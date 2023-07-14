@@ -1,16 +1,22 @@
 import { createGlobalStyle } from "styled-components";
+
 const GlobalStyles = createGlobalStyle`
 
-* {
-   font-family: "Poppins", sans-serif;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+
   body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+     color: #fff;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+     height: 100vh;
   }
 `;
 
 export default GlobalStyles;
-
