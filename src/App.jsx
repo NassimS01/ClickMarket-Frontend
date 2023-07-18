@@ -1,3 +1,4 @@
+
 import Footer from "./components/footer";
 import GlobalStyles from "./styles/GlobalStyles";
 
