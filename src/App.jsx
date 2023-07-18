@@ -1,13 +1,16 @@
-import NavBar from "./components/NavBar/NavBar";
 
+import Footer from "./components/footer";
+import GlobalStyles from "./styles/GlobalStyles";
 
-  function App() {
+function App() {
+  return (
+    <>
+      <Footer></Footer>
+      <GlobalStyles />
+    </>
+  );
+}
 
-    return (
-      <>
-        <NavBar />
-      </>
-    )
-  }
 
 export default App;
+
