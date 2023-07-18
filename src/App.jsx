@@ -1,3 +1,4 @@
+import Footer from "./components/footer";
 import GlobalStyles from "./styles/GlobalStyles";
 
 function App() {
@@ -8,4 +9,6 @@ function App() {
   );
 }
 
+
 export default App;
+
