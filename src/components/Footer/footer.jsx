@@ -94,7 +94,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <span>&copy;2023 Yannal SuperMarket </span>
+      <span>&copy;2023 Yannal Supemarket </span>
     </StyledFooter>
   );
 };
