@@ -1,3 +1,6 @@
+
+import React from "react";
+
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
@@ -9,14 +12,14 @@ const GlobalStyles = createGlobalStyle`
     font-family: "Poppins", sans-serif;
   }
 
-  body {
+  /* body {
      color: #fff;
      display: flex;
      align-items: center;
      justify-content: center;
      flex-direction: column;
      height: 100vh;
-  }
+  } */
 `;
 
 export default GlobalStyles;

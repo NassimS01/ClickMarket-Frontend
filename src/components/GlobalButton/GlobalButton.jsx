@@ -16,14 +16,14 @@ export const ButtonGlobal = styled.button`
     transition: 0.5s ease;
   }
 
-  ${(props) =>
-    props.card &&
+  ${(card) =>
+    card &&
     css`
       font-weight: 500;
     `}
 
-  ${(props) =>
-    props.gray &&
+  ${(gray) =>
+    gray &&
     css`
       background-color: #2b333d;
 
