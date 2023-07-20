@@ -30,9 +30,26 @@ export const ButtonGlobal = styled.button`
     props.buttoncard &&
     css`
       position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       bottom: 18px;
-      right: 20px;
-      width: 180px;
+      right: 50px;
+      width: 50px;
       height: 35px;
+    `}
+
+    ${(props) =>
+    props.buttonless &&
+    css`
+      width: 30px;
+      height: 30px;
+    `}
+
+    ${(props) =>
+    props.buttonmore &&
+    css`
+      width: 30px;
+      height: 30px;
     `}
 `;
