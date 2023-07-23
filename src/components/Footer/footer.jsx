@@ -1,100 +1,78 @@
 import { StyledFooter } from "./FooterStyled";
-import logo from "../../assets/yannal-logo.png";
-import facebook from "../../assets/social-icon/facebook-icon.png";
-import twitter from "../../assets/social-icon/twitter-icon.png";
-import instagram from "../../assets/social-icon/instagram-icon.png";
-import linkedin from "../../assets/social-icon/linkedIn-icon.png";
-import gps from "../../assets/contact-icon/location.png";
-import phone from "../../assets/contact-icon/call.png";
-import messenge from "../../assets/contact-icon/sms.png";
+import { AiFillFacebook, AiFillGithub, AiFillTwitterSquare, AiFillLinkedin, AiFillPhone, AiFillMail } from "react-icons/ai";
+import { FaLocationDot} from "react-icons/fa6";
+import logo from "../../assets/logoClickMarket.png";
+
 
 const Footer = () => {
   return (
     <StyledFooter>
-      <div className="capsule">
-        <div className="container-1">
-          <img className="logo" src={logo} alt="logo-yannal" />
-          <figure>
-            <a href="https://www.facebook.com/">
-              <img className="social-icon" src={facebook} alt="facebook-icon" />
+      <div className="container-footer">
+      <div className="container-1">
+          <img className="logo" src={logo} alt="Logo Click Market" />
+          <div className="social-icons-container-1">
+            <a href="https://www.facebook.com/" className="logo-facebook">
+              <AiFillFacebook/>
             </a>
-            <a href="https://twitter.com/">
-              <img className="social-icon" src={twitter} alt="twitter-icon" />
+            <a href="https://github.com/NassimS01/Supermarket/" className="logo-github">
+              <AiFillGithub/>
             </a>
-            <a href="https://www.instagram.com/">
-              <img
-                className="social-icon"
-                src={instagram}
-                alt="instagram-icon"
-              />
+            <a href="https://twitter.com/" className="logo-twitter">
+              <AiFillTwitterSquare/>
             </a>
-            <a href="https://ar.linkedin.com/">
-              <img className="social-icon" src={linkedin} alt="linkedin-icon" />
-            </a>
-          </figure>
-        </div>
-        <div className="container-2">
-          <h2>Contact</h2>
-          <div className="contact">
-            <img className="icon-contact gps" src={gps} alt="icon-location" />
-            <a href="#" className="text">
-              F1 - 320 Jeff Heights, Main Blvd, Gulberg, Lahore, Pakistan
-            </a>
-          </div>
-          <div className="contact">
-            <img className="icon-contact phone" src={phone} alt="icon-phone" />
-            <a href="#" className="text">
-              +92 - 300 - 115 - 222 -444
-            </a>
-          </div>
-          <div className="contact">
-            <img
-              className="icon-contact messenge"
-              src={messenge}
-              alt="icon-sms"
-            />
-            <a href="#" className="text">
-              support@yannal.com
+            <a href="https://ar.linkedin.com/" className="logo-linkedin">
+              <AiFillLinkedin/>
             </a>
           </div>
         </div>
 
-        <div className="container-3">
-          <h2>Support</h2>
-          <ul>
-            <a href="#">
-              <li>Faq</li>
+        <div className="container-2">
+          <h3>Contacto</h3>
+            <a href="#" className="text">
+              <FaLocationDot/> San Miguel de Tucumán, Tucumán
             </a>
-            <a href="#">
-              <li>Shipping & Returns</li>
+            <a href="#" className="text">
+              <AiFillPhone/> +54 381-5367724
             </a>
-            <a href="#">
-              <li>Contact Us</li>
+            <a href="#" className="text">
+              <AiFillMail/> clickmarket@support.com
             </a>
-            <a href="#">
-              <li>Our Partners</li>
-            </a>
-          </ul>
         </div>
+
+        <div className="container-3">
+          <h3>Support</h3>
+            <a href="#">
+              FQA
+            </a>
+            <a href="#">
+              Shipping & Returns
+            </a>
+            <a href="#">
+              Contact Us
+            </a>
+            <a href="#">
+              Our Partners
+            </a>
+        </div>
+
         <div className="container-4">
-          <h2>Info</h2>
-          <ul>
+          <h3>Info</h3>
             <a href="#">
-              <li>Dates</li>
+              Dates
             </a>
             <a href="#">
-              <li>Parties</li>
+              Parties
             </a>
             <a href="#">
-              <li>Brithdays</li>
+              Brithdays
             </a>
             <a href="#">
-              <li>Menu</li>
+              Menu
             </a>
-          </ul>
         </div>
       </div>
-      <span>&copy;2023 Yannal SuperMarket </span>
+        
+      <p>&copy; Click Market </p>
     </StyledFooter>
   );
 };

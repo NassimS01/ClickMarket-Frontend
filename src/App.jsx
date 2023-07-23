@@ -1,4 +1,5 @@
-// import Footer from "./components/Footer/Footer";
+
+import Footer from "./components/Footer/footer";
 import Header from "./components/Header/Header";
 import Slider from "./components/Slider/Slider";
 // import NotFound from "./pages/NotFound/NotFound";
@@ -11,6 +12,7 @@ function App() {
     <>
       <Header />
       <Slider/>
+      <Footer/>
       <GlobalStyles />
     </>
   );

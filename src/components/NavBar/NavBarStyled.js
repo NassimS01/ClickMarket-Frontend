@@ -2,8 +2,8 @@ import { styled } from "styled-components";
 
 export const ContainerNavBar = styled.nav`
   background-color: rgba(0, 0, 0, .8);
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  top: 15vh;
   padding: 1rem 0;
   right: ${(props) => (props.open ? "0" : "-100%")};
   width: 100%;
@@ -45,6 +45,7 @@ export const ContainerNavBar = styled.nav`
     .navbar-links a{
         font-size: 1rem;
         margin: auto .2rem;
+        color: #000;
     }
 
     .navbar-icons{
