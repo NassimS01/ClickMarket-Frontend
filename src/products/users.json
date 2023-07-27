@@ -1,0 +1,13 @@
+[
+    {   "id": "",
+        "name": "Admin",
+        "lastName": "Admin",
+        "email": "admin@admin.com",
+        "password": "123456",
+        "isAccepted": true,
+        "isAdmin": true,
+        "state":false
+
+
+    }
+]
