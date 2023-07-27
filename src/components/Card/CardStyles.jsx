@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const ContainerCards = styled.div`
-  max-width: 1300px;
+  max-width: 1440px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,7 +59,7 @@ export const Card = styled.div`
 
   & .quantity {
     width: 50px;
-    height: 20px;
+    height: 52px;
     margin: 0;
     display: flex;
     align-items: center;
