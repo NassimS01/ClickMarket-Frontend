@@ -8,7 +8,8 @@ import {
 import { ButtonGlobal } from "../ButtonGlobal/ButtonGlobal";
 import { Card, ButtonsCard } from "./CardStyles";
 
-const CardComponent = () => {
+const CardComponent = (props) => {
+  const { name, price, img, descrip } = props;
   const [cart, setCart] = useState(false);
   const [heart, setHeart] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -32,10 +33,10 @@ const CardComponent = () => {
   return (
     <>
       <Card>
-        <img src={plato} />
-        <h2>Dishim with Fries and Sause</h2>
-        <p>Lorem Ipsum Lorem Ipsum is simply and dummy text of the printing.</p>
-        <span>$7.10</span>
+        <img src={img} />
+        <h2>{name}</h2>
+        <p>{descrip}</p>
+        <span>$ {price}</span>
         <ButtonsCard onClick={handleHeart}>
           {heart ? (
             <AiFillHeart size="20px" color="white" />
@@ -49,12 +50,12 @@ const CardComponent = () => {
         {cart == true ? (
           <div className="buttons">
             {" "}
-            <ButtonGlobal buttonmore="true" onClick={moreQuantity}>
-              +
-            </ButtonGlobal>
-            <span className="quantity">{quantity}</span>
             <ButtonGlobal buttonless="true" onClick={() => lessQuantity()}>
               -
+            </ButtonGlobal>
+            <span className="quantity">{quantity}</span>
+            <ButtonGlobal buttonmore="true" onClick={moreQuantity}>
+              +
             </ButtonGlobal>
           </div>
         ) : (
