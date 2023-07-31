@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import plato from "../../assets/plato/Dish.jpg";
+// import plato from "../../assets/plato/Dish.jpg";
 import {
   AiOutlineHeart,
   AiFillHeart,
