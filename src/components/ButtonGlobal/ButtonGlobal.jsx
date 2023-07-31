@@ -33,10 +33,10 @@ export const ButtonGlobal = styled.button`
       display: flex;
       align-items: center;
       justify-content: center;
-      bottom: 18px;
+      bottom: 32px;
       right: 50px;
       width: 50px;
-      height: 35px;
+      height: 30px;
     `}
 
     ${(props) =>
