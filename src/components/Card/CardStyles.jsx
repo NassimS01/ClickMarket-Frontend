@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 export const ContainerCards = styled.div`
   max-width: 1440px;
+  margin: 30px auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,6 +21,9 @@ export const Card = styled.div`
   border: 1px solid #efefef;
   border-radius: 20px;
   color: #000;
+  box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
+  -webkit-box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
+  -moz-box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
 
   & img {
     margin: 0 auto;
