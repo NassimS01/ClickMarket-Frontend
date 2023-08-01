@@ -13,5 +13,6 @@ export const HeaderWrapper = styled.header`
     & img{
     max-width: 150px;
     padding: .5rem;
+    margin-left: 30px;
     }
 `;

@@ -7,14 +7,13 @@ import Card from "./components/Card/Card";
 
 import GlobalStyles from "./styles/GlobalStyles";
 import Category from "./pages/Category/Category";
+import Routes from "./routes/Routes";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
     <>
-      {/* <Category></Category> */}
-      <Header />
-      <Slider/>
-      <Footer/>
+      <Routes />
       <GlobalStyles />
     </>
   );
