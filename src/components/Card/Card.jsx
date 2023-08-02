@@ -5,11 +5,12 @@ import {
   AiFillHeart,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
+import { getDiscount } from "../../utils/functions";
 import { ButtonGlobal } from "../ButtonGlobal/ButtonGlobal";
 import { Card, ButtonsCard } from "./CardStyles";
 
-const CardComponent = (props) => {
-  const { name, price, img, descrip } = props;
+const CardComponent = ({ name, price, img, descrip, discount }) => {
+  const priceWithDiscount = getDiscount(price, discount);
   const [cart, setCart] = useState(false);
   const [heart, setHeart] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -22,45 +23,23 @@ const CardComponent = (props) => {
     setHeart(!heart);
   };
 
-  const moreQuantity = () => {
-    quantity < 10 ? setQuantity(quantity + 1) : "";
-    // const valuePrice = (price * (quantity + 1)).toFixed(2);
-  };
-
-  const lessQuantity = () => {
-    quantity == 1 ? setCart(false) : setQuantity(quantity - 1);
-  };
   return (
     <>
       <Card>
-        <img src={img} />
-        <h2>{name}</h2>
-        <p>{descrip}</p>
-        <span>$ {price}</span>
+        <img src={img} draggable="false" className="product-image"/>
+        <h3 className="product-name">{name}</h3>
+        <p className="product-description">{descrip}</p>
+        <p className="discount">{discount}%</p>
+        <div className="container-price">
+          <span className="product-price">${price}</span> 
+          <span className="product-discount"><strike>${priceWithDiscount}</strike></span>
+        </div>
         <ButtonsCard onClick={handleHeart}>
-          {heart ? (
-            <AiFillHeart size="20px" color="white" />
-          ) : (
-            <AiOutlineHeart size="20px" color="white" />
-          )}
+          {heart ? (<AiFillHeart size="20px" color="white" />) : (<AiOutlineHeart size="20px" color="white" />)}
         </ButtonsCard>
-        <ButtonGlobal buttoncard="true" onClick={handleCart}>
-          {cart ? "" : <AiOutlineShoppingCart size="24px" />}
+        <ButtonGlobal onClick={handleCart}>
+          Agregar al carrito
         </ButtonGlobal>
-        {cart == true ? (
-          <div className="buttons">
-            {" "}
-            <ButtonGlobal buttonless="true" onClick={() => lessQuantity()}>
-              -
-            </ButtonGlobal>
-            <span className="quantity">{quantity}</span>
-            <ButtonGlobal buttonmore="true" onClick={moreQuantity}>
-              +
-            </ButtonGlobal>
-          </div>
-        ) : (
-          ""
-        )}
       </Card>
     </>
   );
