@@ -3,6 +3,7 @@ import { Wrapper } from './Wrapper';
 import logoClickMarket from '../../assets/logoClickMarketNoEslogan.png';
 import { AiOutlineSearch, AiOutlineMenuUnfold, AiOutlineShoppingCart, AiOutlineUser} from "react-icons/ai";
 import { MdArrowDropDown } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);

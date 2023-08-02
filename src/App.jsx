@@ -8,8 +8,6 @@ import Footer from "./components/Footer/footer";
 // import Footer from "./components/footer";
 // import Card from "./components/Card/Card";
 
-// import Category from "./pages/Category/Category";
-
 function App() {
   return (
     <>
@@ -19,6 +17,7 @@ function App() {
       {/* <Crud /> */}
       <Landing/>
       <Footer/>
+      {/* <Routes /> */}
       <GlobalStyles />
     </>
   );
