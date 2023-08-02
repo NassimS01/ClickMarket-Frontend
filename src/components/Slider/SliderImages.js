@@ -1,29 +1,29 @@
-import bannerDescuento from "../../assets/banners/bannerDescuentos.png";
-import bannerFreeShip from "../../assets/banners/bannerFreeShip.png";
-import bannerOffer from "../../assets/banners/bannerOffer.png";
-import bannerDiaNinio from "../../assets/banners/bannerDiaNinio.png"
+import ofertaLimpieza from "../../assets/banners/ofertaLimpieza.jpg";
+import ofertaComestibles from "../../assets/banners/ofertaComestibles.jpg";
+import ofertaLeche from "../../assets/banners/ofertaLeche.jpg";
+import ofertaBebidas from "../../assets/banners/ofertaBebidas.jpg"
 
 export const bannerImage = [
     {
       id: "1",
-      alt: "Imagen oferta dia del ninio",
+      alt: "Oferta de Limpieza",
       url:
-        bannerDescuento
+      ofertaLimpieza
     },
     {
       id: "2",
-      alt: "Imagen envio gratis",
+      alt: "Oferta de Comestibles",
       url:
-      bannerFreeShip
+      ofertaComestibles
     },
     {
       id: "3",
-      alt: "Imagen ofertas jueves y viernes",
-      url: bannerOffer
+      alt: "Oferta de Leche",
+      url: ofertaLeche
     },
     {
       id: "4",
-      alt: "Imagen ofertas dia del ninio",
-      url: bannerDiaNinio
+      alt: "Oferta de Bebidas",
+      url: ofertaBebidas
     }
   ];

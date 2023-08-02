@@ -10,45 +10,64 @@ export const ContainerCards = styled.div`
 
 export const Card = styled.div`
   position: relative;
-  margin: 15px 15px 0px 0px;
+  margin: 1rem;
+  padding: 1rem;
   display: flex;
+  width: 250px;
+  height: 400px;
   align-items: start;
   justify-content: center;
   flex-direction: column;
-  width: 370px;
-  height: 410px;
   border: 1px solid #efefef;
   border-radius: 20px;
   color: #000;
 
-  & img {
+  & .product-image {
     margin: 0 auto;
-    width: 185px;
-    height: 185px;
+    padding: .2rem;
+    width: 150px;
+    height: auto;
+    transition: ease 300ms;
+    flex-grow: 1;
   }
 
-  & h2 {
-    margin: 47px 0px 0px 28px;
-    font-size: 20px;
-    font-weight: 600;
+  .product-image:hover{
+    transform: scale(1.1);
+  }
+
+  & .product-description{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  & .container-price{
+    margin: 1rem 0;
+  }
+
+  & .discount{
     text-align: center;
+    align-self: center;
+    color: white;
+    font-weight: bold;
+    width: 50%;
+    border-radius: 20px;
+    background-color: #4A4A49;
+    margin-top: .5rem;
   }
 
-  & p {
-    margin: 6px 0px 0px 28px;
-    width: 287px;
-    font-size: 16px;
+  & .product-price {
+    color: red;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    margin: 0 .5rem 0 0;
   }
 
-  & span {
-    margin: 20px 0px 0px 28px;
-    font-weight: 500;
-    font-size: 20px;
+  & .product-discount{
+    color: gray;
   }
 
   & .buttons {
     position: absolute;
-    /* width: 100px; */
     right: 15px;
     bottom: 20px;
     display: flex;
