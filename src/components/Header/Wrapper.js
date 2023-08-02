@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.section`
+export const Wrapper = styled.header`
   position: sticky;
   top: 0;
   width: 100%;
@@ -10,23 +10,56 @@ export const Wrapper = styled.section`
   justify-content: space-between;
   height: auto;
   padding: 5px 1.5%;
-  border-bottom: 1px solid lightblue;
   z-index: 10000;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 
-  img{
+  img {
     width: 130px;
   }
 
-  a{
+  & a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem auto;
+    font-size: 18px;
+    color: #fff;
+    transition: border-bottom 0.3s ease;
+    border-bottom: 2px solid transparent;
     text-decoration: none;
-    color: black;
+    color: #18272f;
+    position: relative;
+    text-decoration: none;
+  }
+
+  a::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    border-radius: 4px;
+    background-color: #18272f;
+    bottom: -2.5px;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  a:hover::before {
+    transform-origin: left;
+    transform: scaleX(1);
   }
 
   .nav-links {
     display: flex;
     align-items: center;
     gap: 20px;
-    font-size: .9rem;
+    font-size: 0.9rem;
   }
   .social-links {
     display: flex;
@@ -37,7 +70,7 @@ export const Wrapper = styled.section`
     font-size: 1.5rem;
     border: thin solid black;
     border-radius: 50%;
-    padding: .5rem;
+    padding: 0.5rem;
     justify-content: center;
     align-items: center;
   }
@@ -62,7 +95,7 @@ export const Wrapper = styled.section`
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   }
 
-  .dd-btn{
+  .dd-btn {
     background: transparent;
     border: none;
   }

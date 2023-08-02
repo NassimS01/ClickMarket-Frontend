@@ -1,4 +1,4 @@
-import notFound from '../../assets/images/404-not-found.png';
+import notFound from '../../assets/images/404/404-not-found.png';
 import { ButtonGlobal } from '../../components/GlobalButton/GlobalButton';
 import { Container, Subtitle, Title } from './NotFoundStyled';
 // import { Link } from 'react-router-dom';

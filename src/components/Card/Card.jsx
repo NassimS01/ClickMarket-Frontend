@@ -26,20 +26,28 @@ const CardComponent = ({ name, price, img, descrip, discount }) => {
   return (
     <>
       <Card>
-        <img src={img} draggable="false" className="product-image"/>
+        <img src={img} draggable="false" className="product-image" />
         <h3 className="product-name">{name}</h3>
         <p className="product-description">{descrip}</p>
         <p className="discount">{discount}%</p>
         <div className="container-price">
-          <span className="product-price">${price}</span> 
-          <span className="product-discount"><strike>${priceWithDiscount}</strike></span>
+          <span className="product-price">${price}</span>
+          <span className="product-discount">
+            <strike>${priceWithDiscount}</strike>
+          </span>
         </div>
         <ButtonsCard onClick={handleHeart}>
-          {heart ? (<AiFillHeart size="20px" color="white" />) : (<AiOutlineHeart size="20px" color="white" />)}
+          {heart ? (
+            <AiFillHeart size="20px" color="white" />
+          ) : (
+            <AiOutlineHeart size="20px" color="white" />
+          )}
         </ButtonsCard>
-        <ButtonGlobal onClick={handleCart}>
+        <div class="container-button">
+        <ButtonGlobal onClick={handleCart} buttoncard>
           Agregar al carrito
         </ButtonGlobal>
+        </div>
       </Card>
     </>
   );
