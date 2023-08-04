@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-import { ErrorMessage, Field, Formik, useFormik } from "formik";
+import {  useFormik } from "formik";
 import * as Yup from 'yup'
 
 
@@ -34,7 +34,6 @@ const Signup = () => {
 
 
     return (
-        
         <div className={styles.signup_container}>
             <div className={styles.signup_form_container}>
                 <div className={styles.left}>
@@ -57,7 +56,7 @@ const Signup = () => {
                             value={formik.values.name}
                         />
                         
-                        {formik.errors.name ? <div>{formik.errors.name}</div>:null}
+                        {formik.touched.name && formik.errors.name ? <div>{formik.errors.name}</div>:null}
                         <input
                             type='text'
                             placeholder='Apellido'
@@ -66,7 +65,7 @@ const Signup = () => {
                             onChange={formik.handleChange}
                             value={formik.values.lastName}
                         />
-                        {formik.errors.lastName ? <div>{formik.errors.lastName}</div>:null}
+                        {formik.touched.lastName && formik.errors.lastName ? <div>{formik.errors.lastName}</div>:null}
                         <input
                             type='email'
                             placeholder='Email'
@@ -75,7 +74,7 @@ const Signup = () => {
                             onChange={formik.handleChange}
                             value={formik.values.email}
                         />
-                        {formik.errors.email ? <div>{formik.errors.email}</div>:null}
+                        {formik.touched.email && formik.errors.email ? <div>{formik.errors.email}</div>:null}
                         <input
                             type='password'
                             placeholder='Contraseña'
@@ -85,7 +84,7 @@ const Signup = () => {
                             onChange={formik.handleChange}
                             value={formik.values.password}
                         />
-                        {formik.errors.password ? <div>{formik.errors.password}</div>:null}
+                        {formik.touched.password && formik.errors.password ? <div>{formik.errors.password}</div>:null}
                         <button type='submit' className={styles.green_btn}>
                             Inscribirse
                         </button>
