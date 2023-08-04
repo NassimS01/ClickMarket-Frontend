@@ -5,7 +5,7 @@ import {
   AiFillHeart,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { getDiscount } from "../../utils/functions";
+import { getDiscount } from "../../../backend/utils/functions";
 import { ButtonGlobal } from "../ButtonGlobal/ButtonGlobal";
 import { Card, ButtonsCard } from "./CardStyles";
 

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import falseDb from '../../products/dataProducts.json';
 import CardComponent from '../Card/Card';
 import { getRandomProducts } from '../../utils/functions';
@@ -5,6 +6,14 @@ import { ContainerCards, Container } from './LandingStyle';
 import ExtraInfo from './ExtraInfo';
 import Categories from './Categories';
 import Slider from '../Slider/Slider';
+=======
+import falseDb from "../../../backend/db/dataProducts.json";
+import CardComponent from "../Card/Card";
+import { getRandomProducts } from "../../../backend/utils/functions";
+import { ContainerCards, Container } from "./LandingStyle";
+import Categories from "./Categories";
+import ExtraInfo from "../ExtraInfo/ExtraInfo";
+>>>>>>> Stashed changes
 
 const Landing = () => {
 
