@@ -1,3 +1,4 @@
+import React from "react";
 import { styled } from "styled-components";
 import { CiDeliveryTruck, CiCreditCard1 } from "react-icons/ci";
 import { BsShieldCheck } from "react-icons/bs";

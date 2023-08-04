@@ -1,3 +1,4 @@
+import React from "react";
 import { styled } from "styled-components";
 import { GiNoodles, GiSteak, GiCharcuterie, GiMilkCarton, GiVacuumCleaner, GiSlicedBread} from "react-icons/gi";
 import { AiOutlineHome } from "react-icons/ai";

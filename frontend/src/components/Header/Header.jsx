@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from 'react';
 import { Wrapper } from './Wrapper';
 import logoClickMarket from '../../assets/logoClickMarketNoEslogan.png';
