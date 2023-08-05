@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 export const ContainerCards = styled.div`
   max-width: 1440px;
+  margin: 30px auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,59 +22,65 @@ export const Card = styled.div`
   border: 1px solid #efefef;
   border-radius: 20px;
   color: #000;
+  box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
+  -webkit-box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
+  -moz-box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
 
   & .product-image {
     margin: 0 auto;
-    padding: .2rem;
+    padding: 0.2rem;
     width: 150px;
-    height: auto;
+    height: 180px;
     transition: ease 300ms;
-    flex-grow: 1;
   }
 
-  .product-image:hover{
+  .product-image:hover {
     transform: scale(1.1);
   }
 
-  & .product-description{
-    display: flex;
-    justify-content: space-around;
+  .product-name {
+    width: 100%;
+    height: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  & .container-price{
-    margin: 1rem 0;
+  & .product-description {
+    height: 50px;
+    width: 230px;
+    /* white-space: nowrap; */
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
   }
 
-  & .discount{
+  & .container-price {
+    margin: 1.3rem 0;
+  }
+
+  & .discount {
+    position: absolute;
+    bottom: 109px;
+    right: 10px;
     text-align: center;
     align-self: center;
     color: white;
     font-weight: bold;
-    width: 50%;
+    width: 70px;
     border-radius: 20px;
-    background-color: #4A4A49;
-    margin-top: .5rem;
+    background-color: #4a4a49;
+    margin-top: 0.5rem;
   }
 
   & .product-price {
     color: red;
     font-weight: bolder;
     font-size: 1.5rem;
-    margin: 0 .5rem 0 0;
+    margin: 0 0.5rem 0 0;
   }
 
-  & .product-discount{
+  & .product-discount {
     color: gray;
-  }
-
-  & .buttons {
-    position: absolute;
-    right: 15px;
-    bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
   }
 
   & .quantity {
@@ -84,6 +91,12 @@ export const Card = styled.div`
     align-items: center;
     justify-content: center;
     color: white;
+  }
+
+  & .container-button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 `;
 

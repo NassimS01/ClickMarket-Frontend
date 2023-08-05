@@ -1,7 +1,8 @@
-import notFound from '../../assets/images/404-not-found.png';
+import React from "react";
+import notFound from '../../assets/images/404/404-not-found.png';
 import { ButtonGlobal } from '../../components/GlobalButton/GlobalButton';
 import { Container, Subtitle, Title } from './NotFoundStyled';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const NotFound = () => {
     return (
@@ -10,8 +11,8 @@ const NotFound = () => {
             <Title>404 Error</Title>
             <Subtitle>Ops! Página no encontrada</Subtitle>
             <p><i>La página que estas buscando no existe o ha ocurrido un error...</i></p>
-            <ButtonGlobal>Ir al Inicio</ButtonGlobal>
-            {/* <Link to="">Volver al inicio</Link> */}
+            {/* <ButtonGlobal>Ir al Inicio</ButtonGlobal> */}
+            <Link to="/" className="home-btn">Volver al inicio</Link>
         </Container>
     );
 };
