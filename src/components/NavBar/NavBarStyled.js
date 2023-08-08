@@ -42,6 +42,7 @@ width: 900px;
 
 & .button-nav1:hover{
 border-bottom-color: red;
+
 }  
 `;
 
@@ -66,4 +67,11 @@ margin-right:60px;
 & .button-nav2:hover{
     text-shadow: black;
     }
+
+
+    @media screen {
+        
+    }
 `;
+
+

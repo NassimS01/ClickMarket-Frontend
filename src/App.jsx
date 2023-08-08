@@ -1,16 +1,19 @@
+// import Footer from "./components/footer";
+// import AboutUs from "./components/AboutUs/AboutUs";
+import AboutUs from "./components/AboutUs/AboutUs.jsx";
 
-import Footer from "./components/footer";
 import GlobalStyles from "./styles/GlobalStyles";
+
 
 function App() {
   return (
     <>
-      <Footer></Footer>
-      <GlobalStyles />
+  
+      <AboutUs></AboutUs>
+      <GlobalStyles/>
     </>
   );
 }
-
 
 export default App;
 
