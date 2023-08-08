@@ -27,38 +27,12 @@ const Login = () => {
             .then((res) => {
                 toast.success("Bienvenido!");
                 navigate("/");
-                window.location.reload(true);
+                // window.location.reload(true);
             })
             .catch((err) => {
                 toast.error(err.response.data.message);
             });
     };
-    // const [data, setData] = useState({
-    //     email: "",
-    //     password: ""
-    // })
-
-
-    // const handleChange = ({ currentTarget: input }) => {
-    //     setData({ ...data, [input.name]: input.value });
-    // }
-
-    /*const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const url="http://localhost:8080/api/auth";
-            const{data:res}= await axios.post(url,data);
-            localStorage.setItem("token", res.data);
-            window.location="/"
-            
-        } catch (error) {
-            if(error.message && error.response.status>=400 && error.response.status<=500){
-                setError(error.response.data.message)
-            }
-
-        }
-    }*/
 
 
     return (

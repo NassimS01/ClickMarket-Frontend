@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { ContainerSignup } from './SignupStyled';
 import { server } from '../../server';
 import { RxAvatar } from "react-icons/rx";
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 
@@ -12,10 +13,10 @@ const Signup = () => {
     const [password, setPassword] = useState("");
     const [visible, setVisible] = useState(false);
     const [avatar, setAvatar] = useState(null);
+    const navigate = useNavigate();
 
     const handleFileInputChange = (e) =>{
         const file = e.target.files[0];
-        console.log(file)
         setAvatar(file);
     };
 
@@ -30,10 +31,18 @@ const Signup = () => {
         newForm.append("email", email);
         newForm.append("password", password);
 
-        axios.post(`${server}/user/create-user`, newForm, config).then((res) =>{
-            console.log(res)
-        }).catch((err)=>{
-            console.log(err)
+        axios
+        .post(`${server}/user/create-user`, newForm, config)
+        .then((res) =>{
+            if(res.data.success === true){
+                toast.success(res.data.message)
+                setName("");
+                setEmail("");
+                setPassword("");
+                setAvatar();
+            }
+        }).catch((error)=>{
+            toast.error(error.response.data.message)
         })
     }
 

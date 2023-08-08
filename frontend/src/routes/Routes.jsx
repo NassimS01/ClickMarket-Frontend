@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import {
   BrowserRouter,
   Route,
@@ -14,6 +16,7 @@ import Layout from "../components/layout/Layout";
 import Home from "../pages/Home/Home";
 import Category from "../pages/Category/Category";
 import Signup from "../pages/Signup/SignupPage";
+
 
 const Routes = () => {
   return (
@@ -32,6 +35,18 @@ const Routes = () => {
           <Route path="signup" element={<Signup />} />
         </ReactDomRoutes>
       </Layout>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </BrowserRouter>
   );
 };
