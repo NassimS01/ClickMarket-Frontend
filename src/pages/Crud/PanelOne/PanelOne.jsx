@@ -8,7 +8,7 @@ const PanelOne = () => {
     <PanelUno>
       <PiUserCirclePlusDuotone className="userCircle" />
       <h3>Administrador</h3>
-      <p>Francisco Paez</p>
+      <p>Francisco</p>
       <StyledBtnCrud>
       <Link to="products" className="btn-adm">Productos</Link>
       <Link to="users" className="btn-adm">Usuarios</Link>

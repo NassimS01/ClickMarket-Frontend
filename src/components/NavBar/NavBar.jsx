@@ -1,37 +1,32 @@
-import {FiSearch} from "react-icons/fi";
-import {BsCart2} from "react-icons/bs";
-import {RxPerson} from "react-icons/rx";
-import {ContainerNavBar, ContainerLeftNavBar ,ContainerRightNavBar} from "./NavBarStyled";
+import { FiSearch } from "react-icons/fi";
+import { BsCart2 } from "react-icons/bs";
+import { RxPerson } from "react-icons/rx";
+import { ContainerNavBar } from "./NavBarStyled";
 import { useState } from "react";
 
-const NavBar = () => {
+
+const NavBar = ({ open }) => {
     const [search, setSearch] = useState(false);
 
     const handleSearch = () => {
         setSearch(!search);
     };
-    
+
     return (
         <>
-            <ContainerNavBar>
-                <ContainerLeftNavBar>
-                    <div className="container-logo">
-                        <p className="logo2">logo</p>
-                    </div>
-                    <div className="container-button-nav">
-                        <a href="" className="button-nav1">menu</a>
-                        <a href="" className="button-nav1">about us</a>
-                        <a href="" className="button-nav1">our specials</a>
-                        <a href="" className="button-nav1">our location</a>
-                        <a href="" className="button-nav1">our cheffs</a>
-                    </div>
-                </ContainerLeftNavBar>
+            <ContainerNavBar open={open}>
+                <div className="navbar-links">
+                    <a href="/" className="button-nav1">Inicio</a>
+                    <a href="/" className="button-nav1">Ofertas</a>
+                    <a href="/" className="button-nav1">Categorías</a>
+                    <a href="/" className="button-nav1">Contacto</a>
+                </div>
 
-                <ContainerRightNavBar>
-                    <button className="button-nav2"><FiSearch/></button>
-                    <button className="button-nav2"><BsCart2/></button>
-                    <button className="button-nav2"><RxPerson/></button>
-                </ContainerRightNavBar>
+                <div className="navbar-icons">
+                    <button className="button-nav2"><FiSearch /></button>
+                    <button className="button-nav2"><BsCart2 /></button>
+                    <button className="button-nav2"><RxPerson /></button>
+                </div>
             </ContainerNavBar>
         </>
     )

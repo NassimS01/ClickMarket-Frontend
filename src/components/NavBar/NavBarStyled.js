@@ -1,69 +1,66 @@
 import { styled } from "styled-components";
 
 export const ContainerNavBar = styled.nav`
-margin: 0;
-color: #da3434;
-display:flex;
-justify-content: center;
-width: 100vw;
-height: 70px;
-border-bottom: 1px solid darkgray;
-`;
+  background-color: rgba(0, 0, 0, .8);
+  position: fixed;
+  top: 15vh;
+  padding: 1rem 0;
+  right: ${(props) => (props.open ? "0" : "-100%")};
+  width: 100%;
+  height: 100vh;
+  transition: right 0.3s linear;
+  
+  & a{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        margin: 1rem auto;
+        font-size: 2rem;
+        color: #fff;
+        transition: border-bottom 0.3s ease;
+        border-bottom: 2px solid transparent;
+        text-decoration: none;
+  }
 
-export const ContainerLeftNavBar = styled.div`
-display: flex;
-justify-content: space-around;
-align-items: center;
-align-content: center;
-width: 900px;
+  & button{
+    display: none;
+  }
 
-& .logo2{
-    color: darkgrey;
-}
-
-& .container-logo{
-}
-
-& .container-button-nav{
+  @media only screen and (min-width: 576px) {
+    position: sticky;
+    top: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-& .button-nav1{
-    margin: 0px 20px;
-    color: black;
+    height: auto;
     background-color: transparent;
-    font-size: 16px; 
-    transition: border-bottom 0.3s ease;
-    border-bottom: 2px solid transparent;
-    text-decoration: none;
-} 
 
-& .button-nav1:hover{
-border-bottom-color: red;
-}  
-`;
-
-export const ContainerRightNavBar = styled.div`
-display: flex;
-justify-content: flex-end;
-align-items: center;
-width: 400px;
-margin-right:60px;
-
-& .button-nav2{
-    display: flex;
-    align-items:center;
-    justify-content: space-around;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-}
-
-& .button-nav2:hover{
-    text-shadow: black;
+    .navbar-links{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-right: auto;
+        margin-left: auto;
     }
+
+    .navbar-links a{
+        font-size: 1rem;
+        margin: auto .2rem;
+        color: #000;
+    }
+
+    .navbar-icons{
+        display: flex;
+        width: 20%;
+        justify-content: space-between;
+    }
+
+    .navbar-icons button{
+        display: inline;
+        font-size: 1.5rem;
+        border: none;
+        background-color: transparent;
+        margin: auto .2rem;
+        cursor: pointer;
+    }
+}
 `;

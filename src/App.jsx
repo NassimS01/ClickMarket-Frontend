@@ -1,18 +1,16 @@
-// import Footer from "./components/Footer/Footer";
-// import NavBar from "./components/NavBar/NavBar";
+// import Footer from "./components/Footer/footer";
+// import Header from "./components/Header/Header";
+// import Slider from "./components/Slider/Slider";
 // import NotFound from "./pages/NotFound/NotFound";
 // import Footer from "./components/footer";
-// import Router from "./router/Router";
-import GlobalStyles from "./styles/GlobalStyles";
+import Router  from "./router/Router";
 
+import GlobalStyles from "./styles/GlobalStyles";
 
 function App() {
   return (
     <>
-      {/* <Router /> */}
-      {/* <Header />
-      <Slider/>
-      <Footer/> */}
+      <Router></Router>
       <GlobalStyles />
     </>
   );
