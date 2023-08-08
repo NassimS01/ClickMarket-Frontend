@@ -40,6 +40,7 @@ const Signup = () => {
                 setEmail("");
                 setPassword("");
                 setAvatar();
+                navigate("/")
             }
         }).catch((error)=>{
             toast.error(error.response.data.message)

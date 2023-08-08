@@ -5,7 +5,7 @@ const router = express.Router();
 const { upload } = require("../multer");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
-const {isAuthenticated} = require("../middleware/auth")
+const { isAuthenticated } = require("../middleware/auth")
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const sendToken = require("../utils/jwtToken")
@@ -95,6 +95,23 @@ router.get(
             res.status(200).json({
                 success: true,
                 user,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+router.get(
+    "/users",
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const users = await User.find().sort({
+                createdAt: -1,
+            });
+            res.status(201).json({
+                success: true,
+                users,
             });
         } catch (error) {
             return next(new ErrorHandler(error.message, 500));

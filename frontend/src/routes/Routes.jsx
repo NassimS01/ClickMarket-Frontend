@@ -45,7 +45,7 @@ const Routes = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="dark"
+        theme="colored"
       />
     </BrowserRouter>
   );
