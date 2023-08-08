@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  max-width: 1500px;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
@@ -23,21 +24,20 @@ export const Category = styled.a`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #fafafa;
-  color: red;
-  padding: 0.5rem;
-  width: 100px;
-  border-radius: 10px;
-  box-shadow: -3px 3px 2px 0px rgba(0, 0, 0, 0.14);
-  -webkit-box-shadow: -3px 3px 5px 0px rgba(0, 0, 0, 0.14);
-  -moz-box-shadow: -3px 3px 5px 0px rgba(0, 0, 0, 0.14);
 
   .category-icon {
-    font-size: 2rem;
+    background-color: #fff;
+    color: var(--colorPrimary);
+    padding: 0.5rem;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    box-shadow: -5px 4px 10px 0px rgba(0, 0, 0, 0.14);
   }
 
   p {
     color: black;
-    font-size: 0.8rem;
+    font-size: 1rem;
+    margin-top: 3px;
   }
 `;

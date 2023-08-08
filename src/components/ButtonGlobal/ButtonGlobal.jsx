@@ -5,7 +5,7 @@ export const ButtonGlobal = styled.button`
   height: 40px;
   border: none;
   border-radius: 12px;
-  background-color: #ff0000;
+  background-color: var(--colorPrimary);
   color: #fff;
   cursor: pointer;
   font-weight: 400;
@@ -17,17 +17,14 @@ export const ButtonGlobal = styled.button`
   }
 
   ${(props) =>
-    props.gray &&
+    props.green &&
     css`
-      background-color: gray;
+      background-color: #4bbb44;
 
       &:hover {
-        background-color: #333;
+        background-color: #3c9536;
       }
     `}
 
-  ${(props) =>
-    props.buttoncard &&
-    css`
-    `}
+  ${(props) => props.buttoncard && css``}
 `;

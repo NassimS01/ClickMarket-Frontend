@@ -11,6 +11,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import Layout from "../components/layout/Layout";
 import Home from "../pages/Home/Home";
 import Category from "../pages/Category/Category";
+import Cart from "../pages/Cart/Cart"
 
 const Routes = () => {
   return (
@@ -25,6 +26,7 @@ const Routes = () => {
             <Route path="orders" element={<PanelOrders />} />
           </Route>
           <Route path="*" element={<NotFound />} />
+          <Route path="carrito" element={<Cart />} />
         </ReactDomRoutes>
       </Layout>
     </BrowserRouter>

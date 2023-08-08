@@ -8,16 +8,26 @@ import {
 import { getDiscount } from "../../utils/functions";
 import { ButtonGlobal } from "../ButtonGlobal/ButtonGlobal";
 import { Card, ButtonsCard } from "./CardStyles";
+import { formatPrice } from "../../utils/formatPrice";
 
-const CardComponent = ({ name, price, img, descrip, discount }) => {
+const CardComponent = ({ id, name, price, img, descrip, discount }) => {
   const priceWithDiscount = getDiscount(price, discount);
-  const [cart, setCart] = useState(false);
   const [heart, setHeart] = useState(false);
-  const [quantity, setQuantity] = useState(1);
 
-  const handleCart = () => {
-    setCart(!cart);
+  const storeInLocalStorage = (product) => {
+    localStorage.setItem("cart", JSON.stringify(product));
   };
+
+  const product = [
+    {
+      id: id,
+      name: name,
+      price: price,
+      img: img,
+      descrip: descrip,
+      discount: discount,
+    },
+  ];
 
   const handleHeart = () => {
     setHeart(!heart);
@@ -31,9 +41,9 @@ const CardComponent = ({ name, price, img, descrip, discount }) => {
         <p className="product-description">{descrip}</p>
         <p className="discount">{discount}%</p>
         <div className="container-price">
-          <span className="product-price">${price}</span>
+          <span className="product-price">{formatPrice(price)}</span>
           <span className="product-discount">
-            <strike>${priceWithDiscount}</strike>
+            {formatPrice(priceWithDiscount)}
           </span>
         </div>
         <ButtonsCard onClick={handleHeart}>
@@ -43,10 +53,13 @@ const CardComponent = ({ name, price, img, descrip, discount }) => {
             <AiOutlineHeart size="20px" color="white" />
           )}
         </ButtonsCard>
-        <div class="container-button">
-        <ButtonGlobal onClick={handleCart} buttoncard>
-          Agregar al carrito
-        </ButtonGlobal>
+        <div className="container-button">
+          <ButtonGlobal
+            onClick={() => storeInLocalStorage(product)}
+            buttoncard="true"
+          >
+            Agregar al carrito
+          </ButtonGlobal>
         </div>
       </Card>
     </>

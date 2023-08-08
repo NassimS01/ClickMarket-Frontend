@@ -5,7 +5,6 @@ export const ContainerCards = styled.div`
   margin: 30px auto;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
 `;
 
@@ -14,7 +13,7 @@ export const Card = styled.div`
   margin: 1rem;
   padding: 1rem;
   display: flex;
-  width: 250px;
+  width: 270px;
   height: 400px;
   align-items: start;
   justify-content: center;
@@ -81,6 +80,10 @@ export const Card = styled.div`
 
   & .product-discount {
     color: gray;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: line-through;
   }
 
   & .quantity {
@@ -109,7 +112,7 @@ export const ButtonsCard = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: red;
+  background-color: var(--colorPrimary);
   border-radius: 10px;
   border: none;
   cursor: pointer;

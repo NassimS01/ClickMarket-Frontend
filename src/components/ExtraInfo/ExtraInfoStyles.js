@@ -2,7 +2,9 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  width: 1200px;
+  justify-content: center;
+  max-width: 1300px;
+  width: 65vw;
   margin: 5rem auto;
   border-radius: 20px;
   box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
@@ -24,7 +26,7 @@ export const Container = styled.div`
     height: 60%;
     width: 1px;
     left: 0;
-    background-color: red;
+    background-color: var(--colorPrimary);
     border-radius: 0px;
   }
 
@@ -34,7 +36,7 @@ export const Container = styled.div`
     height: 60%;
     width: 1px;
     right: 0;
-    background-color: red;
+    background-color: var(--colorPrimary);
     border-radius: 0px;
   }
 
@@ -56,6 +58,10 @@ export const Container = styled.div`
     font-weight: 400;
   }
 
+  @media screen and (max-width: 1024px) {
+    width: 80vw;
+  }
+
   @media screen and (max-width: 576px) {
     flex-wrap: wrap;
 
@@ -69,6 +75,22 @@ export const Container = styled.div`
 
     p {
       font-size: 0.8rem;
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    width: 80vw;
+    .container-info:nth-child(2)::before {
+      height: 1px;
+      width: 50%;
+      top: 0;
+      right: 25%;
+    }
+    .container-info:nth-child(2)::after {
+      height: 1px;
+      width: 50%;
+      bottom: 0;
+      left: 25%;
     }
   }
 `;

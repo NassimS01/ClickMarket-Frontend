@@ -4,7 +4,7 @@ export const ButtonGlobal = styled.button`
   width: 200px;
   height: 50px;
   border: none;
-  background-color: red;
+  background-color: var(--colorPrimary);
   /* transform: skew(-15deg); */
   border-radius: 10px;
   color: white;

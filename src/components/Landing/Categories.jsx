@@ -16,43 +16,63 @@ const Categories = () => {
     <>
       <Container>
         <Category className="animation">
-          <AiOutlineHome className="category-icon" />
+          <Category className="category-icon">
+            <AiOutlineHome size="2.5rem" />
+          </Category>
           <p>Hogar</p>
         </Category>
         <Category className="animation">
-          <PiBeerBottleDuotone className="category-icon" />
+          <Category className="category-icon">
+            <PiBeerBottleDuotone size="2.5rem" />
+          </Category>
           <p>Bebidas</p>
         </Category>
         <Category className="animation">
-          <GiNoodles className="category-icon" />
+          <Category className="category-icon">
+            <GiNoodles size="2.5rem" />
+          </Category>
           <p>Comestibles</p>
         </Category>
         <Category className="animation">
-          <GiSteak className="category-icon" />
+          <Category className="category-icon">
+            <GiSteak size="2.5rem" />
+          </Category>
           <p>Carnes</p>
         </Category>
         <Category className="animation">
-          <BsSnow className="category-icon" />
+          <Category className="category-icon">
+            <BsSnow size="2.5rem" />
+          </Category>
           <p>Congelados</p>
         </Category>
         <Category className="animation">
-          <GiCharcuterie className="category-icon" />
+          <Category className="category-icon">
+            <GiCharcuterie size="2.5rem" />
+          </Category>
           <p>Fiambres</p>
         </Category>
         <Category className="animation">
-          <PiOrangeSliceDuotone className="category-icon" />
+          <Category className="category-icon">
+            <PiOrangeSliceDuotone size="2.5rem" />
+          </Category>
           <p>Frutas</p>
         </Category>
         <Category className="animation">
-          <GiMilkCarton className="category-icon" />
+          <Category className="category-icon">
+            <GiMilkCarton size="2.5rem" />
+          </Category>
           <p>Lacteos</p>
         </Category>
         <Category className="animation">
-          <GiVacuumCleaner className="category-icon" />
+          <Category className="category-icon">
+            <GiVacuumCleaner size="2.5rem" />
+          </Category>
           <p>Limpieza</p>
         </Category>
         <Category className="animation">
-          <GiSlicedBread className="category-icon" />
+          <Category className="category-icon">
+            <GiSlicedBread size="2.5rem" />
+          </Category>
           <p>Panaderia</p>
         </Category>
       </Container>
