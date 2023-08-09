@@ -78,4 +78,3 @@ export const StyledFooter = styled.footer`
     
   }
 `;
-

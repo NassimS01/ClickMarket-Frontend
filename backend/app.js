@@ -11,9 +11,8 @@ app.use(cors({
     origin: "http://localhost:3000",
     credentials: true,
 }))
-app.use("/", express.static("uploads"))
-app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 //config
 
 if (process.env.NODE_ENV !== "PRODUCTION") {

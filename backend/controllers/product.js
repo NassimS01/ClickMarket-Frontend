@@ -4,6 +4,7 @@ const router = express.Router();
 const catchAsyncErrors = require("../middleware/catchAsyncError");
 const ErrorHandler = require("../utils/ErrorHandler");
 const Product = require("../models/product");
+const { isAuthenticated, isAdmin } = require("../middleware/auth");
 
 // create product
 router.post(
@@ -48,6 +49,92 @@ router.get(
             });
         } catch (error) {
             return next(new ErrorHandler(error, 400));
+        }
+    })
+);
+
+router.put(
+    "/edit-product/:id",
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const productId = req.params.id;
+            const updatedProductData = req.body;
+
+            const existingProduct = await Product.findById(productId);
+            if (!existingProduct) {
+                return res.status(404).json({
+                    success: false,
+                    message: "No se encontró ningún producto con el ID proporcionado",
+                });
+            }
+
+            existingProduct.name = updatedProductData.name;
+            existingProduct.description = updatedProductData.description;
+            existingProduct.category = updatedProductData.category;
+            existingProduct.price = updatedProductData.price;
+            existingProduct.discount = updatedProductData.discount;
+            existingProduct.stock = updatedProductData.stock;
+
+            await existingProduct.save();
+
+            res.status(200).json({
+                success: true,
+                message: "Producto actualizado exitosamente",
+                updatedProduct: existingProduct,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error, 400));
+        }
+    })
+);
+
+// delete product
+router.delete(
+    "/delete-product/:id",
+    isAuthenticated,
+    isAdmin("Admin"),
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const product = await Product.findById(req.params.id);
+
+            if (!product) {
+                return next(new ErrorHandler("No se encontro ningun producto con el ID", 404));
+            }
+
+            for (let i = 0; 1 < product.images.length; i++) {
+                const result = await cloudinary.v2.uploader.destroy(
+                    product.images[i].public_id
+                );
+            }
+
+            await product.deleteOne();
+
+            res.status(201).json({
+                success: true,
+                message: "Producto eliminado!",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error, 400));
+        }
+    })
+);
+
+// all products --- for admin
+router.get(
+    "/admin-all-products",
+    isAuthenticated,
+    isAdmin("Admin"),
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const products = await Product.find().sort({
+                createdAt: -1,
+            });
+            res.status(201).json({
+                success: true,
+                products,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
         }
     })
 );

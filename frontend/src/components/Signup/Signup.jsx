@@ -13,68 +13,35 @@ const Signup = () => {
     const [password, setPassword] = useState("");
     const [visible, setVisible] = useState(false);
     const [avatar, setAvatar] = useState(null);
-    const navigate = useNavigate();
 
-    const handleFileInputChange = (e) =>{
-        const file = e.target.files[0];
-        setAvatar(file);
+    const handleFileInputChange = (e) => {
+        const reader = new FileReader();
+
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setAvatar(reader.result);
+            }
+        };
+
+        reader.readAsDataURL(e.target.files[0]);
     };
 
-    const handleSubmit = async (e) =>{
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const config = {headers: {"Content-Type":"multipart/form-data"}}
-        
-        const newForm = new FormData();
-
-        newForm.append("file", avatar);
-        newForm.append("name", name);
-        newForm.append("email", email);
-        newForm.append("password", password);
 
         axios
-        .post(`${server}/user/create-user`, newForm, config)
-        .then((res) =>{
-            if(res.data.success === true){
-                toast.success(res.data.message)
+            .post(`${server}/user/create-user`, { name, email, password, avatar })
+            .then((res) => {
+                toast.success(res.data.message);
                 setName("");
                 setEmail("");
                 setPassword("");
                 setAvatar();
-                navigate("/")
-            }
-        }).catch((error)=>{
-            toast.error(error.response.data.message)
-        })
-    }
-
-    // const handleFileInputChange = (e) => {
-    //     const reader = new FileReader();
-
-    //     reader.onload = () => {
-    //         if (reader.readyState === 2) {
-    //             setAvatar(reader.result);
-    //         }
-    //     };
-
-    //     reader.readAsDataURL(e.target.files[0]);
-    // };
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-
-    //     axios
-    //         .post(`${server}/user/create-user`, { name, email, password, avatar })
-    //         .then((res) => {
-    //             toast.success(res.data.message);
-    //             setName("");
-    //             setEmail("");
-    //             setPassword("");
-    //             setAvatar();
-    //         })
-    //         .catch((error) => {
-    //             toast.error(error.response.data.message);
-    //         });
-    // };
+            })
+            .catch((error) => {
+                toast.error(error.response.data.message);
+            });
+    };
 
 
     return (

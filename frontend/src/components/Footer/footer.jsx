@@ -2,7 +2,7 @@ import React from "react";
 import { StyledFooter } from "./FooterStyled";
 import { AiFillFacebook, AiFillGithub, AiFillTwitterSquare, AiFillLinkedin, AiFillPhone, AiFillMail } from "react-icons/ai";
 import { FaLocationDot} from "react-icons/fa6";
-import logo from "../../assets/logoClickMarket.png";
+import logo from "../../assets/CLICK.png";
 
 
 const Footer = () => {

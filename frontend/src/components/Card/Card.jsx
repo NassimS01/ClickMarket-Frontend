@@ -1,22 +1,32 @@
 import React, { useState } from "react";
+// import plato from "../../assets/plato/Dish.jpg";
 import {
   AiOutlineHeart,
   AiFillHeart,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { getDiscount } from "../../../../backend/utils/functions";
+import { getDiscount, formatPrice } from "../../../../backend/utils/functions";
 import { ButtonGlobal } from "../ButtonGlobal/ButtonGlobal";
 import { Card, ButtonsCard } from "./CardStyles";
 
-const CardComponent = ({ name, price, img, descrip, discount }) => {
+const CardComponent = ({ id, name, price, img, descrip, discount }) => {
   const priceWithDiscount = getDiscount(price, discount);
-  const [cart, setCart] = useState(false);
   const [heart, setHeart] = useState(false);
-  const [quantity, setQuantity] = useState(1);
 
-  const handleCart = () => {
-    setCart(!cart);
+  const storeInLocalStorage = (product) => {
+    localStorage.setItem("cart", JSON.stringify(product));
   };
+
+  const product = [
+    {
+      id: id,
+      name: name,
+      price: price,
+      img: img,
+      descrip: descrip,
+      discount: discount,
+    },
+  ];
 
   const handleHeart = () => {
     setHeart(!heart);
@@ -30,9 +40,9 @@ const CardComponent = ({ name, price, img, descrip, discount }) => {
         <p className="product-description">{descrip}</p>
         <p className="discount">{discount}%</p>
         <div className="container-price">
-          <span className="product-price">${price}</span>
+          <span className="product-price">{formatPrice(price)}</span>
           <span className="product-discount">
-            <strike>${priceWithDiscount}</strike>
+            {formatPrice(priceWithDiscount)}
           </span>
         </div>
         <ButtonsCard onClick={handleHeart}>
@@ -43,7 +53,10 @@ const CardComponent = ({ name, price, img, descrip, discount }) => {
           )}
         </ButtonsCard>
         <div className="container-button">
-          <ButtonGlobal onClick={handleCart}>
+          <ButtonGlobal
+            onClick={() => storeInLocalStorage(product)}
+            buttoncard="true"
+          >
             Agregar al carrito
           </ButtonGlobal>
         </div>

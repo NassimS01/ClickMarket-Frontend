@@ -25,9 +25,9 @@ const Login = () => {
                 { withCredentials: true }
             )
             .then((res) => {
-                toast.success("Bienvenido!");
                 navigate("/");
-                // window.location.reload(true);
+                window.location.reload(true);
+                toast.success("Bienvenido!");
             })
             .catch((err) => {
                 toast.error(err.response.data.message);

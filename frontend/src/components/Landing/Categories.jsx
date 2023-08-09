@@ -1,64 +1,83 @@
-import React from "react";
 import {
-    GiNoodles,
-    GiSteak,
-    GiCharcuterie,
-    GiMilkCarton,
-    GiVacuumCleaner,
-    GiSlicedBread,
-  } from "react-icons/gi";
-  import { AiOutlineHome } from "react-icons/ai";
-  import { PiBeerBottleDuotone, PiOrangeSliceDuotone } from "react-icons/pi";
-  import { BsSnow } from "react-icons/bs";
-  import { Container, Category } from "./CategoryStyles";
-  
-  const Categories = () => {
-    return (
-      <>
-        <Container>
-          <Category className="animation">
-            <AiOutlineHome className="category-icon" />
-            <p>Hogar</p>
+  GiNoodles,
+  GiSteak,
+  GiCharcuterie,
+  GiMilkCarton,
+  GiVacuumCleaner,
+  GiSlicedBread,
+} from "react-icons/gi";
+import { AiOutlineHome } from "react-icons/ai";
+import { PiBeerBottleDuotone, PiOrangeSliceDuotone } from "react-icons/pi";
+import { BsSnow } from "react-icons/bs";
+import { Container, Category } from "./CategoryStyles";
+
+const Categories = () => {
+  return (
+    <>
+      <Container>
+        <Category className="animation">
+          <Category className="category-icon">
+            <AiOutlineHome size="2.5rem" />
           </Category>
-          <Category className="animation">
-            <PiBeerBottleDuotone className="category-icon" />
-            <p>Bebidas</p>
+          <p>Hogar</p>
+        </Category>
+        <Category className="animation">
+          <Category className="category-icon">
+            <PiBeerBottleDuotone size="2.5rem" />
           </Category>
-          <Category className="animation">
-            <GiNoodles className="category-icon" />
-            <p>Comestibles</p>
+          <p>Bebidas</p>
+        </Category>
+        <Category className="animation">
+          <Category className="category-icon">
+            <GiNoodles size="2.5rem" />
           </Category>
-          <Category className="animation">
-            <GiSteak className="category-icon" />
-            <p>Carnes</p>
+          <p>Comestibles</p>
+        </Category>
+        <Category className="animation">
+          <Category className="category-icon">
+            <GiSteak size="2.5rem" />
           </Category>
-          <Category className="animation">
-            <BsSnow className="category-icon" />
-            <p>Congelados</p>
+          <p>Carnes</p>
+        </Category>
+        <Category className="animation">
+          <Category className="category-icon">
+            <BsSnow size="2.5rem" />
           </Category>
-          <Category className="animation">
-            <GiCharcuterie className="category-icon" />
-            <p>Fiambres</p>
+          <p>Congelados</p>
+        </Category>
+        <Category className="animation">
+          <Category className="category-icon">
+            <GiCharcuterie size="2.5rem" />
           </Category>
-          <Category className="animation">
-            <PiOrangeSliceDuotone className="category-icon" />
-            <p>Frutas</p>
+          <p>Fiambres</p>
+        </Category>
+        <Category className="animation">
+          <Category className="category-icon">
+            <PiOrangeSliceDuotone size="2.5rem" />
           </Category>
-          <Category className="animation">
-            <GiMilkCarton className="category-icon" />
-            <p>Lacteos</p>
+          <p>Frutas</p>
+        </Category>
+        <Category className="animation">
+          <Category className="category-icon">
+            <GiMilkCarton size="2.5rem" />
           </Category>
-          <Category className="animation">
-            <GiVacuumCleaner className="category-icon" />
-            <p>Limpieza</p>
+          <p>Lacteos</p>
+        </Category>
+        <Category className="animation">
+          <Category className="category-icon">
+            <GiVacuumCleaner size="2.5rem" />
           </Category>
-          <Category className="animation">
-            <GiSlicedBread className="category-icon" />
-            <p>Panaderia</p>
+          <p>Limpieza</p>
+        </Category>
+        <Category className="animation">
+          <Category className="category-icon">
+            <GiSlicedBread size="2.5rem" />
           </Category>
-        </Container>
-      </>
-    );
-  };
-  
-  export default Categories;
+          <p>Panaderia</p>
+        </Category>
+      </Container>
+    </>
+  );
+};
+
+export default Categories;

@@ -1,18 +1,25 @@
-import React,{ useState } from "react";
-import { Wrapper } from "./Wrapper";
-import logoClickMarket from "../../assets/logoClickMarketNoEslogan.png";
+import { useState } from "react";
+import {ButtonLink, Wrapper } from "./Wrapper";
+import logoClickMarket from "../../assets/CLICK.png";
 import {
+  
   AiOutlineSearch,
   AiOutlineMenuUnfold,
   AiOutlineShoppingCart,
   AiOutlineUser,
+  AiFillHeart,
+  AiOutlineHeart,
+
 } from "react-icons/ai";
 import { MdArrowDropDown } from "react-icons/md";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { HeaderWrapper } from "./HeaderStyled";
 import LinkItem from "../LinkItem/LinkItem";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -31,7 +38,7 @@ const Header = () => {
         <AiOutlineSearch />
       </button>
 
-      <div className="logo">
+      <div className="logo" onClick={() => navigate("/")}>
         <img src={logoClickMarket} alt="Logo Click Market" />
       </div>
 
@@ -47,19 +54,41 @@ const Header = () => {
           Inicio
         </LinkItem>
         <LinkItem to="/categorias">Categorias</LinkItem>
-        <LinkItem to="/ofertas" onClick={toggleMenu}>
-          Ofertas
-        </LinkItem>
         <LinkItem to="/contacto" onClick={toggleMenu}>
           Contacto
         </LinkItem>
+        <a href="https://www.linkedin.com/in/nassim-salomon/" target="_blank"></a>
         <div className="social-links">
-          <LinkItem to="/carrito" rel="noopener noreferrer">
-            <AiOutlineShoppingCart />
-          </LinkItem>
-          <LinkItem to="/login" rel="noopener noreferrer">
-            <AiOutlineUser />
-          </LinkItem>
+          <ButtonLink
+            onClick={() => navigate("/carrito")}
+            rel="noopener noreferrer"
+          >
+            <AiOutlineHeart className="icon" />
+            {/* <span>1</span> */}
+          </ButtonLink>
+          <ButtonLink
+            onClick={() => navigate("/carrito")}
+            rel="noopener noreferrer"
+          >
+            <AiOutlineShoppingCart className="icon" />
+            {/* <span>1</span> */}
+          </ButtonLink>
+            
+          <ButtonLink>
+          {isAuthenticated ? (
+                  <Link to="/">
+                    <img
+                      src={`${user?.avatar?.url}`}
+                      className="user-avatar"
+                      alt=""
+                    />
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <AiOutlineUser className="icon" />
+                  </Link>
+                )}
+          </ButtonLink>
         </div>
       </nav>
     </Wrapper>

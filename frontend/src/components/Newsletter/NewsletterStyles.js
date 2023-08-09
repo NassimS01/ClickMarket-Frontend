@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const AsideNews = styled.aside`
   background-color: white;
-  width: 55%;
+  max-width: 800px;
+  width: 50%;
   height: 235px;
   border-radius: 47px;
   text-align: center;
@@ -12,7 +13,8 @@ export const AsideNews = styled.aside`
   justify-content: center;
   align-items: center;
   row-gap: 1.5em;
-  box-shadow: -2px 3px 5px 4px rgba(0, 0, 0, 0.14);
+  /* box-shadow: -2px 3px 5px 4px rgba(0, 0, 0, 0.14); */
+  box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
 
   & h2 {
     font-size: 23px;
@@ -21,27 +23,28 @@ export const AsideNews = styled.aside`
 
   & .text {
     width: 350px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     color: #2a333e;
   }
 
   & .form {
-    width: 65%;
-    height: 70px;
+    width: 60%;
+    height: 60px;
     border-radius: 47px;
-    border: 2px solid red;
+    border: 2px solid var(--colorPrimary);
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    padding: 0px 10px;
 
-    & input[type="submit"] {
+    & button[type="submit"] {
       color: white;
       font-weight: 500;
       width: 120px;
-      height: 50px;
+      height: 40px;
       border-radius: 60px;
-      background-color: #ea0000;
+      background-color: var(--colorPrimary);
       margin-top: 8px;
       margin-right: 2px;
       border-width: 0px;
@@ -57,8 +60,8 @@ export const AsideNews = styled.aside`
     & input[type="email"] {
       background-color: transparent;
       width: 325px;
-      height: 55px;
-      margin-top: 6px;
+      height: 40px;
+      margin-top: 8px;
       border-radius: 50px;
       border-width: 0px;
       border-style: none;
@@ -69,21 +72,26 @@ export const AsideNews = styled.aside`
     }
   }
 
-  @media screen and (max-width: 900px) {
-    width: 90%;
-    left: 5%;
+  @media screen and (max-width: 1024px) {
+    width: 60%;
+    row-gap: 0.5rem;
+
+    h2 {
+      margin-top: 15px;
+    }
 
     .text {
       width: 65%;
     }
+
     .form {
-      height: 500px;
+      height: 100px;
       border: 0px solid black;
       flex-direction: column;
       justify-content: center;
       align-items: center;
 
-      & input[type="submit"] {
+      & button[type="submit"] {
         height: 35px;
         width: 65%;
       }
@@ -97,6 +105,23 @@ export const AsideNews = styled.aside`
         height: 35px;
         text-align: center;
       }
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    height: 300px;
+  }
+
+  @media screen and (max-width: 425px) {
+    width: 80vw;
+    height: 330px;
+
+    & input[type="email"] {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 12px;
+      padding: 5px;
     }
   }
 `;

@@ -12,27 +12,6 @@ export const Container = styled.div`
     & p{
         margin: 1rem auto;
     }
-
-    & .home-btn{
-        width: 200px;
-        height: 50px;
-        border: none;
-        background-color: red;
-        border-radius: 10px;
-        color: white;
-        font-weight: 400;
-        cursor: pointer;
-        text-decoration: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    & .home-btn:hover{
-        background-color: #ff2727;
-        transition: 0.5s ease;
-    }
-
 `;
 
 

@@ -17,11 +17,8 @@ export const Wrapper = styled.header`
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
 
-  img {
-    width: 130px;
-  }
 
-  & a {
+  a {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,9 +39,9 @@ export const Wrapper = styled.header`
     width: 100%;
     height: 3px;
     border-radius: 4px;
-    background-color: #18272f;
+    background-color: var(--colorPrimary);
     bottom: -2.5px;
-    left: 0;
+    left: 0%;
     transform-origin: right;
     transform: scaleX(0);
     transition: transform 0.3s ease-in-out;
@@ -65,15 +62,11 @@ export const Wrapper = styled.header`
     display: flex;
     gap: 10px;
   }
-  .social-links a {
-    display: flex;
-    font-size: 1.5rem;
-    border: thin solid black;
-    border-radius: 50%;
-    padding: 0.5rem;
-    justify-content: center;
-    align-items: center;
+
+  .icon {
+    color: var(--colorPrimary);
   }
+
   .menu-btn,
   .search-btn {
     display: none;
@@ -180,5 +173,44 @@ export const Wrapper = styled.header`
     .social-links a {
       font-size: 2rem;
     }
+  }
+`;
+
+export const ButtonLink = styled.button`
+  position: relative;
+  display: flex;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  border: none;
+  border-radius: 50%;
+  box-shadow: -5px 4px 10px 0px rgba(0, 0, 0, 0.14);
+  padding: 0.5rem;
+  height: 50px;
+  width: 50px;
+  justify-content: center;
+  background-color: transparent;
+  cursor: pointer;
+  align-items: center;
+  transition: transform 0.2s ease;
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  .user-avatar{
+    border-radius: 9999px;
+    width: 50px;
+    height: 50px;
+  }
+
+  span {
+    position: absolute;
+    font-size: 18px;
+    top: -10px;
+    right: -5px;
+    color: var(--colorPrimary);
+    padding: 1px 5px;
+    border-radius: 50%;
+    background-color: white;
   }
 `;

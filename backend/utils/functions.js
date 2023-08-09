@@ -3,5 +3,12 @@ export const getRandomProducts = (prodsArray, n) => {
 }
 
 export const getDiscount = (price, discount) => {
-    return (price+((price*discount)/100)).toFixed();
+    return (price + ((price * discount) / 100)).toFixed();
 }
+
+export const formatPrice = (price) => {
+    return new Intl.NumberFormat("es-Ar", {
+        style: "currency",
+        currency: "ARS",
+    }).format(price);
+};

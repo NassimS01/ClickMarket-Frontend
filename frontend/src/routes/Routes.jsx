@@ -16,9 +16,17 @@ import Layout from "../components/layout/Layout";
 import Home from "../pages/Home/Home";
 import Category from "../pages/Category/Category";
 import Signup from "../pages/Signup/SignupPage";
+import Cart from "../pages/Cart/Cart"
+import Store from "../redux/store";
+import {loadUser} from "../redux/actions/user"
+import { getAllProducts } from "../redux/actions/product";
 
 
 const Routes = () => {
+  useEffect(()=>{
+    Store.dispatch(loadUser());
+    Store.dispatch(getAllProducts());
+  }, [])
   return (
     <BrowserRouter>
       <Layout>
@@ -33,6 +41,7 @@ const Routes = () => {
           <Route path="*" element={<NotFound />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="carrito" element={<Cart />} />
         </ReactDomRoutes>
       </Layout>
       <ToastContainer

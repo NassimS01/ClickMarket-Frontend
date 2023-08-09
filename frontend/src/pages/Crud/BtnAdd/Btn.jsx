@@ -1,6 +1,6 @@
-import { useState } from "react";
-import Modal from "./Modal";
+import ProductForm from "./ProductForm";
 import { BtnAddStyled } from "./BtnStyled";
+import { useState } from "react";
 
 const BtnModal = () => {
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +18,7 @@ const BtnModal = () => {
   return (
     <BtnAddStyled>
       {!showModal && <button className="btn-add" onClick={handleButtonClick}>+ Agregar</button>}
-      {showModal && <Modal onClose={handleCloseModal} />}
+      {showModal && <ProductForm onClose={handleCloseModal} />}
     </BtnAddStyled>
   );
 };
