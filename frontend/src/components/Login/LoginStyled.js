@@ -99,4 +99,15 @@ export const ContainerLogin = styled.div`
 	color: white;
 	margin: 10px;
 }
+
+.input-password{
+		position:relative;
+	}
+
+	.password-icon{
+		position: absolute;
+		cursor: pointer;
+		right:1%;
+		top: 30%;
+	}
 `;

@@ -184,7 +184,7 @@ export const ButtonLink = styled.button`
   border: none;
   border-radius: 50%;
   box-shadow: -5px 4px 10px 0px rgba(0, 0, 0, 0.14);
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   height: 50px;
   width: 50px;
   justify-content: center;
@@ -198,9 +198,29 @@ export const ButtonLink = styled.button`
   }
 
   .user-avatar{
-    border-radius: 9999px;
+    border-radius: 50%;
     width: 50px;
     height: 50px;
+  }
+
+  .dropdown-content{
+    position: absolute;
+    padding: .2rem;
+    top: 100%;
+    left: -60px;
+    width: 120px;
+  }
+
+  .user-dropdown{
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-dropdown{
+    background-color: red;
+    color: white;
+    padding: 0 .5rem;
+    border-radius: 10px;
   }
 
   span {
@@ -212,5 +232,11 @@ export const ButtonLink = styled.button`
     padding: 1px 5px;
     border-radius: 50%;
     background-color: white;
+  }
+
+  @media screen and (max-width: 576px) {
+    .dropdown-content{
+    left: -105px;
+  }
   }
 `;

@@ -163,6 +163,17 @@ export const ContainerSignup = styled.div`
 	.sr-only{
 		display:none;
 	}
+
+	.input-password{
+		position:relative;
+	}
+
+	.password-icon{
+		position: absolute;
+		cursor: pointer;
+		right:1%;
+		top: 30%;
+	}
 `;
 
 

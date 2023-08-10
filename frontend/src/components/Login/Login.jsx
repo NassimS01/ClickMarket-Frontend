@@ -1,8 +1,9 @@
-import { Link, useNavigate  } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import React, { useState } from 'react';
 import { ContainerLogin } from './LoginStyled';
 import { server } from "../../server.js";
 import { toast } from "react-toastify"
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from 'axios';
 
 
@@ -25,9 +26,11 @@ const Login = () => {
                 { withCredentials: true }
             )
             .then((res) => {
-                navigate("/");
-                window.location.reload(true);
                 toast.success("Bienvenido!");
+                const interval = setInterval(() => {
+                    navigate("/");
+                    window.location.reload(true);
+                }, 2000);
             })
             .catch((err) => {
                 toast.error(err.response.data.message);
@@ -43,8 +46,12 @@ const Login = () => {
                         <h1>Iniciar sesión en su cuenta</h1>
                         <input type='email' placeholder='Email' name='email' value={email} required className="input" onChange={(e) => setEmail(e.target.value)} />
 
-                        <input type='password' placeholder='Contraseña' name='password' value={password} required className="input" onChange={(e) => setPassword(e.target.value)} />
-                        {/* {error && <div className="error_msg">{error}</div>} */}
+                        <div className="input-password">
+                            <input type={visible ? "text" : "password"} name="password" placeholder='Contraseña' required value={password} onChange={(e) => setPassword(e.target.value)} className="input" />
+                            {visible ? (<AiOutlineEye className="password-icon" size={25} onClick={() => setVisible(false)} />)
+                                :
+                                (<AiOutlineEyeInvisible className="password-icon" size={25} onClick={() => setVisible(true)} />)}
+                        </div>
 
                         <button type='submit' className="green_btn">
                             Iniciar sesión

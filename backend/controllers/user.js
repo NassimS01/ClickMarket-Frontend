@@ -7,7 +7,9 @@ const catchAsyncErrors = require("../middleware/catchAsyncError");
 const { isAuthenticated, isAdmin } = require("../middleware/auth");
 const cloudinary = require("cloudinary")
 const jwt = require("jsonwebtoken");
-const sendToken = require("../utils/jwtToken")
+const sendToken = require("../utils/jwtToken");
+
+const strongPasswordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
 router.post("/create-user", async (req, res, next) => {
     try {
@@ -18,21 +20,35 @@ router.post("/create-user", async (req, res, next) => {
             return next(new ErrorHandler("El usuario ya existe", 400));
         }
 
-        cloudinary.image(avatar, { width: 250, height: 250, gravity: "faces", crop: "fill" });
+        if (!strongPasswordRegex.test(password)) {
+            return next(new ErrorHandler("La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula, una letra minúscula y un número.", 400));
+        }
 
-        const myCloud = await cloudinary.v2.uploader.upload(avatar, {
-            folder: "avatars",
-            width: 150,
-        });
+        
+        let avatarData = {};
+
+        if (avatar) {
+            const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+                folder: "avatars",
+                width: 150,
+            });
+
+            avatarData = {
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url,
+            };
+        } else {
+            avatarData = {
+                public_id: "avatars/avatar_ynb8zc.svg",
+                url: "https://res.cloudinary.com/deolzbrpf/image/upload/v1691644404/avatars/avatar_ynb8zc.svg",
+            };
+        }
 
         const user = {
             name: name,
             email: email,
             password: password,
-            avatar: {
-                public_id: myCloud.public_id,
-                url: myCloud.secure_url,
-            },
+            avatar: avatarData,
         };
 
         const newUser = await User.create(user);
@@ -114,7 +130,7 @@ router.get(
             });
             res.status(201).json({
                 success: true,
-                message: "Log out successful!",
+                message: "Cerraste sesion con exito!",
             });
         } catch (error) {
             return next(new ErrorHandler(error.message, 500));

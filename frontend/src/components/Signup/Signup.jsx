@@ -3,15 +3,19 @@ import React, { useState } from 'react';
 import { ContainerSignup } from './SignupStyled';
 import { server } from '../../server';
 import { RxAvatar } from "react-icons/rx";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
 
 const Signup = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
     const [visible, setVisible] = useState(false);
+    const [visibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [avatar, setAvatar] = useState(null);
 
     const handleFileInputChange = (e) => {
@@ -29,6 +33,11 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (password !== confirmPassword) {
+            toast.error("Las contraseñas no coinciden.");
+            return;
+        }
+
         axios
             .post(`${server}/user/create-user`, { name, email, password, avatar })
             .then((res) => {
@@ -36,9 +45,15 @@ const Signup = () => {
                 setName("");
                 setEmail("");
                 setPassword("");
+                setConfirmPassword("");
                 setAvatar();
+                const interval = setInterval(() => {
+                    navigate("/");
+                    window.location.reload(true);
+                }, 2000);
             })
             .catch((error) => {
+                console.log(error)
                 toast.error(error.response.data.message);
             });
     };
@@ -62,8 +77,24 @@ const Signup = () => {
 
                         <input type='email' placeholder='Email' name='email' value={email} className="input" onChange={(e) => setEmail(e.target.value)} />
 
-                        <input type='password' placeholder='Contraseña' name='password' value={password} className="input" onChange={(e) => setPassword(e.target.value)} />
-                        {/* {error && <div className="error_msg">{error}</div>} */}
+                        <div className="input-password">
+                            <input type={visible ? "text" : "password"} name="password" placeholder='Contraseña' required value={password} onChange={(e) => setPassword(e.target.value)} className="input"/>
+                            {visible ? (<AiOutlineEye className="password-icon" size={25} onClick={() => setVisible(false)}/>) 
+                            :
+                            (<AiOutlineEyeInvisible className="password-icon" size={25} onClick={() => setVisible(true)}/>)}
+                        </div>
+
+                        <div className="input-password">
+                            <input type={visibleConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder='Confirmar Contraseña' required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="input"/>
+                            {visibleConfirmPassword ? (<AiOutlineEye className="password-icon" size={25} onClick={() => setVisibleConfirmPassword(false)}/>) 
+                            :
+                            (<AiOutlineEyeInvisible className="password-icon" size={25} onClick={() => setVisibleConfirmPassword(true)}/>)}
+                        </div>
+                        {/* 
+                        <input  type={visible ? "text" : "password"} placeholder='Contraseña' name='password' value={password} className="input" onChange={(e) => setPassword(e.target.value)} />
+
+                        <input  type={visible ? "text" : "password"} placeholder="Confirmar Contraseña" name="confirmPassword" value={confirmPassword} className="input" onChange={(e) => setConfirmPassword(e.target.value)}/> */}
+
 
                         <div>
                             <label
