@@ -86,29 +86,46 @@ const Header = () => {
             rel="noopener noreferrer"
           >
             <AiOutlineShoppingCart className="icon" />
-            {/* <span>1</span> */}
           </ButtonLink>
 
           <ButtonLink onClick={toggleDropdown}>
-            {isAuthenticated ? (
-              <div className="user-dropdown">
-                <img
-                  src={`${user?.avatar?.url}`}
-                  className="user-avatar"
-                  alt=""
-                />
-                {dropdownOpen && (
-                  <div className="dropdown-content">
-                    <button onClick={logoutHandler} className="btn-dropdown">Cerrar Sesión</button>
-                  </div>
+        {isAuthenticated ? (
+          <div className="user-dropdown">
+            <img
+              src={`${user?.avatar?.url}`}
+              className="user-avatar"
+              alt=""
+            />
+            {dropdownOpen && (
+              <div className="dropdown-content">
+                {user?.role === "Admin" ? (
+                  <>
+                    <Link to="/panel-admin/*" className="btn-dropdown">
+                      Panel Administrador
+                    </Link>
+                    <button onClick={logoutHandler} className="btn-dropdown">
+                      Cerrar Sesión
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/perfil" className="btn-dropdown">
+                      Perfil
+                    </Link>
+                    <button onClick={logoutHandler} className="btn-dropdown">
+                      Cerrar Sesión
+                    </button>
+                  </>
                 )}
               </div>
-            ) : (
-              <Link to="/login">
-                <AiOutlineUser className="icon" />
-              </Link>
             )}
-          </ButtonLink>
+          </div>
+        ) : (
+          <Link to="/login">
+            <AiOutlineUser className="icon" />
+          </Link>
+        )}
+      </ButtonLink>
         </div>
       </nav>
     </Wrapper>
