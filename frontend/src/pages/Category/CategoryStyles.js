@@ -1,24 +1,29 @@
 import { styled } from "styled-components";
 
 export const SectionCategory = styled.div`
-  /* margin-top: 50px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  margin-bottom: 151px;
+
   /* Input search */
-  .searchContainer {
+  .filters {
     display: flex;
     line-height: 28px;
     align-items: center;
     flex-direction: column;
+    width: 30%;
+    gap: 30px;
+  }
+
+  .searchContainer {
     position: relative;
-    width: 400px;
   }
 
   .input {
-    width: 100%;
+    position: relative;
+    width: 300px;
     height: 40px;
     line-height: 28px;
     padding: 0 1rem;
@@ -26,21 +31,23 @@ export const SectionCategory = styled.div`
     border: 2px solid transparent;
     border-radius: 8px;
     outline: none;
-    background-color: #f3f3f4;
+    background-color: transparent;
     color: #0d0c22;
     transition: 0.3s ease;
+    box-shadow: 0px 0px 7px 1px rgba(186 30 26/ 30%);
   }
 
   .input::placeholder {
     color: #9e9ea7;
   }
 
+
   .input:focus,
   input:hover {
     outline: none;
     border-color: rgba(234, 76, 137, 0.4);
     background-color: #fff;
-    box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+    box-shadow: 0 0 0 4px rgb(186 30 26 / 10%);
   }
 
   .iconSearch {
@@ -51,6 +58,7 @@ export const SectionCategory = styled.div`
     fill: var(--colorPrimary);
     width: 1rem;
     height: 1rem;
+    z-index: 10;
   }
 
   /*  */
@@ -58,6 +66,16 @@ export const SectionCategory = styled.div`
   & .categories {
     display: flex;
     width: 95vw;
+  }
+
+  .containerCards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .title {
+    margin-top: 30px;
   }
 
   @media only screen and (max-width: 768px) {

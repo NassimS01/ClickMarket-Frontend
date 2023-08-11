@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 
 export const Filter = styled.div`
   width: 300px;
-  margin: 50px 120px 0px 50px;
   font-family: "Whitney", sans-serif;
   border-radius: 20px;
 

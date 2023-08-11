@@ -4,7 +4,7 @@ export const ContainerCards = styled.div`
   max-width: 1440px;
   margin: 30px auto;
   display: flex;
-  align-items: center;
+  align-items: start;
   flex-wrap: wrap;
 
   @media only screen and (max-width: 768px) {

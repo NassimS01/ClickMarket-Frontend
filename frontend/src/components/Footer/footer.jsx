@@ -1,12 +1,19 @@
 import React from "react";
 import { StyledFooter } from "./FooterStyled";
-import { AiFillFacebook, AiFillGithub, AiFillTwitterSquare, AiFillLinkedin, AiFillPhone, AiFillMail } from "react-icons/ai";
-import { FaLocationDot} from "react-icons/fa6";
+import {
+  AiFillFacebook,
+  AiFillGithub,
+  AiFillTwitterSquare,
+  AiFillLinkedin,
+  AiFillPhone,
+  AiFillMail,
+} from "react-icons/ai";
+import { FaLocationDot } from "react-icons/fa6";
 import logo from "../../assets/CLICK.png";
 import qr from "../../assets/ClickMarketQR.png";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { BsPeopleFill, BsFillPersonLinesFill } from "react-icons/bs";
-
+import { useLocation } from "react-router";
 
 const Footer = () => {
   return (
@@ -67,7 +74,6 @@ const Footer = () => {
           <img src={qr} alt="" className="qr" />
         </div>
       </div>
-
     </StyledFooter>
   );
 };

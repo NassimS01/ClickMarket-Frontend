@@ -28,17 +28,16 @@ const Category = () => {
   // El último segmento del pathname contendrá el valor que deseas
   const lastSegment = pathnameSegments[pathnameSegments.length - 1];
 
-  console.log(`/categorias/${lastSegment}`);
 
   const searchBar = (e) => {
     setSearch(e.target.value.toLowerCase());
   };
 
   return (
-    <>
-      <SectionCategory>
-        <h3 className="title">Buscá tus productos</h3>
-        <div className="categories">
+    <SectionCategory>
+      <h3 className="title">Buscá tus productos</h3>
+      <div className="categories">
+        <div className="filters">
           <div className="searchContainer">
             <AiOutlineSearch className="iconSearch" />
             <input
@@ -47,28 +46,28 @@ const Category = () => {
               className="input"
               onChange={(e) => searchBar(e)}
             />
-            <FilterComponent></FilterComponent>
           </div>
-          <ContainerCards>
-            {Object.values(filteredProducts)
-              .filter((product) => {
-                return search.toLowerCase() == "todos"
-                  ? product
-                  : product.name.toLowerCase().includes(search);
-              })
-              .map((product) =>
-                location.pathname == "/categorias/todos" ? (
-                  <CardComponent key={product.id} {...product}></CardComponent>
-                ) : location.pathname == `/categorias/${product.category}` ? (
-                  <CardComponent key={product.id} {...product}></CardComponent>
-                ) : (
-                  ""
-                )
-              )}
-          </ContainerCards>
+          <FilterComponent></FilterComponent>
         </div>
-      </SectionCategory>
-    </>
+        <div className="containerCards">
+          {Object.values(filteredProducts)
+            .filter((product) => {
+              return search.toLowerCase() == "todos"
+                ? product
+                : product.name.toLowerCase().includes(search);
+            })
+            .map((product) =>
+              location.pathname == "/categorias/todos" ? (
+                <CardComponent key={product.id} {...product}></CardComponent>
+              ) : location.pathname == `/categorias/${product.category}` ? (
+                <CardComponent key={product.id} {...product}></CardComponent>
+              ) : (
+                ""
+              )
+            )}
+        </div>
+      </div>
+    </SectionCategory>
   );
 };
 

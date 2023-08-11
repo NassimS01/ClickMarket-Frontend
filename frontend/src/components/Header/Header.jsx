@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonLink, Wrapper } from "./Wrapper";
 import logoClickMarket from "../../assets/CLICK.png";
 import {
@@ -13,9 +13,12 @@ import { MdArrowDropDown } from "react-icons/md";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { HeaderWrapper } from "./HeaderStyled";
 import LinkItem from "../LinkItem/LinkItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFilteredCategories } from "../../redux/actions/categories";
 
 const Header = () => {
+  const dispatch = useDispatch();
+
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,14 +33,21 @@ const Header = () => {
     setDropdownOpen((prevDropdownOpen) => !prevDropdownOpen);
   }
 
+  const filteredCategories = useSelector(
+    (state) => state.categories.filteredCategories
+  );
+
+  useEffect(() => {
+    dispatch(fetchFilteredCategories());
+  }, [dispatch]);
+
   const location = useLocation();
 
   const pathnameSegments = location.pathname.split("/");
-
-  // El último segmento del pathname contendrá el valor que deseas
-  const lastSegment = pathnameSegments[pathnameSegments.length - 1] || "todos";
-
+  const segment = pathnameSegments[pathnameSegments.length - 1];
+  const lastSegment = Object.keys(filteredCategories).includes(segment) ? `${segment}` : "todos"
   const urlCategory = `/categorias/${lastSegment}`;
+
   return (
     <Wrapper>
       <button className="btn search-btn" id="search-btn">

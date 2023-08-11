@@ -1,12 +1,12 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const StyledFooter = styled.footer`
-
   width: 100%;
   padding: 1rem;
   text-align: center;
   box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.15);
-  border-radius: 15px 15px 0;
+  border-radius: 15px 15px 0; 
+  
   img {
     width: 200px;
   }
@@ -115,11 +115,7 @@ export const StyledFooter = styled.footer`
     height: 150px;
   }
 
-  @media only screen and (max-width: 1440px) {
-  }
-
   @media only screen and (max-width: 768px) {
-
     .container-footer {
       gap: 30px;
     }
