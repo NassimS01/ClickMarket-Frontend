@@ -43,7 +43,7 @@ const Login = () => {
             <div className="login_form_container">
                 <div className="left">
                     <form className="form_container" onSubmit={handleSubmit}>
-                        <h1>Iniciar sesión en su cuenta</h1>
+                        <h1>Iniciar sesión</h1>
                         <input type='email' placeholder='Email' name='email' value={email} required className="input" onChange={(e) => setEmail(e.target.value)} />
 
                         <div className="input-password">

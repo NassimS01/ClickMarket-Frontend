@@ -4,8 +4,12 @@ export const ContainerCards = styled.div`
   max-width: 1440px;
   margin: 30px auto;
   display: flex;
-  align-items: center;
+  align-items: start;
   flex-wrap: wrap;
+
+  @media only screen and (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 export const Card = styled.div`
@@ -24,6 +28,7 @@ export const Card = styled.div`
   box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
   -webkit-box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
   -moz-box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
+  z-index: 10;
 
   & .product-image {
     margin: 0 auto;
@@ -116,4 +121,6 @@ export const ButtonsCard = styled.button`
   border-radius: 10px;
   border: none;
   cursor: pointer;
+
+
 `;

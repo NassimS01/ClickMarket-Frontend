@@ -1,113 +1,121 @@
 import styled from "styled-components";
 
 export const ContainerLogin = styled.div`
-	width: 100%;
-	min-height: 100vh;
-	background-color: #f5f5f5;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-.login_form_container {
-	width: 900px;
-	height: 500px;
-	display: flex;
-	border-radius: 10px;
-	box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
-		0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
-}
+  .login_form_container {
+    width: 900px;
+    height: 500px;
+    display: flex;
+    border-radius: 10px;
+    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
+      0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  }
 
-.left {
-	flex: 2;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background-color: white;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-}
+  .left {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
 
-.form_container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
+  .form_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.form_container h1 {
-	font-size: 40px;
-	margin-top: 0;
-}
+  .form_container h1 {
+    font-size: 40px;
+    margin-top: 0;
+  }
 
-.input {
-	outline: none;
-	border: none;
-	width: 370px;
-	padding: 15px;
-	border-radius: 10px;
-	background-color: #edf5f3;
-	margin: 5px 0;
-	font-size: 14px;
-}
+  .input {
+    outline: none;
+    border: 2px solid transparent;
+    width: 370px;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #edf5f3;
+    margin: 5px 0;
+    font-size: 14px;
+  }
 
-.error_msg {
-	width: 370px;
-	padding: 15px;
-	margin: 5px 0;
-	font-size: 14px;
-	background-color: #f34646;
-	color: white;
-	border-radius: 5px;
-	text-align: center;
-}
+  input:focus,
+  input:hover {
+    outline: none;
+    border-color: rgba(234, 76, 137, 0.4);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+  }
 
-.right {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	/* background-color: #3bb19b; */
-	background-color: red;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
+  .error_msg {
+    width: 370px;
+    padding: 15px;
+    margin: 5px 0;
+    font-size: 14px;
+    background-color: #f34646;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+  }
 
-.right h1 {
-	margin-top: 0;
-	color: white;
-	font-size: 2rem;
-	align-self: center;
-}
+  .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #3bb19b; */
+    background-color: var(--colorPrimary);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
 
-.white_btn,
-.green_btn {
-	border: none;
-	outline: none;
-	padding: 12px 0;
-	background-color: white;
-	border-radius: 20px;
-	width: 180px;
-	font-weight: bold;
-	font-size: 14px;
-	cursor: pointer;
-}
+  .right h1 {
+    margin-top: 0;
+    color: white;
+    font-size: 2rem;
+    align-self: center;
+  }
 
-.green_btn {
-	/* background-color: #3bb19b; */
-	background-color: red;
-	color: white;
-	margin: 10px;
-}
+  .white_btn,
+  .green_btn {
+    border: none;
+    outline: none;
+    padding: 12px 0;
+    background-color: white;
+    border-radius: 20px;
+    width: 180px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+  }
 
-.input-password{
-		position:relative;
-	}
+  .green_btn {
+    /* background-color: #3bb19b; */
+    background-color: var(--colorPrimary);
+    color: white;
+    margin: 10px;
+  }
 
-	.password-icon{
-		position: absolute;
-		cursor: pointer;
-		right:1%;
-		top: 30%;
-	}
+  .input-password {
+    position: relative;
+  }
+
+  .password-icon {
+    position: absolute;
+    cursor: pointer;
+    right: 1%;
+    top: 30%;
+  }
 `;

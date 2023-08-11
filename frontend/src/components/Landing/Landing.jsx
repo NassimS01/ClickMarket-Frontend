@@ -12,13 +12,13 @@ const Landing = () => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
 
-    useEffect(() => {
-        axios.get(`${server}/products/get-all-products`).then((res) => {
-            setData(res.data.products);
-        })
-    }, []);
+  useEffect(() => {
+    axios.get(`${server}/products/get-all-products`).then((res) => {
+      setData(res.data.products);
+    });
+  }, []);
 
-    const randomProducts = getRandomProducts(data,4);
+  const randomProducts = getRandomProducts(data, 4);
 
   return (
     <>
@@ -27,9 +27,13 @@ const Landing = () => {
         <Categories />
         <h3 className="title">Productos que pueden interesarte</h3>
         <ContainerCards>
-          {
-            randomProducts.map(product => <CardComponent key={product._id} {...product}  img={product.images.url}/>)
-          }
+          {randomProducts.map((product) => (
+            <CardComponent
+              key={product._id}
+              {...product}
+              img={product.images.url}
+            />
+          ))}
         </ContainerCards>
         <ExtraInfo />
       </Container>

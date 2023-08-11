@@ -1,79 +1,79 @@
 import React from "react";
 import { StyledFooter } from "./FooterStyled";
-import { AiFillFacebook, AiFillGithub, AiFillTwitterSquare, AiFillLinkedin, AiFillPhone, AiFillMail } from "react-icons/ai";
-import { FaLocationDot} from "react-icons/fa6";
+import {
+  AiFillFacebook,
+  AiFillGithub,
+  AiFillTwitterSquare,
+  AiFillLinkedin,
+  AiFillPhone,
+  AiFillMail,
+} from "react-icons/ai";
+import { FaLocationDot } from "react-icons/fa6";
 import logo from "../../assets/CLICK.png";
-
+import qr from "../../assets/ClickMarketQR.png";
+import { LiaShippingFastSolid } from "react-icons/lia";
+import { BsPeopleFill, BsFillPersonLinesFill } from "react-icons/bs";
+import { useLocation } from "react-router";
 
 const Footer = ({isLoading}) => {
   return (
     <StyledFooter isLoading={isLoading}>
       <div className="container-footer">
-      <div className="container-1">
+        <div className="container-1">
           <img className="logo" src={logo} alt="Logo Click Market" />
           <div className="social-icons-container-1">
             <a href="https://www.facebook.com/" className="logo-facebook">
-              <AiFillFacebook/>
+              <AiFillFacebook color="var(--colorPrimary)" />
             </a>
-            <a href="https://github.com/NassimS01/Supermarket/" className="logo-github">
-              <AiFillGithub/>
+            <a
+              href="https://github.com/NassimS01/Supermarket/"
+              className="logo-github"
+            >
+              <AiFillGithub color="var(--colorPrimary)" />
             </a>
             <a href="https://twitter.com/" className="logo-twitter">
-              <AiFillTwitterSquare/>
+              <AiFillTwitterSquare color="var(--colorPrimary)" />
             </a>
             <a href="https://ar.linkedin.com/" className="logo-linkedin">
-              <AiFillLinkedin/>
+              <AiFillLinkedin />
             </a>
           </div>
         </div>
 
         <div className="container-2">
           <h3>Contacto</h3>
-            <a href="#" className="text">
-              <FaLocationDot/> San Miguel de Tucumán, Tucumán
-            </a>
-            <a href="#" className="text">
-              <AiFillPhone/> +54 381-5367724
-            </a>
-            <a href="#" className="text">
-              <AiFillMail/> clickmarket@support.com
-            </a>
+          <p href="#" className="text">
+            <FaLocationDot color="var(--colorPrimary)" /> San Miguel de Tucumán,
+            Tucumán
+          </p>
+          <p href="#" className="text">
+            <AiFillPhone color="var(--colorPrimary)" /> +54 381-5367724
+          </p>
+          <a href="#" className="text">
+            <AiFillMail color="var(--colorPrimary)" /> clickmarket@support.com
+          </a>
         </div>
 
         <div className="container-3">
-          <h3>Support</h3>
-            <a href="#">
-              FQA
-            </a>
-            <a href="#">
-              Shipping & Returns
-            </a>
-            <a href="#">
-              Contact Us
-            </a>
-            <a href="#">
-              Our Partners
-            </a>
+          <h3>Soporte</h3>
+          <a href="#">
+            <LiaShippingFastSolid color="var(--colorPrimary)" size="20px" />
+            Envíos y devoluciones
+          </a>
+          <a href="#">
+            <BsPeopleFill color="var(--colorPrimary)" size="20px" />
+            Acerca de nosotros
+          </a>
+          <a href="#">
+            <BsFillPersonLinesFill color="var(--colorPrimary)" size="20px" />
+            Patrocinios
+          </a>
         </div>
 
         <div className="container-4">
-          <h3>Info</h3>
-            <a href="#">
-              Dates
-            </a>
-            <a href="#">
-              Parties
-            </a>
-            <a href="#">
-              Brithdays
-            </a>
-            <a href="#">
-              Menu
-            </a>
+          <img src={qr} alt="" className="qr" />
         </div>
       </div>
-        
-      <p>&copy; Click Market </p>
     </StyledFooter>
   );
 };

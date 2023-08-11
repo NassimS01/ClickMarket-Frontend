@@ -18,7 +18,6 @@ export const Wrapper = styled.header`
   border-bottom-right-radius: 15px;
   ${({ isLoading }) => isLoading && "pointer-events: none;"}
 
-
   a {
     display: flex;
     flex-direction: column;
@@ -67,6 +66,8 @@ export const Wrapper = styled.header`
   .icon {
     color: var(--colorPrimary);
   }
+
+  
 
   .menu-btn,
   .search-btn {

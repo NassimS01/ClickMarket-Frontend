@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 
 export const Filter = styled.div`
   width: 300px;
-  margin: 50px 120px 0px 50px;
   font-family: "Whitney", sans-serif;
   border-radius: 20px;
 
@@ -252,4 +251,9 @@ export const Filter = styled.div`
   p.title {
     margin: 0;
   }
+
+  @media only screen and (max-width: 768px) {
+    margin: 0;
+  }
+
 `;
