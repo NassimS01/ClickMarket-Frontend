@@ -68,8 +68,8 @@ router.post(
     "/login-user",
     catchAsyncErrors(async (req, res, next) => {
         try {
-            const { email, password } = req.body;
-
+            const { email, password, active } = req.body;
+            
             if (!email || !password) {
                 return next(new ErrorHandler("Debes rellenar todos los campos!", 400));
             }
@@ -86,6 +86,10 @@ router.post(
                 return next(
                     new ErrorHandler("La contraseña ingresada es incorrecta", 400)
                 );
+            }
+
+            if (!user.active) {
+                return next(new ErrorHandler("La cuenta debe ser activada por un administrador", 400));
             }
 
             sendToken(user, 201, res);

@@ -18,7 +18,7 @@ const Landing = () => {
         })
     }, []);
 
-    const randomProducts = getRandomProducts(data,3);
+    const randomProducts = getRandomProducts(data,4);
 
   return (
     <>
@@ -28,7 +28,7 @@ const Landing = () => {
         <h3 className="title">Productos que pueden interesarte</h3>
         <ContainerCards>
           {
-            randomProducts.map(product => <CardComponent key={product._id} name={product.name} price={product.price} descrip={product.description} discount={product.discount}/>)
+            randomProducts.map(product => <CardComponent key={product._id} {...product}  img={product.images.url}/>)
           }
         </ContainerCards>
         <ExtraInfo />

@@ -38,6 +38,7 @@ const Header = () => {
       .then((res) => {
         toast.success(res.data.message); 
         const interval = setInterval(()=>{
+          navigate("/")
           window.location.reload(true);
         },2000)
       })

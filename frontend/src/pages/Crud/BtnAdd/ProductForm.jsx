@@ -1,133 +1,191 @@
-import { useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 import { ModalStyled } from "./ModalStyled";
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createProduct } from "../../../redux/actions/product";
+import { toast } from "react-toastify";
+
 
 const ProductForm = ({ onClose }) => {
-  const [product, setProduct] = useState({
-    name: "",
-    price: 0,
-    img: "",
-    descrip: "",
-    fav: "true",
-    category: "",
-    stock: 0,
-    state: "true",
-  });
+  const { success, error } = useSelector((state) => state.products);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const [images, setImages] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState();
+  const [discount, setDiscount] = useState();
+  const [stock, setStock] = useState();
+  const [state, setState] = useState();
 
-    // Si el campo es fav o state, convertir el valor a booleano
-    const newValue =
-      name === "fav" || name === "state" ? value === "true" : value;
-
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      [name]: newValue,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:3900/api/save",
-        product
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error al guardar el producto:", error);
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
     }
+    if (success) {
+      toast.success("Producto Creado!");
+      const interval = setInterval(() => {
+        window.location.reload();
+      }, 1500)
+    }
+  }, [dispatch, error, success]);
+
+  const handleImageChange = (e) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImages(reader.result);
+      }
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newForm = new FormData();
+
+    newForm.set("images", images);
+    newForm.append("name", name);
+    newForm.append("description", description);
+    newForm.append("category", category);
+    newForm.append("price", price);
+    newForm.append("discount", discount);
+    newForm.append("stock", stock);
+    newForm.append("state", state);
+    dispatch(
+      createProduct({
+        name,
+        description,
+        category,
+        price,
+        discount,
+        stock,
+        state,
+        images,
+      })
+    );
+  };
   return (
     <ModalStyled>
       <h3>Agrega un Producto</h3>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Nombre:</label>
+          <label htmlFor="upload">
+            <AiOutlinePlusCircle size={30} className="image-icon" color="#555" />
+          </label>
           <input
-            type="text"
-            id="name"
-            name="name"
-            value={product.name}
-            onChange={handleChange}
+            type="file"
+            name=""
+            id="upload"
+            className="hidden"
+            multiple
+            onChange={handleImageChange}
           />
+          <div className="image-container">
+              {images ? (
+                    <img
+                      src={images}
+                      alt=""
+                      className="product-image"
+                    />
+                  ) : (
+                    <i>No hay imagen del producto</i>
+                  )}
+          </div>
         </div>
-        <div>
-          <label htmlFor="price">Precio:</label>
+        <div className="name-price-container">
+          <div>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Nombre producto"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="price-container">
+            <input
+              type="number"
+              id="price"
+              name="price"
+              placeholder="Precio $"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="discount-stock-container">
           <input
             type="number"
-            id="price"
-            name="price"
-            value={product.price}
-            onChange={handleChange}
+            id="discount"
+            name="discount"
+            value={discount}
+            placeholder="Descuento"
+            onChange={(e) => setDiscount(e.target.value)}
           />
-        </div>
-        <div>
-          <label htmlFor="img">Imagen URL:</label>
-          <input
-            type="text"
-            id="img"
-            name="img"
-            value={product.img}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="descrip">Descripción:</label>
-          <textarea
-            id="descrip"
-            name="descrip"
-            value={product.descrip}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="fav">Favorito:</label>
-          <select
-            id="fav"
-            name="fav"
-            value={product.fav.toString()}
-            onChange={handleChange}
-          >
-            <option value="true">Sí</option>
-            <option value="false">No</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="category">Categoría:</label>
-          <input
-            type="text"
-            id="category"
-            name="category"
-            value={product.category}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="stock">Stock:</label>
           <input
             type="number"
             id="stock"
             name="stock"
-            value={product.stock}
-            onChange={handleChange}
+            value={stock}
+            placeholder="Stock"
+            onChange={(e) => setStock(e.target.value)}
           />
         </div>
-        <div>
-          <label htmlFor="state">Estado:</label>
-          <select
-            id="state"
-            name="state"
-            value={product.state.toString()}
-            onChange={handleChange}
-          >
-            <option value="true">Sí</option>
-            <option value="false">No</option>
-          </select>
+
+        <div className="category-state-container">
+          <div>
+            <label htmlFor="category">Categoría:</label>
+            <select
+              id="category"
+              name="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="bazar">Bazar</option>
+              <option value="bebidas">Bebidas</option>
+              <option value="carnes">Carnes</option>
+              <option value="comestibles">Comestibles</option>
+              <option value="congelados">Congelados</option>
+              <option value="fiambres">Fiambres</option>
+              <option value="frutas">Frutas</option>
+              <option value="lacteos">Lacteos</option>
+              <option value="limpieza">Limpieza</option>
+              <option value="panaderia">Panaderia</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="state">Estado:</label>
+            <select
+              id="state"
+              name="state"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+            >
+              <option value="true">Sí</option>
+              <option value="false">No</option>
+            </select>
+          </div>
         </div>
+
+        <div className="description-container">
+          <label htmlFor="descrip">Descripción:</label>
+          <textarea
+            id="descrip"
+            name="descrip"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+
         <button type="submit">Guardar Producto</button>
         <button type="button" onClick={onClose}>
           Cerrar

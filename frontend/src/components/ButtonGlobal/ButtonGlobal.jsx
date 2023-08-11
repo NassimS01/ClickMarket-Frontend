@@ -26,5 +26,7 @@ export const ButtonGlobal = styled.button`
       }
     `}
 
-  ${(props) => props.buttoncard && css``}
+  ${(props) => props.buttoncard && css`
+  
+  `}
 `;

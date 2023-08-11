@@ -4,6 +4,7 @@ export const StyledFooter = styled.footer`
   padding: 1rem 1rem 0 1rem;
   text-align: center;
   border-top: solid 1px black;
+  ${({ isLoading }) => isLoading && "pointer-events: none;"}
 
 
   & .logo-facebook{

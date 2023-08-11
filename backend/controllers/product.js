@@ -4,6 +4,7 @@ const router = express.Router();
 const catchAsyncErrors = require("../middleware/catchAsyncError");
 const ErrorHandler = require("../utils/ErrorHandler");
 const Product = require("../models/product");
+const cloudinary = require("cloudinary");
 const { isAuthenticated, isAdmin } = require("../middleware/auth");
 
 // create product
@@ -12,6 +13,7 @@ router.post(
     catchAsyncErrors(async (req, res, next) => {
         try {
             const productData = req.body;
+            const productImage = req.body.images;
 
             const existingProduct = await Product.findOne({ name: productData.name });
 
@@ -22,12 +24,29 @@ router.post(
                 });
             }
 
+            const myCloud = await cloudinary.v2.uploader.upload(productImage, {
+                folder: "products",
+            });
 
-            const product = await Product.create(productData);
+            const product = {
+                name: productData.name,
+                description: productData.description,
+                category: productData.category,
+                price: productData.price,
+                discount: productData.discount,
+                stock: productData.stock,
+                images: {
+                    public_id: myCloud.public_id,
+                    url: myCloud.secure_url,
+                },
+            };
+
+
+            const newProduct = await Product.create(product);
 
             res.status(201).json({
                 success: true,
-                product,
+                newProduct,
             });
         } catch (error) {
             return next(new ErrorHandler(error, 400));
