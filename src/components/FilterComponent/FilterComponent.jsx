@@ -57,9 +57,9 @@ const FilterComponent = () => {
             <label htmlFor="all">Todos</label>
           </li>
           {Object.entries(categories).map(([, cat]) => (
-            <li key={cat}>
-              <input type="radio" id="website" name="type" />
-              <label htmlFor="website">{cat}</label>
+            <li key={cat}>  
+              <input type="radio" id={cat} name="type" />
+              <label htmlFor={cat}>{cat}</label>
             </li>
           ))}
         </ul>

@@ -33,6 +33,7 @@ const GlobalStyles = createGlobalStyle`
     background-color: var(--colorPrimary);
   }
 
+
   /* body {
      color: #fff;
      display: flex;

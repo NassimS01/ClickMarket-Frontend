@@ -58,4 +58,18 @@ export const CartProduct = styled.div`
       font-size: 20px;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    width: auto;
+  }
+
+  @media screen and (max-width: 425px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .infoProductCart {
+      width: auto;
+    }
+  }
 `;

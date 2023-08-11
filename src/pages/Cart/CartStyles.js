@@ -101,6 +101,7 @@ export const CartContainer = styled.div`
   .productCart {
     position: relative;
     display: flex;
+    flex-direction: column;
     width: 50vw;
     box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
     border-radius: 20px;
