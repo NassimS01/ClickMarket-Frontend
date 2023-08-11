@@ -22,7 +22,7 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
       id: id,
       name: name,
       price: price,
-      img: img,
+      images: img,
       descrip: descrip,
       discount: discount,
     },
@@ -55,7 +55,7 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
         <div className="container-button">
           <ButtonGlobal
             onClick={() => storeInLocalStorage(product)}
-            buttoncard="true"
+            buttoncard
           >
             Agregar al carrito
           </ButtonGlobal>

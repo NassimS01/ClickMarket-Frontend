@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "user",
   },
+  active: {
+    type: Boolean,
+    default: false
+  },
   avatar: {
     public_id: {
       type: String,

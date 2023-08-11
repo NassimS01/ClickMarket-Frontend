@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {
@@ -18,12 +18,13 @@ import Category from "../pages/Category/Category";
 import Signup from "../pages/Signup/SignupPage";
 import Cart from "../pages/Cart/Cart"
 import Store from "../redux/store";
-import {loadUser} from "../redux/actions/user"
+import { loadUser } from "../redux/actions/user"
 import { getAllProducts } from "../redux/actions/product";
+import ProtectedAdminRoute from "./ProtectedAdminRoute";
 
 
 const Routes = () => {
-  useEffect(()=>{
+  useEffect(() => {
     Store.dispatch(loadUser());
     Store.dispatch(getAllProducts());
   }, [])
@@ -33,10 +34,10 @@ const Routes = () => {
         <ReactDomRoutes>
           <Route path="/" element={<Home />} />
           <Route path="categorias" element={<Category />} />
-          <Route path="/panel-admin/*" element={<Crud />}>
-            <Route path="products" element={<PanelProducts />} />
-            <Route path="users" element={<PanelUsers />} />
-            <Route path="orders" element={<PanelOrders />} />
+          <Route path="/panel-admin/*" element={<ProtectedAdminRoute><Crud /></ProtectedAdminRoute>}>
+            <Route path="products" element={<ProtectedAdminRoute><PanelProducts /></ProtectedAdminRoute>} />
+            <Route path="users" element={<ProtectedAdminRoute><PanelUsers /></ProtectedAdminRoute>} />
+            <Route path="orders" element={<ProtectedAdminRoute><PanelOrders /></ProtectedAdminRoute>} />
           </Route>
           <Route path="*" element={<NotFound />} />
           <Route path="login" element={<Login />} />

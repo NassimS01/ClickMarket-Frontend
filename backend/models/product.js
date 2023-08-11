@@ -15,6 +15,7 @@ const productSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
+    required: [true, "Ingresa el precio del producto"]
   },
   fav: {
     type: Boolean,
@@ -22,13 +23,13 @@ const productSchema = new mongoose.Schema({
   },
   discount: {
     type: Number,
-    required: [false, "Ingresa el descuento del producto!"],
+    required: false,
   },
   stock: {
     type: Number,
     required: [true, "Por favor, introduce el stock del producto!"],
   },
-  images: [
+  images: 
     {
       public_id: {
         type: String,
@@ -38,8 +39,8 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: false,
       },
-    },
-  ],
+    }
+  ,
   createdAt: {
     type: Date,
     default: Date.now(),

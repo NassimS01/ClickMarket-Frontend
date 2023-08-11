@@ -99,6 +99,20 @@ export const ContainerSignup = styled.div`
 	color: white;
 	margin: 10px;
 }
+	.green_btn:disabled {
+    background: #ccc;
+}
+	.input-checkbox{
+		margin: 2rem 0;
+		color: gray;
+}
+	#checkbox{
+		margin-right: 10px;
+	}
+
+	input[type=checkbox] {
+    transform: scale(1.2);
+}
 
 	.avatar-label{
 	//block text-sm font-medium text-gray-700 
