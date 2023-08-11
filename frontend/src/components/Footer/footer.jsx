@@ -15,9 +15,9 @@ import { LiaShippingFastSolid } from "react-icons/lia";
 import { BsPeopleFill, BsFillPersonLinesFill } from "react-icons/bs";
 import { useLocation } from "react-router";
 
-const Footer = () => {
+const Footer = ({isLoading}) => {
   return (
-    <StyledFooter>
+    <StyledFooter isLoading={isLoading}>
       <div className="container-footer">
         <div className="container-1">
           <img className="logo" src={logo} alt="Logo Click Market" />

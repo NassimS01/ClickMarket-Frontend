@@ -79,7 +79,7 @@ const EditProductModal = ({ productData, onClose }) => {
                 <div>
                     <label htmlFor="img">Imagen URL:</label>
                     <input
-                        type="text"
+                        type="file"
                         id="img"
                         name="img"
                         value={img}

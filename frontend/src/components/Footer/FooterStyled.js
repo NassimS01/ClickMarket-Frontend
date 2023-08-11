@@ -5,8 +5,9 @@ export const StyledFooter = styled.footer`
   padding: 1rem;
   text-align: center;
   box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.15);
-  border-radius: 15px 15px 0; 
-  
+  border-radius: 15px 15px 0;
+  ${({ isLoading }) => isLoading && "pointer-events: none;"}
+
   img {
     width: 200px;
   }

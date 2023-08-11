@@ -21,46 +21,7 @@ const Products = () => {
         dispatch(deleteProduct(id));
         window.location.reload();
     };
-    // const [products, setProducts] = useState([]);
-    // const [status, setStatus] = useState(null);
 
-    // useEffect(() => {
-    //     fetchProducts();
-    //     /// Conexión a los eventos SSE del servidor para agregar o editar un producto
-    //     const eventSource = new EventSource(
-    //         `${server}/api/products-sse`
-    //     );
-    //     eventSource.onmessage = (event) => {
-    //         const eventData = JSON.parse(event.data);
-    //         const updatedProductId = eventData._id;
-
-    //         setProducts((prevProducts) =>
-    //             prevProducts.some((product) => product._id === updatedProductId)
-    //                 ? prevProducts.map((product) =>
-    //                     product._id === updatedProductId ? eventData : product
-    //                 )
-    //                 : [...prevProducts, eventData]
-    //         );
-    //     };
-
-    //     return () => {
-    //         eventSource.close();
-    //     };
-    // }, []);
-
-    // const fetchProducts = () => {
-    //     axios
-    //         .get("http://localhost:3900/api/products")
-    //         .then((res) => {
-    //             console.log(res.data);
-    //             setProducts(res.data.products);
-    //             setStatus("success");
-    //         })
-    //         .catch((error) => {
-    //             setStatus("error");
-    //             console.error("Error fetching products:", error);
-    //         });
-    // };
 
     return (
         <>

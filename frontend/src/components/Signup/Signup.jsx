@@ -6,6 +6,7 @@ import { RxAvatar } from "react-icons/rx";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import Loader from '../Loader/Loader';
 
 
 const Signup = () => {
@@ -16,19 +17,9 @@ const Signup = () => {
     const [visibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [isChecked, setIsChecked] = useState(false);
     const [avatar, setAvatar] = useState(null);
-
-    const handleFileInputChange = (e) => {
-        const reader = new FileReader();
-
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                setAvatar(reader.result);
-            }
-        };
-
-        reader.readAsDataURL(e.target.files[0]);
-    };
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,6 +28,13 @@ const Signup = () => {
             toast.error("Las contraseñas no coinciden.");
             return;
         }
+
+        if (!isChecked) {
+            toast.error("Debes aceptar los Términos y Condiciones.");
+            return;
+        }
+
+        setIsLoading(true);
 
         axios
             .post(`${server}/user/create-user`, { name, email, password, avatar })
@@ -53,90 +51,60 @@ const Signup = () => {
                 }, 2000);
             })
             .catch((error) => {
-                console.log(error)
                 toast.error(error.response.data.message);
+                setIsLoading(false);
             });
     };
 
 
     return (
         <ContainerSignup>
-            <div className="signup_form_container">
-                <div className="left">
-                    <h1>Bienvenido</h1>
-                    <Link to='/login'>
-                        <button type='button' className="white_btn">
-                            Iniciar sesión
-                        </button>
-                    </Link>
-                </div>
-                <div className="right">
-                    <form className="form_container" onSubmit={handleSubmit}>
-                        <h1>Crear cuenta</h1>
-                        <input type='text' placeholder='Nombre' name='firstName' value={name} required className="input" onChange={(e) => setName(e.target.value)} />
+            {isLoading ? (<Loader isLoading={isLoading} />) : (
+                <div className="signup_form_container">
+                    <div className="left">
+                        <h1>Bienvenido</h1>
+                        <Link to='/login'>
+                            <button type='button' className="white_btn">
+                                Iniciar sesión
+                            </button>
+                        </Link>
+                    </div>
+                    <div className="right">
+                        <form className="form_container" onSubmit={handleSubmit}>
+                            <h1>Crear cuenta</h1>
+                            <input type='text' placeholder='Nombre' name='firstName' value={name} required className="input" onChange={(e) => setName(e.target.value)} />
 
-                        <input type='email' placeholder='Email' name='email' value={email} className="input" onChange={(e) => setEmail(e.target.value)} />
+                            <input type='email' placeholder='Email' name='email' value={email} className="input" onChange={(e) => setEmail(e.target.value)} />
 
-                        <div className="input-password">
-                            <input type={visible ? "text" : "password"} name="password" placeholder='Contraseña' required value={password} onChange={(e) => setPassword(e.target.value)} className="input"/>
-                            {visible ? (<AiOutlineEye className="password-icon" size={25} onClick={() => setVisible(false)}/>) 
-                            :
-                            (<AiOutlineEyeInvisible className="password-icon" size={25} onClick={() => setVisible(true)}/>)}
-                        </div>
-
-                        <div className="input-password">
-                            <input type={visibleConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder='Confirmar Contraseña' required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="input"/>
-                            {visibleConfirmPassword ? (<AiOutlineEye className="password-icon" size={25} onClick={() => setVisibleConfirmPassword(false)}/>) 
-                            :
-                            (<AiOutlineEyeInvisible className="password-icon" size={25} onClick={() => setVisibleConfirmPassword(true)}/>)}
-                        </div>
-                        {/* 
-                        <input  type={visible ? "text" : "password"} placeholder='Contraseña' name='password' value={password} className="input" onChange={(e) => setPassword(e.target.value)} />
-
-                        <input  type={visible ? "text" : "password"} placeholder="Confirmar Contraseña" name="confirmPassword" value={confirmPassword} className="input" onChange={(e) => setConfirmPassword(e.target.value)}/> */}
-
-
-                        <div>
-                            <label
-                                htmlFor="avatar"
-                                className="avatar-label"
-                            ></label>
-                            <div className="avatar-container">
-                                <span className="avatar-span">
-                                    {avatar ? (
-                                        <img
-                                            src={avatar}
-                                            alt="avatar"
-                                            className="avatar-img"
-                                        />
-                                    ) : (
-                                        <RxAvatar className="avatar-icon" />
-                                    )}
-                                </span>
-                                <label
-                                    htmlFor="file-input"
-                                    className="label-file"
-                                >
-                                    <span>Subir una imagen</span>
-                                    <input
-                                        type="file"
-                                        name="avatar"
-                                        id="file-input"
-                                        accept=".jpg,.jpeg,.png"
-                                        onChange={handleFileInputChange}
-                                        className="sr-only"
-                                    />
-                                </label>
+                            <div className="input-password">
+                                <input type={visible ? "text" : "password"} name="password" placeholder='Contraseña' required value={password} onChange={(e) => setPassword(e.target.value)} className="input" />
+                                {visible ? (<AiOutlineEye className="password-icon" size={25} onClick={() => setVisible(false)} />)
+                                    :
+                                    (<AiOutlineEyeInvisible className="password-icon" size={25} onClick={() => setVisible(true)} />)}
                             </div>
-                        </div>
 
-                        <button type='submit' className="green_btn">
-                            Registrarse
-                        </button>
+                            <div className="input-password">
+                                <input type={visibleConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder='Confirmar Contraseña' required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="input" />
+                                {visibleConfirmPassword ? (<AiOutlineEye className="password-icon" size={25} onClick={() => setVisibleConfirmPassword(false)} />)
+                                    :
+                                    (<AiOutlineEyeInvisible className="password-icon" size={25} onClick={() => setVisibleConfirmPassword(true)} />)}
+                            </div>
 
-                    </form>
+                            <div className='input-checkbox'>
+                                <input type="checkbox" name="checkbox" id="checkbox" checked={isChecked}
+                                    onChange={(e) => setIsChecked(e.target.checked)} />
+                                <label htmlFor="checkbox">Acepto los Términos y Condiciones</label>
+                            </div>
+
+                            <button type='submit' className="green_btn" disabled={isLoading}>
+                                Registrarse
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            )}
+
+
         </ContainerSignup>
 
     )

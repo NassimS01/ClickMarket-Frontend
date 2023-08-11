@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ButtonLink, Wrapper } from "./Wrapper";
 import logoClickMarket from "../../assets/CLICK.png";
 import {
@@ -6,19 +6,16 @@ import {
   AiOutlineMenuUnfold,
   AiOutlineShoppingCart,
   AiOutlineUser,
-  AiFillHeart,
   AiOutlineHeart,
 } from "react-icons/ai";
-import { MdArrowDropDown } from "react-icons/md";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { HeaderWrapper } from "./HeaderStyled";
 import LinkItem from "../LinkItem/LinkItem";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchFilteredCategories } from "../../redux/actions/categories";
+import { useDispatch, useSelector } from "react-redux";import axios from "axios";
+import { server } from "../../server";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const dispatch = useDispatch();
-
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,6 +30,21 @@ const Header = () => {
     setDropdownOpen((prevDropdownOpen) => !prevDropdownOpen);
   }
 
+  const logoutHandler = () => {
+    axios
+      .get(`${server}/user/logout`, { withCredentials: true })
+      .then((res) => {
+        toast.success(res.data.message);
+        const interval = setInterval(() => {
+          navigate("/");
+          window.location.reload(true);
+        }, 2000);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
+  };
+
   const filteredCategories = useSelector(
     (state) => state.categories.filteredCategories
   );
@@ -45,7 +57,9 @@ const Header = () => {
 
   const pathnameSegments = location.pathname.split("/");
   const segment = pathnameSegments[pathnameSegments.length - 1];
-  const lastSegment = Object.keys(filteredCategories).includes(segment) ? `${segment}` : "todos"
+  const lastSegment = Object.keys(filteredCategories).includes(segment)
+    ? `${segment}`
+    : "todos";
   const urlCategory = `/categorias/${lastSegment}`;
 
   return (
@@ -65,7 +79,6 @@ const Header = () => {
       >
         <AiOutlineMenuUnfold />
       </button>
-
       <nav className={`nav-links ${menuOpen ? "show" : ""}`} id="nav-links">
         <LinkItem to="/" onClick={toggleMenu}>
           Inicio
@@ -74,16 +87,14 @@ const Header = () => {
         <LinkItem to="/contacto" onClick={toggleMenu}>
           Contacto
         </LinkItem>
-        <a
-          href="https://www.linkedin.com/in/nassim-salomon/"
-          target="_blank"
-        ></a>
+        <a href="https://www.google.com/" target="_blank"></a>
         <div className="social-links">
           <ButtonLink
             onClick={() => navigate("/carrito")}
             rel="noopener noreferrer"
           >
             <AiOutlineHeart className="icon" />
+            {/* <span>1</span> */}
           </ButtonLink>
           <ButtonLink
             onClick={() => navigate("/carrito")}
@@ -92,21 +103,50 @@ const Header = () => {
             <AiOutlineShoppingCart className="icon" />
           </ButtonLink>
 
-          <div>
+          <ButtonLink onClick={toggleDropdown}>
             {isAuthenticated ? (
-              <ButtonLink onClick={() => navigate("/")}>
+              <div className="user-dropdown">
                 <img
                   src={`${user?.avatar?.url}`}
                   className="user-avatar"
                   alt=""
                 />
-              </ButtonLink>
+                {dropdownOpen && (
+                  <div className="dropdown-content">
+                    {user?.role === "Admin" ? (
+                      <>
+                        <Link to="/panel-admin/*" className="btn-dropdown">
+                          Panel Administrador
+                        </Link>
+                        <button
+                          onClick={logoutHandler}
+                          className="btn-dropdown"
+                        >
+                          Cerrar Sesión
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <Link to="/perfil" className="btn-dropdown">
+                          Perfil
+                        </Link>
+                        <button
+                          onClick={logoutHandler}
+                          className="btn-dropdown"
+                        >
+                          Cerrar Sesión
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
             ) : (
-              <ButtonLink onClick={() => navigate("/login")}>
+              <Link to="/login">
                 <AiOutlineUser className="icon" />
-              </ButtonLink>
+              </Link>
             )}
-          </div>
+          </ButtonLink>
         </div>
       </nav>
     </Wrapper>

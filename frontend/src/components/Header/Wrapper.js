@@ -10,12 +10,13 @@ export const Wrapper = styled.header`
   justify-content: space-between;
   height: auto;
   padding: 5px 1.5%;
-  z-index: 10000;
+  z-index: 99;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+  ${({ isLoading }) => isLoading && "pointer-events: none;"}
 
   a {
     display: flex;
