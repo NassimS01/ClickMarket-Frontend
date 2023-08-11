@@ -17,7 +17,6 @@ export const Wrapper = styled.header`
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
 
-
   a {
     display: flex;
     flex-direction: column;
@@ -66,6 +65,8 @@ export const Wrapper = styled.header`
   .icon {
     color: var(--colorPrimary);
   }
+
+  
 
   .menu-btn,
   .search-btn {

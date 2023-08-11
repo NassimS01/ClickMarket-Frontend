@@ -252,4 +252,9 @@ export const Filter = styled.div`
   p.title {
     margin: 0;
   }
+
+  @media only screen and (max-width: 768px) {
+    margin: 0;
+  }
+
 `;

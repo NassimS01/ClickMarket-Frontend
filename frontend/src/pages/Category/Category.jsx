@@ -1,31 +1,74 @@
-import axios from "axios";
 import CardComponent from "../../components/Card/Card";
 import { ContainerCards } from "../../components/Card/CardStyles";
 import { SectionCategory } from "./CategoryStyles";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { fetchFilteredProducts } from "../../redux/actions/filterProducts";
+import { useLocation, useParams } from "react-router-dom";
 import FilterComponent from "../../components/FilterComponent/FilterComponent";
-import { useSelector } from "react-redux";
-
-// const fetchCategory = () => {
-//   return axios.get("http://localhost:3006/productos");
-// };
-
-
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Category = () => {
-  // const { data } = useQuery("category", fetchCategory);
-  // console.log(ProductsFilter);
-  const products = useSelector((state) => state.products.products);
+  const dispatch = useDispatch();
+  const filteredProducts = useSelector(
+    (state) => state.productos.filteredProducts
+  );
+
+  // Barra de búsqueda
+  const [search, setSearch] = useState("todos");
+
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(fetchFilteredProducts());
+  }, [dispatch]);
+
+  const pathnameSegments = location.pathname.split("/");
+
+  // El último segmento del pathname contendrá el valor que deseas
+  const lastSegment = pathnameSegments[pathnameSegments.length - 1];
+
+  console.log(`/categorias/${lastSegment}`);
+
+  const searchBar = (e) => {
+    setSearch(e.target.value.toLowerCase());
+  };
+
   return (
-    <SectionCategory>
-      <FilterComponent></FilterComponent>
-      <ContainerCards>
-        {/* {Object.entries(products).map(([, products]) =>
-          products.map((product) => (
-            <CardComponent key={product.id} {...product} />
-          ))
-        )} */}
-      </ContainerCards>
-    </SectionCategory>
+    <>
+      <SectionCategory>
+        <h3 className="title">Buscá tus productos</h3>
+        <div className="categories">
+          <div className="searchContainer">
+            <AiOutlineSearch className="iconSearch" />
+            <input
+              type="search"
+              placeholder="Ingrese un producto"
+              className="input"
+              onChange={(e) => searchBar(e)}
+            />
+            <FilterComponent></FilterComponent>
+          </div>
+          <ContainerCards>
+            {Object.values(filteredProducts)
+              .filter((product) => {
+                return search.toLowerCase() == "todos"
+                  ? product
+                  : product.name.toLowerCase().includes(search);
+              })
+              .map((product) =>
+                location.pathname == "/categorias/todos" ? (
+                  <CardComponent key={product.id} {...product}></CardComponent>
+                ) : location.pathname == `/categorias/${product.category}` ? (
+                  <CardComponent key={product.id} {...product}></CardComponent>
+                ) : (
+                  ""
+                )
+              )}
+          </ContainerCards>
+        </div>
+      </SectionCategory>
+    </>
   );
 };
 
