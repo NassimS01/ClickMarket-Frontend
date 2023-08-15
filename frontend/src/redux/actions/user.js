@@ -1,5 +1,7 @@
 import axios from "axios";
 import { server } from "../../server";
+import { toggleProductCartStatus } from "./cart";
+import { toggleProductWishlistStatus } from "./wishlist";
 
 // load user
 export const loadUser = () => async (dispatch) => {
@@ -24,7 +26,7 @@ export const loadUser = () => async (dispatch) => {
 
 //user update information
 export const updateUserInformation =
-    (name, email, password) => async (dispatch) => {
+    (name, email, oldPassword, newPassword, repeatNewPassword) => async (dispatch) => {
         try {
             dispatch({
                 type: "updateUserInfoRequest",
@@ -33,9 +35,11 @@ export const updateUserInformation =
             const { data } = await axios.put(
                 `${server}/user/update-user-info`,
                 {
-                    email,
-                    password,
                     name,
+                    email,
+                    oldPassword,
+                    newPassword,
+                    repeatNewPassword,
                 },
                 {
                     withCredentials: true,
@@ -48,6 +52,7 @@ export const updateUserInformation =
             dispatch({
                 type: "updateUserInfoSuccess",
                 payload: data.user,
+                successMessage: "Usuario actualizado correctamente!",
             });
         } catch (error) {
             dispatch({
@@ -95,6 +100,10 @@ export const getUserWishlist = () => async (dispatch) => {
             type: "getUserWishlistSuccess",
             payload: data.userWishlist,
         });
+
+        data.userWishlist.forEach(product => {
+            dispatch(toggleProductWishlistStatus(product._id, true));
+        });
     } catch (error) {
         dispatch({
             type: "getUserWishlistFailed",
@@ -117,6 +126,10 @@ export const getUserCart = () => async (dispatch) => {
         dispatch({
             type: "getUserCartSuccess",
             payload: data.userCart,
+        });
+
+        data.userCart.forEach(product => {
+            dispatch(toggleProductCartStatus(product._id, true));
         });
     } catch (error) {
         dispatch({

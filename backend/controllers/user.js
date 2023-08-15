@@ -149,7 +149,7 @@ router.put(
     isAuthenticated,
     catchAsyncErrors(async (req, res, next) => {
         try {
-            const { email, password, name } = req.body;
+            const { name, email, oldPassword, newPassword, repeatNewPassword } = req.body;
 
             const user = await User.findOne({ email }).select("+password");
 
@@ -157,16 +157,22 @@ router.put(
                 return next(new ErrorHandler("Usuario no encontrado", 400));
             }
 
-            const isPasswordValid = await user.comparePassword(password);
+            const isPasswordValid = await user.comparePassword(oldPassword);
 
             if (!isPasswordValid) {
                 return next(
-                    new ErrorHandler("Password incorrecto", 400)
+                    new ErrorHandler("La contraseña vieja es incorrecta", 400)
+                );
+            }
+
+            if (newPassword !== repeatNewPassword) {
+                return next(
+                    new ErrorHandler("Las contraseñas ingresadas no coinciden", 400)
                 );
             }
 
             user.name = name;
-            user.email = email;
+            user.password = newPassword;
 
             await user.save();
 
@@ -194,7 +200,7 @@ router.put(
 
                 const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
                     folder: "avatars",
-                    width: 150,
+                    width: 200,
                 });
 
                 existsUser.avatar = {

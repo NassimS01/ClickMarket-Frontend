@@ -1,16 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CartProduct } from "./ProductCartStyles";
 import { ButtonLink } from "../Header/Wrapper";
 import { BsPlus, BsDash, BsTrash } from "react-icons/bs";
 import { formatPrice } from "../../../../backend/utils/functions";
-import { removeFromCart } from "../../redux/actions/cart";
+import { removeFromCart, toggleProductCartStatus } from "../../redux/actions/cart";
 import { useDispatch } from "react-redux";
 import { alertTime } from "../../../../backend/utils/alerts";
+import { getUserCart } from "../../redux/actions/user";
+import { useNavigate } from "react-router-dom";
+
+
 
 const ProductCart = ({ id, name, price, img }) => {
+    const navigate = useNavigate();
     const [qty, setQty] = useState(1);
     const dispatch = useDispatch();
     const [subtotal, setSubtotal] = useState(price);
+
+    useEffect(() => {
+        dispatch(getUserCart());
+    }, [dispatch]);
 
     const handleIncrement = () => {
         setQty(qty + 1);
@@ -30,6 +39,7 @@ const ProductCart = ({ id, name, price, img }) => {
 
     const removeFromCartHandler = (id) => {
         dispatch(removeFromCart(id));
+        dispatch(toggleProductCartStatus(id, false));
         alertTime("Eliminado del Carrito", "warning")
     };
 

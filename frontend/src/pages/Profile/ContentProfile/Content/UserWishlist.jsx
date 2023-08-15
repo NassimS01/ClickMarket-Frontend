@@ -5,11 +5,8 @@ import CardComponent from "../../../../components/Card/Card";
 import { getUserWishlist } from "../../../../redux/actions/user";
 
 const UserWishlist = () => {
-    const { userWishlist, isAuthenticated } = useSelector((state) => state.user);
+    const { userWishlist } = useSelector((state) => state.user);
     const dispatch = useDispatch();
-
-    console.log(userWishlist)
-
 
     useEffect(() => {
         dispatch(getUserWishlist());

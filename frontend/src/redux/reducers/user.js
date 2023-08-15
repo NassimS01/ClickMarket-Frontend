@@ -37,6 +37,7 @@ export const userReducer = createReducer(initialState, {
     updateUserInfoSuccess: (state, action) => {
         state.loading = false;
         state.user = action.payload;
+        state.successMessage = action.successMessage;
     },
     updateUserInfoFailed: (state, action) => {
         state.loading = false;
@@ -55,13 +56,7 @@ export const userReducer = createReducer(initialState, {
         state.usersLoading = false;
         state.error = action.payload;
     },
-    clearErrors: (state) => {
-        state.error = null;
-    },
-    clearMessages: (state) => {
-        state.successMessage = null;
-    },
-
+    
     //user wishlist
     getUserWishlistRequest: (state) => {
         state.isLoading = true;
@@ -90,5 +85,13 @@ export const userReducer = createReducer(initialState, {
         state.isLoading = false;
         state.error = action.payload;
         state.success = false;
+    },
+
+
+    clearErrors: (state) => {
+        state.error = null;
+    },
+    clearMessages: (state) => {
+        state.successMessage = null;
     },
 });

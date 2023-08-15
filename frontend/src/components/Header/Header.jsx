@@ -56,7 +56,7 @@ const Header = () => {
     axios
       .get(`${server}/user/logout`, { withCredentials: true })
       .then((res) => {
-        toast.success(res.data.message);
+        alertTime(res.data.message, "success");
         const interval = setInterval(() => {
           navigate("/");
           window.location.reload(true);
