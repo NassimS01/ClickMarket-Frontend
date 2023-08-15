@@ -1,7 +1,17 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
+    loading: false,
     isAuthenticated: false,
+    user: null,
+    usersLoading: false,
+    users: [],
+    error: null,
+    successMessage: null,
+    isLoading: false,
+    success: false,
+    userWishlist: [],
+    userCart: [],
 };
 
 export const userReducer = createReducer(initialState, {
@@ -50,5 +60,35 @@ export const userReducer = createReducer(initialState, {
     },
     clearMessages: (state) => {
         state.successMessage = null;
+    },
+
+    //user wishlist
+    getUserWishlistRequest: (state) => {
+        state.isLoading = true;
+    },
+    getUserWishlistSuccess: (state, action) => {
+        state.isLoading = false;
+        state.success = true;
+        state.userWishlist = action.payload;
+    },
+    getUserWishlistFailed: (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+        state.success = false;
+    },
+
+    // user cart
+    getUserCartRequest: (state) => {
+        state.isLoading = true;
+    },
+    getUserCartSuccess: (state, action) => {
+        state.isLoading = false;
+        state.success = true;
+        state.userCart = action.payload;
+    },
+    getUserCartFailed: (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+        state.success = false;
     },
 });

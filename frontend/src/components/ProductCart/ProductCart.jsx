@@ -3,24 +3,43 @@ import { CartProduct } from "./ProductCartStyles";
 import { ButtonLink } from "../Header/Wrapper";
 import { BsPlus, BsDash, BsTrash } from "react-icons/bs";
 import { formatPrice } from "../../../../backend/utils/functions";
+import { removeFromCart } from "../../redux/actions/cart";
+import { useDispatch } from "react-redux";
+import { alertTime } from "../../../../backend/utils/alerts";
 
-const ProductCart = ({ name, price, img }) => {
+const ProductCart = ({ id, name, price, img }) => {
     const [qty, setQty] = useState(1);
+    const dispatch = useDispatch();
+    const [subtotal, setSubtotal] = useState(price);
 
     const handleIncrement = () => {
         setQty(qty + 1);
+        calculateSubtotal(qty + 1);
     };
 
     const handleDecrement = () => {
-        qty == 1 ? "" : setQty(qty - 1);
+        if (qty > 1) {
+            setQty(qty - 1);
+            calculateSubtotal(qty - 1);
+        }
     };
+
+    const calculateSubtotal = (newQty) => {
+        setSubtotal(price * newQty);
+    };
+
+    const removeFromCartHandler = (id) => {
+        dispatch(removeFromCart(id));
+        alertTime("Eliminado del Carrito", "warning")
+    };
+
     return (
         <CartProduct>
             <div className="imgProductCart">
                 <img src={img} alt="" />
             </div>
             <div className="infoProductCart">
-                <ButtonLink className="deleteProductCart">
+                <ButtonLink className="deleteProductCart" onClick={() => removeFromCartHandler(id)}>
                     <BsTrash size="22px" color="var(--colorPrimary)" />
                 </ButtonLink>
                 <h2>{name}</h2>
@@ -36,7 +55,7 @@ const ProductCart = ({ name, price, img }) => {
                 </div>
                 <div className="subTotal">
                     <p>Sub total:</p>
-                    <span>{formatPrice(price)}</span>
+                    <span>{formatPrice(subtotal)}</span>
                 </div>
             </div>
         </CartProduct>

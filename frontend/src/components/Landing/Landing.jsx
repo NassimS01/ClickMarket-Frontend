@@ -3,22 +3,29 @@ import { getRandomProducts } from "../../../../backend/utils/functions";
 import { ContainerCards, Container } from "./LandingStyle";
 import Categories from "./Categories";
 import ExtraInfo from "../ExtraInfo/ExtraInfo";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { server } from "../../server";
+import { getAllProducts } from "../../redux/actions/product";
+import { getUserCart, getUserWishlist } from "../../redux/actions/user";
 
 const Landing = () => {
-  const [data, setData] = useState([]);
+  const {allProducts} = useSelector((state)=> state.product);
+  const {user, userWishlist, userCart} = useSelector((state)=> state.user);
+  const {isProductInWishlist} = useSelector((state)=> state.wishlist)
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get(`${server}/products/get-all-products`).then((res) => {
-      setData(res.data.products);
-    });
-  }, []);
+    dispatch(getAllProducts())
+  }, [dispatch]);
 
-  const randomProducts = getRandomProducts(data, 4);
+  useEffect(() => {
+    dispatch(getUserWishlist());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getUserCart());
+  }, [dispatch]);
+
 
   return (
     <>
@@ -27,12 +34,18 @@ const Landing = () => {
         <Categories />
         <h3 className="title">Productos que pueden interesarte</h3>
         <ContainerCards>
-          {randomProducts.map((product) => (
+          {allProducts && allProducts.map((product) => (
             <CardComponent
-              key={product._id}
-              {...product}
-              img={product.images.url}
-            />
+            key={product._id}
+            id={product._id}
+            name={product.name}
+            descrip={product.description}
+            category={product.category}
+            price={product.price}
+            discount={product.discount}
+            stock={product.stock}
+            img={product.images.url}
+        />
           ))}
         </ContainerCards>
         <ExtraInfo />
@@ -42,5 +55,3 @@ const Landing = () => {
 };
 
 export default Landing;
-
-// {/* <CardComponent key={product._id} name={product.name} price={product.price} descrip={product.description} discount={product.discount} */ }

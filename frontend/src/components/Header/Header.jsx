@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonLink, Wrapper } from "./Wrapper";
 import logoClickMarket from "../../assets/CLICK.png";
 import {
@@ -13,6 +13,10 @@ import LinkItem from "../LinkItem/LinkItem";
 import { useDispatch, useSelector } from "react-redux";import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
+import { fetchFilteredCategories } from "../../redux/actions/categories";
+import { alertTime } from "../../../../backend/utils/alerts";
+
+
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -28,6 +32,24 @@ const Header = () => {
 
   function toggleDropdown() {
     setDropdownOpen((prevDropdownOpen) => !prevDropdownOpen);
+  }
+
+  const handleWishlist = ()=>{
+    if(isAuthenticated){
+      navigate("profile/wishlist");
+    }else{
+      navigate("/login")
+      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error")
+    }
+  }
+
+  const handleCart = ()=>{
+    if(isAuthenticated){
+      navigate("profile/cart");
+    }else{
+      navigate("/login")
+      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error")
+    }
   }
 
   const logoutHandler = () => {
@@ -90,14 +112,14 @@ const Header = () => {
         <a href="https://www.google.com/" target="_blank"></a>
         <div className="social-links">
           <ButtonLink
-            onClick={() => navigate("/carrito")}
+            onClick={handleWishlist}
             rel="noopener noreferrer"
           >
             <AiOutlineHeart className="icon" />
             {/* <span>1</span> */}
           </ButtonLink>
           <ButtonLink
-            onClick={() => navigate("/carrito")}
+            onClick={handleCart}
             rel="noopener noreferrer"
           >
             <AiOutlineShoppingCart className="icon" />
@@ -127,7 +149,7 @@ const Header = () => {
                       </>
                     ) : (
                       <>
-                        <Link to="/perfil" className="btn-dropdown">
+                        <Link to="/profile" className="btn-dropdown">
                           Perfil
                         </Link>
                         <button
