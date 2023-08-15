@@ -9,15 +9,12 @@ import FilterComponent from "../../components/FilterComponent/FilterComponent";
 import { AiOutlineSearch } from "react-icons/ai";
 
 const Category = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
-  const filteredProducts = useSelector(
-    (state) => state.productos.filteredProducts
-  );
+  const filteredProducts = useSelector((state) => state.productos.filteredProducts);
 
   // Barra de búsqueda
   const [search, setSearch] = useState("todos");
-
-  const location = useLocation();
 
   useEffect(() => {
     dispatch(fetchFilteredProducts());
@@ -58,9 +55,9 @@ const Category = () => {
             })
             .map((product) =>
               location.pathname == "/categorias/todos" ? (
-                <CardComponent key={product.id} {...product}></CardComponent>
+                <CardComponent key={product.id} {...product} id={product._id} img={product.images.url}></CardComponent>
               ) : location.pathname == `/categorias/${product.category}` ? (
-                <CardComponent key={product.id} {...product}></CardComponent>
+                <CardComponent key={product.id} {...product} id={product._id} img={product.images.url}></CardComponent>
               ) : (
                 ""
               )

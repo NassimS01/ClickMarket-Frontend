@@ -7,6 +7,7 @@ export const ContainerSignup = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all ease-in-out 1s;
 
   .signup_form_container {
     width: 900px;
@@ -102,14 +103,12 @@ export const ContainerSignup = styled.div`
   }
 
   .green_btn {
-    /* background-color: #3bb19b; */
     background-color: var(--colorPrimary);
     color: white;
     margin: 10px;
   }
 
   .avatar-label {
-    //block text-sm font-medium text-gray-700
     display: block;
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -118,14 +117,12 @@ export const ContainerSignup = styled.div`
   }
 
   .avatar-container {
-    //mt-2 flex items-center
     margin-top: 0.5rem;
     display: flex;
     align-items: center;
   }
 
   .avatar-span {
-    //inline-block h-8 w-8 rounded-full overflow-hidden
     display: inline-block;
     height: 2rem;
     width: 2rem;
@@ -134,7 +131,6 @@ export const ContainerSignup = styled.div`
   }
 
   .avatar-img {
-    //h-full w-full object-cover rounded-full
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -180,6 +176,16 @@ export const ContainerSignup = styled.div`
     cursor: pointer;
     right: 1%;
     top: 30%;
+  }
+
+  .input-checkbox{
+    color: gray;
+    margin: 1rem 0;
+  }
+
+  input[type="checkbox"]{
+    transform: scale(1.5);
+    margin-right: .5rem;
   }
 `;
 

@@ -79,3 +79,49 @@ export const getAllUsers = () => async (dispatch) => {
         });
     }
 };
+
+//get user wishlist
+export const getUserWishlist = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: "getUserWishlistRequest",
+        });
+
+        const { data } = await axios.get(`${server}/user/get-user-wishlist`, {
+            withCredentials: true,
+        });
+
+        dispatch({
+            type: "getUserWishlistSuccess",
+            payload: data.userWishlist,
+        });
+    } catch (error) {
+        dispatch({
+            type: "getUserWishlistFailed",
+            payload: error.response.data.message,
+        });
+    }
+};
+
+// get user cart
+export const getUserCart = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: "getUserCartRequest",
+        });
+
+        const { data } = await axios.get(`${server}/user/get-user-cart`, {
+            withCredentials: true,
+        });
+
+        dispatch({
+            type: "getUserCartSuccess",
+            payload: data.userCart,
+        });
+    } catch (error) {
+        dispatch({
+            type: "getUserCartFailed",
+            payload: error.response.data.message,
+        });
+    }
+};

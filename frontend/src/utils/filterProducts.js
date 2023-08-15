@@ -50,14 +50,3 @@ export async function categories() {
   }
 }
 
-// async function AllCategories() {
-//   try {
-//       Object.entries(categories()).map(([, category]) => category)
-//   } catch (error) {
-
-//   }
-// }
-
-// AllCategories()
-
-export const consolita = console.log("hola");
