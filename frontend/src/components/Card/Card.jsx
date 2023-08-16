@@ -16,7 +16,8 @@ import { toggleProductWishlistStatus } from '../../redux/actions/wishlist';
 import { toggleProductCartStatus } from '../../redux/actions/cart';
 
 
-const CardComponent = ({ id, name, price, img, descrip, discount }) => {
+
+const CardComponent = ({ id, name, price, img, description, discount }) => {
   const navigate = useNavigate();
   const priceWithDiscount = getDiscount(price, discount);
   const dispatch = useDispatch();
@@ -48,10 +49,12 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
     }
   };
 
+
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
     dispatch(toggleProductCartStatus(id, false));
     alertTime("Eliminado del Carrito", "warning")
+
   };
 
 
@@ -78,7 +81,7 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
       <Card>
         <img src={img} draggable="false" className="product-image" />
         <h3 className="product-name">{name}</h3>
-        <p className="product-description">{descrip}</p>
+        <p className="product-description">{description}</p>
         <p className="discount">{discount}%</p>
         <div className="container-price">
           <span className="product-price">{formatPrice(price)}</span>
@@ -111,6 +114,7 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
 
 
         <div className="container-button">
+
         {isProductInCart ? (
           <ButtonGlobal
           buttoncard="true"

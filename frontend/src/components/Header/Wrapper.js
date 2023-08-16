@@ -33,13 +33,17 @@ export const Wrapper = styled.header`
     text-decoration: none;
   }
 
+  .logo {
+    cursor: pointer;
+  }
+
   a::before {
     content: "";
     position: absolute;
     width: 100%;
     height: 3px;
     border-radius: 4px;
-    background-color: var(--colorPrimary);
+    background-color: #ff443d;
     bottom: -2.5px;
     left: 0%;
     transform-origin: right;
@@ -66,8 +70,6 @@ export const Wrapper = styled.header`
   .icon {
     color: var(--colorPrimary);
   }
-
-  
 
   .menu-btn,
   .search-btn {
@@ -199,30 +201,35 @@ export const ButtonLink = styled.button`
     transform: scale(0.9);
   }
 
-  .user-avatar{
+  .user-avatar {
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
   }
 
-  .dropdown-content{
+  .dropdown-content {
     position: absolute;
-    padding: .2rem;
     top: 100%;
     left: -60px;
-    width: 120px;
+    width: 130px;
   }
 
-  .user-dropdown{
+  .user-dropdown {
     display: flex;
     justify-content: center;
   }
 
-  .btn-dropdown{
-    background-color: red;
+  .btn-dropdown {
+    background-color: var(--colorPrimary);
     color: white;
-    padding: 0 .5rem;
+    padding: .3rem;
     border-radius: 10px;
+    font-size: 16px;
+  }
+
+  button {
+    outline: none;
+    border: none;
   }
 
   span {
@@ -237,8 +244,8 @@ export const ButtonLink = styled.button`
   }
 
   @media screen and (max-width: 576px) {
-    .dropdown-content{
-    left: -105px;
-  }
+    .dropdown-content {
+      left: -105px;
+    }
   }
 `;

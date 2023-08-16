@@ -9,7 +9,7 @@ import {
 import Crud from "../pages/Crud/Crud";
 import Login from "../pages/Login/LoginPage";
 import PanelProducts from "../pages/Crud/PanelsTwo/PanelProducts";
-import PanelUsers from "../pages/Crud/PanelsTwo/PanelUsers";
+import PanelUsers from "../pages/Crud/UserCrud/PanelUsers";
 import PanelOrders from "../pages/Crud/PanelsTwo/PanelOrders";
 import NotFound from "../pages/NotFound/NotFound";
 import Layout from "../components/layout/Layout";
@@ -38,7 +38,7 @@ const Routes = () => {
       <Layout>
         <ReactDomRoutes>
           <Route path="/" element={<Home />} />
-          <Route path="/categorias/:categoria" element={<Category />} />
+          <Route path="/categorias/:category" element={<Category />} />
 
           {/* CRUD ADMIN */}
           <Route
@@ -134,6 +134,7 @@ const Routes = () => {
         draggable
         pauseOnHover
         theme="colored"
+        style={{borderRadius: "50px"}}
       />
     </BrowserRouter>
   );

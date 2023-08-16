@@ -1,9 +1,12 @@
 import ProductForm from "./ProductForm";
 import { BtnAddStyled } from "./BtnStyled";
 import { useState } from "react";
+import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
 
 const BtnModal = () => {
   const [showModal, setShowModal] = useState(false);
+
+  
   
 
   const handleButtonClick = () => {
@@ -17,7 +20,7 @@ const BtnModal = () => {
  
   return (
     <BtnAddStyled>
-      {!showModal && <button className="btn-add" onClick={handleButtonClick}>+ Agregar</button>}
+      {!showModal && <ButtonGlobal className="btn-add" onClick={handleButtonClick}>Agregar Producto</ButtonGlobal>}
       {showModal && <ProductForm onClose={handleCloseModal} />}
     </BtnAddStyled>
   );

@@ -10,13 +10,17 @@ import {
 } from "react-icons/ai";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import LinkItem from "../LinkItem/LinkItem";
-import { useDispatch, useSelector } from "react-redux";import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 import { fetchFilteredCategories } from "../../redux/actions/categories";
+<<<<<<< HEAD
 import { alertTime } from "../../../../backend/utils/alerts";
 
 
+=======
+>>>>>>> cab18ebfc8fc70c75f37e5ecce7ac12c3a7a52a6
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -137,7 +141,7 @@ const Header = () => {
                   <div className="dropdown-content">
                     {user?.role === "Admin" ? (
                       <>
-                        <Link to="/panel-admin/*" className="btn-dropdown">
+                        <Link to="/panel-admin" className="btn-dropdown">
                           Panel Administrador
                         </Link>
                         <button
@@ -164,9 +168,9 @@ const Header = () => {
                 )}
               </div>
             ) : (
-              <Link to="/login">
+              <ButtonLink onClick={() => navigate("/login")}>
                 <AiOutlineUser className="icon" />
-              </Link>
+              </ButtonLink>
             )}
           </ButtonLink>
         </div>
