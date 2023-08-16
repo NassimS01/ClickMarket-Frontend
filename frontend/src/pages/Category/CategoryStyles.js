@@ -70,8 +70,9 @@ export const SectionCategory = styled.div`
   .containerCards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
     max-width: 1440px;
+    min-width: 1440px;
     min-height: 864px;
   }
 

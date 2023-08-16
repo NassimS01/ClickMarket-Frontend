@@ -13,14 +13,13 @@ const Category = () => {
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(0);
-  const [activeCategory, setActiveCategory] = useState("todos");
   const [filteredAndPaginatedProducts, setFilteredAndPaginatedProducts] =
     useState([]);
-  const productsPerPage = 10;
+    const productsPerPage = 10;
   const [search, setSearch] = useState("todos");
   const [activeFilters, setActiveFilters] = useState([]);
   const { category } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const filteredProducts = useSelector(
     (state) => state.productos.filteredProducts
@@ -30,10 +29,9 @@ const Category = () => {
     dispatch(fetchFilteredProducts());
   }, [dispatch]);
 
-
   useEffect(() => {
     if (category) {
-      setActiveCategory(category);
+      setActiveFilters([category]);
     }
   }, [category]);
 
@@ -48,39 +46,24 @@ const Category = () => {
       .filter(
         (product) =>
           search === "todos" || product.name.toLowerCase().includes(search)
-      )
-      .slice(
-        currentPage * productsPerPage,
-        (currentPage + 1) * productsPerPage
       );
 
     setFilteredAndPaginatedProducts(filteredAndPaginatedProducts);
-  }, [filteredProducts, currentPage, productsPerPage, search, activeFilters]);
+    setCurrentPage(0); 
+  }, [filteredProducts, search, activeFilters]);
 
   const searchBar = (e) => {
     setSearch(e.target.value.toLowerCase());
   };
 
   const handleCategorySelect = (category) => {
-
     setActiveFilters([category]);
-    setActiveCategory(category);
-    setCurrentPage(0); // Reiniciar la página al cambiar de categoría
+    setCurrentPage(0); 
 
-    // navigate(`/categorias/${category}`)
-
-    // if(location.pathname == "/categorias/todos") {
-    //   setActiveFilters([])
-    // }
-
+    navigate(`/categorias/${category}`);
   };
 
-  console.log(filteredAndPaginatedProducts);
-
-  // console.log(activeCategory);
-  // console.log(activeFilters)
-
-
+  const totalPages = Math.ceil(filteredAndPaginatedProducts.length / productsPerPage)
 
   return (
     <SectionCategory>
@@ -102,82 +85,18 @@ const Category = () => {
             ></FilterComponent>
           </div>
           <div className="containerCards">
-            {filteredAndPaginatedProducts.map((product) =>
-              location.pathname == "/categorias/todos" ? (
-                <CardComponent
-                  key={product._id}
-                  {...product}
-                  img={product.images.url}
-                ></CardComponent>
-              ) : location.pathname == `/categorias/${product.category}` ? (
-                <CardComponent
-                  key={product._id}
-                  {...product}
-                  img={product.images.url}
-                ></CardComponent>
-              ) : (
-                ""
+            {filteredAndPaginatedProducts
+              .slice(
+                currentPage * productsPerPage,
+                (currentPage + 1) * productsPerPage
               )
-            )}
-
-            {/* {search == "todos"
-              ? Object.values(currentPageProducts).map((product) => (
-                  <CardComponent
-                    key={product._id}
-                    {...product}
-                    img={product.images.url}
-                  ></CardComponent>
-                ))
-              : search == search
-              ? Object.values(filteredProducts)
-                  .filter((product) => {
-                    return search.toLowerCase() == "todos"
-                      ? product
-                      : product.name.toLowerCase().includes(search);
-                  })
-                  .map((product) =>
-                    location.pathname == "/categorias/todos" ? (
-                      <CardComponent
-                        key={product._id}
-                        {...product}
-                        img={product.images.url}
-                      ></CardComponent>
-                    ) : location.pathname ==
-                      `/categorias/${product.category}` ? (
-                      <CardComponent
-                        key={product._id}
-                        {...product}
-                        img={product.images.url}
-                      ></CardComponent>
-                    ) : (
-                      ""
-                    )
-                  )
-              : ""} */}
-
-            {/* {Object.values(filteredProducts)
-              .filter((product) => {
-                return search.toLowerCase() == "todos"
-                  ? product
-                  : product.name.toLowerCase().includes(search);
-              })
-              .map((product) =>
-                location.pathname == "/categorias/todos" ? (
-                  <CardComponent
-                    key={product._id}
-                    {...product}
-                    img={product.images.url}
-                  ></CardComponent>
-                ) : location.pathname == `/categorias/${product.category}` ? (
-                  <CardComponent
-                    key={product._id}
-                    {...product}
-                    img={product.images.url}
-                  ></CardComponent>
-                ) : (
-                  ""
-                )
-              )} */}
+              .map((product) => (
+                <CardComponent
+                  key={product._id}
+                  {...product}
+                  img={product.images.url}
+                />
+              ))}
           </div>
         </div>
       </div>
@@ -194,22 +113,9 @@ const Category = () => {
         <ButtonGlobal
           pagination="true"
           onClick={() =>
-            setCurrentPage((prevPage) =>
-              Math.min(
-                prevPage + 1,
-                Math.ceil(
-                  Object.values(filteredProducts).length / productsPerPage
-                )
-              )
-            )
+            setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages - 1))
           }
-          disabled={
-            currentPage ===
-            Math.ceil(
-              Object.values(filteredProducts).length / productsPerPage
-            ) -
-              1
-          }
+          disabled={currentPage === totalPages - 1}
         >
           Siguiente
         </ButtonGlobal>

@@ -6,11 +6,13 @@ const router = express.Router();
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
 const { isAuthenticated, isAdmin } = require("../middleware/auth");
-const cloudinary = require("cloudinary")
+const cloudinary = require("cloudinary");
 const jwt = require("jsonwebtoken");
 const sendToken = require("../utils/jwtToken");
+const catchAsyncError = require("../middleware/catchAsyncError");
 
-const strongPasswordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+const strongPasswordRegex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
 router.post("/create-user", async (req, res, next) => {
     try {
@@ -75,6 +77,10 @@ router.post(
                 return next(new ErrorHandler("Debes rellenar todos los campos!", 400));
             }
 
+            if (!email || !password) {
+                return next(new ErrorHandler("Debes rellenar todos los campos!", 400));
+            }
+
             const user = await User.findOne({ email }).select("+password");
 
             if (!user) {
@@ -90,7 +96,12 @@ router.post(
             }
 
             if (!user.active) {
-                return next(new ErrorHandler("La cuenta debe ser activada por un administrador", 400));
+                return next(
+                    new ErrorHandler(
+                        "La cuenta debe ser activada por un administrador",
+                        400
+                    )
+                );
             }
 
             sendToken(user, 201, res);
@@ -349,9 +360,7 @@ router.delete(
             const user = await User.findById(req.params.id);
 
             if (!user) {
-                return next(
-                    new ErrorHandler("No se encontro el usuario", 400)
-                );
+                return next(new ErrorHandler("No se encontro el usuario", 400));
             }
 
             const imageId = user.avatar.public_id;
@@ -465,5 +474,3 @@ router.delete(
     })
 );
 module.exports = router;
-
-

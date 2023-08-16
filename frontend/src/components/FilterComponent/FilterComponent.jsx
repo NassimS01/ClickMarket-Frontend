@@ -70,14 +70,14 @@ const FilterComponent = ({ onCategorySelect }) => {
         <ul>
           <li>
             <input type="radio" id="all" name="type" />
-            <label htmlFor="all" onClick={(e) => handleCategory(e)}>
+            <label htmlFor="all" onClick={handleCategory}>
               todos
             </label>
           </li>
           {Object.keys(filteredCategories).map((category) => (
             <li key={category}>
               <input type="radio" id={category} name="type" />
-              <label htmlFor={category} onClick={(e) => handleCategory(e)}>
+              <label htmlFor={category} onClick={handleCategory}>
                 {category}
               </label>
             </li>
