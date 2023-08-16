@@ -29,10 +29,6 @@ import BtnOrders from "../pages/Profile/ContentProfile/BtnOrders"
 import BtnSettings from "../pages/Profile/ContentProfile/BtnSettings"
 
 const Routes = () => {
-  useEffect(() => {
-    Store.dispatch(loadUser());
-    Store.dispatch(getAllProducts());
-  }, []);
   return (
     <BrowserRouter>
       <Layout>
@@ -42,38 +38,13 @@ const Routes = () => {
 
           {/* CRUD ADMIN */}
           <Route
-            path="/panel-admin/*"
-            element={
-              <ProtectedAdminRoute>
-                <Crud />
-              </ProtectedAdminRoute>
-            }
-          >
-            <Route
-              path="products"
-              element={
-                <ProtectedAdminRoute>
-                  <PanelProducts />
-                </ProtectedAdminRoute>
-              }
-            />
-            <Route
-              path="users"
-              element={
-                <ProtectedAdminRoute>
-                  <PanelUsers />
-                </ProtectedAdminRoute>
-              }
-            />
-            <Route
-              path="orders"
-              element={
-                <ProtectedAdminRoute>
-                  <PanelOrders />
-                </ProtectedAdminRoute>
-              }
-            />
-          </Route>
+          path="/panel-admin/*"
+          element={<ProtectedAdminRoute><Crud /></ProtectedAdminRoute>}
+        >
+          <Route path="products" element={<PanelProducts />} />
+          <Route path="users" element={<PanelUsers />} />
+          <Route path="orders" element={<PanelOrders />} />
+        </Route>
 
           {/* PANEL USER */}
           <Route

@@ -84,6 +84,7 @@ export const TableStyled = styled.div`
       display: flex;
       justify-content: center;
       gap: 15px;
+      cursor: pointer;
     }
   }
 `;

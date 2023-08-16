@@ -7,12 +7,12 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from 'axios';
 import { alertTime } from '../../../../backend/utils/alerts';
 
-
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,14 +27,14 @@ const Login = () => {
                 { withCredentials: true }
             )
             .then((res) => {
-                alertTime("Bienvenido!", "success")
+                alertTime(`Bienvenido!`, "success", "green", "white")
                 const interval = setInterval(() => {
                     navigate("/");
                     window.location.reload(true);
                 }, 2000);
             })
             .catch((err) => {
-                toast.error(err.response.data.message);
+                alertTime(err.response.data.message, "error", "red", "white");
             });
     };
 

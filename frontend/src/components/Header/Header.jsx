@@ -13,9 +13,8 @@ import LinkItem from "../LinkItem/LinkItem";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { server } from "../../server";
-import { toast } from "react-toastify";
 import { fetchFilteredCategories } from "../../redux/actions/categories";
-import { alertTime } from "../../../../backend/utils/alerts";
+import { alertTime, alertConfirmCancel } from "../../../../backend/utils/alerts";
 
 
 const Header = () => {
@@ -39,7 +38,7 @@ const Header = () => {
       navigate("profile/wishlist");
     }else{
       navigate("/login")
-      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error")
+      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error", "red", "white")
     }
   }
 
@@ -48,23 +47,26 @@ const Header = () => {
       navigate("profile/cart");
     }else{
       navigate("/login")
-      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error")
+      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error", "red", "white")
     }
   }
 
   const logoutHandler = () => {
-    axios
+    alertConfirmCancel("", "Estás a punto de cerrar sesión", "question", "Sí!", "No!", ()=>{
+      axios
       .get(`${server}/user/logout`, { withCredentials: true })
       .then((res) => {
-        alertTime(res.data.message, "success");
+        alertTime(res.data.message, "success", "green", "white");
         const interval = setInterval(() => {
           navigate("/");
           window.location.reload(true);
         }, 2000);
       })
       .catch((error) => {
-        console.log(error.response.data.message);
+        alertTime(error.response.data.message, "error", "red", "white");
       });
+    })
+    
   };
 
   const filteredCategories = useSelector(

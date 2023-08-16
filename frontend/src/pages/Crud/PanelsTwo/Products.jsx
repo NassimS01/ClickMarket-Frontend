@@ -7,6 +7,7 @@ import BtnDelete from "../BtnDelete/BtnDelete";
 import BtnEdit from "../BtnEdit/BtnEdit";
 import { server } from "../../../server";
 import { AiOutlineSearch } from "react-icons/ai";
+import { alertConfirmCancel } from "../../../../../backend/utils/alerts";
 
 const Products = ({ search }) => {
   const [data, setData] = useState([]);
@@ -23,8 +24,11 @@ const Products = ({ search }) => {
   }, []);
 
   const handleDelete = (id) => {
-    dispatch(deleteProduct(id));
-    window.location.reload();
+    alertConfirmCancel("", "¿Deseas eliminar este producto?", "question", "Confirmar", "Cancelar", () => {
+      dispatch(deleteProduct(id));
+      window.location.reload();
+    })
+
   };
 
   return (
@@ -43,12 +47,12 @@ const Products = ({ search }) => {
         >
           <TableStyled>
             <div className="containerNames">
-              <p style={{width: "10%"}}>Imagen</p>
-              <p style={{width: "20%"}}>Nombre</p>
-              <p style={{width: "10%"}}>Precio</p>
-              <p style={{width: "30%"}}>Descripción</p>
-              <p style={{width: "20%"}}>Categoría</p>
-              <p style={{width: "10%"}}>Botones</p>
+              <p style={{ width: "10%" }}>Imagen</p>
+              <p style={{ width: "20%" }}>Nombre</p>
+              <p style={{ width: "10%" }}>Precio</p>
+              <p style={{ width: "30%" }}>Descripción</p>
+              <p style={{ width: "20%" }}>Categoría</p>
+              <p style={{ width: "10%" }}>Botones</p>
             </div>
 
             {data
