@@ -2,42 +2,43 @@ import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
     isLoading: false,
-    productInCartStatus: {},
+    productInWishlistStatus: {},
 };
 
-export const cartReducer = createReducer(initialState, {
-    addToCartRequest: (state) => {
+export const wishlistReducer = createReducer(initialState, {
+    addToWishlistRequest: (state) => {
         state.isLoading = true;
     },
-    addToCartSuccess: (state, action) => {
+    addToWishlistSuccess: (state, action) => {
         state.isLoading = false;
         state.success = true;
         state.message = action.payload;
     },
-    addToCartFailed: (state, action) => {
+    addToWishlistFailed: (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
         state.success = false;
     },
 
-    removeFromCartRequest: (state) => {
+    removeFromWishlistRequest: (state) => {
         state.isLoading = true;
     },
-    removeFromCartSuccess: (state, action) => {
+    removeFromWishlistSuccess: (state, action) => {
         state.isLoading = false;
         state.success = true;
         state.message = action.payload;
     },
-    removeFromCartFailed: (state, action) => {
+    removeFromWishlistFailed: (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
         state.success = false;
     },
 
-    toggleProductInCart: (state, action) => {
-        const { productId, isInCart } = action.payload;
-        state.productInCartStatus[productId] = isInCart;
+    toggleProductInWishlist: (state, action) => {
+        const { productId, isInWishlist } = action.payload;
+        state.productInWishlistStatus[productId] = isInWishlist;
     },
+
 
     clearErrors: (state) => {
         state.error = null;

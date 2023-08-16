@@ -10,11 +10,11 @@ import { server } from "../../../server";
 import { TableStyled } from "../PanelsTwo/ProductsStyled";
 import BtnDelete from "../BtnDelete/BtnDelete";
 import BtnAccept from "../BtnAccept/BtnAccept";
+import { alertConfirmCancel } from "../../../../../backend/utils/alerts";
 
 const Users = ({ search }) => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
-  // const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     axios
@@ -27,13 +27,25 @@ const Users = ({ search }) => {
   }, []);
 
   const handleDelete = (id) => {
-    dispatch(deleteUser(id));
-    window.location.reload();
+    alertConfirmCancel("", "¿Deseas eliminar a este usuario?", "question", "Confirmar", "Cancelar", () => {
+      dispatch(deleteUser(id));
+      window.location.reload();
+    })
   };
 
   const handleActive = (user, active) => {
-    dispatch(activeUser(user._id, !active));
-    window.location.reload();
+    if (!active) {
+      alertConfirmCancel("", "¿Deseas habilitar a este usuario?", "question", "Confirmar", "Cancelar", () => {
+        dispatch(activeUser(user._id, true));
+        window.location.reload();
+      })
+    } else {
+      alertConfirmCancel("", "¿Deseas deshabilitar a este usuario?", "question", "Confirmar", "Cancelar", () => {
+        dispatch(activeUser(user._id, false));
+        window.location.reload();
+      })
+    }
+
   };
 
   return (

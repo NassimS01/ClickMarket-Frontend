@@ -6,10 +6,12 @@ import { fetchFilteredProducts } from "../../redux/actions/filterProducts";
 import FilterComponent from "../../components/FilterComponent/FilterComponent";
 import { AiOutlineSearch } from "react-icons/ai";
 import { ButtonGlobal } from "../../components/ButtonGlobal/ButtonGlobal";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const Category = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
+
   const [currentPage, setCurrentPage] = useState(0);
   const [filteredAndPaginatedProducts, setFilteredAndPaginatedProducts] =
     useState([]);

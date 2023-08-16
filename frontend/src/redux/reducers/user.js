@@ -2,6 +2,8 @@ import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
     isAuthenticated: false,
+    userWishlist: [],
+    userCart: [],
 };
 
 export const userReducer = createReducer(initialState, {
@@ -27,6 +29,7 @@ export const userReducer = createReducer(initialState, {
     updateUserInfoSuccess: (state, action) => {
         state.loading = false;
         state.user = action.payload;
+        state.successMessage = action.successMessage;
     },
     updateUserInfoFailed: (state, action) => {
         state.loading = false;
@@ -45,6 +48,38 @@ export const userReducer = createReducer(initialState, {
         state.usersLoading = false;
         state.error = action.payload;
     },
+    
+    //user wishlist
+    getUserWishlistRequest: (state) => {
+        state.isLoading = true;
+    },
+    getUserWishlistSuccess: (state, action) => {
+        state.isLoading = false;
+        state.success = true;
+        state.userWishlist = action.payload;
+    },
+    getUserWishlistFailed: (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+        state.success = false;
+    },
+
+    // user cart
+    getUserCartRequest: (state) => {
+        state.isLoading = true;
+    },
+    getUserCartSuccess: (state, action) => {
+        state.isLoading = false;
+        state.success = true;
+        state.userCart = action.payload;
+    },
+    getUserCartFailed: (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+        state.success = false;
+    },
+
+
     clearErrors: (state) => {
         state.error = null;
     },

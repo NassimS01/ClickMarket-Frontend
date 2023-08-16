@@ -19,7 +19,7 @@ export const productReducer = createReducer(initialState, {
         state.success = false;
     },
 
-    
+
 
     // get all products
     getAllProductsRequest: (state) => {
@@ -37,6 +37,7 @@ export const productReducer = createReducer(initialState, {
     clearErrors: (state) => {
         state.error = null;
     },
+
 
     // edit product
     editProductRequest: (state) => {

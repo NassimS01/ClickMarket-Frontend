@@ -1,8 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import { ContainerSignup } from "./SignupStyled";
-import { server } from "../../server";
-import { RxAvatar } from "react-icons/rx";
+import { Link, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { ContainerSignup } from './SignupStyled';
+import { server } from '../../server';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { toast } from "react-toastify";
 import axios from "axios";

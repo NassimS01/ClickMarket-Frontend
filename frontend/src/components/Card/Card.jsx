@@ -1,43 +1,91 @@
-import React, { useState } from "react";
-// import plato from "../../assets/plato/Dish.jpg";
+import React, { useEffect, useState } from "react";
 import {
   AiOutlineHeart,
   AiFillHeart,
-  AiOutlineShoppingCart,
 } from "react-icons/ai";
 import { getDiscount, formatPrice } from "../../../../backend/utils/functions";
 import { ButtonGlobal } from "../ButtonGlobal/ButtonGlobal";
 import { Card, ButtonsCard } from "./CardStyles";
+import { useDispatch, useSelector } from "react-redux";
+import { addToWishlist, removeFromWishlist } from "../../redux/actions/wishlist";
+import { addToCart, removeFromCart } from "../../redux/actions/cart";
+import { useLocation, useNavigate } from "react-router-dom";
+import { alertConfirmCancel, alertTime } from "../../../../backend/utils/alerts";
+import { getUserCart, getUserWishlist } from "../../redux/actions/user";
+import { toggleProductWishlistStatus } from '../../redux/actions/wishlist';
+import { toggleProductCartStatus } from '../../redux/actions/cart';
 
-const CardComponent = ({ id, name, price, img, description, discount }) => {
+
+
+const CardComponent = ({ id, name, price, img, descrip, discount }) => {
+  const navigate = useNavigate();
   const priceWithDiscount = getDiscount(price, discount);
-  const [heart, setHeart] = useState(false);
+  const dispatch = useDispatch();
+  const { isAuthenticated, userCart, userWishlist } = useSelector((state) => state.user);
+  const isProductInWishlist = useSelector((state) =>
+    state.wishlist.productInWishlistStatus[id] || false
+  );
+  const isProductInCart = useSelector((state) =>
+    state.cart.productInCartStatus[id] || false
+  );
 
-  const storeInLocalStorage = (product) => {
-    localStorage.setItem("cart", JSON.stringify(product));
+
+  useEffect(() => {
+    dispatch(getUserWishlist());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getUserCart());
+  }, [dispatch]);
+
+  const addToCartHandler = (id) => {
+    if (isAuthenticated) {
+      dispatch(addToCart(id));
+      dispatch(toggleProductCartStatus(id, true));
+      alertTime("Agregado al Carrito", "success", "green", "white")
+    } else {
+      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error", "red", "white")
+      navigate("/login")
+    }
   };
 
-  const product = [
-    {
-      id: id,
-      name: name,
-      price: price,
-      images: img,
-      description: description,
-      discount: discount,
-    },
-  ];
 
-  const handleHeart = () => {
-    setHeart(!heart);
+  const removeFromCartHandler = (id) => {
+    alertConfirmCancel("", "¿Deseas eliminar este producto de tu carrito?", "question", "Confirmar", "Cancelar", () => {
+    dispatch(removeFromCart(id));
+    dispatch(toggleProductCartStatus(id, false));
+    window.location.reload()
+    });
+};
+
+
+  const addToWishlistHandler = (id) => {
+    if (isAuthenticated) {
+      dispatch(addToWishlist(id));
+      dispatch(toggleProductWishlistStatus(id, true));
+      alertTime("Agregado a Favoritos", "success", "green", "white")
+    } else {
+      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error", "red", "white")
+      navigate("/login")
+    }
   };
+
+  const removeFromWishlistHandler = (id) => {
+    alertConfirmCancel("", "Deseas eliminar este producto de tus Favoritos?", "question", "Confirmar", "Cancelar", () => {
+      dispatch(removeFromWishlist(id));
+      dispatch(toggleProductWishlistStatus(id, false));
+      window.location.reload();
+    })
+
+  };
+
 
   return (
     <>
       <Card>
         <img src={img} draggable="false" className="product-image" />
         <h3 className="product-name">{name}</h3>
-        <p className="product-description">{description}</p>
+        <p className="product-description">{descrip}</p>
         <p className="discount">{discount}%</p>
         <div className="container-price">
           <span className="product-price">{formatPrice(price)}</span>
@@ -45,17 +93,48 @@ const CardComponent = ({ id, name, price, img, description, discount }) => {
             {formatPrice(priceWithDiscount)}
           </span>
         </div>
-        <ButtonsCard onClick={handleHeart}>
-          {heart ? (
-            <AiFillHeart size="20px" color="white" />
-          ) : (
-            <AiOutlineHeart size="20px" color="white" />
-          )}
-        </ButtonsCard>
+
+        {isProductInWishlist ? (
+          <ButtonsCard>
+            <AiFillHeart
+              size={20}
+              className="cursor-pointer"
+              onClick={() => removeFromWishlistHandler(id)}
+              color="white"
+              title="Quitar de Favoritos"
+            />
+          </ButtonsCard>
+        ) : (
+          <ButtonsCard>
+            <AiOutlineHeart
+              size={20}
+              className="cursor-pointer"
+              onClick={() => addToWishlistHandler(id)}
+              title="Agregar a Favoritos"
+              color="white"
+            />
+          </ButtonsCard>
+        )}
+
+
         <div className="container-button">
-          <ButtonGlobal onClick={() => storeInLocalStorage(product)} buttoncard>
-            Agregar al carrito
-          </ButtonGlobal>
+
+          {isProductInCart ? (
+            <ButtonGlobal
+              buttoncard="true"
+              onClick={() => removeFromCartHandler(id)}
+            >
+              Quitar del carrito
+            </ButtonGlobal>
+          ) : (
+            <ButtonGlobal
+              buttoncard="true"
+              onClick={() => addToCartHandler(id)}
+            >
+              Agregar al carrito
+            </ButtonGlobal>
+          )}
+
         </div>
       </Card>
     </>

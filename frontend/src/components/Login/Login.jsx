@@ -4,7 +4,8 @@ import { ContainerLogin } from "./LoginStyled";
 import { server } from "../../server.js";
 import { toast } from "react-toastify";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import axios from "axios";
+import axios from 'axios';
+import { alertTime } from '../../../../backend/utils/alerts';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,29 +13,31 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios
-      .post(
-        `${server}/user/login-user`,
-        {
-          email,
-          password,
-        },
-        { withCredentials: true }
-      )
-      .then((res) => {
-        toast.success("Bienvenido!");
-        const interval = setInterval(() => {
-          navigate("/");
-          window.location.reload(true);
-        }, 2000);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
-  };
+        await axios
+            .post(
+                `${server}/user/login-user`,
+                {
+                    email,
+                    password,
+                },
+                { withCredentials: true }
+            )
+            .then((res) => {
+                alertTime(`Bienvenido!`, "success", "green", "white")
+                const interval = setInterval(() => {
+                    navigate("/");
+                    window.location.reload(true);
+                }, 2000);
+            })
+            .catch((err) => {
+                alertTime(err.response.data.message, "error", "red", "white");
+            });
+    };
+
 
   return (
     <ContainerLogin>

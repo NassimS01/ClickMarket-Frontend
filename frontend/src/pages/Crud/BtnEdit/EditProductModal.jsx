@@ -5,32 +5,30 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { editProduct } from "../../../redux/actions/product";
 import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
+import { alertTime } from "../../../../../backend/utils/alerts";
+import { server } from "../../../server";
 
 const EditProductModal = ({ productData, onClose }) => {
   const dispatch = useDispatch();
 
   // Estados locales para los campos editables
-  const [img, setImg] = useState(productData.img || "");
-  const [name, setName] = useState(productData.name || "");
-  const [price, setPrice] = useState(productData.price || 0);
-  const [discount, setDiscount] = useState(productData.discount || 0);
-  const [description, setDescrip] = useState(productData.description || "");
-  const [fav, setFav] = useState(productData.fav || false);
-  const [category, setCategory] = useState(productData.category || "");
-  const [stock, setStock] = useState(productData.stock || 0);
-  const [state, setState] = useState(productData.state || false);
+  const [name, setName] = useState(productData && productData.name);
+  const [price, setPrice] = useState(productData && productData.price);
+  const [discount, setDiscount] = useState(productData && productData.discount);
+  const [description, setDescrip] = useState(productData && productData.description);
+  const [category, setCategory] = useState(productData && productData.category);
+  const [stock, setStock] = useState(productData && productData.stock);
+  const [state, setState] = useState(productData && productData.state);
 
   useEffect(() => {
     // Actualiza los campos del formulario cuando se reciben los nuevos datos del producto a editar
     if (productData) {
-      setImg(productData.img);
       setName(productData.name);
       setPrice(productData.price);
       setDiscount(productData.discount);
       setStock(productData.stock);
       setCategory(productData.category);
       setState(productData.state);
-      setFav(productData.fav);
       setDescrip(productData.description);
     }
   }, [productData]);
@@ -38,21 +36,10 @@ const EditProductModal = ({ productData, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const updatedProduct = {
-        name,
-        price,
-        img,
-        description,
-        fav,
-        category,
-        stock,
-        state,
-      };
 
-      // Despacha la acción de edición para actualizar el producto
-      dispatch(editProduct(productData._id, updatedProduct));
-
-      window.location.reload();
+      dispatch(editProduct(productData._id, name, price, discount, description, category, stock, state));
+      alertTime("Producto actualizado", "success", "green", "white")
+      window.location.reload()
     } catch (error) {
       console.error("Error al actualizar el producto:", error);
     }
@@ -63,25 +50,6 @@ const EditProductModal = ({ productData, onClose }) => {
       <div className="modal">
         <h3 className="title">Edita el producto</h3>
         <form onSubmit={handleSubmit} style={{ gap: "20px" }}>
-          <div
-            className="image-container"
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              gap: "10px",
-              marginTop: "20px",
-            }}
-          >
-            <label htmlFor="img">Imagen URL:</label>
-            <input
-              type="file"
-              id="img"
-              name="img"
-              value={img}
-              className="input"
-              onChange={(e) => setImg(e.target.value)}
-            />
-          </div>
           <div
             className="name-price-container"
             style={{ flexDirection: "row", gap: "10px" }}
@@ -160,7 +128,7 @@ const EditProductModal = ({ productData, onClose }) => {
               id="state"
               name="state"
               value={state}
-              onChange={(e) => setState(e.target.value === "true")}
+              onChange={(e) => setState(e.target.value)}
             >
               <option value="true">Sí</option>
               <option value="false">No</option>
@@ -175,7 +143,7 @@ const EditProductModal = ({ productData, onClose }) => {
               id="descrip"
               name="descrip"
               value={description}
-              className="textarea"
+              className="input"
               onChange={(e) => setDescrip(e.target.value)}
             />
           </div>
@@ -193,19 +161,5 @@ const EditProductModal = ({ productData, onClose }) => {
   );
 };
 
-EditProductModal.propTypes = {
-  onClose: PropTypes.func,
-  productData: PropTypes.shape({
-    _id: PropTypes.string,
-    name: PropTypes.string,
-    price: PropTypes.number,
-    img: PropTypes.string,
-    descrip: PropTypes.string,
-    fav: PropTypes.bool,
-    category: PropTypes.string,
-    stock: PropTypes.number,
-    state: PropTypes.bool,
-  }),
-};
 
 export default EditProductModal;

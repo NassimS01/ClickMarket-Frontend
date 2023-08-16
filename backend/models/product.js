@@ -17,10 +17,6 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Ingresa el precio del producto"]
   },
-  fav: {
-    type: Boolean,
-    default: false
-  },
   discount: {
     type: Number,
     required: false,
@@ -28,6 +24,10 @@ const productSchema = new mongoose.Schema({
   stock: {
     type: Number,
     required: [true, "Por favor, introduce el stock del producto!"],
+  },
+  state: {
+    type: Boolean,
+    default: true,
   },
   images: 
     {

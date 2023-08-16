@@ -26,7 +26,6 @@ const Footer = ({ isLoading }) => {
   ];
   const location = useLocation();
 
-  console.log(routesNone.includes(location.pathname));
 
   return (
     <StyledFooter

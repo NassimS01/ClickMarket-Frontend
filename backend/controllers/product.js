@@ -72,12 +72,14 @@ router.get(
     })
 );
 
+
+// edit-product by ID
 router.put(
     "/edit-product/:id",
     catchAsyncErrors(async (req, res, next) => {
         try {
             const productId = req.params.id;
-            const updatedProductData = req.body;
+            const { name, price, discount, description, category, stock, state} = req.body;
 
             const existingProduct = await Product.findById(productId);
             if (!existingProduct) {
@@ -87,12 +89,12 @@ router.put(
                 });
             }
 
-            existingProduct.name = updatedProductData.name;
-            existingProduct.description = updatedProductData.description;
-            existingProduct.category = updatedProductData.category;
-            existingProduct.price = updatedProductData.price;
-            existingProduct.discount = updatedProductData.discount;
-            existingProduct.stock = updatedProductData.stock;
+            existingProduct.name = name;
+            existingProduct.description = description;
+            existingProduct.category = category;
+            existingProduct.price = price;
+            existingProduct.discount = discount;
+            existingProduct.stock = stock;
 
             await existingProduct.save();
 
@@ -107,7 +109,7 @@ router.put(
     })
 );
 
-// delete product
+// delete product by ID
 router.delete(
     "/delete-product/:id",
     isAuthenticated,

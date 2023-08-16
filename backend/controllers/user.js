@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const User = require("../models/user");
+const Product = require("../models/product");;
 const router = express.Router();
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
@@ -22,16 +23,12 @@ router.post("/create-user", async (req, res, next) => {
       return next(new ErrorHandler("El usuario ya existe", 400));
     }
 
-    if (!strongPasswordRegex.test(password)) {
-      return next(
-        new ErrorHandler(
-          "La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula, una letra minúscula y un número.",
-          400
-        )
-      );
-    }
+        if (!strongPasswordRegex.test(password)) {
+            return next(new ErrorHandler("La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula, una letra minúscula y un número.", 400));
+        }
 
-    let avatarData = {};
+
+        let avatarData = {};
 
     if (avatar) {
       const myCloud = await cloudinary.v2.uploader.upload(avatar, {
@@ -60,7 +57,7 @@ router.post("/create-user", async (req, res, next) => {
     const newUser = await User.create(user);
     res.status(201).json({
       success: true,
-      message: `El usuario ha sido creado correctamente!`,
+      message: `Tu cuenta ha sido creada correctamente!`,
       newUser,
     });
   } catch (error) {
@@ -70,14 +67,14 @@ router.post("/create-user", async (req, res, next) => {
 
 // login user
 router.post(
-  "/login-user",
-  catchAsyncErrors(async (req, res, next) => {
-    try {
-      const { email, password, active } = req.body;
-
-      if (!email || !password) {
-        return next(new ErrorHandler("Debes rellenar todos los campos!", 400));
-      }
+    "/login-user",
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const { email, password, active } = req.body;
+            
+            if (!email || !password) {
+                return next(new ErrorHandler("Debes rellenar todos los campos!", 400));
+            }
 
       const user = await User.findOne({ email }).select("+password");
 
@@ -158,7 +155,7 @@ router.put(
   isAuthenticated,
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const { email, password, name } = req.body;
+      const { name, email, oldPassword, newPassword, repeatNewPassword } = req.body;
 
       const user = await User.findOne({ email }).select("+password");
 
@@ -166,14 +163,20 @@ router.put(
         return next(new ErrorHandler("Usuario no encontrado", 400));
       }
 
-      const isPasswordValid = await user.comparePassword(password);
+      const isPasswordValid = await user.comparePassword(oldPassword);
 
       if (!isPasswordValid) {
-        return next(new ErrorHandler("Password incorrecto", 400));
+        return next(new ErrorHandler("La contraseña vieja es incorrecta", 400)
+                );
+            }
+
+            if (newPassword !== repeatNewPassword) {
+                return next(
+                    new ErrorHandler("Las contraseñas ingresadas no coinciden", 400));
       }
 
       user.name = name;
-      user.email = email;
+      user.password = newPassword;
 
       await user.save();
 
@@ -201,7 +204,7 @@ router.put(
 
         const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
           folder: "avatars",
-          width: 150,
+          width: 200,
         });
 
         existsUser.avatar = {
@@ -224,37 +227,37 @@ router.put(
 
 // update user password
 router.put(
-  "/update-user-password",
-  isAuthenticated,
-  catchAsyncErrors(async (req, res, next) => {
-    try {
-      const user = await User.findById(req.user.id).select("+password");
+    "/update-user-password",
+    isAuthenticated,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const user = await User.findById(req.user.id).select("+password");
 
-      const isPasswordMatched = await user.comparePassword(
-        req.body.oldPassword
-      );
+            const isPasswordMatched = await user.comparePassword(
+                req.body.oldPassword
+            );
 
-      if (!isPasswordMatched) {
-        return next(
-          new ErrorHandler("La contraseña vieja es incorrecta!", 400)
-        );
-      }
+            if (!isPasswordMatched) {
+                return next(new ErrorHandler("La contraseña vieja es incorrecta!", 400));
+            }
 
-      if (req.body.newPassword !== req.body.confirmPassword) {
-        return next(new ErrorHandler("Las contraseñas no coinciden!", 400));
-      }
-      user.password = req.body.newPassword;
+            if (req.body.newPassword !== req.body.confirmPassword) {
+                return next(
+                    new ErrorHandler("Las contraseñas no coinciden!", 400)
+                );
+            }
+            user.password = req.body.newPassword;
 
-      await user.save();
+            await user.save();
 
-      res.status(200).json({
-        success: true,
-        message: "Contraseña cambiada con exito!",
-      });
-    } catch (error) {
-      return next(new ErrorHandler(error.message, 500));
-    }
-  })
+            res.status(200).json({
+                success: true,
+                message: "Contraseña cambiada con exito!",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
 );
 
 // find user information with the userId
@@ -272,6 +275,57 @@ router.get(
       return next(new ErrorHandler(error.message, 500));
     }
   })
+);
+
+// add product to user wishlist
+router.post(
+    "/add-to-wishlist/:id",
+    isAuthenticated,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const user = await User.findById(req.user.id);
+
+            const product = await Product.findById(req.params.id);
+
+            if (user.wishlist.includes(product._id)) {
+                user.wishlist.pull(product._id);
+            } else {
+                user.wishlist.push(product);
+            }
+
+            await user.save();
+
+            res.status(201).json({
+                success: true,
+                message: "Producto agregado a la lista de deseos!",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// remove product from user wishlist
+router.delete(
+    "/remove-from-wishlist/:id",
+    isAuthenticated,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const user = await User.findById(req.user.id);
+
+            const product = await Product.findById(req.params.id);
+
+            user.wishlist.pull(product._id);
+            await user.save();
+
+            res.status(200).json({
+                success: true,
+                message: "Producto eliminado de la lista de deseos!",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
 );
 
 // all users --- for admin
@@ -292,6 +346,36 @@ router.get(
       return next(new ErrorHandler(error.message, 500));
     }
   })
+);
+
+// active user --admin
+router.put(
+    "/active-user/:id",
+    isAuthenticated,
+    isAdmin("Admin"),
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const userId = req.params.id;
+            const updatedUserData = req.body;
+
+            const existingUser = await User.findById(userId);
+            if (!existingUser) {
+                return next(new ErrorHandler("Usuario no encontrado", 400));
+            }
+
+            existingUser.active = updatedUserData.active;
+
+            await existingUser.save();
+
+            res.status(201).json({
+                success: true,
+                message: "Usuario habilitado exitosamente",
+                updatedUser: existingUser,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
 );
 
 // delete users --- admin
@@ -353,4 +437,128 @@ router.put(
   })
 );
 
+// active user --admin
+router.put(
+  "/active-user/:id",
+  isAuthenticated,
+  isAdmin("Admin"),
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const userId = req.params.id;
+      const updatedUserData = req.body;
+
+      const existingUser = await User.findById(userId);
+      if (!existingUser) {
+         return next(new ErrorHandler("Usuario no encontrado", 400));
+      }
+
+     existingUser.active = updatedUserData.active;
+
+      await existingUser.save();
+
+      res.status(201).json({
+        success: true,
+        message: "Usuario habilitado exitosamente",
+        updatedUser: existingUser,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
+// get user wishlist
+router.get(
+    "/get-user-wishlist",
+    isAuthenticated,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const user = await User.findById(req.user.id).populate('wishlist');
+
+            if (!user) {
+                return next(new ErrorHandler("Usuario no encontrado", 400));
+            }
+
+            res.status(200).json({
+                success: true,
+                userWishlist: user.wishlist,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// get user cart
+router.get(
+    "/get-user-cart",
+    isAuthenticated,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const user = await User.findById(req.user.id).populate('cart');
+
+            if (!user) {
+                return next(new ErrorHandler("Usuario no encontrado", 400));
+            }
+
+            res.status(200).json({
+                success: true,
+                userCart: user.cart,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// add product to user cart
+router.post(
+    "/add-to-cart/:id",
+    isAuthenticated,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const user = await User.findById(req.user.id);
+
+            const product = await Product.findById(req.params.id);
+
+            if (user.cart.includes(product._id)) {
+                user.cart.pull(product._id);
+            } else {
+                user.cart.push(product);
+            }
+
+            await user.save();
+
+            res.status(201).json({
+                success: true,
+                message: "Producto agregado al carrito!",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// remove product from cart
+router.delete(
+    "/remove-from-cart/:id",
+    isAuthenticated,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const user = await User.findById(req.user.id);
+
+            const product = await Product.findById(req.params.id);
+
+            user.cart.pull(product._id);
+            await user.save();
+
+            res.status(200).json({
+                success: true,
+                message: "Producto eliminado del carrito!",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
 module.exports = router;
