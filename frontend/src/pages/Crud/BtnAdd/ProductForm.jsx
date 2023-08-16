@@ -1,0 +1,202 @@
+import { useEffect, useState } from "react";
+import { AiOutlinePlusCircle } from "react-icons/ai";
+import { ModalStyled } from "./ModalStyled";
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createProduct } from "../../../redux/actions/product";
+import { toast } from "react-toastify";
+
+
+const ProductForm = ({ onClose }) => {
+  const { success, error } = useSelector((state) => state.products);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [images, setImages] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState();
+  const [discount, setDiscount] = useState();
+  const [stock, setStock] = useState();
+  const [state, setState] = useState();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+    if (success) {
+      toast.success("Producto Creado!");
+      const interval = setInterval(() => {
+        window.location.reload();
+      }, 1500)
+    }
+  }, [dispatch, error, success]);
+
+  const handleImageChange = (e) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImages(reader.result);
+      }
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newForm = new FormData();
+
+    newForm.set("images", images);
+    newForm.append("name", name);
+    newForm.append("description", description);
+    newForm.append("category", category);
+    newForm.append("price", price);
+    newForm.append("discount", discount);
+    newForm.append("stock", stock);
+    newForm.append("state", state);
+    dispatch(
+      createProduct({
+        name,
+        description,
+        category,
+        price,
+        discount,
+        stock,
+        state,
+        images,
+      })
+    );
+  };
+  return (
+    <ModalStyled>
+      <h3>Agrega un Producto</h3>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="upload">
+            <AiOutlinePlusCircle size={30} className="image-icon" color="#555" />
+          </label>
+          <input
+            type="file"
+            name=""
+            id="upload"
+            className="hidden"
+            multiple
+            onChange={handleImageChange}
+          />
+          <div className="image-container">
+              {images ? (
+                    <img
+                      src={images}
+                      alt=""
+                      className="product-image"
+                    />
+                  ) : (
+                    <i>No hay imagen del producto</i>
+                  )}
+          </div>
+        </div>
+        <div className="name-price-container">
+          <div>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Nombre producto"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="price-container">
+            <input
+              type="number"
+              id="price"
+              name="price"
+              placeholder="Precio $"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="discount-stock-container">
+          <input
+            type="number"
+            id="discount"
+            name="discount"
+            value={discount}
+            placeholder="Descuento"
+            onChange={(e) => setDiscount(e.target.value)}
+          />
+          <input
+            type="number"
+            id="stock"
+            name="stock"
+            value={stock}
+            placeholder="Stock"
+            onChange={(e) => setStock(e.target.value)}
+          />
+        </div>
+
+        <div className="category-state-container">
+          <div>
+            <label htmlFor="category">Categoría:</label>
+            <select
+              id="category"
+              name="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="bazar">Bazar</option>
+              <option value="bebidas">Bebidas</option>
+              <option value="carnes">Carnes</option>
+              <option value="comestibles">Comestibles</option>
+              <option value="congelados">Congelados</option>
+              <option value="fiambres">Fiambres</option>
+              <option value="frutas">Frutas</option>
+              <option value="lacteos">Lacteos</option>
+              <option value="limpieza">Limpieza</option>
+              <option value="panaderia">Panaderia</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="state">Estado:</label>
+            <select
+              id="state"
+              name="state"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+            >
+              <option value="true">Sí</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="description-container">
+          <label htmlFor="descrip">Descripción:</label>
+          <textarea
+            id="descrip"
+            name="descrip"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+
+        <button type="submit">Guardar Producto</button>
+        <button type="button" onClick={onClose}>
+          Cerrar
+        </button>
+      </form>
+    </ModalStyled>
+  );
+};
+
+ProductForm.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
+
+export default ProductForm;
