@@ -17,10 +17,6 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Ingresa el precio del producto"]
   },
-  fav: {
-    type: Boolean,
-    default: false
-  },
   discount: {
     type: Number,
     required: false,

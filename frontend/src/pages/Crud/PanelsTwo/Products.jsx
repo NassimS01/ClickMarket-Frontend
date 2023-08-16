@@ -6,6 +6,7 @@ import { TableStyled } from "./ProductsStyled";
 import BtnDelete from "../BtnDelete/BtnDelete";
 import BtnEdit from "../BtnEdit/BtnEdit";
 import { server } from "../../../server";
+import Loader from "../../../components/Loader/Loader"
 
 const Products = () => {
     const [data, setData] = useState([]);
@@ -67,10 +68,11 @@ const Products = () => {
                     <h2 style={{ textAlign: "center" }}>No hay productos para mostrar</h2>
                 </div>
             ) : (
-                <div className="loading">
-                    <h2 style={{ textAlign: "center" }}>Cargando....</h2>
-                    <p style={{ textAlign: "center" }}>Espere mientras carga el contenido</p>
-                </div>
+                // <div className="loading">
+                //     <h2 style={{ textAlign: "center" }}>Cargando....</h2>
+                //     <p style={{ textAlign: "center" }}>Espere mientras carga el contenido</p>
+                // </div>
+                <Loader/>
             )}
         </>
     );

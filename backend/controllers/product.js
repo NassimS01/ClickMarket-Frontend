@@ -72,6 +72,8 @@ router.get(
     })
 );
 
+
+// edit-product by ID
 router.put(
     "/edit-product/:id",
     catchAsyncErrors(async (req, res, next) => {
@@ -107,7 +109,7 @@ router.put(
     })
 );
 
-// delete product
+// delete product by ID
 router.delete(
     "/delete-product/:id",
     isAuthenticated,

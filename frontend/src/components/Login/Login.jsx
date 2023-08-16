@@ -5,6 +5,7 @@ import { server } from "../../server.js";
 import { toast } from "react-toastify"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from 'axios';
+import { alertTime } from '../../../../backend/utils/alerts';
 
 
 const Login = () => {
@@ -26,7 +27,7 @@ const Login = () => {
                 { withCredentials: true }
             )
             .then((res) => {
-                toast.success("Bienvenido!");
+                alertTime("Bienvenido!", "success")
                 const interval = setInterval(() => {
                     navigate("/");
                     window.location.reload(true);

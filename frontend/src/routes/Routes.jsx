@@ -18,9 +18,15 @@ import Category from "../pages/Category/Category";
 import Signup from "../pages/Signup/SignupPage";
 import Cart from "../pages/Cart/Cart";
 import Store from "../redux/store";
-import { loadUser } from "../redux/actions/user";
+import {loadUser } from "../redux/actions/user";
 import { getAllProducts } from "../redux/actions/product";
 import ProtectedAdminRoute from "./ProtectedAdminRoute";
+import ProtectedRoute from "./ProtectedRoute";
+import Profile from "../pages/Profile/Profile";
+import BtnWishlist from "../pages/Profile/ContentProfile/BtnWishlist";
+import BtnCart from "../pages/Profile/ContentProfile/BtnCart"
+import BtnOrders from "../pages/Profile/ContentProfile/BtnOrders"
+import BtnSettings from "../pages/Profile/ContentProfile/BtnSettings"
 
 const Routes = () => {
   useEffect(() => {
@@ -33,6 +39,8 @@ const Routes = () => {
         <ReactDomRoutes>
           <Route path="/" element={<Home />} />
           <Route path="/categorias/:categoria" element={<Category />} />
+
+          {/* CRUD ADMIN */}
           <Route
             path="/panel-admin/*"
             element={
@@ -63,6 +71,49 @@ const Routes = () => {
                 <ProtectedAdminRoute>
                   <PanelOrders />
                 </ProtectedAdminRoute>
+              }
+            />
+          </Route>
+
+          {/* PANEL USER */}
+          <Route
+            path="/profile/*"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          >
+            <Route
+              path="wishlist"
+              element={
+                <ProtectedRoute>
+                  <BtnWishlist />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="cart"
+              element={
+                <ProtectedRoute>
+                  <BtnCart />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="orders"
+              element={
+                <ProtectedRoute>
+                  <BtnOrders />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="settings"
+              element={
+                <ProtectedRoute>
+                  <BtnSettings />
+                </ProtectedRoute>
               }
             />
           </Route>

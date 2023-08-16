@@ -3,22 +3,15 @@ import { getRandomProducts } from "../../../../backend/utils/functions";
 import { ContainerCards, Container } from "./LandingStyle";
 import Categories from "./Categories";
 import ExtraInfo from "../ExtraInfo/ExtraInfo";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { server } from "../../server";
+import { getUserCart, getUserWishlist } from "../../redux/actions/user";
+import Loader from "../Loader/Loader";
 
 const Landing = () => {
-  const [data, setData] = useState([]);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const {allProducts, isLoading} = useSelector((state)=> state.product);
 
-  useEffect(() => {
-    axios.get(`${server}/products/get-all-products`).then((res) => {
-      setData(res.data.products);
-    });
-  }, []);
-
-  const randomProducts = getRandomProducts(data, 4);
 
   return (
     <>
@@ -26,15 +19,24 @@ const Landing = () => {
         <h3 className="title">Categorias destacadas</h3>
         <Categories />
         <h3 className="title">Productos que pueden interesarte</h3>
-        <ContainerCards>
-          {randomProducts.map((product) => (
-            <CardComponent
+        {
+          isLoading? (<Loader/>) :
+          (<ContainerCards>
+            {allProducts && allProducts.map((product) => (
+              <CardComponent
               key={product._id}
-              {...product}
+              id={product._id}
+              name={product.name}
+              descrip={product.description}
+              category={product.category}
+              price={product.price}
+              discount={product.discount}
+              stock={product.stock}
               img={product.images.url}
-            />
-          ))}
-        </ContainerCards>
+          />
+            ))}
+          </ContainerCards>)
+        }
         <ExtraInfo />
       </Container>
     </>
@@ -42,5 +44,3 @@ const Landing = () => {
 };
 
 export default Landing;
-
-// {/* <CardComponent key={product._id} name={product.name} price={product.price} descrip={product.description} discount={product.discount} */ }

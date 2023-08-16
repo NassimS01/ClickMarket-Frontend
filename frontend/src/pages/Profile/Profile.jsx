@@ -1,31 +1,35 @@
-import { SideBar } from "./ProfileStyles";
+import { useSelector } from "react-redux";
+import {  Outlet, useNavigate } from "react-router-dom";
+import { Container } from "./ProfileStyles";
+import { alertConfirmCancel } from "../../../../backend/utils/alerts";
+import axios from "axios";
+import { server } from "../../server";
+import PanelProfile from "./PanelProfile/PanelProfile"
 
 const Profile = () => {
+    const { user } = useSelector((state) => state.user);
+    const navigate = useNavigate();
+
+    const logoutHandler = () => {
+        alertConfirmCancel("", "Seguro deseas cerrar sesión?", 'question', "Confirmar", "Cancelar", () => {
+            axios
+                .get(`${server}/user/logout`, { withCredentials: true })
+                .then((res) => {
+                    navigate("/");
+                    window.location.reload(true)
+                })
+                .catch((error) => {
+                    console.log(error.response.data.message);
+                })
+        }, () => { })
+
+    };
     return (
         <>
-            <SideBar>
-                <div className="panel-item">
-                    <Link
-                        to="/admin/dashboard"
-                        className={`panel-link ${active === 1 ? 'active' : ''}`}
-                    >
-                        <RxDashboard className="panel-icon" />
-                        <h5 className="panel-text">Dashboard</h5>
-                    </Link>
-                </div>
-
-                <div className="panel-item">
-                    <Link
-                        to="/admin-orders"
-                        className={`panel-link ${active === 2 ? 'active' : ''}`}
-                    >
-                        <FiShoppingBag className="panel-icon" />
-                        <h5 className="panel-text">All Orders</h5>
-                    </Link>
-                </div>
-
-                {/* Rest of the items */}
-            </SideBar>
+            <Container>
+                <PanelProfile/>
+                <Outlet/>
+            </Container>
         </>
     )
 }
