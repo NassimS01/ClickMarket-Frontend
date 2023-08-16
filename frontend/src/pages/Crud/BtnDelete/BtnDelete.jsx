@@ -1,10 +1,13 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { BiTrashAlt } from "react-icons/bi";
 
 const BtnDelete = ({ product, handleDelete }) => {
   return (
-    <button onClick={() => handleDelete(product._id)}>
-      ❌
-    </button>
+    <BiTrashAlt
+      onClick={() => handleDelete(product._id)}
+      size="25px"
+      color="var(--colorPrimary)"
+    />
   );
 };
 

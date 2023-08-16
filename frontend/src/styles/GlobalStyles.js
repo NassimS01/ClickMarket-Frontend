@@ -3,7 +3,10 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
 
 :root {
-   --colorPrimary: #ba1e1a
+   --colorPrimary: #BA1E1A;
+   --colorPrimaryHover: #6E0B08;
+   --colorSecondary: #FF443D;
+   --colorSuccess: #1ABA52;
 }
 
   * {
@@ -30,17 +33,8 @@ const GlobalStyles = createGlobalStyle`
     left: 50%;
     border-radius: 20px;
     transform: translate(-50%, -50%);
-    background-color: var(--colorPrimary);
+    background-color: #FF443D;
   }
-
-  /* body {
-     color: #fff;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     flex-direction: column;
-     height: 100vh;
-  } */
 `;
 
 export default GlobalStyles;

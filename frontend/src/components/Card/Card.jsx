@@ -9,7 +9,7 @@ import { getDiscount, formatPrice } from "../../../../backend/utils/functions";
 import { ButtonGlobal } from "../ButtonGlobal/ButtonGlobal";
 import { Card, ButtonsCard } from "./CardStyles";
 
-const CardComponent = ({ id, name, price, img, descrip, discount }) => {
+const CardComponent = ({ id, name, price, img, description, discount }) => {
   const priceWithDiscount = getDiscount(price, discount);
   const [heart, setHeart] = useState(false);
 
@@ -23,7 +23,7 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
       name: name,
       price: price,
       images: img,
-      descrip: descrip,
+      description: description,
       discount: discount,
     },
   ];
@@ -37,7 +37,7 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
       <Card>
         <img src={img} draggable="false" className="product-image" />
         <h3 className="product-name">{name}</h3>
-        <p className="product-description">{descrip}</p>
+        <p className="product-description">{description}</p>
         <p className="discount">{discount}%</p>
         <div className="container-price">
           <span className="product-price">{formatPrice(price)}</span>
@@ -53,10 +53,7 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
           )}
         </ButtonsCard>
         <div className="container-button">
-          <ButtonGlobal
-            onClick={() => storeInLocalStorage(product)}
-            buttoncard
-          >
+          <ButtonGlobal onClick={() => storeInLocalStorage(product)} buttoncard>
             Agregar al carrito
           </ButtonGlobal>
         </div>

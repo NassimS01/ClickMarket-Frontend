@@ -2,8 +2,7 @@ import { styled } from "styled-components";
 
 export const ContainerSignup = styled.div`
   width: 100%;
-  min-height: 100vh;
-  background-color: #f5f5f5;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,6 +14,31 @@ export const ContainerSignup = styled.div`
     border-radius: 10px;
     box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
       0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    border: 1px thin #edf5f3;
+  }
+
+  .registerBackground {
+    position: relative;
+    width: 100%;
+    height: 93.9vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .registerBackground::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url("https://hoydia.com.ar/wp-content/uploads/2021/11/supermercados-16032020.jpg");
+    background-size: cover;
+    /* background-attachment: fixed; */
+    background-position: -50%;
+    filter: blur(10px);
+    z-index: -1;
   }
 
   .left {
@@ -24,7 +48,7 @@ export const ContainerSignup = styled.div`
     align-items: center;
     justify-content: center;
     /* background-color: #3bb19b; */
-    background-color: var(--colorPrimary);
+    background-color: var(--colorPrimaryHover);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
   }
@@ -93,12 +117,17 @@ export const ContainerSignup = styled.div`
     border: none;
     outline: none;
     padding: 12px 0;
-    background-color: white;
+    background-color: var(--colorPrimary);
     border-radius: 20px;
     width: 180px;
     font-weight: bold;
     font-size: 14px;
     cursor: pointer;
+    color: white;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 5px;
   }
 
   .green_btn {

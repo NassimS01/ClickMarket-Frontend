@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { ModalStyled } from "./ModalStyled";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createProduct } from "../../../redux/actions/product";
 import { toast } from "react-toastify";
-
+import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
 
 const ProductForm = ({ onClose }) => {
   const { success, error } = useSelector((state) => state.products);
@@ -21,6 +21,7 @@ const ProductForm = ({ onClose }) => {
   const [discount, setDiscount] = useState();
   const [stock, setStock] = useState();
   const [state, setState] = useState();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (error) {
@@ -30,9 +31,12 @@ const ProductForm = ({ onClose }) => {
       toast.success("Producto Creado!");
       const interval = setInterval(() => {
         window.location.reload();
-      }, 1500)
+      }, 1500);
     }
   }, [dispatch, error, success]);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleImageChange = (e) => {
     const reader = new FileReader();
@@ -71,126 +75,139 @@ const ProductForm = ({ onClose }) => {
       })
     );
   };
+
   return (
     <ModalStyled>
-      <h3>Agrega un Producto</h3>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="upload">
-            <AiOutlinePlusCircle size={30} className="image-icon" color="#555" />
-          </label>
-          <input
-            type="file"
-            name=""
-            id="upload"
-            className="hidden"
-            multiple
-            onChange={handleImageChange}
-          />
-          <div className="image-container">
-              {images ? (
-                    <img
-                      src={images}
-                      alt=""
-                      className="product-image"
-                    />
-                  ) : (
-                    <i>No hay imagen del producto</i>
-                  )}
-          </div>
-        </div>
-        <div className="name-price-container">
+      <div className="modal">
+        <h3 className="title">Agrega un Producto</h3>
+        <form onSubmit={handleSubmit}>
           <div>
+            <label htmlFor="upload">
+              <AiOutlinePlusCircle
+                size={30}
+                className="image-icon"
+                color="#555"
+              />
+            </label>
             <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Nombre producto"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              type="file"
+              name=""
+              id="upload"
+              className="hidden input"
+              multiple
+              onChange={handleImageChange}
             />
+            <div className="image-container">
+              {images ? (
+                <img src={images} alt="" className="product-image" />
+              ) : (
+                <i>No hay imagen del producto</i>
+              )}
+            </div>
           </div>
-          <div className="price-container">
+          <div className="name-price-container">
+            <div>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Nombre producto"
+                className="input"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="price-container">
+              <input
+                type="number"
+                id="price"
+                name="price"
+                placeholder="Precio $"
+                value={price}
+                className="input"
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="discount-stock-container">
             <input
               type="number"
-              id="price"
-              name="price"
-              placeholder="Precio $"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              id="discount"
+              name="discount"
+              value={discount}
+              placeholder="Descuento"
+              className="input"
+              onChange={(e) => setDiscount(e.target.value)}
+            />
+            <input
+              type="number"
+              id="stock"
+              name="stock"
+              value={stock}
+              placeholder="Stock"
+              className="input"
+              onChange={(e) => setStock(e.target.value)}
             />
           </div>
-        </div>
 
-        <div className="discount-stock-container">
-          <input
-            type="number"
-            id="discount"
-            name="discount"
-            value={discount}
-            placeholder="Descuento"
-            onChange={(e) => setDiscount(e.target.value)}
-          />
-          <input
-            type="number"
-            id="stock"
-            name="stock"
-            value={stock}
-            placeholder="Stock"
-            onChange={(e) => setStock(e.target.value)}
-          />
-        </div>
-
-        <div className="category-state-container">
-          <div>
-            <label htmlFor="category">Categoría:</label>
-            <select
-              id="category"
-              name="category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="bazar">Bazar</option>
-              <option value="bebidas">Bebidas</option>
-              <option value="carnes">Carnes</option>
-              <option value="comestibles">Comestibles</option>
-              <option value="congelados">Congelados</option>
-              <option value="fiambres">Fiambres</option>
-              <option value="frutas">Frutas</option>
-              <option value="lacteos">Lacteos</option>
-              <option value="limpieza">Limpieza</option>
-              <option value="panaderia">Panaderia</option>
-            </select>
+          <div className="category-and-state-container">
+            <div className="category-state-container">
+              <label htmlFor="category">Categoría:</label>
+              <select
+                id="category"
+                name="category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value="bazar">Bazar</option>
+                <option value="bebidas">Bebidas</option>
+                <option value="carnes">Carnes</option>
+                <option value="comestibles">Comestibles</option>
+                <option value="congelados">Congelados</option>
+                <option value="fiambres">Fiambres</option>
+                <option value="frutas">Frutas</option>
+                <option value="lacteos">Lacteos</option>
+                <option value="limpieza">Limpieza</option>
+                <option value="panaderia">Panaderia</option>
+              </select>
+            </div>
+            <div className="category-state-container">
+              <label htmlFor="state">Estado:</label>
+              <select
+                id="state"
+                name="state"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+              >
+                <option value="true">Sí</option>
+                <option value="false">No</option>
+              </select>
+            </div>
           </div>
-          <div>
-            <label htmlFor="state">Estado:</label>
-            <select
-              id="state"
-              name="state"
-              value={state}
-              onChange={(e) => setState(e.target.value)}
-            >
-              <option value="true">Sí</option>
-              <option value="false">No</option>
-            </select>
+
+          <div className="description-container">
+            <label htmlFor="descrip">Descripción:</label>
+            <textarea
+              id="descrip"
+              name="descrip"
+              value={description}
+              className="textarea"
+              placeholder="Descripción"
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </div>
-        </div>
 
-        <div className="description-container">
-          <label htmlFor="descrip">Descripción:</label>
-          <textarea
-            id="descrip"
-            name="descrip"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-
-        <button type="submit">Guardar Producto</button>
-        <button type="button" onClick={onClose}>
-          Cerrar
-        </button>
-      </form>
+          <div className="buttons">
+            <ButtonGlobal green type="submit">
+              Guardar Producto
+            </ButtonGlobal>
+            <ButtonGlobal type="button" onClick={onClose}>
+              Cerrar
+            </ButtonGlobal>
+          </div>
+        </form>
+      </div>
     </ModalStyled>
   );
 };

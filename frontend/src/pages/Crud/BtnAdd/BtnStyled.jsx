@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const BtnAddStyled = styled.div`
   display: flex;
   justify-content: end;
-  width: 90%;
+  /* width: 90%; */
   
   & .btn-add {
     font-size: 1em;

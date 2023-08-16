@@ -12,21 +12,31 @@ export const ButtonGlobal = styled.button`
   font-size: 16px;
 
   &:hover {
-    transition: 0.2s ease;
-    background-color: #d30707;
+    transition: 0.3s ease;
+    background-color: #6e0b08;
   }
 
   ${(props) =>
     props.green &&
     css`
-      background-color: #4bbb44;
+      background-color: var(--colorSuccess);
 
       &:hover {
-        background-color: #3c9536;
+        transition: 0.3s ease;
+        background-color: #006e26;
       }
     `}
 
-  ${(props) => props.buttoncard && css`
-  
+  ${(props) =>
+    props.pagination &&
+    css`
+      background-color: var(--colorSecondary);
+    `}
+
+  ${(props) =>
+    props.disabled && css
+    `
+    opacity: 0.5;
+    cursor: default;
   `}
 `;

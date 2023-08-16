@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonLink, Wrapper } from "./Wrapper";
 import logoClickMarket from "../../assets/CLICK.png";
 import {
@@ -10,9 +10,11 @@ import {
 } from "react-icons/ai";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import LinkItem from "../LinkItem/LinkItem";
-import { useDispatch, useSelector } from "react-redux";import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
+import { fetchFilteredCategories } from "../../redux/actions/categories";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -115,7 +117,7 @@ const Header = () => {
                   <div className="dropdown-content">
                     {user?.role === "Admin" ? (
                       <>
-                        <Link to="/panel-admin/*" className="btn-dropdown">
+                        <Link to="/panel-admin" className="btn-dropdown">
                           Panel Administrador
                         </Link>
                         <button
@@ -142,9 +144,9 @@ const Header = () => {
                 )}
               </div>
             ) : (
-              <Link to="/login">
+              <ButtonLink onClick={() => navigate("/login")}>
                 <AiOutlineUser className="icon" />
-              </Link>
+              </ButtonLink>
             )}
           </ButtonLink>
         </div>
