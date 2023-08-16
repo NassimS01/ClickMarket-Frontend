@@ -6,11 +6,7 @@ import { TableStyled } from "./ProductsStyled";
 import BtnDelete from "../BtnDelete/BtnDelete";
 import BtnEdit from "../BtnEdit/BtnEdit";
 import { server } from "../../../server";
-<<<<<<< HEAD
-import Loader from "../../../components/Loader/Loader"
-=======
 import { AiOutlineSearch } from "react-icons/ai";
->>>>>>> cab18ebfc8fc70c75f37e5ecce7ac12c3a7a52a6
 
 const Products = ({ search }) => {
   const [data, setData] = useState([]);
@@ -78,21 +74,6 @@ const Products = ({ search }) => {
                     <BtnDelete product={product} handleDelete={handleDelete} />
                   </div>
                 </div>
-<<<<<<< HEAD
-            ) : data.length === 0 && status === "success" ? (
-                <div>
-                    <h2 style={{ textAlign: "center" }}>No hay productos para mostrar</h2>
-                </div>
-            ) : (
-                // <div className="loading">
-                //     <h2 style={{ textAlign: "center" }}>Cargando....</h2>
-                //     <p style={{ textAlign: "center" }}>Espere mientras carga el contenido</p>
-                // </div>
-                <Loader/>
-            )}
-        </>
-    );
-=======
               ))}
           </TableStyled>
         </div>
@@ -110,7 +91,6 @@ const Products = ({ search }) => {
       )}
     </>
   );
->>>>>>> cab18ebfc8fc70c75f37e5ecce7ac12c3a7a52a6
 };
 
 export default Products;

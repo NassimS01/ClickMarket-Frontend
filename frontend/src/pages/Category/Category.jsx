@@ -11,13 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const Category = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-<<<<<<< HEAD
-  const filteredProducts = useSelector((state) => state.productos.filteredProducts);
 
-  // Barra de búsqueda
-  const [search, setSearch] = useState("todos");
-
-=======
   const [currentPage, setCurrentPage] = useState(0);
   const [activeCategory, setActiveCategory] = useState("todos");
   const [filteredAndPaginatedProducts, setFilteredAndPaginatedProducts] =
@@ -32,7 +26,6 @@ const Category = () => {
     (state) => state.productos.filteredProducts
   );
 
->>>>>>> cab18ebfc8fc70c75f37e5ecce7ac12c3a7a52a6
   useEffect(() => {
     dispatch(fetchFilteredProducts());
   }, [dispatch]);
@@ -111,11 +104,6 @@ const Category = () => {
           <div className="containerCards">
             {filteredAndPaginatedProducts.map((product) =>
               location.pathname == "/categorias/todos" ? (
-<<<<<<< HEAD
-                <CardComponent key={product.id} {...product} id={product._id} img={product.images.url}></CardComponent>
-              ) : location.pathname == `/categorias/${product.category}` ? (
-                <CardComponent key={product.id} {...product} id={product._id} img={product.images.url}></CardComponent>
-=======
                 <CardComponent
                   key={product._id}
                   {...product}
@@ -127,7 +115,6 @@ const Category = () => {
                   {...product}
                   img={product.images.url}
                 ></CardComponent>
->>>>>>> cab18ebfc8fc70c75f37e5ecce7ac12c3a7a52a6
               ) : (
                 ""
               )

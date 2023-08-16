@@ -87,7 +87,6 @@ export const getAllUsers = () => async (dispatch) => {
     }
 };
 
-<<<<<<< HEAD
 //get user wishlist
 export const getUserWishlist = () => async (dispatch) => {
     try {
@@ -140,55 +139,55 @@ export const getUserCart = () => async (dispatch) => {
             payload: error.response.data.message,
         });
     }
-=======
+};
+
 // delete user
 
 export const deleteUser = (id) => async (dispatch) => {
-  try {
-    dispatch({
-      type: "deleteUserRequest"
-    })
+    try {
+        dispatch({
+            type: "deleteUserRequest"
+        })
 
-    const {data} = await axios.delete(`${server}/user/delete-user/${id}`, {
-      withCredentials: true,
-    })
+        const { data } = await axios.delete(`${server}/user/delete-user/${id}`, {
+            withCredentials: true,
+        })
 
-    dispatch({
-      type: "deleteUserSuccess",
-      payload: data.message,
-    })
-  } catch(error) {
-    dispatch({
-      type: "deleteUserFailed",
-      payload: error.response.data.message
-    })
-  }
+        dispatch({
+            type: "deleteUserSuccess",
+            payload: data.message,
+        })
+    } catch (error) {
+        dispatch({
+            type: "deleteUserFailed",
+            payload: error.response.data.message
+        })
+    }
 }
 
 // enable user 
 
 export const activeUser = (id, updatedData) => async (dispatch) => {
-  try {
-    dispatch({
-      type: "enableUserRequest",
-    });
+    try {
+        dispatch({
+            type: "enableUserRequest",
+        });
 
-    const { data } = await axios.put(
-      `${server}/user/active-user/${id}`,
-      {active: updatedData},
-      {
-        withCredentials: true,
-      }
-    );
-    dispatch({
-      type: "enableUserSuccess",
-      payload: data.message,
-    });
-  } catch (error) {
-    dispatch({
-      type: "enableUserFailed",
-      payload: error.response.data.message,
-    });
-  }
->>>>>>> cab18ebfc8fc70c75f37e5ecce7ac12c3a7a52a6
+        const { data } = await axios.put(
+            `${server}/user/active-user/${id}`,
+            { active: updatedData },
+            {
+                withCredentials: true,
+            }
+        );
+        dispatch({
+            type: "enableUserSuccess",
+            payload: data.message,
+        });
+    } catch (error) {
+        dispatch({
+            type: "enableUserFailed",
+            payload: error.response.data.message,
+        });
+    }
 };
