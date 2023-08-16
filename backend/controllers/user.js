@@ -221,41 +221,6 @@ router.put(
     })
 );
 
-// update user password
-router.put(
-    "/update-user-password",
-    isAuthenticated,
-    catchAsyncErrors(async (req, res, next) => {
-        try {
-            const user = await User.findById(req.user.id).select("+password");
-
-            const isPasswordMatched = await user.comparePassword(
-                req.body.oldPassword
-            );
-
-            if (!isPasswordMatched) {
-                return next(new ErrorHandler("La contraseña vieja es incorrecta!", 400));
-            }
-
-            if (req.body.newPassword !== req.body.confirmPassword) {
-                return next(
-                    new ErrorHandler("Las contraseñas no coinciden!", 400)
-                );
-            }
-            user.password = req.body.newPassword;
-
-            await user.save();
-
-            res.status(200).json({
-                success: true,
-                message: "Contraseña cambiada con exito!",
-            });
-        } catch (error) {
-            return next(new ErrorHandler(error.message, 500));
-        }
-    })
-);
-
 // find user information with the userId
 router.get(
     "/user-info/:id",
@@ -447,6 +412,7 @@ router.post(
     })
 );
 
+// remove product from cart
 router.delete(
     "/remove-from-cart/:id",
     isAuthenticated,

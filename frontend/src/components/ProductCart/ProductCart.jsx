@@ -52,15 +52,15 @@ const ProductCart = ({ id, name, price, img }) => {
                 <ButtonLink className="deleteProductCart" onClick={() => removeFromCartHandler(id)}>
                     <BsTrash size="22px" color="var(--colorPrimary)" />
                 </ButtonLink>
-                <h2>{name}</h2>
+                <h4>{name}</h4>
                 <div className="quantity">
                     <p>Cantidad:</p>
                     <ButtonLink onClick={handleDecrement}>
-                        <BsDash size="18px" color="var(--colorPrimary)" />
+                        <BsDash size="10px" className="icon" color="var(--colorPrimary)" />
                     </ButtonLink>
                     <span>{qty}</span>
                     <ButtonLink onClick={handleIncrement}>
-                        <BsPlus size="18px" color="var(--colorPrimary)" />
+                        <BsPlus size="10px" className="icon" color="var(--colorPrimary)" />
                     </ButtonLink>
                 </div>
                 <div className="subTotal">

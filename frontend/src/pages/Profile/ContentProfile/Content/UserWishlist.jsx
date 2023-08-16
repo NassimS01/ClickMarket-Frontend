@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { styled } from "styled-components";
 import CardComponent from "../../../../components/Card/Card";
 import { getUserWishlist } from "../../../../redux/actions/user";
 
@@ -15,6 +16,7 @@ const UserWishlist = () => {
 
     return (
         <>
+        <Container>
             {
                 userWishlist && userWishlist.map((product) => (
                     <CardComponent
@@ -30,8 +32,14 @@ const UserWishlist = () => {
                     />
                 ))
             }
+        </Container>
+            
         </>
     )
 }
 
 export default UserWishlist;
+
+const Container = styled.div`
+    display: flex;
+`;
