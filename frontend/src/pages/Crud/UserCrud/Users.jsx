@@ -52,11 +52,11 @@ const Users = ({ search }) => {
         >
           <TableStyled>
             <div className="containerNames">
-              <p style={{ width: "20%" }}>Activo</p>
-              <p style={{ width: "20%" }}>Nombre</p>
-              <p style={{ width: "30%" }}>Email</p>
-              <p style={{ width: "5%" }}>Rol</p>
-              <p style={{ width: "10%" }}>Acciones</p>
+              <p className="user-active">Activo</p>
+              <p className="user-name">Nombre</p>
+              <p className="user-email">Email</p>
+              <p className="user-role">Rol</p>
+              <p className="user-buttons">Acciones</p>
             </div>
 
             {data
@@ -69,38 +69,18 @@ const Users = ({ search }) => {
                 user.role == "user" ? (
                   <div className="container-info" key={user._id}>
                     {user.active == false ? (
-                      <p
-                        style={{
-                          width: "20%",
-                          fontWeight: "500",
-                          textTransform: "capitalize",
-                          color: "red",
-                        }}
-                      >
+                      <p className="user-activeTrue">
                         {user.active.toString()}
                       </p>
                     ) : (
-                      <p
-                        style={{
-                          width: "20%",
-                          fontWeight: "500",
-                          textTransform: "capitalize",
-                          color: "green",
-                        }}
-                      >
+                      <p className="user-activeFalse">
                         {user.active.toString()}
                       </p>
                     )}
-                    <p style={{ width: "20%", fontWeight: "400" }}>
-                      {user.name}
-                    </p>
-                    <p style={{ width: "30%", fontWeight: "500" }}>
-                      {user.email.toLowerCase()}
-                    </p>
-                    <p style={{ width: "5%", fontWeight: "600" }}>
-                      {user.role}
-                    </p>
-                    <div className="buttons" style={{ width: "10%" }}>
+                    <p className="user-name">{user.name}</p>
+                    <p className="user-email">{user.email.toLowerCase()}</p>
+                    <p className="user-role">{user.role}</p>
+                    <div className="buttons user-buttons">
                       <BtnAccept user={user} handleActive={handleActive} />
                       <BtnDelete product={user} handleDelete={handleDelete} />
                     </div>

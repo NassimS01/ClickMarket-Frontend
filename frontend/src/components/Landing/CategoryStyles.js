@@ -24,6 +24,7 @@ export const Category = styled.a`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100px;
 
   .category-icon {
     background-color: #fff;

@@ -7,12 +7,13 @@ import BtnDelete from "../BtnDelete/BtnDelete";
 import BtnEdit from "../BtnEdit/BtnEdit";
 import { server } from "../../../server";
 import { AiOutlineSearch } from "react-icons/ai";
+import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
 
 const Products = ({ search }) => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
-
-  console.log(search);
+  const productsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     axios
@@ -27,14 +28,14 @@ const Products = ({ search }) => {
     window.location.reload();
   };
 
+  const totalPages = Math.ceil(data.length / productsPerPage);
+
   return (
     <>
       {data.length >= 1 ? (
         <div
           id="products"
           style={{
-            // maxHeight: "500px",
-            // overflowY: "auto",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -43,12 +44,12 @@ const Products = ({ search }) => {
         >
           <TableStyled>
             <div className="containerNames">
-              <p style={{width: "10%"}}>Imagen</p>
-              <p style={{width: "20%"}}>Nombre</p>
-              <p style={{width: "10%"}}>Precio</p>
-              <p style={{width: "30%"}}>Descripción</p>
-              <p style={{width: "20%"}}>Categoría</p>
-              <p style={{width: "10%"}}>Botones</p>
+              <p style={{ width: "10%" }}>Imagen</p>
+              <p style={{ width: "20%" }}>Nombre</p>
+              <p style={{ width: "10%" }}>Precio</p>
+              <p style={{ width: "30%" }}>Descripción</p>
+              <p style={{ width: "20%" }}>Categoría</p>
+              <p style={{ width: "10%" }}>Botones</p>
             </div>
 
             {data
@@ -57,6 +58,10 @@ const Products = ({ search }) => {
                   ? product
                   : product.name.toLowerCase().includes(search);
               })
+              .slice(
+                currentPage * productsPerPage,
+                (currentPage + 1) * productsPerPage
+              )
               .map((product) => (
                 <div className="container-info" key={product._id}>
                   <div className="container-img">
@@ -75,6 +80,28 @@ const Products = ({ search }) => {
                   </div>
                 </div>
               ))}
+            <div className="paginationButtons">
+              <ButtonGlobal
+                pagination="true"
+                onClick={() =>
+                  setCurrentPage((prevPage) => Math.max(prevPage - 1, 0))
+                }
+                disabled={currentPage === 0}
+              >
+                Anterior
+              </ButtonGlobal>
+              <ButtonGlobal
+                pagination="true"
+                onClick={() =>
+                  setCurrentPage((prevPage) =>
+                    Math.min(prevPage + 1, totalPages - 1)
+                  )
+                }
+                disabled={currentPage === totalPages - 1}
+              >
+                Siguiente
+              </ButtonGlobal>
+            </div>
           </TableStyled>
         </div>
       ) : data.length === 0 && status === "success" ? (

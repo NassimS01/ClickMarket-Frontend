@@ -31,6 +31,7 @@ export const ButtonGlobal = styled.button`
     props.pagination &&
     css`
       background-color: var(--colorSecondary);
+      width: 130px;
     `}
 
   ${(props) =>
