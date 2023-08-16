@@ -77,6 +77,8 @@ export const getAllUsers = () => async (dispatch) => {
             type: "getAllUsersSuccess",
             payload: data.users,
         });
+
+        console.log(data)
     } catch (error) {
         dispatch({
             type: "getAllUsersFailed",
@@ -134,6 +136,57 @@ export const getUserCart = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: "getUserCartFailed",
+            payload: error.response.data.message,
+        });
+    }
+};
+
+// delete user
+
+export const deleteUser = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: "deleteUserRequest"
+        })
+
+        const { data } = await axios.delete(`${server}/user/delete-user/${id}`, {
+            withCredentials: true,
+        })
+
+        dispatch({
+            type: "deleteUserSuccess",
+            payload: data.message,
+        })
+    } catch (error) {
+        dispatch({
+            type: "deleteUserFailed",
+            payload: error.response.data.message
+        })
+    }
+}
+
+// enable user 
+
+export const activeUser = (id, updatedData) => async (dispatch) => {
+    try {
+        dispatch({
+            type: "enableUserRequest",
+        });
+
+        const { data } = await axios.put(
+            `${server}/user/active-user/${id}`,
+            { active: updatedData },
+            {
+                withCredentials: true,
+            }
+        );
+        dispatch({
+            type: "enableUserSuccess",
+            payload: data.message,
+        });
+    } catch (error) {
+        dispatch({
+            type: "enableUserFailed",
             payload: error.response.data.message,
         });
     }

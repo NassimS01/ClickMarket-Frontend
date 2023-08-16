@@ -2,9 +2,6 @@ import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
     isLoading: false,
-    success: false,
-    error: null,
-    message: "",
     productInCartStatus: {},
 };
 

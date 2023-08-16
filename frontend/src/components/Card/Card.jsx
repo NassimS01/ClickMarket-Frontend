@@ -10,10 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToWishlist, removeFromWishlist } from "../../redux/actions/wishlist";
 import { addToCart, removeFromCart } from "../../redux/actions/cart";
 import { useLocation, useNavigate } from "react-router-dom";
-import { alertTime } from "../../../../backend/utils/alerts";
+import { alertConfirmCancel, alertTime } from "../../../../backend/utils/alerts";
 import { getUserCart, getUserWishlist } from "../../redux/actions/user";
 import { toggleProductWishlistStatus } from '../../redux/actions/wishlist';
 import { toggleProductCartStatus } from '../../redux/actions/cart';
+
 
 
 const CardComponent = ({ id, name, price, img, descrip, discount }) => {
@@ -25,51 +26,57 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
     state.wishlist.productInWishlistStatus[id] || false
   );
   const isProductInCart = useSelector((state) =>
-  state.cart.productInCartStatus[id] || false
+    state.cart.productInCartStatus[id] || false
   );
 
-  
+
   useEffect(() => {
     dispatch(getUserWishlist());
   }, [dispatch]);
-  
+
   useEffect(() => {
     dispatch(getUserCart());
   }, [dispatch]);
-  
+
   const addToCartHandler = (id) => {
     if (isAuthenticated) {
       dispatch(addToCart(id));
       dispatch(toggleProductCartStatus(id, true));
-      alertTime("Agregado al Carrito", "success")
+      alertTime("Agregado al Carrito", "success", "green", "white")
     } else {
-      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error")
+      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error", "red", "white")
       navigate("/login")
     }
   };
 
+
   const removeFromCartHandler = (id) => {
+    alertConfirmCancel("", "¿Deseas eliminar este producto de tu carrito?", "question", "Confirmar", "Cancelar", () => {
     dispatch(removeFromCart(id));
     dispatch(toggleProductCartStatus(id, false));
-    alertTime("Eliminado del Carrito", "warning")
-  };
+    window.location.reload()
+    });
+};
 
 
   const addToWishlistHandler = (id) => {
     if (isAuthenticated) {
       dispatch(addToWishlist(id));
       dispatch(toggleProductWishlistStatus(id, true));
-      alertTime("Agregado a Favoritos", "success")
+      alertTime("Agregado a Favoritos", "success", "green", "white")
     } else {
-      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error")
+      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error", "red", "white")
       navigate("/login")
     }
   };
 
   const removeFromWishlistHandler = (id) => {
-    dispatch(removeFromWishlist(id));
-    dispatch(toggleProductWishlistStatus(id, false));
-    alertTime("Eliminado de Favoritos", "warning")
+    alertConfirmCancel("", "Deseas eliminar este producto de tus Favoritos?", "question", "Confirmar", "Cancelar", () => {
+      dispatch(removeFromWishlist(id));
+      dispatch(toggleProductWishlistStatus(id, false));
+      window.location.reload();
+    })
+
   };
 
 
@@ -111,22 +118,23 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
 
 
         <div className="container-button">
-        {isProductInCart ? (
-          <ButtonGlobal
-          buttoncard="true"
-          onClick={() => removeFromCartHandler(id)}
-        >
-          Quitar del carrito
-        </ButtonGlobal>
-        ) : (
-          <ButtonGlobal
-            buttoncard="true"
-            onClick={() => addToCartHandler(id)}
-          >
-            Agregar al carrito
-          </ButtonGlobal>
-        )}
-          
+
+          {isProductInCart ? (
+            <ButtonGlobal
+              buttoncard="true"
+              onClick={() => removeFromCartHandler(id)}
+            >
+              Quitar del carrito
+            </ButtonGlobal>
+          ) : (
+            <ButtonGlobal
+              buttoncard="true"
+              onClick={() => addToCartHandler(id)}
+            >
+              Agregar al carrito
+            </ButtonGlobal>
+          )}
+
         </div>
       </Card>
     </>

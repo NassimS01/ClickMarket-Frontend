@@ -61,14 +61,22 @@ export const getAllProducts = () => async (dispatch) => {
 };
 
 // edit product
-export const editProduct = (id, updatedData) => async (dispatch) => {
+export const editProduct = (id, name, price, discount, description, category, stock, state) => async (dispatch) => {
     try {
         dispatch({
             type: "editProductRequest",
         });
         const { data } = await axios.put(
             `${server}/products/edit-product/${id}`,
-            updatedData,
+            {
+                name,
+                price,
+                discount,
+                description,
+                category,
+                stock,
+                state,
+            },
             {
                 withCredentials: true,
             }

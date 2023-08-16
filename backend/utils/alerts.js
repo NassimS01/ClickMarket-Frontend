@@ -43,59 +43,15 @@ export const alertConfirmCancel = (
   });
 };
 
-export const validateUserAlert = (
-  userData,
-  id,
-  token,
-  action,
-  actionTwo,
-  actionThree,
-  info
-) => {
-  Swal.fire({
-    title: info.title,
-    input: info.inputType,
-    inputAttributes: {
-      autocapitalize: 'off',
-    },
-    showCancelButton: true,
-    cancelButtonText: info.cancelTextButton,
-    confirmButtonText: info.textButton,
-    confirmButtonColor: '#6D8B74',
-    showLoaderOnConfirm: true,
-    preConfirm: async (password) => {
-      return await action(id, password, token)
-        .then(async (response) => {
-          if (!response) {
-            throw new Error(response);
-          }
-          return await actionTwo(id, userData, token);
-        })
-        .catch((error) => {
-          Swal.showValidationMessage(`${error}: ${info.errorMessage}`);
-        });
-    },
-    allowOutsideClick: () => !Swal.isLoading(),
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: info.successTitle,
-        text: info.successText,
-        confirmButtonText: info.successButtonText,
-        confirmButtonColor: '#6D8B74',
-      }).then(() => {
-        actionThree();
-      });
-    }
-  });
-};
 
-export const alertTime = (title, icon) => {
+export const alertTime = (title, icon, background, color) => {
   Swal.fire({
     toast: true,
     icon: icon,
+    color: color,
+    background: background,
     title: title,
-    position: "bottom",
+    position: "bottom-start",
     showConfirmButton: false,
     timer: 3000,
   });

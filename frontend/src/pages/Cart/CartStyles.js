@@ -50,7 +50,7 @@ export const CartContainer = styled.div`
     width: 100%;
     height: 2px;
     transform: translateX(-50%);
-    background-color: #4bbb44;
+    background-color: var(--colorSuccess);
     margin: 0 auto;
   }
 
@@ -62,7 +62,7 @@ export const CartContainer = styled.div`
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #4bbb44;
+    background-color: var(--colorSuccess);
     margin: 0 auto;
   }
 

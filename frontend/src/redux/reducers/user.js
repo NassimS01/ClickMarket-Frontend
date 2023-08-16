@@ -1,15 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-    loading: false,
     isAuthenticated: false,
-    user: null,
-    usersLoading: false,
-    users: [],
-    error: null,
-    successMessage: null,
-    isLoading: false,
-    success: false,
     userWishlist: [],
     userCart: [],
 };

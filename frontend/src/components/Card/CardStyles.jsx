@@ -17,7 +17,7 @@ export const Card = styled.div`
   margin: 1rem;
   padding: 1rem;
   display: flex;
-  width: 270px;
+  width: 290px;
   height: 400px;
   align-items: start;
   justify-content: center;
@@ -34,7 +34,8 @@ export const Card = styled.div`
     margin: 0 auto;
     padding: 0.2rem;
     width: 150px;
-    height: 180px;
+    height: 150px;
+    margin-bottom: 10px;
     transition: ease 300ms;
   }
 

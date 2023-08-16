@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 export const StyledCrud = styled.div`
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw; */
+  height: 90vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: gainsboro;
 `;
