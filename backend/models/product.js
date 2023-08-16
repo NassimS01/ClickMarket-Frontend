@@ -25,6 +25,10 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Por favor, introduce el stock del producto!"],
   },
+  state: {
+    type: Boolean,
+    default: true,
+  },
   images: 
     {
       public_id: {

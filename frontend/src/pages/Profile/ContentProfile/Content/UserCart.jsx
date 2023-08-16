@@ -31,9 +31,10 @@ const UserCart = () => {
         <>
             <Container>
                 <div>
-                    {userCart && userCart.map((product) => (
+                    {userCart.length == 0? (<div>Todavia no hay productos en tu carrito</div>): (userCart.map((product) => (
                         <ProductCart key={product._id} id={product._id} name={product.name} price={product.price} img={product.images.url} />
-                    ))}
+                    ))
+                    )}
                 </div>
                 {
                     userCart ? (

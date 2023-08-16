@@ -55,7 +55,7 @@ router.post("/create-user", async (req, res, next) => {
         const newUser = await User.create(user);
         res.status(201).json({
             success: true,
-            message: `El usuario ha sido creado correctamente!`,
+            message: `Tu cuenta ha sido creada correctamente!`,
             newUser,
         });
 
@@ -250,7 +250,7 @@ router.post(
 
             if (user.wishlist.includes(product._id)) {
                 user.wishlist.pull(product._id);
-            }else{
+            } else {
                 user.wishlist.push(product);
             }
 
@@ -302,6 +302,36 @@ router.get(
             res.status(201).json({
                 success: true,
                 users,
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// active user --admin
+router.put(
+    "/active-user/:id",
+    isAuthenticated,
+    isAdmin("Admin"),
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const userId = req.params.id;
+            const updatedUserData = req.body;
+
+            const existingUser = await User.findById(userId);
+            if (!existingUser) {
+                return next(new ErrorHandler("Usuario no encontrado", 400));
+            }
+
+            existingUser.active = updatedUserData.active;
+
+            await existingUser.save();
+
+            res.status(201).json({
+                success: true,
+                message: "Usuario habilitado exitosamente",
+                updatedUser: existingUser,
             });
         } catch (error) {
             return next(new ErrorHandler(error.message, 500));
@@ -396,7 +426,7 @@ router.post(
 
             if (user.cart.includes(product._id)) {
                 user.cart.pull(product._id);
-            }else{
+            } else {
                 user.cart.push(product);
             }
 

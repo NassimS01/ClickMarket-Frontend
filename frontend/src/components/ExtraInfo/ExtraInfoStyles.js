@@ -8,7 +8,7 @@ export const Container = styled.div`
   margin: 5rem auto;
   border-radius: 20px;
   box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
-
+  border: 1px solid #efefef;
   .container-info {
     position: relative;
     display: flex;
@@ -26,7 +26,7 @@ export const Container = styled.div`
     height: 60%;
     width: 1px;
     left: 0;
-    background-color: var(--colorPrimary);
+    background-color: var(--colorSecondary);
     border-radius: 0px;
   }
 
@@ -36,7 +36,7 @@ export const Container = styled.div`
     height: 60%;
     width: 1px;
     right: 0;
-    background-color: var(--colorPrimary);
+    background-color: var(--colorSecondary);
     border-radius: 0px;
   }
 
@@ -47,6 +47,7 @@ export const Container = styled.div`
   }
 
   .title-extraInfo {
+    position: relative;
     font-weight: 600;
     font-size: 18px;
     margin-bottom: 5px;

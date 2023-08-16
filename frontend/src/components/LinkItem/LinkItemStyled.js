@@ -8,7 +8,7 @@ export const LinkItemStyled = styled(NavLink)`
   text-decoration: none;
 
   &.active {
-    border-bottom: 3px solid var(--colorPrimary);
+    border-bottom: 3px solid #ff443d;
     border-radius: 2px;
     transition: 0s;
   }

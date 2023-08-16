@@ -5,7 +5,7 @@ export const SectionCategory = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 151px;
+  /* margin-bottom: 151px; */
 
   /* Input search */
   .filters {
@@ -41,7 +41,6 @@ export const SectionCategory = styled.div`
     color: #9e9ea7;
   }
 
-
   .input:focus,
   input:hover {
     outline: none;
@@ -72,6 +71,17 @@ export const SectionCategory = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 1440px;
+    min-height: 864px;
+  }
+
+  .paginationButtons {
+    margin-top: 70px;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
   }
 
   .title {

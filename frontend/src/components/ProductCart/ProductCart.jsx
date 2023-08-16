@@ -5,7 +5,7 @@ import { BsPlus, BsDash, BsTrash } from "react-icons/bs";
 import { formatPrice } from "../../../../backend/utils/functions";
 import { removeFromCart, toggleProductCartStatus } from "../../redux/actions/cart";
 import { useDispatch } from "react-redux";
-import { alertTime } from "../../../../backend/utils/alerts";
+import { alertTime, alertConfirmCancel } from "../../../../backend/utils/alerts";
 import { getUserCart } from "../../redux/actions/user";
 import { useNavigate } from "react-router-dom";
 
@@ -38,9 +38,11 @@ const ProductCart = ({ id, name, price, img }) => {
     };
 
     const removeFromCartHandler = (id) => {
+        alertConfirmCancel("", "¿Deseas eliminar este producto de tu carrito?", "question", "Confirmar", "Cancelar", () => {
         dispatch(removeFromCart(id));
         dispatch(toggleProductCartStatus(id, false));
-        alertTime("Eliminado del Carrito", "warning")
+        window.location.reload()
+        });
     };
 
     return (

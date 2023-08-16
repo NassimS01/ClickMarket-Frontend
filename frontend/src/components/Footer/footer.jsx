@@ -15,9 +15,25 @@ import { LiaShippingFastSolid } from "react-icons/lia";
 import { BsPeopleFill, BsFillPersonLinesFill } from "react-icons/bs";
 import { useLocation } from "react-router";
 
-const Footer = ({isLoading}) => {
+const Footer = ({ isLoading }) => {
+  const routesNone = [
+    "/login",
+    "/signup",
+    "/panel-admin",
+    "/panel-admin/products",
+    "/panel-admin/users",
+    "/panel-admin/orders",
+  ];
+  const location = useLocation();
+
+
   return (
-    <StyledFooter isLoading={isLoading}>
+    <StyledFooter
+      isLoading={isLoading}
+      footernone={
+        routesNone.includes(location.pathname) ? true : false
+      }
+    >
       <div className="container-footer">
         <div className="container-1">
           <img className="logo" src={logo} alt="Logo Click Market" />
@@ -35,7 +51,7 @@ const Footer = ({isLoading}) => {
               <AiFillTwitterSquare color="var(--colorPrimary)" />
             </a>
             <a href="https://ar.linkedin.com/" className="logo-linkedin">
-              <AiFillLinkedin />
+              <AiFillLinkedin color="var(--colorPrimary)" />
             </a>
           </div>
         </div>
@@ -71,6 +87,7 @@ const Footer = ({isLoading}) => {
         </div>
 
         <div className="container-4">
+        <h3>Datos Fiscal</h3>
           <img src={qr} alt="" className="qr" />
         </div>
       </div>

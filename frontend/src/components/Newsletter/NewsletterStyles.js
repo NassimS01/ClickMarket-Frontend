@@ -13,8 +13,8 @@ export const AsideNews = styled.aside`
   justify-content: center;
   align-items: center;
   row-gap: 1.5em;
-  /* box-shadow: -2px 3px 5px 4px rgba(0, 0, 0, 0.14); */
   box-shadow: -2px 2px 5px 0px rgba(0, 0, 0, 0.14);
+  border: 1px solid #efefef;
 
   & h2 {
     font-size: 23px;
@@ -49,7 +49,6 @@ export const AsideNews = styled.aside`
       margin-right: 2px;
       border-width: 0px;
       border-style: none;
-      border-color: none;
       border-image: none;
 
       &:hover {
@@ -65,7 +64,7 @@ export const AsideNews = styled.aside`
       border-radius: 50px;
       border-width: 0px;
       border-style: none;
-      border-color: none;
+      border-color: var(--colorPrimary);
       border-image: none;
       outline: none;
       font-size: 1em;

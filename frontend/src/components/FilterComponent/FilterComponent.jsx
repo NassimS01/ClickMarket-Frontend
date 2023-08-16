@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Filter } from "./FilterComponentStyles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchFilteredCategories } from "../../redux/actions/categories";
 import { useDispatch, useSelector } from "react-redux";
 
-const FilterComponent = () => {
+const FilterComponent = ({ onCategorySelect }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [activeFilters, setActiveFilters] = useState([]);
+  const { category } = useParams();
+
+  // console.log(category)
 
   const handleFilterClick = (e) => {
     const titleItem = e.target;
@@ -54,7 +57,9 @@ const FilterComponent = () => {
   }, [dispatch]);
 
   const handleCategory = (e) => {
-    navigate(`/categorias/${e.target.textContent.toLowerCase()}`);
+    const selectedCategory = e.target.textContent.toLowerCase();
+    onCategorySelect(selectedCategory);
+    navigate(`/categorias/${selectedCategory}`);
   };
 
   return (
@@ -65,15 +70,15 @@ const FilterComponent = () => {
         <ul>
           <li>
             <input type="radio" id="all" name="type" />
-            <label htmlFor="all" onClick={handleCategory}>
+            <label htmlFor="all" onClick={(e) => handleCategory(e)}>
               todos
             </label>
           </li>
-          {Object.keys(filteredCategories).map((cat) => (
-            <li key={cat}>
-              <input type="radio" id={cat} name="type" />
-              <label htmlFor={cat} onClick={handleCategory}>
-                {cat}
+          {Object.keys(filteredCategories).map((category) => (
+            <li key={category}>
+              <input type="radio" id={category} name="type" />
+              <label htmlFor={category} onClick={(e) => handleCategory(e)}>
+                {category}
               </label>
             </li>
           ))}

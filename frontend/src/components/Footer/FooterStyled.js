@@ -7,6 +7,11 @@ export const StyledFooter = styled.footer`
   box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.15);
   border-radius: 15px 15px 0;
   ${({ isLoading }) => isLoading && "pointer-events: none;"}
+  ${(props) =>
+    props.footernone &&
+    `
+    display: none;
+  `}
 
   img {
     width: 200px;
@@ -45,7 +50,7 @@ export const StyledFooter = styled.footer`
     left: 50%;
     display: inline-block;
     transform: translateX(-50%);
-    background-color: var(--colorPrimary);
+    background-color: var(--colorSecondary);
   }
 
   & .container-footer {
