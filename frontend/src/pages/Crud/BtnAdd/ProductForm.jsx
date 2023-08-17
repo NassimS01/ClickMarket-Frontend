@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { createProduct } from "../../../redux/actions/product";
 import { toast } from "react-toastify";
 import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
+import { alertTime } from "../../../../../backend/utils/alerts";
 
 const ProductForm = ({ onClose }) => {
-  const { success, error } = useSelector((state) => state.products);
+  const { success, error } = useSelector((state) => state.product);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -25,10 +26,10 @@ const ProductForm = ({ onClose }) => {
 
   useEffect(() => {
     if (error) {
-      toast.error(error);
+      alertTime(error, "error", "red", "white")
     }
     if (success) {
-      toast.success("Producto Creado!");
+      alertTime("Producto creado!", "success", "green", "white")
       const interval = setInterval(() => {
         window.location.reload();
       }, 1500);

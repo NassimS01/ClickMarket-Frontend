@@ -79,6 +79,9 @@ export const userReducer = createReducer(initialState, {
         state.success = false;
     },
 
+    removeAllFromCart: (state) => {
+        state.userCart = [];
+    },
 
     clearErrors: (state) => {
         state.error = null;

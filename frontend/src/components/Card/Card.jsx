@@ -21,7 +21,7 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
   const navigate = useNavigate();
   const priceWithDiscount = getDiscount(price, discount);
   const dispatch = useDispatch();
-  const { isAuthenticated, userCart, userWishlist } = useSelector((state) => state.user);
+  const { isAuthenticated} = useSelector((state) => state.user);
   const isProductInWishlist = useSelector((state) =>
     state.wishlist.productInWishlistStatus[id] || false
   );
@@ -32,11 +32,11 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
 
   useEffect(() => {
     dispatch(getUserWishlist());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     dispatch(getUserCart());
-  }, [dispatch]);
+  }, []);
 
   const addToCartHandler = (id) => {
     if (isAuthenticated) {

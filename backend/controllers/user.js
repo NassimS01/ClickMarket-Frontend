@@ -473,4 +473,102 @@ router.delete(
         }
     })
 );
+
+// add order
+router.post(
+    "/add-order",
+    isAuthenticated,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const userId = req.user.id;
+            console.log(req.body)
+            const { userEmail, address, city, zip, orderId, products } = req.body;
+
+
+            const user = await User.findById(userId);
+
+            if (!user) {
+                return next(new ErrorHandler("Usuario no encontrado", 400));
+            }
+
+            user.order.push({
+                userEmail,
+                address,
+                city,
+                zip,
+                orderId,
+                products,
+            });
+
+            await user.save();
+
+            res.status(201).json({
+                success: true,
+                message: "Orden agregada al usuario correctamente",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// Quitar una orden del usuario
+router.delete(
+    "/remove-order/:orderId",
+    isAuthenticated,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const userId = req.user.id;
+            const orderIdToRemove = req.params.orderId;
+
+            const user = await User.findById(userId);
+
+            if (!user) {
+                return next(new ErrorHandler("Usuario no encontrado", 400));
+            }
+
+            // Encontrar y quitar la orden según el orderId
+            user.order = user.order.filter(userOrder => userOrder.orderId !== orderIdToRemove);
+
+            await user.save();
+
+            res.status(200).json({
+                success: true,
+                message: "Orden eliminada del usuario correctamente",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+router.delete(
+    "/clear-user-cart",
+    isAuthenticated,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const userId = req.user.id;
+
+            const user = await User.findById(userId);
+
+            if (!user) {
+                return next(new ErrorHandler("Usuario no encontrado", 400));
+            }
+
+            user.cart = [];
+
+            await user.save();
+
+            res.status(200).json({
+                success: true,
+                message: "Carrito Vacio",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+
+
 module.exports = router;

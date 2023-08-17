@@ -11,7 +11,7 @@ const UserWishlist = () => {
 
     useEffect(() => {
         dispatch(getUserWishlist());
-    }, [dispatch]);
+    }, []);
 
 
     return (
