@@ -6,6 +6,7 @@ export const ContainerCards = styled.div`
   display: flex;
   align-items: start;
   flex-wrap: wrap;
+  justify-content: center;
 
   @media only screen and (max-width: 768px) {
     justify-content: center;

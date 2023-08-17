@@ -17,6 +17,12 @@ export const ButtonGlobal = styled.button`
   }
 
   ${(props) =>
+    props.buttoncard &&
+    css`
+      background-color: var(--colorSecondary);
+    `}
+
+  ${(props) =>
     props.green &&
     css`
       background-color: var(--colorSuccess);
@@ -35,9 +41,9 @@ export const ButtonGlobal = styled.button`
     `}
 
   ${(props) =>
-    props.disabled && css
-    `
-    opacity: 0.5;
-    cursor: default;
-  `}
+    props.disabled &&
+    css`
+      opacity: 0.5;
+      cursor: default;
+    `}
 `;

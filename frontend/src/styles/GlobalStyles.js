@@ -16,6 +16,10 @@ const GlobalStyles = createGlobalStyle`
     font-family: "Poppins", sans-serif;
   }
 
+  .swal2-popup {
+  border-radius: 10px;
+}
+
    .title {
     position: relative;
     font-weight: 500;

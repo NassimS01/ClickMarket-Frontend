@@ -102,6 +102,7 @@ const Category = () => {
               .map((product) => (
                 <CardComponent
                   key={product._id}
+                  id={product._id}
                   {...product}
                   img={product.images.url}
                 />

@@ -2,7 +2,7 @@ const UserOrders = () =>{
     return(
         <>
         <div>
-            Ordenes de usuario
+        <h2 className="title">Pedidos</h2>
         </div>
         </>
     )

@@ -6,16 +6,20 @@ export const CartContainer = styled.div`
   align-items: center;
   justify-content: center;
 
+
   .cart {
     display: flex;
+    gap: 20px;
   }
 
   .cartSectionLeft {
     width: 60vw;
     margin-bottom: 50px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    
   }
 
   .cartSectionRigth {
@@ -113,13 +117,16 @@ export const CartContainer = styled.div`
   }
 
   .imgProductCart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: auto 0;
     width: 200px;
     height: 150px;
 
     img {
-      width: 100%;
-      height: 100%;
+      width: 75%;
+      height: 75%;
     }
   }
 
@@ -159,15 +166,20 @@ export const CartContainer = styled.div`
   }
 
   @media screen and (max-width: 1024px) {
-    margin-top: -20px;
     .cartSectionLeft {
       width: 80%;
+    }
+
+    .cartSectionRigth {
+      width: 50%;
+      margin-top: 40px;
+      margin-right: 10px;
     }
   }
 
   @media screen and (max-width: 768px) {
-    height: 90vh;
-    margin-top: 140px;
+
+    margin-top: 40px;
     .cart {
       flex-direction: column;
       align-items: center;
@@ -190,7 +202,8 @@ export const CartContainer = styled.div`
     .cartSectionRigth {
       width: 80vw;
       height: 300px;
-      margin-bottom: 10px;
+      margin-bottom: 50px;
+      margin-left: 0;
     }
 
     .infoOrden {
@@ -217,8 +230,8 @@ export const CartContainer = styled.div`
     }
 
     .imgProductCart {
-      width: 100px;
-      height: 100px;
+      width: 75px;
+      height: 75px;
     }
 
     .infoProductCart {

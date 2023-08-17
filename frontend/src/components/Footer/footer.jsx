@@ -22,7 +22,7 @@ const Footer = ({ isLoading }) => {
     "/panel-admin",
     "/panel-admin/products",
     "/panel-admin/users",
-    "/panel-admin/orders",
+    "/panel-admin/orders", 
   ];
   const location = useLocation();
 

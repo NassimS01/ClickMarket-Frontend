@@ -42,9 +42,9 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
     if (isAuthenticated) {
       dispatch(addToCart(id));
       dispatch(toggleProductCartStatus(id, true));
-      alertTime("Agregado al Carrito", "success", "green", "white")
+      alertTime("Agregado al Carrito", "success", "var(--colorSucces)", "white")
     } else {
-      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error", "red", "white")
+      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error", "var(--colorPrimary)", "white")
       navigate("/login")
     }
   };
@@ -63,9 +63,14 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
     if (isAuthenticated) {
       dispatch(addToWishlist(id));
       dispatch(toggleProductWishlistStatus(id, true));
-      alertTime("Agregado a Favoritos", "success", "green", "white")
+      alertTime("Agregado a Favoritos", "success", "var(--colorSuccess)", "white")
     } else {
-      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error", "red", "white")
+      alertTime(
+        "Debes iniciar sesion para usar esta funcionalidad",
+        "error",
+        "var(--colorPrimary)",
+        "white"
+      );
       navigate("/login")
     }
   };
@@ -128,7 +133,6 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
             </ButtonGlobal>
           ) : (
             <ButtonGlobal
-              buttoncard="true"
               onClick={() => addToCartHandler(id)}
             >
               Agregar al carrito

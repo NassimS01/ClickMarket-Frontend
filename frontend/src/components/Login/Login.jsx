@@ -27,14 +27,24 @@ const Login = () => {
                 { withCredentials: true }
             )
             .then((res) => {
-                alertTime(`Bienvenido!`, "success", "green", "white")
+                alertTime(
+                  `Bienvenido!`,
+                  "success",
+                  "var(--colorSuccess)",
+                  "white"
+                );
                 const interval = setInterval(() => {
                     navigate("/");
                     window.location.reload(true);
                 }, 2000);
             })
             .catch((err) => {
-                alertTime(err.response.data.message, "error", "red", "white");
+                alertTime(
+                  err.response.data.message,
+                  "error",
+                  "var(--colorPrimary)",
+                  "white"
+                );
             });
     };
 
