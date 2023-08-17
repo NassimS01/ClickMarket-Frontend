@@ -21,6 +21,7 @@ const UserCart = () => {
     dispatch(getUserCart());
   }, [dispatch]);
 
+
   return (
     <CartContainer>
       <h2 className="title">Mi carrito</h2>
@@ -43,7 +44,6 @@ const UserCart = () => {
             )}
           </div>
         )}
-        {userCart ? (
           <div className="cartSectionRigth">
             <h2>Orden</h2>
             <div className="infoOrden">
@@ -70,10 +70,7 @@ const UserCart = () => {
               </Link>
             </div>
           </div>
-        ) : (
-          <div>Todavia no hay productos en tu carrito</div>
-        )}
-      </div>
+        </div>
     </CartContainer>
   );
 };

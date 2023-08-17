@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { alertTime, alertConfirmCancel } from "../../../../backend/utils/alerts";
 import { getUserCart, getUserWishlist } from "../../redux/actions/user";
 import { useNavigate } from "react-router-dom";
-
+import { updateSubtotal } from "../../redux/reducers/cartSlice";
 
 
 const ProductCart = ({ id, name, price, stock, img }) => {
@@ -50,6 +50,7 @@ const ProductCart = ({ id, name, price, stock, img }) => {
             </div>
         </CartProduct>
     );
+
 };
 
 export default ProductCart;
