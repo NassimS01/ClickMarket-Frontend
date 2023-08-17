@@ -12,18 +12,10 @@ import { CartContainer } from "../../../Cart/CartStyles";
 const UserCart = () => {
   const dispatch = useDispatch();
   const { userCart } = useSelector((state) => state.user);
-  const [totalPrice, setTotalPrice] = useState(0);
+  
+  let totalPrice = 0;
+  const subtotal = userCart.map((product)=> (totalPrice += product.price))
 
-  const item = userCart.length;
-
-  useEffect(() => {
-    if (userCart) {
-      const total = userCart.reduce((accumulator, product) => {
-        return accumulator + product.price;
-      }, 0);
-      setTotalPrice(total);
-    }
-  }, [userCart]);
 
   useEffect(() => {
     dispatch(getUserCart());
@@ -31,40 +23,37 @@ const UserCart = () => {
 
   return (
     <CartContainer>
-    <h2 className="title">Mi carrito</h2>
+      <h2 className="title">Mi carrito</h2>
       <div className="cart">
-          {userCart.length == 0 ? (
-            <h3 className="title">Todavia no hay productos en tu carrito</h3>
-          ) : (
-        <div className="cartSectionLeft">
+        {userCart.length == 0 ? (
+          <h3 className="title">Todavia no hay productos en tu carrito</h3>
+        ) : (
+          <div className="cartSectionLeft">
             {userCart.map((product) => (
               <ProductCart
                 key={product._id}
                 id={product._id}
                 name={product.name}
                 price={product.price}
+                stock={product.stock}
                 img={product.images.url}
               />
             )
-            
+
             )}
-        </div>
-          )}
+          </div>
+        )}
         {userCart ? (
           <div className="cartSectionRigth">
             <h2>Orden</h2>
             <div className="infoOrden">
               <div className="infoItem">
                 <p>
-                  {item <= 1
+                  {userCart.length <= 1
                     ? "Precio de 1 item seleccionado"
-                    : `Precio de ${item} items seleccionados`}
+                    : `Precio de ${userCart.length} items seleccionados`}
                 </p>
-                <span>{formatPrice(40000)}</span>
-              </div>
-              <div className="infoItem">
-                <p>Descuento</p>
-                <span>0.00</span>
+                <span>{formatPrice(totalPrice)}</span>
               </div>
               <div className="infoItem">
                 <p>Costo de envío</p>
@@ -74,9 +63,11 @@ const UserCart = () => {
             <div className="ordenTotal">
               <div className="infoItem">
                 <p className="total">Total:</p>
-                <span>{formatPrice(43000)}</span>
+                <span>{formatPrice(totalPrice+3000)}</span>
               </div>
-              <ButtonGlobal green="true">Comprar</ButtonGlobal>
+              <Link to="/payment">
+                <ButtonGlobal green="true">Comprar</ButtonGlobal>
+              </Link>
             </div>
           </div>
         ) : (
