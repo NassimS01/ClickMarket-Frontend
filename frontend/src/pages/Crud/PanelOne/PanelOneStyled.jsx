@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const PanelUno = styled.section`
   display: flex;
@@ -8,6 +8,20 @@ export const PanelUno = styled.section`
   height: 200px;
   text-align: center;
   margin-top: 100px;
+
+  ${(props) =>
+    props.user &&
+    css`
+      width: 750px;
+      margin-top: 0;
+      .user-avatar {
+        border-radius: 50px;
+      }
+
+      .user-name {
+        font-weight: 600;
+      }
+    `}
 
   .user-avatar {
     width: 50px;
@@ -66,6 +80,30 @@ export const PanelUno = styled.section`
     a:hover::before {
       transform-origin: left;
       transform: scaleX(1);
+    }
+  }
+
+   .infoLeft, .infoCenter, .infoRight {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      gap: 40px; 
+    } 
+
+  @media only screen and (max-width: 425px) {
+    .cardUser {
+      width: 90vw;
+      height: auto;
+      gap: 10px;
+      padding: 10px;
+      display: flex;
+    }
+
+    .infoLeft,.infoCenter,
+    .infoRight {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
     }
   }
 `;

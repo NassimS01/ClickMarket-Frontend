@@ -6,11 +6,13 @@ const router = express.Router();
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
 const { isAuthenticated, isAdmin } = require("../middleware/auth");
-const cloudinary = require("cloudinary")
+const cloudinary = require("cloudinary");
 const jwt = require("jsonwebtoken");
 const sendToken = require("../utils/jwtToken");
+const catchAsyncError = require("../middleware/catchAsyncError");
 
-const strongPasswordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+const strongPasswordRegex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
 router.post("/create-user", async (req, res, next) => {
     try {
@@ -75,6 +77,10 @@ router.post(
                 return next(new ErrorHandler("Debes rellenar todos los campos!", 400));
             }
 
+            if (!email || !password) {
+                return next(new ErrorHandler("Debes rellenar todos los campos!", 400));
+            }
+
             const user = await User.findOne({ email }).select("+password");
 
             if (!user) {
@@ -90,7 +96,12 @@ router.post(
             }
 
             if (!user.active) {
-                return next(new ErrorHandler("La cuenta debe ser activada por un administrador", 400));
+                return next(
+                    new ErrorHandler(
+                        "La cuenta debe ser activada por un administrador",
+                        400
+                    )
+                );
             }
 
             sendToken(user, 201, res);
@@ -167,8 +178,7 @@ router.put(
 
             if (newPassword !== repeatNewPassword) {
                 return next(
-                    new ErrorHandler("Las contraseñas ingresadas no coinciden", 400)
-                );
+                    new ErrorHandler("Las contraseñas ingresadas no coinciden", 400));
             }
 
             user.name = name;
@@ -349,9 +359,7 @@ router.delete(
             const user = await User.findById(req.params.id);
 
             if (!user) {
-                return next(
-                    new ErrorHandler("No se encontro el usuario", 400)
-                );
+                return next(new ErrorHandler("No se encontro el usuario", 400));
             }
 
             const imageId = user.avatar.public_id;
@@ -464,6 +472,102 @@ router.delete(
         }
     })
 );
+
+// add order
+router.post(
+    "/add-order",
+    isAuthenticated,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const userId = req.user.id;
+            console.log(req.body)
+            const { userEmail, address, city, zip, orderId, products } = req.body;
+
+
+            const user = await User.findById(userId);
+
+            if (!user) {
+                return next(new ErrorHandler("Usuario no encontrado", 400));
+            }
+
+            user.order.push({
+                userEmail,
+                address,
+                city,
+                zip,
+                orderId,
+                products,
+            });
+
+            await user.save();
+
+            res.status(201).json({
+                success: true,
+                message: "Orden agregada al usuario correctamente",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+// Quitar una orden del usuario
+router.delete(
+    "/remove-order/:orderId",
+    isAuthenticated,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const userId = req.user.id;
+            const orderIdToRemove = req.params.orderId;
+
+            const user = await User.findById(userId);
+
+            if (!user) {
+                return next(new ErrorHandler("Usuario no encontrado", 400));
+            }
+
+            // Encontrar y quitar la orden según el orderId
+            user.order = user.order.filter(userOrder => userOrder.orderId !== orderIdToRemove);
+
+            await user.save();
+
+            res.status(200).json({
+                success: true,
+                message: "Orden eliminada del usuario correctamente",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+router.delete(
+    "/clear-user-cart",
+    isAuthenticated,
+    catchAsyncErrors(async (req, res, next) => {
+        try {
+            const userId = req.user.id;
+
+            const user = await User.findById(userId);
+
+            if (!user) {
+                return next(new ErrorHandler("Usuario no encontrado", 400));
+            }
+
+            user.cart = [];
+
+            await user.save();
+
+            res.status(200).json({
+                success: true,
+                message: "Carrito Vacio",
+            });
+        } catch (error) {
+            return next(new ErrorHandler(error.message, 500));
+        }
+    })
+);
+
+
+
 module.exports = router;
-
-

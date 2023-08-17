@@ -7,21 +7,6 @@ import ProductCart from "../../components/ProductCart/ProductCart";
 import { formatPrice } from "../../../../backend/utils/functions";
 
 const Cart = () => {
-    // const [data, setData] = useState([
-    //     { id: 1, name: "Item 1" },
-    //     { id: 2, name: "Item 2" },
-    //     { id: 3, name: "Item 3" },
-    // ]);
-
-    // useEffect(() => {
-    //     const localStorageData = localStorage.getItem("cart");
-
-    //     setData(JSON.parse(localStorageData));
-    // }, []);
-
-    // const productsData = data.map((products) => products.img);
-    // const title = data.map((products) => products.name);
-    // const price = data.map((products) => products.price);
 
     const item = 1;
     return (

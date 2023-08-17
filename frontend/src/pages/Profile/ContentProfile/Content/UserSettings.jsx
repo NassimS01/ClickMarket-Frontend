@@ -29,7 +29,7 @@ const UserSettings = () => {
         }
     }, [error, successMessage]);
 
-    // console.log(user)
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         setEmail(user.email)

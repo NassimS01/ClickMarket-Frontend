@@ -19,10 +19,11 @@ import { alertTime, alertConfirmCancel } from "../../../../backend/utils/alerts"
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated, user, userCart, userWishlist } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
 
   function toggleMenu() {
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
@@ -33,40 +34,67 @@ const Header = () => {
     setDropdownOpen((prevDropdownOpen) => !prevDropdownOpen);
   }
 
-  const handleWishlist = ()=>{
-    if(isAuthenticated){
+  const handleWishlist = () => {
+    if (isAuthenticated) {
       navigate("profile/wishlist");
-    }else{
-      navigate("/login")
-      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error", "red", "white")
+    } else {
+      navigate("/login");
+      alertTime(
+        "Debes iniciar sesion para usar esta funcionalidad",
+        "error",
+        "var(--colorPrimary)",
+        "white",
+        ""
+      );
     }
-  }
+  };
 
-  const handleCart = ()=>{
-    if(isAuthenticated){
+  const handleCart = () => {
+    if (isAuthenticated) {
       navigate("profile/cart");
-    }else{
-      navigate("/login")
-      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error", "red", "white")
+    } else {
+      navigate("/login");
+      alertTime(
+        "Debes iniciar sesion para usar esta funcionalidad",
+        "error",
+        "var(--colorPrimary)",
+        "white"
+      );
     }
-  }
+  };
 
   const logoutHandler = () => {
-    alertConfirmCancel("", "Estás a punto de cerrar sesión", "question", "Sí!", "No!", ()=>{
-      axios
-      .get(`${server}/user/logout`, { withCredentials: true })
-      .then((res) => {
-        alertTime(res.data.message, "success", "green", "white");
-        const interval = setInterval(() => {
-          navigate("/");
-          window.location.reload(true);
-        }, 2000);
-      })
-      .catch((error) => {
-        alertTime(error.response.data.message, "error", "red", "white");
-      });
-    })
-    
+    alertConfirmCancel(
+      "",
+      "Estás a punto de cerrar sesión",
+      "question",
+      "Sí!",
+      "No!",
+      () => {
+        axios
+          .get(`${server}/user/logout`, { withCredentials: true })
+          .then((res) => {
+            alertTime(
+              res.data.message,
+              "success",
+              "var(--colorSuccess)",
+              "white"
+            );
+            const interval = setInterval(() => {
+              navigate("/");
+              window.location.reload(true);
+            }, 2000);
+          })
+          .catch((error) => {
+            alertTime(
+              error.response.data.message,
+              "error",
+              "var(--colorPrimary)",
+              "white"
+            );
+          });
+      }
+    );
   };
 
   const filteredCategories = useSelector(
@@ -111,20 +139,19 @@ const Header = () => {
         <LinkItem to="/contacto" onClick={toggleMenu}>
           Contacto
         </LinkItem>
+        { (user?.role === "Admin")  ? (
+          <LinkItem to="/panel-admin">Panel Administrativo</LinkItem>
+        ) : ""}
+        {(user?.role === "user") ? (<LinkItem to="/profile/orders">Pedidos</LinkItem>) : ""}
         <a href="https://www.google.com/" target="_blank"></a>
         <div className="social-links">
-          <ButtonLink
-            onClick={handleWishlist}
-            rel="noopener noreferrer"
-          >
+          <ButtonLink onClick={handleWishlist} rel="noopener noreferrer">
             <AiOutlineHeart className="icon" />
-            {/* <span>1</span> */}
+            <span>{userWishlist && userWishlist.length}</span>
           </ButtonLink>
-          <ButtonLink
-            onClick={handleCart}
-            rel="noopener noreferrer"
-          >
+          <ButtonLink onClick={handleCart} rel="noopener noreferrer">
             <AiOutlineShoppingCart className="icon" />
+            <span>{userCart && userCart.length}</span>
           </ButtonLink>
 
           <ButtonLink onClick={toggleDropdown}>
@@ -151,7 +178,7 @@ const Header = () => {
                       </>
                     ) : (
                       <>
-                        <Link to="/profile" className="btn-dropdown">
+                        <Link to="/profile/settings" className="btn-dropdown">
                           Perfil
                         </Link>
                         <button

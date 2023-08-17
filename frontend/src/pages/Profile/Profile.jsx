@@ -5,6 +5,7 @@ import { alertConfirmCancel } from "../../../../backend/utils/alerts";
 import axios from "axios";
 import { server } from "../../server";
 import PanelProfile from "./PanelProfile/PanelProfile"
+import { StyledCrud } from "../Crud/CrudStyled";
 
 const Profile = () => {
     const { user } = useSelector((state) => state.user);
@@ -25,12 +26,9 @@ const Profile = () => {
 
     };
     return (
-        <>
-            <Container>
-                <PanelProfile/>
+            <StyledCrud>
                 <Outlet/>
-            </Container>
-        </>
+            </StyledCrud>
     )
 }
 

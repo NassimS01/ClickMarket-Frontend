@@ -38,7 +38,12 @@ const EditProductModal = ({ productData, onClose }) => {
     try {
 
       dispatch(editProduct(productData._id, name, price, discount, description, category, stock, state));
-      alertTime("Producto actualizado", "success", "green", "white")
+      alertTime(
+        "Producto actualizado",
+        "success",
+        "var(--colorSuccess)",
+        "white"
+      );
       window.location.reload()
     } catch (error) {
       console.error("Error al actualizar el producto:", error);

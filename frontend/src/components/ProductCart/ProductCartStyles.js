@@ -8,16 +8,15 @@ export const CartProduct = styled.div`
   border-radius: 20px;
   margin-top: 1rem;
 
-    p {
-      font-weight: 500;
-      font-size: 16px;
-    }
+  p {
+    font-weight: 500;
+    font-size: 16px;
+  }
 
-    span {
-      font-weight: 500;
-      font-size: 16px;
-    }
-
+  span {
+    font-weight: 500;
+    font-size: 16px;
+  }
 
   .deleteProductCart {
     position: absolute;
@@ -31,8 +30,8 @@ export const CartProduct = styled.div`
     height: 100px;
 
     img {
-      width: 100%;
-      height: 100%;
+      width: 75%;
+      height: 75%;
     }
   }
 
@@ -40,7 +39,7 @@ export const CartProduct = styled.div`
     display: flex;
     flex-direction: column;
     padding: 15px;
-    width: 35vw;
+    width: 52vw;
     gap: 15px;
   }
 
@@ -59,7 +58,37 @@ export const CartProduct = styled.div`
   .subTotal {
     display: flex;
     justify-content: space-between;
+  }
 
-    
+  @media only screen and (max-width: 425px) {
+    .infoProductCart {
+      gap: 5px;
+    }
+
+    .subTotal p,
+    .subTotal span {
+      font-size: 16px;
+    }
+  }
+
+  @media only screen and (max-width: 320px) {
+
+    .infoProductCart {
+      width: 42vw;
+    }
+
+    .quantity {
+      gap: 10px;
+    }
+
+
+    .quantity p {
+      font-size: 13px;
+    }
+
+    .subTotal p,
+    .subTotal span {
+      font-size: 13px;
+    }
   }
 `;

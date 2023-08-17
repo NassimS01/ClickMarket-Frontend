@@ -191,3 +191,7 @@ export const activeUser = (id, updatedData) => async (dispatch) => {
         });
     }
 };
+
+export const removeAllFromCart = () => ({
+    type: "removeAllFromCart",
+});

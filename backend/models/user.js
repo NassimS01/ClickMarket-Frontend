@@ -47,6 +47,43 @@ const userSchema = new mongoose.Schema({
       ref: 'Product',
     },
   ],
+  order: [
+    { 
+      userEmail: {
+        type: String,
+        required: true,
+      },
+      address: {
+        type: String,
+        required: true,
+      },
+      city: {
+        type: String,
+        required: true,
+      },
+      zip: {
+        type: Number,
+        required: true,
+      },
+      orderId: {
+        type: String,
+        required: true,
+      },
+      products: [
+        {
+          productId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product',
+            required: true,
+          },
+          quantity: {
+            type: Number,
+            required: true,
+          },
+        },
+      ],
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now(),

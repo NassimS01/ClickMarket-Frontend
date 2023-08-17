@@ -3,15 +3,18 @@ import { CartProduct } from "./ProductCartStyles";
 import { ButtonLink } from "../Header/Wrapper";
 import { BsPlus, BsDash, BsTrash } from "react-icons/bs";
 import { formatPrice } from "../../../../backend/utils/functions";
-import { removeFromCart, toggleProductCartStatus } from "../../redux/actions/cart";
+import {
+  removeFromCart,
+  toggleProductCartStatus,
+} from "../../redux/actions/cart";
 import { useDispatch } from "react-redux";
 import { alertTime, alertConfirmCancel } from "../../../../backend/utils/alerts";
-import { getUserCart } from "../../redux/actions/user";
+import { getUserCart, getUserWishlist } from "../../redux/actions/user";
 import { useNavigate } from "react-router-dom";
 
 
 
-const ProductCart = ({ id, name, price, img }) => {
+const ProductCart = ({ id, name, price, img, updateTotalPrice }) => {
     const navigate = useNavigate();
     const [qty, setQty] = useState(1);
     const dispatch = useDispatch();
@@ -19,29 +22,34 @@ const ProductCart = ({ id, name, price, img }) => {
 
     useEffect(() => {
         dispatch(getUserCart());
-    }, [dispatch]);
+    }, []);
 
-    const handleIncrement = () => {
-        setQty(qty + 1);
-        calculateSubtotal(qty + 1);
-    };
 
-    const handleDecrement = () => {
-        if (qty > 1) {
-            setQty(qty - 1);
-            calculateSubtotal(qty - 1);
-        }
-    };
+  const handleIncrement = () => {
+    setQty(qty + 1);
+    calculateSubtotal(qty + 1);
+  };
+
+  const handleDecrement = () => {
+    if (qty > 1) {
+      setQty(qty - 1);
+      calculateSubtotal(qty - 1);
+    }
+  };
 
     const calculateSubtotal = (newQty) => {
-        setSubtotal(price * newQty);
+        setQty(newQty);
+        const newSubtotal = price * newQty;
+        setSubtotal(newSubtotal);
+
+        updateTotalPrice(userCart.reduce((acc, product) => acc + product.subtotal, newSubtotal));
     };
 
     const removeFromCartHandler = (id) => {
         alertConfirmCancel("", "¿Deseas eliminar este producto de tu carrito?", "question", "Confirmar", "Cancelar", () => {
-        dispatch(removeFromCart(id));
-        dispatch(toggleProductCartStatus(id, false));
-        window.location.reload()
+            dispatch(removeFromCart(id));
+            dispatch(toggleProductCartStatus(id, false));
+            window.location.reload()
         });
     };
 
@@ -72,6 +80,6 @@ const ProductCart = ({ id, name, price, img }) => {
             </div>
         </CartProduct>
     );
-};
+  };
 
 export default ProductCart;

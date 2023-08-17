@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Wrapper = styled.header`
   position: sticky;
@@ -197,6 +197,13 @@ export const ButtonLink = styled.button`
   align-items: center;
   transition: transform 0.2s ease;
 
+  ${(props) =>
+    props.user &&
+    css`
+      height: 35px;
+      width: 35px;
+    `}
+
   &:active {
     transform: scale(0.9);
   }
@@ -222,7 +229,7 @@ export const ButtonLink = styled.button`
   .btn-dropdown {
     background-color: var(--colorPrimary);
     color: white;
-    padding: .3rem;
+    padding: 0.3rem;
     border-radius: 10px;
     font-size: 16px;
   }

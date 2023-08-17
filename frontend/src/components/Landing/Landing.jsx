@@ -12,6 +12,9 @@ const Landing = () => {
   const dispatch = useDispatch()
   const {allProducts, isLoading} = useSelector((state)=> state.product);
 
+  // console.log(allProducts)
+
+  // const interestingProducts = getRandomProducts(allProducts, 4);
 
   return (
     <>
