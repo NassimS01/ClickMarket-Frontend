@@ -12,8 +12,6 @@ const Landing = () => {
   const dispatch = useDispatch()
   const {allProducts, isLoading} = useSelector((state)=> state.product);
 
-  console.log();
-
 
   return (
     <>

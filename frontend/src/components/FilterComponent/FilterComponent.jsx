@@ -83,25 +83,6 @@ const FilterComponent = ({ onCategorySelect }) => {
             </li>
           ))}
         </ul>
-        <p className="title_items">Precio</p>
-        <ul>
-          <li>
-            <input type="radio" id="small" name="bonus" />
-            <label htmlFor="small">$5.000,00</label>
-          </li>
-          <li>
-            <input type="radio" id="medium" name="bonus" />
-            <label htmlFor="medium">$5.000,00 - $10.000,00</label>
-          </li>
-          <li>
-            <input type="radio" id="big" name="bonus" />
-            <label htmlFor="big">$10.000,00 - $30.000,00</label>
-          </li>
-          <li>
-            <input type="radio" id="bigest" name="bonus" />
-            <label htmlFor="bigest">más $30.000,00</label>
-          </li>
-        </ul>
       </div>
     </Filter>
   );

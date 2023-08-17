@@ -36,20 +36,13 @@ const UserSettings = () => {
     }
   }, [error, successMessage]);
 
-  // console.log(user)
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setEmail(user.email);
-    dispatch(
-      updateUserInformation(
-        name,
-        email,
-        oldPassword,
-        newPassword,
-        repeatNewPassword
-      )
-    );
-  };
+    // console.log(user)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setEmail(user.email)
+        dispatch(updateUserInformation(name, email, oldPassword, newPassword, repeatNewPassword))
+    };
+
 
   const handleImage = async (e) => {
     const reader = new FileReader();
@@ -92,7 +85,7 @@ const UserSettings = () => {
                     <BiSolidImageAdd size="40px"/>
                   </div>
                   <div class="text">
-                    <span>Haz click para subir una imágen</span>
+                    <span>Haz click para cambiar el avatar</span>
                   </div>
                   <input type="file" id="file" onChange={handleImage} />
                 </label>

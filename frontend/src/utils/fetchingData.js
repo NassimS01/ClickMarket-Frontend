@@ -1,9 +1,10 @@
 import axios from "axios";
+import { server } from "../server";
 
 export async function getProductsFromDatabase() {
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/v2/products/get-all-products"
+      `${server}/products/get-all-products`
     );
     return response.data.products;
   } catch (error) {

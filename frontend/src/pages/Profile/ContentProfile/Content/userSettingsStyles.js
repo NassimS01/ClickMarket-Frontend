@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const UserSettingsStyles = styled.div`
-  margin: 1rem;
+  margin-top: 3rem;
   padding: 1rem;
   display: flex;
   width: 300px;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   BrowserRouter,
@@ -18,16 +17,18 @@ import Category from "../pages/Category/Category";
 import Signup from "../pages/Signup/SignupPage";
 import Cart from "../pages/Cart/Cart";
 import Store from "../redux/store";
-import { loadUser } from "../redux/actions/user";
+import {loadUser } from "../redux/actions/user";
 import { getAllProducts } from "../redux/actions/product";
 import ProtectedAdminRoute from "./ProtectedAdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../pages/Profile/Profile";
 import BtnWishlist from "../pages/Profile/ContentProfile/BtnWishlist";
-import BtnCart from "../pages/Profile/ContentProfile/BtnCart";
-import BtnOrders from "../pages/Profile/ContentProfile/BtnOrders";
-import BtnSettings from "../pages/Profile/ContentProfile/BtnSettings";
-import Contact from "../components/Contact/Contact";
+import BtnCart from "../pages/Profile/ContentProfile/BtnCart"
+import BtnOrders from "../pages/Profile/ContentProfile/BtnOrders"
+import BtnSettings from "../pages/Profile/ContentProfile/BtnSettings"
+import PaymentPage from "../pages/Payment/PaymentPage";
+import Contact from "../components/Contact/Contact"
+import { ToastContainer } from "react-toastify";
 
 const Routes = () => {
   return (
@@ -94,10 +95,20 @@ const Routes = () => {
               }
             />
           </Route>
+
+          {/* PAYMENT */}
+          <Route
+              path="/payment"
+              element={
+                <ProtectedRoute>
+                  <PaymentPage />
+                </ProtectedRoute>
+              }
+            />
+          
           <Route path="*" element={<NotFound />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="carrito" element={<Cart />} />
         </ReactDomRoutes>
       </Layout>
       <ToastContainer
@@ -111,7 +122,7 @@ const Routes = () => {
         draggable
         pauseOnHover
         theme="colored"
-        style={{ borderRadius: "50px" }}
+        style={{borderRadius: "50px"}}
       />
     </BrowserRouter>
   );

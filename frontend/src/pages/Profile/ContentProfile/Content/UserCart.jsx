@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { formatPrice } from "../../../../../../backend/utils/functions";
 import { ButtonGlobal } from "../../../../components/ButtonGlobal/ButtonGlobal";
+import { ButtonLink } from "../../../../components/Header/Wrapper";
 import ProductCart from "../../../../components/ProductCart/ProductCart";
-import { getUserCart } from "../../../../redux/actions/user";
+import { getUserCart, getUserWishlist } from "../../../../redux/actions/user";
 import { CartContainer } from "../../../Cart/CartStyles";
 
 const UserCart = () => {
@@ -91,11 +93,19 @@ const Container = styled.div`
     margin-left: 5rem;
   }
 
-  .cart {
-    padding: 20px;
-    height: 550px;
-    width: 50vw;
-    margin-bottom: 200px;
-    overflow-y: auto;
-  }
+
+    .cartSectionRight{
+        position: sticky;
+        top: 0;
+        right: 0;
+        margin-left: 1rem;
+    }
+`;
+
+const ButtonPayment = styled.button`
+    background-color: green;
+    border-radius: 10px;
+    position: sticky;
+    top: 0;
+    right: -100%;
 `;

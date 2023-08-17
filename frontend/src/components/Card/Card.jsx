@@ -17,53 +17,36 @@ import { toggleProductCartStatus } from '../../redux/actions/cart';
 
 
 
-const CardComponent = ({ id, name, price, img, descrip, discount }) => {
+const CardComponent = ({ id, name, price, img, description, discount }) => {
   const navigate = useNavigate();
   const priceWithDiscount = getDiscount(price, discount);
   const dispatch = useDispatch();
-  const { isAuthenticated, userCart, userWishlist } = useSelector((state) => state.user);
-  const isProductInWishlist = useSelector((state) =>
-    state.wishlist.productInWishlistStatus[id] || false
+  const { isAuthenticated } = useSelector((state) => state.user);
+  const isProductInWishlist = useSelector(
+    (state) => state.wishlist.productInWishlistStatus[id] || false
   );
-  const isProductInCart = useSelector((state) =>
-    state.cart.productInCartStatus[id] || false
+  const isProductInCart = useSelector(
+    (state) => state.cart.productInCartStatus[id] || false
   );
-
 
   useEffect(() => {
     dispatch(getUserWishlist());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     dispatch(getUserCart());
-  }, [dispatch]);
+  }, []);
 
   const addToCartHandler = (id) => {
     if (isAuthenticated) {
       dispatch(addToCart(id));
       dispatch(toggleProductCartStatus(id, true));
-      alertTime("Agregado al Carrito", "success", "var(--colorSuccess)", "white")
-    } else {
-      alertTime("Debes iniciar sesion para usar esta funcionalidad", "error", "var(--colorPrimary)", "white")
-      navigate("/login")
-    }
-  };
-
-
-  const removeFromCartHandler = (id) => {
-    alertConfirmCancel("", "¿Deseas eliminar este producto de tu carrito?", "question", "Confirmar", "Cancelar", () => {
-    dispatch(removeFromCart(id));
-    dispatch(toggleProductCartStatus(id, false));
-    window.location.reload()
-    });
-};
-
-
-  const addToWishlistHandler = (id) => {
-    if (isAuthenticated) {
-      dispatch(addToWishlist(id));
-      dispatch(toggleProductWishlistStatus(id, true));
-      alertTime("Agregado a Favoritos", "success", "var(--colorSuccess)", "white")
+      alertTime(
+        "Agregado al Carrito",
+        "success",
+        "var(--colorSuccess)",
+        "white"
+      );
     } else {
       alertTime(
         "Debes iniciar sesion para usar esta funcionalidad",
@@ -71,26 +54,67 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
         "var(--colorPrimary)",
         "white"
       );
-      navigate("/login")
+      navigate("/login");
+    }
+  };
+
+  const removeFromCartHandler = (id) => {
+    alertConfirmCancel(
+      "",
+      "¿Deseas eliminar este producto de tu carrito?",
+      "question",
+      "Confirmar",
+      "Cancelar",
+      () => {
+        dispatch(removeFromCart(id));
+        dispatch(toggleProductCartStatus(id, false));
+        window.location.reload();
+      }
+    );
+  };
+
+  const addToWishlistHandler = (id) => {
+    if (isAuthenticated) {
+      dispatch(addToWishlist(id));
+      dispatch(toggleProductWishlistStatus(id, true));
+      alertTime(
+        "Agregado a Favoritos",
+        "success",
+        "var(--colorSuccess)",
+        "white"
+      );
+    } else {
+      alertTime(
+        "Debes iniciar sesion para usar esta funcionalidad",
+        "error",
+        "var(--colorPrimary)",
+        "white"
+      );
+      navigate("/login");
     }
   };
 
   const removeFromWishlistHandler = (id) => {
-    alertConfirmCancel("", "Deseas eliminar este producto de tus Favoritos?", "question", "Confirmar", "Cancelar", () => {
-      dispatch(removeFromWishlist(id));
-      dispatch(toggleProductWishlistStatus(id, false));
-      window.location.reload();
-    })
-
+    alertConfirmCancel(
+      "",
+      "Deseas eliminar este producto de tus Favoritos?",
+      "question",
+      "Confirmar",
+      "Cancelar",
+      () => {
+        dispatch(removeFromWishlist(id));
+        dispatch(toggleProductWishlistStatus(id, false));
+        window.location.reload();
+      }
+    );
   };
-
 
   return (
     <>
       <Card>
         <img src={img} draggable="false" className="product-image" />
         <h3 className="product-name">{name}</h3>
-        <p className="product-description">{descrip}</p>
+        <p className="product-description">{description}</p>
         <p className="discount">{discount}%</p>
         <div className="container-price">
           <span className="product-price">{formatPrice(price)}</span>
@@ -121,9 +145,7 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
           </ButtonsCard>
         )}
 
-
         <div className="container-button">
-
           {isProductInCart ? (
             <ButtonGlobal
               buttoncard="true"
@@ -132,13 +154,10 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
               Quitar del carrito
             </ButtonGlobal>
           ) : (
-            <ButtonGlobal
-              onClick={() => addToCartHandler(id)}
-            >
+            <ButtonGlobal onClick={() => addToCartHandler(id)}>
               Agregar al carrito
             </ButtonGlobal>
           )}
-
         </div>
       </Card>
     </>

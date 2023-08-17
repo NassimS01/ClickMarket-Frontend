@@ -5,7 +5,7 @@ import { cartReducer } from "./reducers/cart";
 import productosReducer from "./reducers/productSlice";
 import categoriesReducer from "./reducers/categoriesSlice";
 import { wishlistReducer } from "./reducers/wishlist";
-import cartUploadReducer from "./reducers/cartSlice"
+import { orderReducer } from "./reducers/order";
 
 const Store = configureStore({
   reducer: {
@@ -15,7 +15,7 @@ const Store = configureStore({
     productos: productosReducer,
     categories: categoriesReducer,
     wishlist: wishlistReducer,
-    cartUpload: cartUploadReducer,
+    order: orderReducer,
   },
 });
 

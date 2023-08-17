@@ -14,17 +14,16 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { server } from "../../server";
 import { fetchFilteredCategories } from "../../redux/actions/categories";
-import {
-  alertTime,
-  alertConfirmCancel,
-} from "../../../../backend/utils/alerts";
+import { alertTime, alertConfirmCancel } from "../../../../backend/utils/alerts";
+
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated, user, userCart, userWishlist } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
 
   function toggleMenu() {
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
@@ -148,10 +147,11 @@ const Header = () => {
         <div className="social-links">
           <ButtonLink onClick={handleWishlist} rel="noopener noreferrer">
             <AiOutlineHeart className="icon" />
-            {/* <span>1</span> */}
+            <span>{userWishlist && userWishlist.length}</span>
           </ButtonLink>
           <ButtonLink onClick={handleCart} rel="noopener noreferrer">
             <AiOutlineShoppingCart className="icon" />
+            <span>{userCart && userCart.length}</span>
           </ButtonLink>
 
           <ButtonLink onClick={toggleDropdown}>

@@ -8,17 +8,22 @@ import {
   toggleProductCartStatus,
 } from "../../redux/actions/cart";
 import { useDispatch } from "react-redux";
-import {
-  alertTime,
-  alertConfirmCancel,
-} from "../../../../backend/utils/alerts";
-import { getUserCart } from "../../redux/actions/user";
+import { alertTime, alertConfirmCancel } from "../../../../backend/utils/alerts";
+import { getUserCart, getUserWishlist } from "../../redux/actions/user";
 import { useNavigate } from "react-router-dom";
 import { updateSubtotal } from "../../redux/reducers/cartSlice";
 
+
+
 const ProductCart = ({ id, name, price, img }) => {
+  const navigate = useNavigate();
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
+  const [subtotal, setSubtotal] = useState(price);
+
+    useEffect(() => {
+        dispatch(getUserCart());
+    }, []);
 
 
   const handleIncrement = () => {
@@ -75,8 +80,8 @@ const ProductCart = ({ id, name, price, img }) => {
           </ButtonLink>
         </div>
         <div className="subTotal">
-          <p>Subtotal:</p>
-          <span>{formatPrice(qty * price)}</span>
+          <p>Sub total:</p>
+          <span>{formatPrice(subtotal)}</span>
         </div>
       </div>
     </CartProduct>
