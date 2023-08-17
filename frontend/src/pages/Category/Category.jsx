@@ -15,7 +15,7 @@ const Category = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [filteredAndPaginatedProducts, setFilteredAndPaginatedProducts] =
     useState([]);
-    const productsPerPage = 10;
+  const productsPerPage = 10;
   const [search, setSearch] = useState("todos");
   const [activeFilters, setActiveFilters] = useState([]);
   const { category } = useParams();
@@ -33,6 +33,8 @@ const Category = () => {
     if (category) {
       setActiveFilters([category]);
     }
+        window.scrollTo(0, 0);
+
   }, [category]);
 
   useEffect(() => {
@@ -49,7 +51,7 @@ const Category = () => {
       );
 
     setFilteredAndPaginatedProducts(filteredAndPaginatedProducts);
-    setCurrentPage(0); 
+    setCurrentPage(0);
   }, [filteredProducts, search, activeFilters]);
 
   const searchBar = (e) => {
@@ -58,12 +60,19 @@ const Category = () => {
 
   const handleCategorySelect = (category) => {
     setActiveFilters([category]);
-    setCurrentPage(0); 
+    setCurrentPage(0);
 
     navigate(`/categorias/${category}`);
   };
 
-  const totalPages = Math.ceil(filteredAndPaginatedProducts.length / productsPerPage)
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
+  };
+
+  const totalPages = Math.ceil(
+    filteredAndPaginatedProducts.length / productsPerPage
+  );
 
   return (
     <SectionCategory>
@@ -93,6 +102,7 @@ const Category = () => {
               .map((product) => (
                 <CardComponent
                   key={product._id}
+                  id={product._id}
                   {...product}
                   img={product.images.url}
                 />
@@ -104,7 +114,7 @@ const Category = () => {
         <ButtonGlobal
           pagination="true"
           onClick={() =>
-            setCurrentPage((prevPage) => Math.max(prevPage - 1, 0))
+            handlePageChange((prevPage) => Math.max(prevPage - 1, 0))
           }
           disabled={currentPage === 0}
         >
@@ -113,7 +123,9 @@ const Category = () => {
         <ButtonGlobal
           pagination="true"
           onClick={() =>
-            setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages - 1))
+            handlePageChange((prevPage) =>
+              Math.min(prevPage + 1, totalPages - 1)
+            )
           }
           disabled={currentPage === totalPages - 1}
         >

@@ -3,7 +3,10 @@ import { CartProduct } from "./ProductCartStyles";
 import { ButtonLink } from "../Header/Wrapper";
 import { BsPlus, BsDash, BsTrash } from "react-icons/bs";
 import { formatPrice } from "../../../../backend/utils/functions";
-import { removeFromCart, toggleProductCartStatus } from "../../redux/actions/cart";
+import {
+  removeFromCart,
+  toggleProductCartStatus,
+} from "../../redux/actions/cart";
 import { useDispatch } from "react-redux";
 import { alertTime, alertConfirmCancel } from "../../../../backend/utils/alerts";
 import { getUserCart, getUserWishlist } from "../../redux/actions/user";
@@ -21,17 +24,18 @@ const ProductCart = ({ id, name, price, img, updateTotalPrice }) => {
         dispatch(getUserCart());
     }, []);
 
-    const handleIncrement = () => {
-        setQty(qty + 1);
-        calculateSubtotal(qty + 1);
-    };
 
-    const handleDecrement = () => {
-        if (qty > 1) {
-            setQty(qty - 1);
-            calculateSubtotal(qty - 1);
-        }
-    };
+  const handleIncrement = () => {
+    setQty(qty + 1);
+    calculateSubtotal(qty + 1);
+  };
+
+  const handleDecrement = () => {
+    if (qty > 1) {
+      setQty(qty - 1);
+      calculateSubtotal(qty - 1);
+    }
+  };
 
     const calculateSubtotal = (newQty) => {
         setQty(newQty);
@@ -76,6 +80,6 @@ const ProductCart = ({ id, name, price, img, updateTotalPrice }) => {
             </div>
         </CartProduct>
     );
-};
+  };
 
 export default ProductCart;

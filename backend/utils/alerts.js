@@ -5,8 +5,11 @@ export const customAlert = (title, text, icon, buttonText, action) => {
     title: title,
     text: text,
     icon: icon,
+    customClass: {
+      container: 'border-radius-0'
+    },
     confirmButtonText: buttonText,
-    confirmButtonColor: '#6D8B74',
+    confirmButtonColor: 'var(--colorSuccess)',
     allowOutsideClick: false,
   }).then((result) => {
     if (result.isConfirmed) {
@@ -31,8 +34,8 @@ export const alertConfirmCancel = (
     icon: icon,
     showCancelButton: true,
     cancelButtonText: buttonCancel,
-    confirmButtonColor: 'green',
-    cancelButtonColor: '#BA1F1C',
+    confirmButtonColor: 'var(--colorSuccess)',
+    cancelButtonColor: 'var(--colorPrimary)',
     confirmButtonText: buttonConfirm,
   }).then((result) => {
     if (result.isConfirmed) {

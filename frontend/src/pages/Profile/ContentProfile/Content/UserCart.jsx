@@ -7,60 +7,97 @@ import { ButtonGlobal } from "../../../../components/ButtonGlobal/ButtonGlobal";
 import { ButtonLink } from "../../../../components/Header/Wrapper";
 import ProductCart from "../../../../components/ProductCart/ProductCart";
 import { getUserCart, getUserWishlist } from "../../../../redux/actions/user";
-
+import { CartContainer } from "../../../Cart/CartStyles";
 
 const UserCart = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const { userCart } = useSelector((state) => state.user);
-    const [totalPrice, setTotalPrice] = useState(0);
+  const dispatch = useDispatch();
+  const { userCart } = useSelector((state) => state.user);
+  const [totalPrice, setTotalPrice] = useState(0);
 
-    const item = userCart.length;
-    useEffect(() => {
-        if (userCart) {
-            const total = userCart.reduce((accumulator, product) => {
-                return accumulator + product.subtotal;
-            }, 0);
-            setTotalPrice(total);
-        }
-    }, [userCart]);
+  const item = userCart.length;
 
-    useEffect(() => {
-        dispatch(getUserCart());
-    }, []);
+  useEffect(() => {
+    if (userCart) {
+      const total = userCart.reduce((accumulator, product) => {
+        return accumulator + product.price;
+      }, 0);
+      setTotalPrice(total);
+    }
+  }, [userCart]);
 
-    return (
-        <>
-            <Container>
-                <div>
-                    {userCart.length == 0 ? (<div>Todavia no hay productos en tu carrito</div>) : (userCart.map((product) => (
-                        <ProductCart key={product._id} id={product._id} name={product.name} price={product.price} img={product.images.url} updateTotalPrice={(newTotal) => setTotalPrice(newTotal)} />
-                    ))
-                    )}
-                </div>
-                {
-                    userCart ? (
-                        <ButtonPayment onClick={() => navigate("/payment")}>
-                            Comprar Carrito
-                        </ButtonPayment>
-                    ) : (
+  useEffect(() => {
+    dispatch(getUserCart());
+  }, [dispatch]);
 
-                        <div>
-                            Todavia no hay productos en tu carrito
-                        </div>
-                    )
-                }
-            </Container>
-
-        </>
-    )
-}
+  return (
+    <CartContainer>
+    <h2 className="title">Mi carrito</h2>
+      <div className="cart">
+          {userCart.length == 0 ? (
+            <h3 className="title">Todavia no hay productos en tu carrito</h3>
+          ) : (
+        <div className="cartSectionLeft">
+            {userCart.map((product) => (
+              <ProductCart
+                key={product._id}
+                id={product._id}
+                name={product.name}
+                price={product.price}
+                img={product.images.url}
+              />
+            )
+            
+            )}
+        </div>
+          )}
+        {userCart ? (
+          <div className="cartSectionRigth">
+            <h2>Orden</h2>
+            <div className="infoOrden">
+              <div className="infoItem">
+                <p>
+                  {item <= 1
+                    ? "Precio de 1 item seleccionado"
+                    : `Precio de ${item} items seleccionados`}
+                </p>
+                <span>{formatPrice(40000)}</span>
+              </div>
+              <div className="infoItem">
+                <p>Descuento</p>
+                <span>0.00</span>
+              </div>
+              <div className="infoItem">
+                <p>Costo de envío</p>
+                <span>{formatPrice(3000)}</span>
+              </div>
+            </div>
+            <div className="ordenTotal">
+              <div className="infoItem">
+                <p className="total">Total:</p>
+                <span>{formatPrice(43000)}</span>
+              </div>
+              <ButtonGlobal green="true">Comprar</ButtonGlobal>
+            </div>
+          </div>
+        ) : (
+          <div>Todavia no hay productos en tu carrito</div>
+        )}
+      </div>
+    </CartContainer>
+  );
+};
 
 export default UserCart;
 
-
 const Container = styled.div`
-    display: flex;
+  margin-top: 100px;
+  .cartSectionRight {
+    position: sticky;
+    top: 0;
+    right: 0;
+    margin-left: 5rem;
+  }
+
 
     .cartSectionRight{
         position: sticky;
@@ -77,32 +114,3 @@ const ButtonPayment = styled.button`
     top: 0;
     right: -100%;
 `;
-
-{/* <div className="cartSectionRight">
-                            <h2>Orden</h2>
-                            <div className="infoOrden">
-                                <div className="infoItem">
-                                    <p>
-                                        {item <= 1
-                                            ? "Precio de 1 item seleccionado"
-                                            : `Precio de ${item} items seleccionados`}
-                                    </p>
-                                    <span>{formatPrice(40000)}</span>
-                                </div>
-                                <div className="infoItem">
-                                    <p>Descuento</p>
-                                    <span>0.00</span>
-                                </div>
-                                <div className="infoItem">
-                                    <p>Costo de envío</p>
-                                    <span>{formatPrice(3000)}</span>
-                                </div>
-                            </div>
-                            <div className="ordenTotal">
-                                <div className="infoItem">
-                                    <p className="total">Total:</p>
-                                    <span>{totalPrice}</span>
-                                </div>
-                                <ButtonGlobal green="true">Comprar</ButtonGlobal>
-                            </div>
-                        </div> */}

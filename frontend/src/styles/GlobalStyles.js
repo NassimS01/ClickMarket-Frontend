@@ -16,6 +16,10 @@ const GlobalStyles = createGlobalStyle`
     font-family: "Poppins", sans-serif;
   }
 
+  .swal2-popup {
+  border-radius: 10px;
+}
+
    .title {
     position: relative;
     font-weight: 500;
@@ -35,6 +39,25 @@ const GlobalStyles = createGlobalStyle`
     transform: translate(-50%, -50%);
     background-color: #FF443D;
   }
+
+::-webkit-scrollbar-track
+{
+	border-radius: 5px;
+	background-color: #fff;
+}
+
+::-webkit-scrollbar
+{
+	width: 7px;
+	background-color: #ccc;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #ccc;
+}
 `;
 
 export default GlobalStyles;

@@ -5,6 +5,7 @@ export const SectionCategory = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   /* margin-bottom: 151px; */
 
   /* Input search */
@@ -71,8 +72,8 @@ export const SectionCategory = styled.div`
     display: flex;
     flex-wrap: wrap;
     /* justify-content: center; */
-    max-width: 1440px;
-    min-width: 1440px;
+    max-width: 1300px;
+    min-width: 1300px;
     min-height: 864px;
   }
 
@@ -89,11 +90,24 @@ export const SectionCategory = styled.div`
     margin-top: 30px;
   }
 
-  @media only screen and (max-width: 768px) {
-    & .categories {
-      margin-top: 50px;
+  @media only screen and (max-width: 1440px) {
+    .filters {
+      margin-bottom: 20px;
+    }
+    .categories {
       flex-direction: column;
       align-items: center;
+    }
+
+    .containerCards {
+      min-width: auto;
+      justify-content: center;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .paginationButtons {
+      gap: 15px;
     }
   }
 `;

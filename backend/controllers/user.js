@@ -178,8 +178,7 @@ router.put(
 
             if (newPassword !== repeatNewPassword) {
                 return next(
-                    new ErrorHandler("Las contraseñas ingresadas no coinciden", 400)
-                );
+                    new ErrorHandler("Las contraseñas ingresadas no coinciden", 400));
             }
 
             user.name = name;
