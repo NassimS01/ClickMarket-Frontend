@@ -27,14 +27,15 @@ const UserCart = () => {
     dispatch(getUserCart());
   }, [dispatch]);
 
+
   return (
     <CartContainer>
-    <h2 className="title">Mi carrito</h2>
-      <div className="cart">
-          {userCart.length == 0 ? (
-            <h3 className="title">Todavia no hay productos en tu carrito</h3>
-          ) : (
-        <div className="cartSectionLeft">
+      <h2 className="title">Mi Carrito</h2>
+      {userCart.length == 0 ? (
+        <h3 className="title">Todavia no hay productos en tu carrito</h3>
+      ) : (
+        <div className="cart">
+          <div className="cartSectionLeft">
             {userCart.map((product) => (
               <ProductCart
                 key={product._id}
@@ -43,12 +44,8 @@ const UserCart = () => {
                 price={product.price}
                 img={product.images.url}
               />
-            )
-            
-            )}
-        </div>
-          )}
-        {userCart ? (
+            ))}
+          </div>
           <div className="cartSectionRigth">
             <h2>Orden</h2>
             <div className="infoOrden">
@@ -58,7 +55,7 @@ const UserCart = () => {
                     ? "Precio de 1 item seleccionado"
                     : `Precio de ${item} items seleccionados`}
                 </p>
-                <span>{formatPrice(40000)}</span>
+                <span>{formatPrice(totalPrice)}</span>
               </div>
               <div className="infoItem">
                 <p>Descuento</p>
@@ -77,10 +74,8 @@ const UserCart = () => {
               <ButtonGlobal green="true">Comprar</ButtonGlobal>
             </div>
           </div>
-        ) : (
-          <div>Todavia no hay productos en tu carrito</div>
-        )}
-      </div>
+        </div>
+      )}
     </CartContainer>
   );
 };

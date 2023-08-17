@@ -14,33 +14,27 @@ import {
 } from "../../../../backend/utils/alerts";
 import { getUserCart } from "../../redux/actions/user";
 import { useNavigate } from "react-router-dom";
+import { updateSubtotal } from "../../redux/reducers/cartSlice";
 
 const ProductCart = ({ id, name, price, img }) => {
-  const navigate = useNavigate();
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
-  const [subtotal, setSubtotal] = useState(price);
 
-  useEffect(() => {
-    dispatch(getUserCart());
-  }, [dispatch]);
 
   const handleIncrement = () => {
     setQty(qty + 1);
-    calculateSubtotal(qty + 1);
   };
 
   const handleDecrement = () => {
     if (qty > 1) {
       setQty(qty - 1);
-      calculateSubtotal(qty - 1);
     }
   };
 
-  const calculateSubtotal = (newQty) => {
-    setSubtotal(price * newQty);
-  };
-
+ useEffect(() => {
+   const subtotal = qty * price;
+   dispatch(updateSubtotal({ productId: id, subtotal })); // Llamada a la acción para actualizar el subtotal en el estado
+ }, [qty, price]);
   const removeFromCartHandler = (id) => {
     alertConfirmCancel(
       "",
@@ -81,8 +75,8 @@ const ProductCart = ({ id, name, price, img }) => {
           </ButtonLink>
         </div>
         <div className="subTotal">
-          <p>Sub total:</p>
-          <span>{formatPrice(subtotal)}</span>
+          <p>Subtotal:</p>
+          <span>{formatPrice(qty * price)}</span>
         </div>
       </div>
     </CartProduct>

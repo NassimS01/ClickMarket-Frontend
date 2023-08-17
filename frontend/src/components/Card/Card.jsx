@@ -42,7 +42,7 @@ const CardComponent = ({ id, name, price, img, descrip, discount }) => {
     if (isAuthenticated) {
       dispatch(addToCart(id));
       dispatch(toggleProductCartStatus(id, true));
-      alertTime("Agregado al Carrito", "success", "var(--colorSucces)", "white")
+      alertTime("Agregado al Carrito", "success", "var(--colorSuccess)", "white")
     } else {
       alertTime("Debes iniciar sesion para usar esta funcionalidad", "error", "var(--colorPrimary)", "white")
       navigate("/login")

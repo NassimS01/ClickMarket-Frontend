@@ -12,6 +12,8 @@ const Landing = () => {
   const dispatch = useDispatch()
   const {allProducts, isLoading} = useSelector((state)=> state.product);
 
+  console.log();
+
 
   return (
     <>
@@ -19,24 +21,26 @@ const Landing = () => {
         <h3 className="title">Categorias destacadas</h3>
         <Categories />
         <h3 className="title">Productos que pueden interesarte</h3>
-        {
-          isLoading? (<Loader/>) :
-          (<ContainerCards>
-            {allProducts && allProducts.map((product) => (
-              <CardComponent
-              key={product._id}
-              id={product._id}
-              name={product.name}
-              descrip={product.description}
-              category={product.category}
-              price={product.price}
-              discount={product.discount}
-              stock={product.stock}
-              img={product.images.url}
-          />
-            ))}
-          </ContainerCards>)
-        }
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <ContainerCards>
+            {allProducts &&
+              getRandomProducts(allProducts, 4).map((product) => (
+                <CardComponent
+                  key={product._id}
+                  id={product._id}
+                  name={product.name}
+                  descrip={product.description}
+                  category={product.category}
+                  price={product.price}
+                  discount={product.discount}
+                  stock={product.stock}
+                  img={product.images.url}
+                />
+              ))}
+          </ContainerCards>
+        )}
         <ExtraInfo />
       </Container>
     </>

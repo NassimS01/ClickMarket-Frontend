@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
 
 const ProductForm = ({ onClose }) => {
-  const { success, error } = useSelector((state) => state.products);
+  const { success, error } = useSelector((state) => state.product);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

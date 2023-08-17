@@ -18,15 +18,16 @@ import Category from "../pages/Category/Category";
 import Signup from "../pages/Signup/SignupPage";
 import Cart from "../pages/Cart/Cart";
 import Store from "../redux/store";
-import {loadUser } from "../redux/actions/user";
+import { loadUser } from "../redux/actions/user";
 import { getAllProducts } from "../redux/actions/product";
 import ProtectedAdminRoute from "./ProtectedAdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../pages/Profile/Profile";
 import BtnWishlist from "../pages/Profile/ContentProfile/BtnWishlist";
-import BtnCart from "../pages/Profile/ContentProfile/BtnCart"
-import BtnOrders from "../pages/Profile/ContentProfile/BtnOrders"
-import BtnSettings from "../pages/Profile/ContentProfile/BtnSettings"
+import BtnCart from "../pages/Profile/ContentProfile/BtnCart";
+import BtnOrders from "../pages/Profile/ContentProfile/BtnOrders";
+import BtnSettings from "../pages/Profile/ContentProfile/BtnSettings";
+import Contact from "../components/Contact/Contact";
 
 const Routes = () => {
   return (
@@ -35,16 +36,21 @@ const Routes = () => {
         <ReactDomRoutes>
           <Route path="/" element={<Home />} />
           <Route path="/categorias/:category" element={<Category />} />
+          <Route path="/contacto" element={<Contact />} />
 
           {/* CRUD ADMIN */}
           <Route
-          path="/panel-admin/*"
-          element={<ProtectedAdminRoute><Crud /></ProtectedAdminRoute>}
-        >
-          <Route path="products" element={<PanelProducts />} />
-          <Route path="users" element={<PanelUsers />} />
-          <Route path="orders" element={<PanelOrders />} />
-        </Route>
+            path="/panel-admin/*"
+            element={
+              <ProtectedAdminRoute>
+                <Crud />
+              </ProtectedAdminRoute>
+            }
+          >
+            <Route path="products" element={<PanelProducts />} />
+            <Route path="users" element={<PanelUsers />} />
+            <Route path="orders" element={<PanelOrders />} />
+          </Route>
 
           {/* PANEL USER */}
           <Route
@@ -105,7 +111,7 @@ const Routes = () => {
         draggable
         pauseOnHover
         theme="colored"
-        style={{borderRadius: "50px"}}
+        style={{ borderRadius: "50px" }}
       />
     </BrowserRouter>
   );
