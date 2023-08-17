@@ -23,6 +23,7 @@ import BtnCart from "../pages/Profile/ContentProfile/BtnCart"
 import BtnOrders from "../pages/Profile/ContentProfile/BtnOrders"
 import BtnSettings from "../pages/Profile/ContentProfile/BtnSettings"
 import PaymentPage from "../pages/Payment/PaymentPage";
+import Contact from "../components/Contact/Contact";
 
 const Routes = () => {
   return (
@@ -31,16 +32,21 @@ const Routes = () => {
         <ReactDomRoutes>
           <Route path="/" element={<Home />} />
           <Route path="/categorias/:category" element={<Category />} />
+          <Route path="/contacto" element={<Contact />} />
 
           {/* CRUD ADMIN */}
           <Route
-          path="/panel-admin/*"
-          element={<ProtectedAdminRoute><Crud /></ProtectedAdminRoute>}
-        >
-          <Route path="products" element={<PanelProducts />} />
-          <Route path="users" element={<PanelUsers />} />
-          <Route path="orders" element={<PanelOrders />} />
-        </Route>
+            path="/panel-admin/*"
+            element={
+              <ProtectedAdminRoute>
+                <Crud />
+              </ProtectedAdminRoute>
+            }
+          >
+            <Route path="products" element={<PanelProducts />} />
+            <Route path="users" element={<PanelUsers />} />
+            <Route path="orders" element={<PanelOrders />} />
+          </Route>
 
           {/* PANEL USER */}
           <Route

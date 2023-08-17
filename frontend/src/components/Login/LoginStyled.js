@@ -25,12 +25,9 @@ export const ContainerLogin = styled.div`
     height: 100%;
     background: url("https://www.baring.com.ar/resources/original/supermercado-rosario-gondolas.jpg");
     background-size: cover;
-    /* background-attachment: fixed; */
     background-position: -50%;
     filter: blur(10px);
     z-index: -1;
-
-    https: ; //hoydia.com.ar/wp-content/uploads/2021/11/supermercados-16032020.jpg
   }
 
   .login_form_container {

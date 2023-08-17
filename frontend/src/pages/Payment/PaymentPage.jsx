@@ -27,7 +27,10 @@ const PaymentPage = () => {
     const [year, setYear] = useState(0);
     const [cvv, setCvv] = useState(0);
 
-    if(userCart.length === 0){
+    let totalPrice = 0;
+    const subtotal = userCart.map((product) => (totalPrice += product.price))
+
+    if (userCart.length === 0) {
         navigate("/")
     }
 
@@ -111,17 +114,13 @@ const PaymentPage = () => {
                 <div className="col-25">
                     <div className="container">
                         <h4>Carrito <span className="price"><AiOutlineShoppingCart /> <b>{userCart.length}</b></span></h4>
-                        {
-                            userCart.length > 0 ? (
-                                userCart.map((product) => (
-                                    <p key={product._id}>{product.name} <span className="price">{product.price}</span></p>
-                                ))
-                            ) : (
-                                <p>No hay productos en tu carrito</p>
-                            )
-                        }
+                                {userCart.map((product) => (
+                                    <p key={product._id}>{product.name} <span className="price">${product.price}</span></p>
+                                    
+                                ))}
+                        <p>Costo de envio<span className="price">$3000</span></p>
                         <hr />
-                        <p>Total <span className="price"><b>Aqui va la suma</b></span></p>
+                        <p>Total <span className="price"><b>{totalPrice+3000}</b></span></p>
                     </div>
                 </div>
                 <div className="col-75">
