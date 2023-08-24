@@ -58,7 +58,7 @@ router.post("/create-user", async (req, res, next) => {
             message: `Tu cuenta ha sido creada correctamente!`,
             newUser,
         });
-
+        
     } catch (error) {
         return next(new ErrorHandler(error.message, 400))
     }
