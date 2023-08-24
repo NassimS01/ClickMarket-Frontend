@@ -222,7 +222,5 @@ export const TableStyled = styled.div`
         width: 10%;
       }
     }
-
-    /*  */
   }
 `;
