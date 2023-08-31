@@ -6,6 +6,7 @@ import productosReducer from "./reducers/productSlice";
 import categoriesReducer from "./reducers/categoriesSlice";
 import { wishlistReducer } from "./reducers/wishlist";
 import { orderReducer } from "./reducers/order";
+import cartUploadReducer from "./reducers/cartSlice"
 
 const Store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const Store = configureStore({
     categories: categoriesReducer,
     wishlist: wishlistReducer,
     order: orderReducer,
+    cartUpload: cartUploadReducer,
   },
 });
 

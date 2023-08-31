@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
   },
   active: {
     type: Boolean,
-    default: false
+    default: false,
   },
   avatar: {
     public_id: {
@@ -38,17 +38,23 @@ const userSchema = new mongoose.Schema({
   wishlist: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Product',
+      ref: "Product",
     },
   ],
   cart: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Product',
+      type: Object,
+      ref: "Product",
     },
   ],
+  // cart: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: 'Product',
+  //   },
+  // ],
   order: [
-    { 
+    {
       userEmail: {
         type: String,
         required: true,
@@ -73,7 +79,7 @@ const userSchema = new mongoose.Schema({
         {
           productId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Product',
+            ref: "Product",
             required: true,
           },
           quantity: {

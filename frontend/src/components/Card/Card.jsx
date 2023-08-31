@@ -29,6 +29,8 @@ const CardComponent = ({ id, name, price, img, description, discount }) => {
     (state) => state.cart.productInCartStatus[id] || false
   );
 
+  console.log(isProductInCart);
+
   useEffect(() => {
     dispatch(getUserWishlist());
   }, []);

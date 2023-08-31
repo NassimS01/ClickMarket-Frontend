@@ -29,7 +29,7 @@ const Landing = () => {
                   key={product._id}
                   id={product._id}
                   name={product.name}
-                  descrip={product.description}
+                  description={product.description}
                   category={product.category}
                   price={product.price}
                   discount={product.discount}

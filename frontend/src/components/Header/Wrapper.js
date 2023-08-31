@@ -104,6 +104,10 @@ export const Wrapper = styled.header`
     display: flex;
   }
 
+  .social-links{
+    margin-right: 15px;
+  } 
+  
   @media screen and (max-width: 576px) {
     padding: 20px;
 
@@ -180,6 +184,7 @@ export const Wrapper = styled.header`
   }
 `;
 
+
 export const ButtonLink = styled.button`
   position: relative;
   display: flex;
@@ -204,6 +209,13 @@ export const ButtonLink = styled.button`
       width: 35px;
     `}
 
+  ${(props) =>
+    props.disabled &&
+    css`
+      opacity: 0.4;
+      cursor: default;
+    `}
+
   &:active {
     transform: scale(0.9);
   }
@@ -217,7 +229,6 @@ export const ButtonLink = styled.button`
   .dropdown-content {
     position: absolute;
     top: 100%;
-    left: -60px;
     width: 130px;
   }
 
@@ -237,6 +248,16 @@ export const ButtonLink = styled.button`
   button {
     outline: none;
     border: none;
+    cursor: pointer;
+  }
+
+  .container-buttons-user {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
   }
 
   span {

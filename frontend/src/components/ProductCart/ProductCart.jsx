@@ -4,42 +4,43 @@ import { ButtonLink } from "../Header/Wrapper";
 import { BsPlus, BsDash, BsTrash } from "react-icons/bs";
 import { formatPrice } from "../../../../backend/utils/functions";
 import {
+  decreaseCartItemQuantity,
+  increaseCartItemQuantity,
   removeFromCart,
   toggleProductCartStatus,
 } from "../../redux/actions/cart";
-import { useDispatch } from "react-redux";
-import { alertTime, alertConfirmCancel } from "../../../../backend/utils/alerts";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  alertTime,
+  alertConfirmCancel,
+} from "../../../../backend/utils/alerts";
 import { getUserCart, getUserWishlist } from "../../redux/actions/user";
 import { useNavigate } from "react-router-dom";
 import { updateSubtotal } from "../../redux/reducers/cartSlice";
 
-
-
-const ProductCart = ({ id, name, price, img }) => {
-  const navigate = useNavigate();
-  const [qty, setQty] = useState(1);
+const ProductCart = ({ id, name, price, stock, img, quantity }) => {
   const dispatch = useDispatch();
-  const [subtotal, setSubtotal] = useState(price);
+  const { userCart } = useSelector((state) => state.user);
 
-    useEffect(() => {
-        dispatch(getUserCart());
-    }, []);
+  console.log(userCart);
 
-
-  const handleIncrement = () => {
-    setQty(qty + 1);
+  const handleIncreaseQuantity = () => {
+    console.log("increase quantity");
+    dispatch(increaseCartItemQuantity(id));
   };
 
-  const handleDecrement = () => {
-    if (qty > 1) {
-      setQty(qty - 1);
+  const handleDecreaseQuantity = () => {
+    console.log("decrase quantity");
+    if (quantity <= 1) {
+      return;
+    } else {
+      dispatch(decreaseCartItemQuantity(id));
     }
   };
+  useEffect(() => {
+    dispatch(getUserCart());
+  }, []);
 
- useEffect(() => {
-   const subtotal = qty * price;
-   dispatch(updateSubtotal({ productId: id, subtotal })); // Llamada a la acción para actualizar el subtotal en el estado
- }, [qty, price]);
   const removeFromCartHandler = (id) => {
     alertConfirmCancel(
       "",
@@ -71,17 +72,17 @@ const ProductCart = ({ id, name, price, img }) => {
         <h4>{name}</h4>
         <div className="quantity">
           <p>Cantidad:</p>
-          <ButtonLink user="true" onClick={handleDecrement}>
+          <ButtonLink user="true" onClick={handleDecreaseQuantity} disabled={quantity <= 1}>
             <BsDash size="22px" className="icon" color="var(--colorPrimary)" />
           </ButtonLink>
-          <span>{qty}</span>
-          <ButtonLink user="true" onClick={handleIncrement}>
+          <span>{quantity}</span>
+          <ButtonLink user="true" onClick={handleIncreaseQuantity}>
             <BsPlus size="22px" className="icon" color="var(--colorPrimary)" />
           </ButtonLink>
         </div>
         <div className="subTotal">
-          <p>Sub total:</p>
-          <span>{formatPrice(subtotal)}</span>
+          <p>Subtotal:</p>
+          <span>{formatPrice(price * quantity)}</span>
         </div>
       </div>
     </CartProduct>

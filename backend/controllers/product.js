@@ -29,16 +29,17 @@ router.post(
             });
 
             const product = {
-                name: productData.name,
-                description: productData.description,
-                category: productData.category,
-                price: productData.price,
-                discount: productData.discount,
-                stock: productData.stock,
-                images: {
-                    public_id: myCloud.public_id,
-                    url: myCloud.secure_url,
-                },
+              name: productData.name,
+              description: productData.description,
+              category: productData.category,
+              price: productData.price,
+              discount: productData.discount,
+              stock: productData.stock,
+              quantity: 1,
+              images: {
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url,
+              },
             };
 
 

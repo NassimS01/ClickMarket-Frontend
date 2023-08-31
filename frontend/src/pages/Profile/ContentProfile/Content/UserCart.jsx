@@ -8,75 +8,94 @@ import { ButtonLink } from "../../../../components/Header/Wrapper";
 import ProductCart from "../../../../components/ProductCart/ProductCart";
 import { getUserCart, getUserWishlist } from "../../../../redux/actions/user";
 import { CartContainer } from "../../../Cart/CartStyles";
+import { server } from "../../../../server";
+import { addOrder } from "../../../../redux/actions/order";
 
 const UserCart = () => {
   const dispatch = useDispatch();
   const { userCart } = useSelector((state) => state.user);
-  const [totalPrice, setTotalPrice] = useState(0);
 
-  const item = userCart.length;
-
-  useEffect(() => {
-    if (userCart) {
-      const total = userCart.reduce((accumulator, product) => {
-        return accumulator + product.price;
-      }, 0);
-      setTotalPrice(total);
-    }
-  }, [userCart]);
+  const totalPrice = userCart.reduce((acc, item) => {
+    return (acc += item.price * item.quantity);
+  }, 0);
 
   useEffect(() => {
     dispatch(getUserCart());
   }, [dispatch]);
 
+  const checkout = () => {
+    // fetch(`${server}/user/add-order`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     products: userCart,
+    //   }),
+    // })
+    //   .then((res) => {
+    //     if (res.ok) return res.json();
+    //     return res.json().then((json) => Promise.reject(json));
+    //   })
+    //   .then(({ url }) => {
+    //     console.log(url);
+    //     // window.location = url;
+    //   })
+    //   .catch((e) => {
+    //     console.error(e.error);
+    //   });
+    dispatch(addOrder(userCart))
+  };
 
   return (
     <CartContainer>
-      <h2 className="title">Mi Carrito</h2>
       {userCart.length == 0 ? (
         <h3 className="title">Todavia no hay productos en tu carrito</h3>
       ) : (
-        <div className="cart">
-          <div className="cartSectionLeft">
-            {userCart.map((product) => (
-              <ProductCart
-                key={product._id}
-                id={product._id}
-                name={product.name}
-                price={product.price}
-                img={product.images.url}
-              />
-            ))}
-          </div>
-          <div className="cartSectionRigth">
-            <h2>Orden</h2>
-            <div className="infoOrden">
-              <div className="infoItem">
-                <p>
-                  {item <= 1
-                    ? "Precio de 1 item seleccionado"
-                    : `Precio de ${item} items seleccionados`}
-                </p>
-                <span>{formatPrice(totalPrice)}</span>
+        <>
+          <h2 className="title">Mi carrito</h2>
+          <div className="cart">
+            <div className="cartSectionLeft">
+              {userCart.map((product) => (
+                <ProductCart
+                  key={product._id}
+                  id={product._id}
+                  name={product.name}
+                  price={product.price}
+                  stock={product.stock}
+                  img={product.images.url}
+                  quantity={product.quantity}
+                />
+              ))}
+            </div>
+            <div className="cartSectionRigth">
+              <h2>Orden</h2>
+              <div className="infoOrden">
+                <div className="infoItem">
+                  <p>
+                    {userCart.length <= 1
+                      ? "Precio de 1 item seleccionado"
+                      : `Precio de ${userCart.length} items seleccionados`}
+                  </p>
+                  <span>{formatPrice(totalPrice)}</span>
+                </div>
+                <div className="infoItem">
+                  <p>Costo de envío</p>
+                  <span>{formatPrice(3000)}</span>
+                </div>
               </div>
-              <div className="infoItem">
-                <p>Descuento</p>
-                <span>0.00</span>
-              </div>
-              <div className="infoItem">
-                <p>Costo de envío</p>
-                <span>{formatPrice(3000)}</span>
+              <div className="ordenTotal">
+                <div className="infoItem">
+                  <p className="total">Total:</p>
+                  <span>{formatPrice(totalPrice + 3000)}</span>
+                </div>
+                <Link onClick={checkout}>
+                  <ButtonGlobal green="true">Comprar</ButtonGlobal>
+                </Link>
               </div>
             </div>
-            <div className="ordenTotal">
-              <div className="infoItem">
-                <p className="total">Total:</p>
-                <span>{formatPrice(43000)}</span>
-              </div>
-              <ButtonGlobal green="true">Comprar</ButtonGlobal>
-            </div>
           </div>
-        </div>
+        </>
       )}
     </CartContainer>
   );
@@ -93,19 +112,18 @@ const Container = styled.div`
     margin-left: 5rem;
   }
 
-
-    .cartSectionRight{
-        position: sticky;
-        top: 0;
-        right: 0;
-        margin-left: 1rem;
-    }
+  .cartSectionRight {
+    position: sticky;
+    top: 0;
+    right: 0;
+    margin-left: 1rem;
+  }
 `;
 
 const ButtonPayment = styled.button`
-    background-color: green;
-    border-radius: 10px;
-    position: sticky;
-    top: 0;
-    right: -100%;
+  background-color: green;
+  border-radius: 10px;
+  position: sticky;
+  top: 0;
+  right: -100%;
 `;

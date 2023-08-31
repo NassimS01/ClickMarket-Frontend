@@ -14,16 +14,19 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { server } from "../../server";
 import { fetchFilteredCategories } from "../../redux/actions/categories";
-import { alertTime, alertConfirmCancel } from "../../../../backend/utils/alerts";
-
+import {
+  alertTime,
+  alertConfirmCancel,
+} from "../../../../backend/utils/alerts";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, user, userCart, userWishlist } = useSelector((state) => state.user);
+  const { isAuthenticated, user, userCart, userWishlist } = useSelector(
+    (state) => state.user
+  );
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
 
   function toggleMenu() {
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
@@ -139,10 +142,16 @@ const Header = () => {
         <LinkItem to="/contacto" onClick={toggleMenu}>
           Contacto
         </LinkItem>
-        { (user?.role === "Admin")  ? (
+        {user?.role === "Admin" ? (
           <LinkItem to="/panel-admin">Panel Administrativo</LinkItem>
-        ) : ""}
-        {(user?.role === "user") ? (<LinkItem to="/profile/orders">Pedidos</LinkItem>) : ""}
+        ) : (
+          ""
+        )}
+        {user?.role === "user" ? (
+          <LinkItem to="/profile/orders">Pedidos</LinkItem>
+        ) : (
+          ""
+        )}
         <a href="https://www.google.com/" target="_blank"></a>
         <div className="social-links">
           <ButtonLink onClick={handleWishlist} rel="noopener noreferrer">
@@ -177,17 +186,21 @@ const Header = () => {
                         </button>
                       </>
                     ) : (
-                      <>
-                        <Link to="/profile/settings" className="btn-dropdown">
+                      <div className="container-buttons-user">
+                        <button
+                          onClick={() => navigate("/profile/settings")}
+                          
+                          className="btn-dropdown"
+                        >
                           Perfil
-                        </Link>
+                        </button>
                         <button
                           onClick={logoutHandler}
                           className="btn-dropdown"
                         >
                           Cerrar Sesión
                         </button>
-                      </>
+                      </div>
                     )}
                   </div>
                 )}

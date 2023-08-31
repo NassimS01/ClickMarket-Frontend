@@ -82,11 +82,6 @@ export const Filter = styled.div`
     right: 14px;
     margin-top: -6.5px;
   }
-
-  & ul:nth-child(3) {
-    border-radius: 0px;
-  }
-
   & ul:nth-child(5) {
     border-radius: 0px;
   }

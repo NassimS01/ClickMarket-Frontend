@@ -15,9 +15,10 @@ import Layout from "../components/layout/Layout";
 import Home from "../pages/Home/Home";
 import Category from "../pages/Category/Category";
 import Signup from "../pages/Signup/SignupPage";
+
 import Cart from "../pages/Cart/Cart";
 import Store from "../redux/store";
-import {loadUser } from "../redux/actions/user";
+import { loadUser } from "../redux/actions/user";
 import { getAllProducts } from "../redux/actions/product";
 import ProtectedAdminRoute from "./ProtectedAdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
@@ -27,8 +28,7 @@ import BtnCart from "../pages/Profile/ContentProfile/BtnCart"
 import BtnOrders from "../pages/Profile/ContentProfile/BtnOrders"
 import BtnSettings from "../pages/Profile/ContentProfile/BtnSettings"
 import PaymentPage from "../pages/Payment/PaymentPage";
-import Contact from "../components/Contact/Contact"
-import { ToastContainer } from "react-toastify";
+import Contact from "../components/Contact/Contact";
 
 const Routes = () => {
   return (
@@ -111,19 +111,6 @@ const Routes = () => {
           <Route path="signup" element={<Signup />} />
         </ReactDomRoutes>
       </Layout>
-      <ToastContainer
-        position="bottom-center"
-        autoClose={3000}
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-        style={{borderRadius: "50px"}}
-      />
     </BrowserRouter>
   );
 };

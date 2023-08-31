@@ -36,13 +36,20 @@ const UserSettings = () => {
     }
   }, [error, successMessage]);
 
-    // console.log(user)
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setEmail(user.email)
-        dispatch(updateUserInformation(name, email, oldPassword, newPassword, repeatNewPassword))
-    };
-
+  // console.log(user)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setEmail(user.email);
+    dispatch(
+      updateUserInformation(
+        name,
+        email,
+        oldPassword,
+        newPassword,
+        repeatNewPassword
+      )
+    );
+  };
 
   const handleImage = async (e) => {
     const reader = new FileReader();

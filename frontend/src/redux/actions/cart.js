@@ -62,9 +62,38 @@ export const toggleProductCartStatus = (productId, isInCart) => {
   };
 };
 
-export const updateSubtotal = (productId, subtotal) => {
-  return {
-    type: "UPDATE_SUBTOTAL",
-    payload: { productId, subtotal },
-  };
+export const increaseCartItemQuantity = (productId) => async (dispatch) => {
+  try {
+    const { data } = await axios.post(
+      `${server}/user/increase-quantity/${productId}`,
+      null,
+      {
+        withCredentials: true,
+      }
+    );
+    dispatch({
+      type: "increaseCartItemQuantity",
+      payload: productId,
+    });
+  } catch (error) {
+    console.log("hola");
+  }
+};
+
+export const decreaseCartItemQuantity = (productId) => async (dispatch) => {
+  try {
+    const { data } = await axios.post(
+      `${server}/user/decrease-quantity/${productId}`,
+      null,
+      {
+        withCredentials: true,
+      }
+    );
+    dispatch({
+      type: "decreaseCartItemQuantity",
+      payload: productId,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
 };
