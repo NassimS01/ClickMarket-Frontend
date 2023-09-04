@@ -38,9 +38,9 @@ export const addOrder = (cartItems) => async (dispatch) => {
   try {
     dispatch({
       type: "addOrderRequest",
-    })
+    });
     const { data } = await axios.post(
-      `http://localhost:5000/create-checkout-session`,
+      `${server}/stripe/create-checkout-session`,
       {
         cartItems,
       },
@@ -48,7 +48,7 @@ export const addOrder = (cartItems) => async (dispatch) => {
         withCredentials: true,
       }
     );
-      // console.log(data.url)
+    // console.log(data.url)
     window.location = data.url;
 
     dispatch({

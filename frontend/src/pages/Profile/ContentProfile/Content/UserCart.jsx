@@ -24,26 +24,6 @@ const UserCart = () => {
   }, [dispatch]);
 
   const checkout = () => {
-    // fetch(`${server}/user/add-order`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     products: userCart,
-    //   }),
-    // })
-    //   .then((res) => {
-    //     if (res.ok) return res.json();
-    //     return res.json().then((json) => Promise.reject(json));
-    //   })
-    //   .then(({ url }) => {
-    //     console.log(url);
-    //     // window.location = url;
-    //   })
-    //   .catch((e) => {
-    //     console.error(e.error);
-    //   });
     dispatch(addOrder(userCart))
   };
 

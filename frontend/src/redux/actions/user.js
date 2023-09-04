@@ -141,6 +141,35 @@ export const getUserCart = () => async (dispatch) => {
     }
 };
 
+// get user order
+
+export const getUserOrder = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "getUserOrderRequest",
+    });
+
+    const { data } = await axios.get(`${server}/user/get-user-order`, {
+      withCredentials: true,
+    });
+
+    dispatch({
+      type: "getUserOrderSuccess",
+      payload: data.userOrder,
+    });
+
+    data.userOrder.forEach((product) => {
+      dispatch(toggleProductCartStatus(product._id, true));
+    });
+  } catch (error) {
+    dispatch({
+      type: "getUserOrderFailed",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+
 // delete user
 
 export const deleteUser = (id) => async (dispatch) => {

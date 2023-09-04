@@ -32,7 +32,7 @@ export const ContainerContact = styled.div`
 
   .container-all-contact {
     position: relative;
-    width: 50%;
+    width: 70%;
     background-color: #fff;
     border-radius: 6px;
     padding: 30px 60px 40px 40px;

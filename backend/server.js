@@ -2,25 +2,6 @@ const app = require("./app");
 const connectDatabase = require("./db/Database");
 const cloudinary = require("cloudinary");
 
-// Stripe
-require("dotenv").config();
-
-const express = require("express");
-app.use(express.json());
-app.use(express.static("public"));
-
-const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
-
-const storeItems = new Map([
-  [
-    [1, { priceInCents: 10000, name: "Learn react today" }],
-    [2, { priceInCents: 20000, name: "Learn CSS Today" }],
-  ],
-]);
-
-app.post("/profile/create-checkout-session", (req, res) => {
-  res.json({ url: "Hi" });
-});
 
 // apps.listen(3000);
 
