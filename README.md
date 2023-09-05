@@ -46,6 +46,8 @@ styled-components: Estiliza componentes usando la biblioteca styled-components.
 
 sweetalert2: Muestra atractivos cuadros de diálogo modales para interacciones con el usuario.
 
+react-redux-toolkit: Manejo global de los estados, para una mejor optimización del código.
+
 
 ## Empezando
 Para comenzar con el proyecto, sigue estos pasos:
