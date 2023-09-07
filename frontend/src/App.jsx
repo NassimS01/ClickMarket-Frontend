@@ -4,6 +4,8 @@ import Routes from "./routes/Routes";
 import { loadUser } from "./redux/actions/user";
 import { getAllProducts } from "./redux/actions/product";
 import { useDispatch } from "react-redux";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
     <>
       <Routes />
       <GlobalStyles />
+      <ToastContainer />
     </>
   );
 }

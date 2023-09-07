@@ -6,9 +6,6 @@ import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
 const BtnModal = () => {
   const [showModal, setShowModal] = useState(false);
 
-  
-  
-
   const handleButtonClick = () => {
     setShowModal(true);
   };

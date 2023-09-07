@@ -224,8 +224,6 @@ export const TableStyled = styled.div`
         width: 10%;
       }
     }
-
-    /*  */
   }
 
   @media screen and (max-width: 680px){
