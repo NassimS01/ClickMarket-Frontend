@@ -151,6 +151,8 @@ export const TableStyled = styled.div`
       cursor: pointer;
     }
 
+    
+
     /*  */
 
     /* Estilos crud Usuarios */
@@ -224,5 +226,82 @@ export const TableStyled = styled.div`
     }
 
     /*  */
+  }
+
+  @media screen and (max-width: 680px){
+    flex-direction: row;
+    flex-wrap: wrap;
+    .containerNames{
+      display: none;
+    }
+    .container-info{
+    max-width: none;
+    width: 235px;
+    height: 295px;
+    background-color: white;
+    box-shadow: -1px -0px 7px 1px rgba(0, 0, 0, 0.14);
+    border: 1px solid #efefef;
+    border-radius: 10px;
+    display: unset;
+    flex-direction: none;
+    align-items: none;
+    justify-content: none;
+    padding: 0 5px;
+
+    & .container-img {
+      width: 45%;
+      align-items: normal;
+      justify-content: normal;
+    }
+
+    & .img {
+      margin: 2em 0em 0em 0.5em;
+      width: 80px;
+      height: 80px;
+    }
+
+    & .name {
+      width: 50%;
+      font-weight: 500;
+      display: inline-block;
+      position: relative;
+      margin-left: 95px;
+      top: -75px;
+    }
+
+    .description {
+      width: 100%;
+      font-weight: 500;
+      position: relative;
+      top: -30px;
+    }
+
+    & .price {
+      width: 25%;
+      position: relative;
+      left: 130px;
+      top: -50px;
+      font-weight: 600;
+    }
+    .category {
+      width: 100%;
+      text-transform: capitalize;
+      font-weight: 600;
+      text-align: center;
+      position: relative;
+      top: -20px;
+    }
+
+    & .buttons {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      top: -10px;
+      cursor: pointer;
+    }
+    }
   }
 `;

@@ -104,7 +104,7 @@ export const Wrapper = styled.header`
     display: flex;
   }
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: 785px) {
     padding: 20px;
 
     .menu-btn,
@@ -250,7 +250,7 @@ export const ButtonLink = styled.button`
     background-color: white;
   }
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: 785px) {
     .dropdown-content {
       left: -105px;
     }
