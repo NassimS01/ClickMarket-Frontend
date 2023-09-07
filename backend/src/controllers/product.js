@@ -35,6 +35,7 @@ router.post(
                 price: productData.price,
                 discount: productData.discount,
                 stock: productData.stock,
+                quantity: 1,
                 images: {
                     public_id: myCloud.public_id,
                     url: myCloud.secure_url,
