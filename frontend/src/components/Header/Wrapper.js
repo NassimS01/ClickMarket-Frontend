@@ -16,7 +16,6 @@ export const Wrapper = styled.header`
   -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  ${({ isLoading }) => isLoading && "pointer-events: none;"}
 
   a {
     display: flex;

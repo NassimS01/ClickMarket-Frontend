@@ -3,7 +3,7 @@ import { Carousel } from "react-responsive-carousel";
 import React from "react";
 import { useState } from "react";
 import { bannerImage } from "./SliderImages";
-import { ContainerSlider } from "./SliderStyled";
+import styled  from "styled-components";
 
 
 
@@ -38,4 +38,15 @@ const Slider = () => {
 }
 
 export default Slider;
+
+export const ContainerSlider = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+
+    & .carousel-container{
+        width: 100%;
+    }
+`;
 

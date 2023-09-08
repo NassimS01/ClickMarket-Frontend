@@ -2,12 +2,16 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  max-width: 1500px;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 10px;
-  margin: 2rem auto;
+
+  .overflow{
+    display: flex;
+    max-width: 1500px;
+    gap: 10px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  
 
   .animation {
     transition: all ease 500ms;
@@ -16,6 +20,15 @@ export const Container = styled.div`
   .animation:hover {
     transform: translateY(-10px);
     cursor: pointer;
+  }
+
+  @media only screen and (max-width: 1090px) {
+    .overflow{
+      overflow: auto;
+    }
+    .overflow::-webkit-scrollbar{
+      display:none;
+    }
   }
 `;
 
@@ -41,4 +54,6 @@ export const Category = styled.a`
     font-size: 1rem;
     margin-top: 3px;
   }
+
+  
 `;

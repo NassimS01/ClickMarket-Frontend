@@ -18,6 +18,7 @@ const Categories = () => {
   return (
     <>
       <Container>
+        <div className="overflow">
         <Category
           className="animation"
           onClick={() => navigate("/categorias/bazar")}
@@ -108,6 +109,8 @@ const Categories = () => {
           </Category>
           <p>Panaderia</p>
         </Category>
+        </div>
+        
       </Container>
     </>
   );

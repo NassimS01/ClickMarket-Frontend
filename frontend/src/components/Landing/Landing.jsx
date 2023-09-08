@@ -2,11 +2,11 @@ import CardComponent from "../Card/Card";
 import { getRandomProducts } from "../../../../backend/utils/functions";
 import { ContainerCards, Container } from "./LandingStyle";
 import Categories from "./Categories";
+import Offerts from "./Offerts";
 import ExtraInfo from "../ExtraInfo/ExtraInfo";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { getUserCart, getUserWishlist } from "../../redux/actions/user";
 import Loader from "../Loader/Loader";
+
 
 const Landing = () => {
   const dispatch = useDispatch()
@@ -24,7 +24,7 @@ const Landing = () => {
         ) : (
           <ContainerCards>
             {allProducts &&
-              getRandomProducts(allProducts, 4).map((product) => (
+              getRandomProducts(allProducts, 8).map((product) => (
                 <CardComponent
                   key={product._id}
                   id={product._id}
@@ -39,6 +39,7 @@ const Landing = () => {
               ))}
           </ContainerCards>
         )}
+        <Offerts/>
         <ExtraInfo />
       </Container>
     </>
