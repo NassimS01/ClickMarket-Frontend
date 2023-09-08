@@ -5,7 +5,7 @@ import { BsBuildingAdd, BsCreditCard2Front, BsHouseDoor } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
 import { getUserCart, removeAllFromCart } from "../../redux/actions/user";
-import { alertTime } from "../../../../backend/utils/alerts"
+import { alertTime } from "../../../../backend/src/utils/alerts"
 import { addOrder } from "../../redux/actions/order";
 import { useNavigate } from "react-router";
 import { removeFromCart } from "../../redux/actions/cart";

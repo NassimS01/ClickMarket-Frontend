@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import {  Outlet, useNavigate } from "react-router-dom";
 import { Container } from "./ProfileStyles";
-import { alertConfirmCancel } from "../../../../backend/utils/alerts";
+import { alertConfirmCancel } from "../../../../backend/src/utils/alerts";
 import axios from "axios";
 import { server } from "../../server";
 import PanelProfile from "./PanelProfile/PanelProfile"

@@ -10,7 +10,7 @@ import { server } from "../../../server";
 import { TableStyled } from "../PanelsTwo/ProductsStyled";
 import BtnDelete from "../BtnDelete/BtnDelete";
 import BtnAccept from "../BtnAccept/BtnAccept";
-import { alertConfirmCancel } from "../../../../../backend/utils/alerts";
+import { alertConfirmCancel } from "../../../../../backend/src/utils/alerts";
 
 const Users = ({ search }) => {
   const [data, setData] = useState([]);

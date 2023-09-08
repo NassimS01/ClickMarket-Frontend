@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { CartProduct } from "./ProductCartStyles";
 import { ButtonLink } from "../Header/Wrapper";
 import { BsPlus, BsDash, BsTrash } from "react-icons/bs";
-import { formatPrice } from "../../../../backend/utils/functions";
+import { formatPrice } from "../../../../backend/src/utils/functions";
 import {
   removeFromCart,
   toggleProductCartStatus,
 } from "../../redux/actions/cart";
 import { useDispatch } from "react-redux";
-import { alertTime, alertConfirmCancel } from "../../../../backend/utils/alerts";
+import { alertTime, alertConfirmCancel } from "../../../../backend/src/utils/alerts";
 import { getUserCart, getUserWishlist } from "../../redux/actions/user";
 import { useNavigate } from "react-router-dom";
 import { updateSubtotal } from "../../redux/reducers/cartSlice";

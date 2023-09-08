@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { server } from "../../server";
 import { fetchFilteredCategories } from "../../redux/actions/categories";
-import { alertTime, alertConfirmCancel } from "../../../../backend/utils/alerts";
+import { alertTime, alertConfirmCancel } from "../../../../backend/src/utils/alerts";
 
 
 const Header = () => {

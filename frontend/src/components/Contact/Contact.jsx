@@ -4,7 +4,7 @@ import { FaEnvelope } from "react-icons/fa";
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { ContainerContact } from "./ContactStyles";
-import { alertTime } from "../../../../backend/utils/alerts";
+import { alertTime } from "../../../../backend/src/utils/alerts";
 
 const Contact = () => {
   const form = useRef();

@@ -7,7 +7,7 @@ import BtnDelete from "../BtnDelete/BtnDelete";
 import BtnEdit from "../BtnEdit/BtnEdit";
 import { server } from "../../../server";
 import { AiOutlineSearch } from "react-icons/ai";
-import { alertConfirmCancel } from "../../../../../backend/utils/alerts";
+import { alertConfirmCancel } from "../../../../../backend/src/utils/alerts";
 import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
 
 const Products = ({ search }) => {

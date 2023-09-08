@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { createProduct } from "../../../redux/actions/product";
 import { toast } from "react-toastify";
 import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
-import { alertTime } from "../../../../../backend/utils/alerts";
+import { alertTime } from "../../../../../backend/src/utils/alerts";
 
 const ProductForm = ({ onClose }) => {
   const { success, error } = useSelector((state) => state.product);
