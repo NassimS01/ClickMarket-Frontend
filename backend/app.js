@@ -28,7 +28,7 @@ const stripe = require("./controllers/stripe");
 const user = require("./controllers/user");
 const product = require("./controllers/product");
 
-app.use("/", stripe);
+app.use("/api/v2/stripe", stripe);
 app.use("/api/v2/user", user);
 app.use("/api/v2/products", product);
 

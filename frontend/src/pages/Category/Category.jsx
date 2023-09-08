@@ -9,7 +9,6 @@ import { ButtonGlobal } from "../../components/ButtonGlobal/ButtonGlobal";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const Category = () => {
-  const location = useLocation();
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(0);

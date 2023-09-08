@@ -555,77 +555,29 @@ router.post(
   })
 );
 
-// add order
+// get order
 
-router.post(
-  "/create-checkout-session",
+router.get(
+  "/get-user-order",
   isAuthenticated,
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const userId = req.user.id;
-      const products = req.body.products;
-      const user = await User.findById(userId);
+      const user = await User.findById(req.user.id);
+
       if (!user) {
         return next(new ErrorHandler("Usuario no encontrado", 400));
       }
 
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
-        line_items: products.map((product) => ({
-          name: product.name,
-          description: product.description,
-          images: [product.images.url],
-          amount: product.price,
-          currency: "ARS",
-          quantity: product.quantity,
-        })),
-        mode: "payment",
-        success_url: `${process.env.SERVER_URL}`,
-        cancel_url: `${process.env.SERVER_URL}`,
+      res.status(200).json({
+        success: true,
+        userOrder: user.order,
       });
-
-      res.json({ url: session.url });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
   })
 );
 
-// router.post(
-//   "/add-order",
-//   isAuthenticated,
-//   catchAsyncErrors(async (req, res, next) => {
-//     try {
-//       const userId = req.user.id;
-//       console.log(req.body);
-//       const { userEmail, address, city, zip, orderId, products } = req.body;
-
-//       const user = await User.findById(userId);
-
-//       if (!user) {
-//         return next(new ErrorHandler("Usuario no encontrado", 400));
-//       }
-
-//       user.order.push({
-//         userEmail,
-//         address,
-//         city,
-//         zip,
-//         orderId,
-//         products,
-//       });
-
-//       await user.save();
-
-//       res.status(201).json({
-//         success: true,
-//         message: "Orden agregada al usuario correctamente",
-//       });
-//     } catch (error) {
-//       return next(new ErrorHandler(error.message, 500));
-//     }
-//   })
-// );
 
 // Quitar una orden del usuario
 router.delete(

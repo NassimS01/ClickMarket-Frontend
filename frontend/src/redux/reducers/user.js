@@ -4,6 +4,7 @@ const initialState = {
   isAuthenticated: false,
   userWishlist: [],
   userCart: [],
+  userOrder: [],
 };
 
 export const userReducer = createReducer(initialState, {
@@ -131,7 +132,19 @@ export const userReducer = createReducer(initialState, {
     state.successMessage = null;
   },
 
-  userOrder: (state, action) => {
-    state.userCart = action.payload;
+  // get user order
+
+  getUserOrderRequest: (state) => {
+    state.isLoading = true;
+  },
+  getUserOrderSuccess: (state, action) => {
+    state.isLoading = false;
+    state.success = true;
+    state.userOrder = action.payload;
+  },
+  getUserOrderFailed: (state, action) => {
+    state.isLoading = false;
+    state.error = action.payload;
+    state.success = false;
   },
 });
