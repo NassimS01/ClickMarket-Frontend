@@ -11,6 +11,7 @@ import { TableStyled } from "../PanelsTwo/ProductsStyled";
 import BtnDelete from "../BtnDelete/BtnDelete";
 import BtnAccept from "../BtnAccept/BtnAccept";
 import { alertConfirmCancel } from "../../../../../backend/utils/alerts";
+import "./UserStyles.css";
 
 const Users = ({ search }) => {
   const [data, setData] = useState([]);
@@ -27,25 +28,45 @@ const Users = ({ search }) => {
   }, []);
 
   const handleDelete = (id) => {
-    alertConfirmCancel("", "¿Deseas eliminar a este usuario?", "question", "Confirmar", "Cancelar", () => {
-      dispatch(deleteUser(id));
-      window.location.reload();
-    })
+    alertConfirmCancel(
+      "",
+      "¿Deseas eliminar a este usuario?",
+      "question",
+      "Confirmar",
+      "Cancelar",
+      () => {
+        dispatch(deleteUser(id));
+        window.location.reload();
+      }
+    );
   };
 
   const handleActive = (user, active) => {
     if (!active) {
-      alertConfirmCancel("", "¿Deseas habilitar a este usuario?", "question", "Confirmar", "Cancelar", () => {
-        dispatch(activeUser(user._id, true));
-        window.location.reload();
-      })
+      alertConfirmCancel(
+        "",
+        "¿Deseas habilitar a este usuario?",
+        "question",
+        "Confirmar",
+        "Cancelar",
+        () => {
+          dispatch(activeUser(user._id, true));
+          window.location.reload();
+        }
+      );
     } else {
-      alertConfirmCancel("", "¿Deseas deshabilitar a este usuario?", "question", "Confirmar", "Cancelar", () => {
-        dispatch(activeUser(user._id, false));
-        window.location.reload();
-      })
+      alertConfirmCancel(
+        "",
+        "¿Deseas deshabilitar a este usuario?",
+        "question",
+        "Confirmar",
+        "Cancelar",
+        () => {
+          dispatch(activeUser(user._id, false));
+          window.location.reload();
+        }
+      );
     }
-
   };
 
   return (
@@ -63,7 +84,7 @@ const Users = ({ search }) => {
           }}
         >
           <TableStyled>
-            <div className="containerNames">
+            <div className="containerNames containerNames2">
               <p className="user-active">Activo</p>
               <p className="user-name">Nombre</p>
               <p className="user-email">Email</p>
@@ -79,7 +100,10 @@ const Users = ({ search }) => {
               })
               .map((user) =>
                 user.role == "user" ? (
-                  <div className="container-info" key={user._id}>
+                  <div
+                    className="container-info container-info2"
+                    key={user._id}
+                  >
                     {user.active == false ? (
                       <p className="user-activeTrue">
                         {user.active.toString()}
@@ -92,7 +116,7 @@ const Users = ({ search }) => {
                     <p className="user-name">{user.name}</p>
                     <p className="user-email">{user.email.toLowerCase()}</p>
                     <p className="user-role">{user.role}</p>
-                    <div className="buttons user-buttons">
+                    <div className="buttons user-buttons btns">
                       <BtnAccept user={user} handleActive={handleActive} />
                       <BtnDelete product={user} handleDelete={handleDelete} />
                     </div>

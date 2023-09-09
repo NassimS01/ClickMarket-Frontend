@@ -216,6 +216,29 @@ export const ContainerSignup = styled.div`
     transform: scale(1.5);
     margin-right: .5rem;
   }
+
+  @media screen and (max-width: 660px) {
+    .signup_form_container {
+      width: 85%;
+      flex-direction: column;
+    }
+    .left{
+      border-radius: 9px 9px 0px 0px;
+      & h1{
+        margin-top: 0.5em;
+      }
+      & .white_btn{
+        margin-bottom: 1em;
+      }
+    }
+    .right{
+      border-radius: 0px 0px 9px 9px;
+    }
+
+    .input{
+      width: 265px;
+    }
+  }
 `;
 
 

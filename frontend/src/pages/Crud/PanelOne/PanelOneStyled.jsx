@@ -88,16 +88,29 @@ export const PanelUno = styled.section`
       align-items: center;
       flex-direction: row;
       gap: 40px; 
-    } 
+    }
+
+  @media screen and (max-width: 680px){
+    margin-top: 60px;
+      .user-avatar {
+      display:none;
+    }
+      .cardUser{
+        width: 345px;
+        height: 200px;
+        flex-direction: column;
+        gap: 20px;
+      }
+  }
 
   @media only screen and (max-width: 425px) {
-    .cardUser {
+    /* .cardUser {
       width: 90vw;
       height: auto;
       gap: 10px;
       padding: 10px;
       display: flex;
-    }
+    } */
 
     .infoLeft,.infoCenter,
     .infoRight {

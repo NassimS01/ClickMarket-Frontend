@@ -58,6 +58,12 @@ const GlobalStyles = createGlobalStyle`
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: #ccc;
 }
+
+@media screen and (max-width: 680px){
+  body{
+    overflow-x: hidden;
+  }
+}
 `;
 
 export default GlobalStyles;

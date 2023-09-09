@@ -16,6 +16,7 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
   require("dotenv").config({
     path: "backend/config/.env",
   });
+
 }
 
 //connect db

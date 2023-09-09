@@ -92,7 +92,7 @@ const UserSettings = () => {
                     <BiSolidImageAdd size="40px"/>
                   </div>
                   <div class="text">
-                    <span>Haz click para cambiar el avatar</span>
+                    <span>Haz click para subir una imágen</span>
                   </div>
                   <input type="file" id="file" onChange={handleImage} />
                 </label>

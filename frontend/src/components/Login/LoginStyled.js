@@ -37,7 +37,7 @@ export const ContainerLogin = styled.div`
     border-radius: 10px;
     box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
       0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
-    border: 1px thin #edf5f3;
+    border: 1px thin #edf5f3; 
   }
 
   .left {
@@ -141,5 +141,21 @@ export const ContainerLogin = styled.div`
     cursor: pointer;
     right: 1%;
     top: 30%;
+  }
+
+  @media screen and (max-width: 768px){
+    .login_form_container{
+      width: 85%;
+      flex-direction: column;
+    }
+    .input{
+      width: 265px;
+    }
+    .right{
+      border-radius: 0px 0px 9px 9px;
+    }
+    .left{
+      border-radius: 9px 9px 0px 0px;
+    }
   }
 `;
