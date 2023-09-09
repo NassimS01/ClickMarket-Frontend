@@ -32,7 +32,7 @@ const Cart = () => {
                                         ? "Precio de 1 item seleccionado"
                                         : `Precio de ${item} items seleccionados`}
                                 </p>
-                                <span>{formatPrice(40000)}</span>
+                                <span>{40000}</span>
                             </div>
                             <div className="infoItem">
                                 <p>Descuento</p>
@@ -40,13 +40,13 @@ const Cart = () => {
                             </div>
                             <div className="infoItem">
                                 <p>Costo de envío</p>
-                                <span>{formatPrice(3000)}</span>
+                                <span>{3000}</span>
                             </div>
                         </div>
                         <div className="ordenTotal">
                             <div className="infoItem">
                                 <p className="total">Total:</p>
-                                <span>{formatPrice(43000)}</span>
+                                <span>{43000}</span>
                             </div>
                             <ButtonGlobal green="true">Comprar</ButtonGlobal>
                         </div>
