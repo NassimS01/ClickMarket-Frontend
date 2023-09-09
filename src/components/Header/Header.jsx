@@ -37,6 +37,11 @@ const Header = () => {
     setDropdownOpen((prevDropdownOpen) => !prevDropdownOpen);
   }
 
+  
+  function closeMenu() {
+    setMenuOpen(false);
+  }
+
   const handleWishlist = () => {
     if (isAuthenticated) {
       navigate("profile/wishlist");
@@ -51,6 +56,7 @@ const Header = () => {
       );
     }
   };
+
 
   const handleCart = () => {
     if (isAuthenticated) {
@@ -135,20 +141,24 @@ const Header = () => {
         <AiOutlineMenuUnfold />
       </button>
       <nav className={`nav-links ${menuOpen ? "show" : ""}`} id="nav-links">
-        <LinkItem to="/" onClick={toggleMenu}>
+        <LinkItem to="/" onClick={closeMenu}>
           Inicio
         </LinkItem>
         <LinkItem to={urlCategory}>Categorias</LinkItem>
-        <LinkItem to="/contacto" onClick={toggleMenu}>
+        <LinkItem to="/contacto" onClick={closeMenu}>
           Contacto
         </LinkItem>
         {user?.role === "Admin" ? (
-          <LinkItem to="/panel-admin">Panel Administrativo</LinkItem>
+          <LinkItem to="/panel-admin" onClick={closeMenu}>
+            Panel Administrativo
+          </LinkItem>
         ) : (
           ""
         )}
         {user?.role === "user" ? (
-          <LinkItem to="/profile/orders">Pedidos</LinkItem>
+          <LinkItem to="/profile/orders" onClick={closeMenu}>
+            Pedidos
+          </LinkItem>
         ) : (
           ""
         )}
@@ -175,7 +185,11 @@ const Header = () => {
                   <div className="dropdown-content">
                     {user?.role === "Admin" ? (
                       <>
-                        <Link to="/panel-admin" className="btn-dropdown">
+                        <Link
+                          to="/panel-admin"
+                          className="btn-dropdown"
+                          onClick={closeMenu}
+                        >
                           Panel Administrador
                         </Link>
                         <button
@@ -188,8 +202,9 @@ const Header = () => {
                     ) : (
                       <div className="container-buttons-user">
                         <button
-                          onClick={() => navigate("/profile/settings")}
-                          
+                          onClick={
+                            (() => navigate("/profile/settings"), { closeMenu })
+                          }
                           className="btn-dropdown"
                         >
                           Perfil
@@ -206,7 +221,7 @@ const Header = () => {
                 )}
               </div>
             ) : (
-              <ButtonLink onClick={() => navigate("/login")}>
+              <ButtonLink onClick={(() => navigate("/login"), { closeMenu })}>
                 <AiOutlineUser className="icon" />
               </ButtonLink>
             )}
