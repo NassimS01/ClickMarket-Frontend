@@ -21,7 +21,6 @@ const Contact = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
           alertTime(
             `Mensaje enviado!`,
             "success",
@@ -31,7 +30,6 @@ const Contact = () => {
           form.current.reset();
         },
         (error) => {
-          console.log(error.text);
           alertTime(
             "Error al enviar el mensaje",
             "error",

@@ -17,7 +17,6 @@ const Newsletter = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Datos a enviar", formData);
   };
 
   return (

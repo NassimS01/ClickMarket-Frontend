@@ -72,7 +72,6 @@ const Category = () => {
   const totalPages = Math.ceil(
     filteredAndPaginatedProducts.length / productsPerPage
   );
-  console.log(filteredProducts);
 
   return (
     <SectionCategory>

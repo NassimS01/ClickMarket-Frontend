@@ -16,7 +16,6 @@ const PanelOrders = () => {
        });
    }, []);
 
-   console.log(data)
 
   return (
     <PanelsTwoStyled>

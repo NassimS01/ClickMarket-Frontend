@@ -78,7 +78,6 @@ export const getAllUsers = () => async (dispatch) => {
             payload: data.users,
         });
 
-        console.log(data)
     } catch (error) {
         dispatch({
             type: "getAllUsersFailed",

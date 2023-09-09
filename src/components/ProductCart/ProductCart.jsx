@@ -22,15 +22,12 @@ const ProductCart = ({ id, name, price, stock, img, quantity }) => {
   const dispatch = useDispatch();
   const { userCart } = useSelector((state) => state.user);
 
-  console.log(userCart);
 
   const handleIncreaseQuantity = () => {
-    console.log("increase quantity");
     dispatch(increaseCartItemQuantity(id));
   };
 
   const handleDecreaseQuantity = () => {
-    console.log("decrase quantity");
     if (quantity <= 1) {
       return;
     } else {

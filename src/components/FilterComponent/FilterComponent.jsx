@@ -10,7 +10,6 @@ const FilterComponent = ({ onCategorySelect }) => {
   const [activeFilters, setActiveFilters] = useState([]);
   const { category } = useParams();
 
-  // console.log(category)
 
   const handleFilterClick = (e) => {
     const titleItem = e.target;

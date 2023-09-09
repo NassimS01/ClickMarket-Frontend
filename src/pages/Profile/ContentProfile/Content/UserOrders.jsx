@@ -30,7 +30,6 @@ const UserOrders = () => {
     arrayOfObjects.push(obj);
   });
 
-  console.log(arrayOfObjects.map((customer) => customer));
 
   useEffect(() => {
     dispatch(getUserOrder());

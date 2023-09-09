@@ -76,7 +76,7 @@ export const increaseCartItemQuantity = (productId) => async (dispatch) => {
       payload: productId,
     });
   } catch (error) {
-    console.log("hola");
+    console.log("error", error);
   }
 };
 
@@ -94,6 +94,6 @@ export const decreaseCartItemQuantity = (productId) => async (dispatch) => {
       payload: productId,
     });
   } catch (error) {
-    console.log(error.message);
+    console.log("error", error);
   }
 };

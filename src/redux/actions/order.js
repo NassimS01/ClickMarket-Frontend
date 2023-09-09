@@ -48,7 +48,6 @@ export const addOrder = (cartItems) => async (dispatch) => {
         withCredentials: true,
       }
     );
-    // console.log(data.url)
     window.location = data.url;
 
     dispatch({

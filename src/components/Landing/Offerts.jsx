@@ -21,7 +21,6 @@ const Offerts = () => {
 
     const bebidas = allProducts.filter((product) => product.category === "bebidas")
 
-    console.log(allProducts)
     return (
         <>
             <Container>
