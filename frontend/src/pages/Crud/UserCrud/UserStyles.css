@@ -1,0 +1,15 @@
+@media screen and (max-width: 680px){
+    .containerNames2{
+        display: none;
+    }
+    .container-info2{
+        padding: 1em !important;
+        width: 300px !important;
+        height: 150px !important;
+    }
+    .btns{
+        width: 100px !important;
+        margin-left: 160px;
+    }
+
+}
