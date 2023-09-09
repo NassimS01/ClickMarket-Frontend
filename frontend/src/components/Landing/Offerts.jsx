@@ -93,7 +93,7 @@ const Offerts = () => {
                             discount={bebidas[4].discount}
                             stock={bebidas[4].stock}
                             img={bebidas[4].images.url} />
-                        <CardComponent key={bebidas[5]._id}
+                        {/* <CardComponent key={bebidas[5]._id}
                             id={bebidas[5]._id}
                             name={bebidas[5].name}
                             description={bebidas[5].description}
@@ -101,7 +101,7 @@ const Offerts = () => {
                             price={bebidas[5].price}
                             discount={bebidas[5].discount}
                             stock={bebidas[5].stock}
-                            img={bebidas[5].images.url} />
+                            img={bebidas[5].images.url} /> */}
                     </div>
                 </Carousel>
             </Container>
