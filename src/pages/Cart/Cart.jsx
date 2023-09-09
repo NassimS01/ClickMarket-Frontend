@@ -4,7 +4,6 @@ import { ButtonGlobal } from "../../components/ButtonGlobal/ButtonGlobal";
 import { ButtonLink } from "../../components/Header/Wrapper";
 
 import ProductCart from "../../components/ProductCart/ProductCart";
-import { formatPrice } from "../../../../backend/utils/functions";
 
 const Cart = () => {
 
