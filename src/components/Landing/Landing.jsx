@@ -1,5 +1,5 @@
 import CardComponent from "../Card/Card";
-import { getRandomProducts } from "../../../../backend/utils/functions";
+import { getRandomProducts } from "../../utils/functions.js";
 import { ContainerCards, Container } from "./LandingStyle";
 import Categories from "./Categories";
 import Offerts from "./Offerts";

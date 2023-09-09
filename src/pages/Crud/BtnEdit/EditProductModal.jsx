@@ -5,7 +5,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { editProduct } from "../../../redux/actions/product";
 import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
-import { alertTime } from "../../../../../backend/utils/alerts";
+import { alertTime } from "../../../utils/alerts";
 import { server } from "../../../server";
 
 const EditProductModal = ({ productData, onClose }) => {

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineCamera } from "react-icons/ai";
 import { BiSolidImageAdd } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { alertTime } from "../../../../../../backend/utils/alerts";
+import { alertTime } from "../../../../utils/alerts";
 import {
   loadUser,
   updateUserInformation,

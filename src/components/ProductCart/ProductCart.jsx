@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CartProduct } from "./ProductCartStyles";
 import { ButtonLink } from "../Header/Wrapper";
 import { BsPlus, BsDash, BsTrash } from "react-icons/bs";
-import { formatPrice } from "../../../../backend/utils/functions";
+import { formatPrice } from "../../utils/functions"
 import {
   decreaseCartItemQuantity,
   increaseCartItemQuantity,
@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   alertTime,
   alertConfirmCancel,
-} from "../../../../backend/utils/alerts";
+} from "../../utils/alerts";
 import { getUserCart, getUserWishlist } from "../../redux/actions/user";
 import { useNavigate } from "react-router-dom";
 import { updateSubtotal } from "../../redux/reducers/cartSlice";

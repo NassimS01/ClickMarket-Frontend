@@ -7,6 +7,7 @@ import FilterComponent from "../../components/FilterComponent/FilterComponent";
 import { AiOutlineSearch } from "react-icons/ai";
 import { ButtonGlobal } from "../../components/ButtonGlobal/ButtonGlobal";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 const Category = () => {
   const dispatch = useDispatch();
@@ -32,8 +33,7 @@ const Category = () => {
     if (category) {
       setActiveFilters([category]);
     }
-        window.scrollTo(0, 0);
-
+    window.scrollTo(0, 0);
   }, [category]);
 
   useEffect(() => {
@@ -72,6 +72,7 @@ const Category = () => {
   const totalPages = Math.ceil(
     filteredAndPaginatedProducts.length / productsPerPage
   );
+  console.log(filteredProducts);
 
   return (
     <SectionCategory>
@@ -93,19 +94,33 @@ const Category = () => {
             ></FilterComponent>
           </div>
           <div className="containerCards">
-            {filteredAndPaginatedProducts
-              .slice(
-                currentPage * productsPerPage,
-                (currentPage + 1) * productsPerPage
-              )
-              .map((product) => (
-                <CardComponent
-                  key={product._id}
-                  id={product._id}
-                  {...product}
-                  img={product.images.url}
-                />
-              ))}
+            {filteredProducts.length >= 1 ? (
+              filteredAndPaginatedProducts
+                .slice(
+                  currentPage * productsPerPage,
+                  (currentPage + 1) * productsPerPage
+                )
+                .map((product) => (
+                  <CardComponent
+                    key={product._id}
+                    id={product._id}
+                    {...product}
+                    img={product.images.url}
+                  />
+                ))
+            ) : (
+              <div
+                className="loading"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <CircularProgress size="60px" style={{ marginTop: "50px" }} />
+              </div>
+            )}
           </div>
         </div>
       </div>

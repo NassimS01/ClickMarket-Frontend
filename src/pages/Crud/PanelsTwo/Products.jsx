@@ -7,8 +7,9 @@ import BtnDelete from "../BtnDelete/BtnDelete";
 import BtnEdit from "../BtnEdit/BtnEdit";
 import { server } from "../../../server";
 import { AiOutlineSearch } from "react-icons/ai";
-import { alertConfirmCancel } from "../../../../../backend/utils/alerts";
+import { alertConfirmCancel } from "../../../utils/alerts";
 import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
+import { CircularProgress } from "@mui/material";
 
 const Products = ({ search }) => {
   const [data, setData] = useState([]);
@@ -48,12 +49,12 @@ const Products = ({ search }) => {
         >
           <TableStyled>
             <div className="containerNames">
-              <p style={{  width: "10%"  }}>Imagen</p>
-              <p style={{  width: "20%"  }}>Nombre</p>
-              <p style={{  width: "10%"  }}>Precio</p>
-              <p style={{  width: "30%"  }}>Descripción</p>
-              <p style={{  width: "20%"  }}>Categoría</p>
-              <p style={{  width: "10%"  }}>Botones</p>
+              <p style={{ width: "10%" }}>Imagen</p>
+              <p style={{ width: "20%" }}>Nombre</p>
+              <p style={{ width: "10%" }}>Precio</p>
+              <p style={{ width: "30%" }}>Descripción</p>
+              <p style={{ width: "20%" }}>Categoría</p>
+              <p style={{ width: "10%" }}>Botones</p>
             </div>
 
             {data
@@ -109,15 +110,21 @@ const Products = ({ search }) => {
           </TableStyled>
         </div>
       ) : data.length === 0 && status === "success" ? (
-        <div>
+        {
+          /* <div>
           <h2 style={{ textAlign: "center" }}>No hay productos para mostrar</h2>
-        </div>
+        </div> */
+        }
       ) : (
-        <div className="loading">
-          <h2 style={{ textAlign: "center" }}>Cargando....</h2>
-          <p style={{ textAlign: "center" }}>
-            Espere mientras carga el contenido
-          </p>
+        <div
+          className="loading"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress size="60px" style={{ marginTop: "50px" }} />
         </div>
       )}
     </>

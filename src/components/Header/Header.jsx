@@ -17,7 +17,7 @@ import { fetchFilteredCategories } from "../../redux/actions/categories";
 import {
   alertTime,
   alertConfirmCancel,
-} from "../../../../backend/utils/alerts";
+} from "../../utils/alerts";
 
 const Header = () => {
   const dispatch = useDispatch();

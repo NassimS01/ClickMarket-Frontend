@@ -5,7 +5,7 @@ import { server } from "../../server.js";
 import { toast } from "react-toastify";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from 'axios';
-import { alertTime } from '../../../../backend/utils/alerts';
+import { alertTime } from '../../utils/alerts';
 
 const Login = () => {
   const navigate = useNavigate();

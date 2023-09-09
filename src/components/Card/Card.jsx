@@ -3,14 +3,14 @@ import {
   AiOutlineHeart,
   AiFillHeart,
 } from "react-icons/ai";
-import { getDiscount, formatPrice } from "../../../../backend/utils/functions";
+import { getDiscount, formatPrice } from "../../utils/functions"
 import { ButtonGlobal } from "../ButtonGlobal/ButtonGlobal";
 import { Card, ButtonsCard } from "./CardStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishlist, removeFromWishlist } from "../../redux/actions/wishlist";
 import { addToCart, removeFromCart } from "../../redux/actions/cart";
 import { useLocation, useNavigate } from "react-router-dom";
-import { alertConfirmCancel, alertTime } from "../../../../backend/utils/alerts";
+import { alertConfirmCancel, alertTime } from "../../utils/alerts";
 import { getUserCart, getUserWishlist } from "../../redux/actions/user";
 import { toggleProductWishlistStatus } from '../../redux/actions/wishlist';
 import { toggleProductCartStatus } from '../../redux/actions/cart';

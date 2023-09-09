@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserOrder } from "../../../../redux/actions/user";
 import { useEffect } from "react";
 import { Order, OrderProduct } from "./userOrderStyles";
-import { formatPrice } from "../../../../../../backend/utils/functions";
+import { formatPrice } from "../../../../utils/functions";
 
 const UserOrders = () => {
   const dispatch = useDispatch();

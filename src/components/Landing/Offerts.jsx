@@ -114,8 +114,7 @@ export default Offerts;
 
 export const Container = styled.div`
     .banner{
-        width: 100vw;
-        margin: 2rem 0;
+        width: 100%;
     }
 
     .carousel{
@@ -124,6 +123,10 @@ export const Container = styled.div`
         align-items: center;
         height: auto;
         width: 100%;
+    }
+
+    .carousel .slide img {
+      width: auto;
     }
 
     .section{

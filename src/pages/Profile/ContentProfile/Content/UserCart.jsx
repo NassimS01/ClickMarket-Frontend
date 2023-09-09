@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import { formatPrice } from "../../../../../../backend/utils/functions";
+import { formatPrice } from "../../../../utils/functions";
+
 import { ButtonGlobal } from "../../../../components/ButtonGlobal/ButtonGlobal";
 import { ButtonLink } from "../../../../components/Header/Wrapper";
 import ProductCart from "../../../../components/ProductCart/ProductCart";

@@ -66,6 +66,10 @@ export const SectionCategory = styled.div`
   & .categories {
     display: flex;
     width: 95vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
   }
 
   .containerCards {

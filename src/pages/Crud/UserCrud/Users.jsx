@@ -10,8 +10,9 @@ import { server } from "../../../server";
 import { TableStyled } from "../PanelsTwo/ProductsStyled";
 import BtnDelete from "../BtnDelete/BtnDelete";
 import BtnAccept from "../BtnAccept/BtnAccept";
-import { alertConfirmCancel } from "../../../../../backend/utils/alerts";
+import { alertConfirmCancel } from "../../../utils/alerts";
 import "./UserStyles.css";
+import { CircularProgress  } from "@mui/material";
 
 const Users = ({ search }) => {
   const [data, setData] = useState([]);
@@ -128,15 +129,19 @@ const Users = ({ search }) => {
           </TableStyled>
         </div>
       ) : data.length === 0 && status === "success" ? (
-        <div>
+        {/* <div>
           <h2 style={{ textAlign: "center" }}>No hay productos para mostrar</h2>
-        </div>
+        </div> */}
       ) : (
-        <div className="loading">
-          <h2 style={{ textAlign: "center" }}>Cargando....</h2>
-          <p style={{ textAlign: "center" }}>
-            Espere mientras carga el contenido
-          </p>
+        <div
+          className="loading"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress size="60px" style={{ marginTop: "50px" }} />
         </div>
       )}
     </>
