@@ -17,6 +17,12 @@ export const Wrapper = styled.header`
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
 
+  ${(props) =>
+    props.headernone === "true" &&
+    `
+    display: none;
+  `}
+
   a {
     display: flex;
     flex-direction: column;
@@ -50,6 +56,20 @@ export const Wrapper = styled.header`
     transition: transform 0.3s ease-in-out;
   }
 
+  .active {
+    border-bottom: 3px solid #ff443d;
+    border-radius: 2px;
+    transition: 0s;
+  }
+
+  .active::before {
+    content: "";
+    width: 0;
+    height: 0;
+    transition: 0s;
+    transform: scaleX(0);
+  }
+
   a:hover::before {
     transform-origin: left;
     transform: scaleX(1);
@@ -58,7 +78,7 @@ export const Wrapper = styled.header`
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     font-size: 0.9rem;
   }
   .social-links {
@@ -103,10 +123,10 @@ export const Wrapper = styled.header`
     display: flex;
   }
 
-  .social-links{
+  .social-links {
     margin-right: 15px;
-  } 
-  
+  }
+
   @media screen and (max-width: 576px) {
     padding: 20px;
 
@@ -127,7 +147,6 @@ export const Wrapper = styled.header`
       right: 0;
       flex-direction: column;
       align-items: center;
-      gap: 40px;
       background: #333;
       width: 100vw;
       height: 0;
@@ -139,6 +158,7 @@ export const Wrapper = styled.header`
     .show {
       height: initial;
       padding: 40px;
+      padding-bottom: 100px;
     }
     .nav-links a,
     .dd-btn {
@@ -177,8 +197,17 @@ export const Wrapper = styled.header`
       gap: 20px;
     }
 
-    .social-links a {
-      font-size: 2rem;
+    .dropdown-content {
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .social-links a,
+    .social-links button {
+      padding: 8px;
     }
   }
 `;
@@ -264,7 +293,7 @@ export const ButtonLink = styled.button`
     top: -10px;
     right: -5px;
     color: var(--colorPrimary);
-    padding: 1px 5px;
+    padding: 1px 8px;
     border-radius: 50%;
     background-color: white;
   }

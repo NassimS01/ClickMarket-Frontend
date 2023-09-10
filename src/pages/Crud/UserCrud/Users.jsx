@@ -76,7 +76,7 @@ const Users = ({ search }) => {
         <div
           id="users"
           style={{
-            maxHeight: "800px",
+            // maxHeight: "800px",
             overflowY: "auto",
             display: "flex",
             justifyContent: "center",
@@ -102,7 +102,7 @@ const Users = ({ search }) => {
               .map((user) =>
                 user.role == "user" ? (
                   <div
-                    className="container-info container-info2"
+                    className="container-info"
                     key={user._id}
                   >
                     {user.active == false ? (
