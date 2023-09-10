@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
 
 export const ContainerContact = styled.div`
-  min-height: 100vh;
   width: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,7 +32,7 @@ export const ContainerContact = styled.div`
 
   .container-all-contact {
     position: relative;
-    width: 50%;
+    width: 60%;
     background-color: #fff;
     border-radius: 6px;
     padding: 30px 60px 40px 40px;
@@ -46,7 +46,7 @@ export const ContainerContact = styled.div`
   }
 
   .container-all-contact .content-contact .container-contact-left {
-    width: 45%;
+    width: 35%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -155,7 +155,7 @@ export const ContainerContact = styled.div`
 
   @media (max-width: 950px) {
     .container-all-contact {
-      width: 90%;
+      width: 80%;
       padding: 30px 35px 40px 35px;
     }
   }
@@ -163,17 +163,16 @@ export const ContainerContact = styled.div`
   @media (max-width: 820px) {
     .container-all-contact {
       margin: 40px 0;
-      height: 100%;
+      height: auto;
     }
 
     .container-all-contact .content-contact {
-      flex-direction: column-reverse;
+      flex-direction: column;
     }
 
     .container-all-contact .content-contact .container-contact-left {
       width: 100%;
       flex-direction: row;
-      margin-top: 40px;
       justify-content: center;
       flex-wrap: wrap;
     }
@@ -186,5 +185,9 @@ export const ContainerContact = styled.div`
       width: 100%;
       margin-left: 0;
     }
+  }
+
+  @media (max-width: 500px) {
+    margin: 100px 0;
   }
 `;

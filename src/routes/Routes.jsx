@@ -24,11 +24,12 @@ import ProtectedAdminRoute from "./ProtectedAdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../pages/Profile/Profile";
 import BtnWishlist from "../pages/Profile/ContentProfile/BtnWishlist";
-import BtnCart from "../pages/Profile/ContentProfile/BtnCart"
-import BtnOrders from "../pages/Profile/ContentProfile/BtnOrders"
-import BtnSettings from "../pages/Profile/ContentProfile/BtnSettings"
+import BtnCart from "../pages/Profile/ContentProfile/BtnCart";
+import BtnOrders from "../pages/Profile/ContentProfile/BtnOrders";
+import BtnSettings from "../pages/Profile/ContentProfile/BtnSettings";
 import PaymentPage from "../pages/Payment/PaymentPage";
 import Contact from "../components/Contact/Contact";
+import ActiveUser from "../pages/Signup/ActiveUser/ActiveUser";
 
 const Routes = () => {
   return (
@@ -38,6 +39,7 @@ const Routes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/categorias/:category" element={<Category />} />
           <Route path="/contacto" element={<Contact />} />
+          <Route path="/verify-user/:id" element={<ActiveUser />} />
 
           {/* CRUD ADMIN */}
           <Route
@@ -98,14 +100,14 @@ const Routes = () => {
 
           {/* PAYMENT */}
           <Route
-              path="/payment"
-              element={
-                <ProtectedRoute>
-                  <PaymentPage />
-                </ProtectedRoute>
-              }
-            />
-          
+            path="/payment"
+            element={
+              <ProtectedRoute>
+                <PaymentPage />
+              </ProtectedRoute>
+            }
+          />
+
           <Route path="*" element={<NotFound />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />

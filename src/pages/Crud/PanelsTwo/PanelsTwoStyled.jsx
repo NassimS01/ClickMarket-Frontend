@@ -24,7 +24,8 @@ export const PanelsTwoStyled = styled.section`
 
   .input-search {
     /* position: relative; */
-    width: 350px;
+    min-width: 300px;
+    max-width: 400px;
     height: 40px;
     line-height: 28px;
     padding: 0 1rem;

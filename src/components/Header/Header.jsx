@@ -9,17 +9,15 @@ import {
   AiOutlineHeart,
 } from "react-icons/ai";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import LinkItem from "../LinkItem/LinkItem";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { server } from "../../server";
 import { fetchFilteredCategories } from "../../redux/actions/categories";
-import {
-  alertTime,
-  alertConfirmCancel,
-} from "../../utils/alerts";
+import { alertTime, alertConfirmCancel } from "../../utils/alerts";
 
 const Header = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
   const dispatch = useDispatch();
   const { isAuthenticated, user, userCart, userWishlist } = useSelector(
     (state) => state.user
@@ -29,20 +27,21 @@ const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   function toggleMenu() {
-    setMenuOpen((prevMenuOpen) => !prevMenuOpen);
-    setDropdownOpen(false);
+    setMenuOpen(!menuOpen);
   }
 
   function toggleDropdown() {
-    setDropdownOpen((prevDropdownOpen) => !prevDropdownOpen);
+    setDropdownOpen(!dropdownOpen);
   }
 
-  
   function closeMenu() {
     setMenuOpen(false);
+    setDropdownOpen(false);
   }
 
   const handleWishlist = () => {
+    setMenuOpen(false);
+
     if (isAuthenticated) {
       navigate("profile/wishlist");
     } else {
@@ -57,8 +56,8 @@ const Header = () => {
     }
   };
 
-
   const handleCart = () => {
+    setMenuOpen(false);
     if (isAuthenticated) {
       navigate("profile/cart");
     } else {
@@ -114,8 +113,6 @@ const Header = () => {
     dispatch(fetchFilteredCategories());
   }, [dispatch, userWishlist, userCart]);
 
-  const location = useLocation();
-
   const pathnameSegments = location.pathname.split("/");
   const segment = pathnameSegments[pathnameSegments.length - 1];
   const lastSegment = Object.keys(filteredCategories).includes(segment)
@@ -123,12 +120,12 @@ const Header = () => {
     : "todos";
   const urlCategory = `/categorias/${lastSegment}`;
 
-  return (
-    <Wrapper>
-      <button className="btn search-btn" id="search-btn">
-        <AiOutlineSearch />
-      </button>
+  console.log(location.pathname);
 
+  return (
+    <Wrapper
+      headernone={location.pathname == `/verify-user/${id}` ? "true" : "false"}
+    >
       <div className="logo" onClick={() => navigate("/")}>
         <img src={logoClickMarket} alt="Logo Click Market" className="logo-click"/>
       </div>
@@ -141,28 +138,33 @@ const Header = () => {
         <AiOutlineMenuUnfold />
       </button>
       <nav className={`nav-links ${menuOpen ? "show" : ""}`} id="nav-links">
-        <LinkItem to="/" onClick={closeMenu}>
+        <NavLink
+          to="/"
+          onClick={closeMenu}
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
           Inicio
-        </LinkItem>
-        <LinkItem to={urlCategory}>Categorias</LinkItem>
-        <LinkItem to="/contacto" onClick={closeMenu}>
+        </NavLink>
+        <NavLink to={urlCategory} onClick={closeMenu}>
+          Categorias
+        </NavLink>
+        <NavLink to="/contacto" onClick={closeMenu}>
           Contacto
-        </LinkItem>
+        </NavLink>
         {user?.role === "Admin" ? (
-          <LinkItem to="/panel-admin" onClick={closeMenu}>
+          <NavLink to="/panel-admin" onClick={closeMenu}>
             Panel Administrativo
-          </LinkItem>
+          </NavLink>
         ) : (
           ""
         )}
         {user?.role === "user" ? (
-          <LinkItem to="/profile/orders" onClick={closeMenu}>
+          <NavLink to="/profile/orders" onClick={closeMenu}>
             Pedidos
-          </LinkItem>
+          </NavLink>
         ) : (
           ""
         )}
-        {/* <a href="https://www.google.com/" target="_blank" rel="noreferrer"></a> */}
         <div className="social-links">
           <ButtonLink onClick={handleWishlist} rel="noopener noreferrer">
             <AiOutlineHeart className="icon" />
@@ -180,6 +182,7 @@ const Header = () => {
                   src={`${user?.avatar?.url}`}
                   className="user-avatar"
                   alt=""
+                  to="/login"
                 />
                 {dropdownOpen && (
                   <div className="dropdown-content">
@@ -202,9 +205,10 @@ const Header = () => {
                     ) : (
                       <div className="container-buttons-user">
                         <button
-                          onClick={
-                            (() => navigate("/profile/settings"), { closeMenu })
-                          }
+                          onClick={() => {
+                            navigate("/profile/settings");
+                            closeMenu();
+                          }}
                           className="btn-dropdown"
                         >
                           Perfil
@@ -221,7 +225,12 @@ const Header = () => {
                 )}
               </div>
             ) : (
-              <ButtonLink onClick={(() => navigate("/login"), { closeMenu })}>
+              <ButtonLink
+                onClick={() => {
+                  navigate("/login");
+                  closeMenu();
+                }}
+              >
                 <AiOutlineUser className="icon" />
               </ButtonLink>
             )}

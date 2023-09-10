@@ -4,7 +4,8 @@ export const PanelUno = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 650px;
+  min-width: 300px;
+  max-width: 800px;
   height: 200px;
   text-align: center;
   margin-top: 100px;
@@ -83,24 +84,27 @@ export const PanelUno = styled.section`
     }
   }
 
-   .infoLeft, .infoCenter, .infoRight {
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      gap: 40px; 
-    }
+  .infoLeft,
+  .infoCenter,
+  .infoRight {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 40px;
+  }
 
-  @media screen and (max-width: 680px){
+  @media screen and (max-width: 680px) {
     margin-top: 60px;
-      .user-avatar {
-      display:none;
+    .user-avatar {
+      display: none;
     }
-      .cardUser{
-        width: 345px;
-        height: 200px;
-        flex-direction: column;
-        gap: 20px;
-      }
+    .cardUser {
+      min-width: 300px;
+      max-width: 400px;
+      height: 200px;
+      flex-direction: column;
+      gap: 20px;
+    }
   }
 
   @media only screen and (max-width: 425px) {
@@ -112,7 +116,8 @@ export const PanelUno = styled.section`
       display: flex;
     } */
 
-    .infoLeft,.infoCenter,
+    .infoLeft,
+    .infoCenter,
     .infoRight {
       display: flex;
       align-items: center;

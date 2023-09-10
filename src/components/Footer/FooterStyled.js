@@ -8,7 +8,7 @@ export const StyledFooter = styled.footer`
   border-radius: 15px 15px 0;
   ${({ isLoading }) => isLoading && "pointer-events: none;"}
   ${(props) =>
-    props.footernone &&
+    props.footernone === "true" &&
     `
     display: none;
   `}

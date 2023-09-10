@@ -7,6 +7,7 @@ import {
   AiFillLinkedin,
   AiFillPhone,
   AiFillMail,
+  AiOutlineConsoleSql,
 } from "react-icons/ai";
 import { FaLocationDot } from "react-icons/fa6";
 import logo from "../../assets/CLICK.png";
@@ -16,23 +17,22 @@ import { BsPeopleFill, BsFillPersonLinesFill } from "react-icons/bs";
 import { useLocation } from "react-router";
 
 const Footer = ({ isLoading }) => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2]
   const routesNone = [
     "/login",
     "/signup",
     "/panel-admin",
     "/panel-admin/products",
     "/panel-admin/users",
-    "/panel-admin/orders", 
+    "/panel-admin/orders",
+    `/verify-user/${id}`,
   ];
-  const location = useLocation();
-
 
   return (
     <StyledFooter
       isLoading={isLoading}
-      footernone={
-        routesNone.includes(location.pathname) ? true : false
-      }
+      footernone={routesNone.includes(location.pathname) ? "true" : "false"}
     >
       <div className="container-footer">
         <div className="container-1">
