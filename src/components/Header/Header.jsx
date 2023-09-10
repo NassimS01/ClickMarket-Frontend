@@ -205,9 +205,10 @@ const Header = () => {
                     ) : (
                       <div className="container-buttons-user">
                         <button
-                          onClick={
-                            (() => navigate("/profile/settings"), { closeMenu })
-                          }
+                          onClick={() => {
+                            navigate("/profile/settings");
+                            closeMenu();
+                          }}
                           className="btn-dropdown"
                         >
                           Perfil
