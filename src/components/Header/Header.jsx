@@ -112,7 +112,7 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(fetchFilteredCategories());
-  }, [dispatch]);
+  }, [dispatch, userWishlist, userCart]);
 
   const location = useLocation();
 
@@ -130,7 +130,7 @@ const Header = () => {
       </button>
 
       <div className="logo" onClick={() => navigate("/")}>
-        <img src={logoClickMarket} alt="Logo Click Market" />
+        <img src={logoClickMarket} alt="Logo Click Market" className="logo-click"/>
       </div>
 
       <button
@@ -162,7 +162,7 @@ const Header = () => {
         ) : (
           ""
         )}
-        <a href="https://www.google.com/" target="_blank"></a>
+        {/* <a href="https://www.google.com/" target="_blank" rel="noreferrer"></a> */}
         <div className="social-links">
           <ButtonLink onClick={handleWishlist} rel="noopener noreferrer">
             <AiOutlineHeart className="icon" />

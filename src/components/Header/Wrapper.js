@@ -107,6 +107,7 @@ export const Wrapper = styled.header`
     margin-right: 15px;
   } 
   
+  
   @media screen and (max-width: 576px) {
     padding: 20px;
 
@@ -179,6 +180,16 @@ export const Wrapper = styled.header`
 
     .social-links a {
       font-size: 2rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .logo-click{
+      width: 100px;
+    }
+
+    .nav-links a{
+      font-size: 14px;
     }
   }
 `;

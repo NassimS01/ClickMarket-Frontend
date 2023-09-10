@@ -11,6 +11,7 @@ import { Carousel } from "react-responsive-carousel";
 import { useSelector } from "react-redux";
 import CardComponent from "../Card/Card";
 import Loader from "../Loader/Loader";
+import { useEffect, useState } from "react";
 
 const Offerts = () => {
     const { allProducts } = useSelector((state) => state.product);
@@ -19,7 +20,7 @@ const Offerts = () => {
         return <Loader />;
     }
 
-    const bebidas = allProducts.filter((product) => product.category === "bebidas")
+    const bebidas = allProducts.filter((product) => product.category === "bebidas");
 
     return (
         <>
@@ -33,76 +34,27 @@ const Offerts = () => {
                         <img src={Galicia} alt="" />
                     </div>
                     <div>
-                        <a href="https://campus.rollingcodeschool.com/" target={"_blank"}><img src={RollingCode} alt="banner rolling code" className="banner-rolling" /></a>
+                        <a href="https://campus.rollingcodeschool.com/" target={"_blank"} rel="noreferrer"><img src={RollingCode} alt="banner rolling code" className="banner-rolling" /></a>
                     </div>
                 </section>
                 <img src={OfertasBebidas} alt="banner ofertas bebidas" className="banner" />
-                <Carousel 
-                    showArrows={true}
-                    autoPlay={true}
-                    infiniteLoop={true}
-                    showIndicators={false}
-                    showThumbs={false}
-                    showStatus={false}>
-                    <div className="carousel">
-                        <CardComponent key={bebidas[0]._id}
-                            id={bebidas[0]._id}
-                            name={bebidas[0].name}
-                            description={bebidas[0].description}
-                            category={bebidas[0].category}
-                            price={bebidas[0].price}
-                            discount={bebidas[0].discount}
-                            stock={bebidas[0].stock}
-                            img={bebidas[0].images.url} />
-                        <CardComponent key={bebidas[1]._id}
-                            id={bebidas[1]._id}
-                            name={bebidas[1].name}
-                            description={bebidas[1].description}
-                            category={bebidas[1].category}
-                            price={bebidas[1].price}
-                            discount={bebidas[1].discount}
-                            stock={bebidas[1].stock}
-                            img={bebidas[1].images.url} />
-                        <CardComponent key={bebidas[2]._id}
-                            id={bebidas[2]._id}
-                            name={bebidas[2].name}
-                            description={bebidas[2].description}
-                            category={bebidas[2].category}
-                            price={bebidas[2].price}
-                            discount={bebidas[2].discount}
-                            stock={bebidas[2].stock}
-                            img={bebidas[2].images.url} />
-                    </div>
-                    <div className="carousel">
-                        <CardComponent key={bebidas[3]._id}
-                            id={bebidas[3]._id}
-                            name={bebidas[3].name}
-                            description={bebidas[3].description}
-                            category={bebidas[3].category}
-                            price={bebidas[3].price}
-                            discount={bebidas[3].discount}
-                            stock={bebidas[3].stock}
-                            img={bebidas[3].images.url} />
-                        <CardComponent key={bebidas[4]._id}
-                            id={bebidas[4]._id}
-                            name={bebidas[4].name}
-                            description={bebidas[4].description}
-                            category={bebidas[4].category}
-                            price={bebidas[4].price}
-                            discount={bebidas[4].discount}
-                            stock={bebidas[4].stock}
-                            img={bebidas[4].images.url} />
-                        {/* <CardComponent key={bebidas[5]._id}
-                            id={bebidas[5]._id}
-                            name={bebidas[5].name}
-                            description={bebidas[5].description}
-                            category={bebidas[5].category}
-                            price={bebidas[5].price}
-                            discount={bebidas[5].discount}
-                            stock={bebidas[5].stock}
-                            img={bebidas[5].images.url} /> */}
-                    </div>
-                </Carousel>
+                <div className="render-cards">
+                    {
+                        bebidas && bebidas.map((bebida) => (
+                            <CardComponent key={bebida._id}
+                                id={bebida._id}
+                                name={bebida.name}
+                                description={bebida.description}
+                                category={bebida.category}
+                                price={bebida.price}
+                                discount={bebida.discount}
+                                stock={bebida.stock}
+                                img={bebida.images.url} />
+                        )
+                        )
+                    }
+                </div>
+
             </Container>
         </>
     )
@@ -114,18 +66,6 @@ export default Offerts;
 export const Container = styled.div`
     .banner{
         width: 100%;
-    }
-
-    .carousel{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: auto;
-        width: 100%;
-    }
-
-    .carousel .slide img {
-      width: auto;
     }
 
     .section{
@@ -155,12 +95,18 @@ export const Container = styled.div`
         }
     }
 
+    .render-cards{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
     @media (min-width: 320px) and (max-width: 576px){
         .banner-rolling{
             display: none;
         }
     }
-    
     
 
 `;
