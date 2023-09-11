@@ -55,16 +55,12 @@ Para comenzar con el proyecto, sigue estos pasos:
 ```sh
  git clone https://github.com/NassimS01/Supermarket.git
  ```
-2.Navega al directorio del proyecto:
-```sh
-cd Supermarket
-```
-3.Instala las dependencias del proyecto:
+2.Instala las dependencias del proyecto:
 ```sh
 npm install
 ```
 
-4.Inicia el servidor de desarrollo:
+3.Inicia el servidor de desarrollo:
 ```sh
 npm run dev
 ```
