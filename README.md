@@ -10,11 +10,13 @@ Este README te guiará a través de la configuración, uso y características de
 
 Dependencias
 
+Aclaraciones
+
 Empezando
 
-Contribuciones
-
 Deploy Final
+
+Contribuciones
 
 ## Dependencias
 
@@ -46,12 +48,15 @@ Este proyecto utiliza las siguientes dependencias:
 
 * **react-redux-toolkit:** Manejo global de los estados, para una mejor optimización del código.
 
+## Aclaraciones
+* **stripe:** Stripe tiene limitaciones de carácteres en el modo desarrollador por ende a la hora de cargar más de dos productos no permite realizar la compra.
+Documentación: https://stripe.com/docs/api/metadata
 
 ## Empezando
 Para comenzar con el proyecto, sigue estos pasos:
 1. Clona este repositorio en tu máquina local usando:
 ```sh
- git clone https://github.com/NassimS01/Supermarket.git
+ git clone https://github.com/NassimS01/ClickMarket-Frontend.git
  ```
 2. Instala las dependencias del proyecto:
 ```sh
