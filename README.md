@@ -75,6 +75,9 @@ npm run dev
 ```sh
 npm run dev
 ```
+## Deploy Final
+El Proyecto ha sido desplegado y se puede acceder en: 
+https://clickmarket.vercel.app/
 
 ## Contribuciones
 - [Salomón, Nassim](https://github.com/NassimS01)
@@ -82,7 +85,5 @@ npm run dev
 - [Guevara, Franco](https://github.com/FrancoLadronDeGuevara)
 - [Paez, Francisco](https://github.com/FranX-21) 
 - [Hernandez,Agustina](https://github.com/agustinahernandez17)
-
-
 
 
