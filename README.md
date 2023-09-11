@@ -12,11 +12,9 @@ Dependencias
 
 Empezando
 
-Uso
-
 Contribuciones
 
-
+Deploy Final
 
 ## Dependencias
 
@@ -64,13 +62,7 @@ npm install
 ```sh
 npm run dev
 ```
-## Uso
 
-1. Asegúrate de que el backend del proyecto esté en funcionamiento y accesible.
-2. Ejecuta la aplicación de React:
-```sh
-npm run dev
-```
 ## Deploy Final
 El Proyecto ha sido desplegado y se puede acceder en: 
 https://clickmarket.vercel.app/
