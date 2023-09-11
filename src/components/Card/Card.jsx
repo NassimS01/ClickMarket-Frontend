@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-import {
-  AiOutlineHeart,
-  AiFillHeart,
-} from "react-icons/ai";
-import { getDiscount, formatPrice } from "../../utils/functions"
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { getDiscount, formatPrice } from "../../utils/functions";
 import { ButtonGlobal } from "../ButtonGlobal/ButtonGlobal";
 import { Card, ButtonsCard } from "./CardStyles";
 import { useDispatch, useSelector } from "react-redux";
-import { addToWishlist, removeFromWishlist } from "../../redux/actions/wishlist";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../redux/actions/wishlist";
 import { addToCart, removeFromCart } from "../../redux/actions/cart";
 import { useLocation, useNavigate } from "react-router-dom";
 import { alertConfirmCancel, alertTime } from "../../utils/alerts";
 import { getUserCart, getUserWishlist } from "../../redux/actions/user";
-import { toggleProductWishlistStatus } from '../../redux/actions/wishlist';
-import { toggleProductCartStatus } from '../../redux/actions/cart';
-
-
+import { toggleProductWishlistStatus } from "../../redux/actions/wishlist";
+import { toggleProductCartStatus } from "../../redux/actions/cart";
 
 const CardComponent = ({ id, name, price, img, description, discount }) => {
   const navigate = useNavigate();
@@ -23,25 +21,26 @@ const CardComponent = ({ id, name, price, img, description, discount }) => {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.user);
   const isProductInWishlist = useSelector(
-    (state) => state.wishlist.productInWishlistStatus[id] || false
+    (state) => state.wishlist.productInWishlistStatus[id]
   );
   const isProductInCart = useSelector(
-    (state) => state.cart.productInCartStatus[id] || false
+    (state) => state.cart.productInCartStatus[id]
   );
 
-
   useEffect(() => {
-    dispatch(getUserWishlist());
-  }, []);
+    if (isProductInWishlist) {
+      console.log("hi")
+    } else {
+      console.log("bai")
+    }
+  }, [isProductInWishlist]);
 
-  useEffect(() => {
-    dispatch(getUserCart());
-  }, []);
+  const { userCart } = useSelector((state) => state.user);
+  const { userWishlist } = useSelector((state) => state.user);
 
   const addToCartHandler = (id) => {
     if (isAuthenticated) {
-      dispatch(addToCart(id));
-      dispatch(toggleProductCartStatus(id, true));
+      dispatch(addToCart(id, name, price, img, description, discount));
       alertTime(
         "Agregado al Carrito",
         "success",
@@ -68,16 +67,13 @@ const CardComponent = ({ id, name, price, img, description, discount }) => {
       "Cancelar",
       () => {
         dispatch(removeFromCart(id));
-        dispatch(toggleProductCartStatus(id, false));
-        window.location.reload();
       }
     );
   };
 
   const addToWishlistHandler = (id) => {
     if (isAuthenticated) {
-      dispatch(addToWishlist(id));
-      dispatch(toggleProductWishlistStatus(id, true));
+      dispatch(addToWishlist(id, name, price, img, description, discount));
       alertTime(
         "Agregado a Favoritos",
         "success",
@@ -104,11 +100,17 @@ const CardComponent = ({ id, name, price, img, description, discount }) => {
       "Cancelar",
       () => {
         dispatch(removeFromWishlist(id));
-        dispatch(toggleProductWishlistStatus(id, false));
-        window.location.reload();
       }
     );
   };
+
+  useEffect(() => {
+    dispatch(getUserWishlist());
+  }, [isProductInWishlist]);
+
+  useEffect(() => {
+    dispatch(getUserCart());
+  }, []);
 
   return (
     <>

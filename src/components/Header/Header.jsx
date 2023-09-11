@@ -14,6 +14,7 @@ import axios from "axios";
 import { server } from "../../server";
 import { fetchFilteredCategories } from "../../redux/actions/categories";
 import { alertTime, alertConfirmCancel } from "../../utils/alerts";
+import { getUserCart } from "../../redux/actions/user";
 
 const Header = () => {
   const location = useLocation();
@@ -22,6 +23,7 @@ const Header = () => {
   const { isAuthenticated, user, userCart, userWishlist } = useSelector(
     (state) => state.user
   );
+
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -113,14 +115,16 @@ const Header = () => {
     dispatch(fetchFilteredCategories());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getUserCart());
+  }, []);
+
   const pathnameSegments = location.pathname.split("/");
   const segment = pathnameSegments[pathnameSegments.length - 1];
   const lastSegment = Object.keys(filteredCategories).includes(segment)
     ? `${segment}`
     : "todos";
   const urlCategory = `/categorias/${lastSegment}`;
-
-  console.log(location.pathname);
 
   return (
     <Wrapper
@@ -168,11 +172,11 @@ const Header = () => {
         <div className="social-links">
           <ButtonLink onClick={handleWishlist} rel="noopener noreferrer">
             <AiOutlineHeart className="icon" />
-            <span>{userWishlist && userWishlist.length}</span>
+            <span>{userWishlist.length}</span>
           </ButtonLink>
           <ButtonLink onClick={handleCart} rel="noopener noreferrer">
             <AiOutlineShoppingCart className="icon" />
-            <span>{userCart && userCart.length}</span>
+            <span>{userCart.length}</span>
           </ButtonLink>
 
           <ButtonLink onClick={toggleDropdown}>

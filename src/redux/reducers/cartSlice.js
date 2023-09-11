@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    userCart: [], // Tu array de productos en el carrito
+    userCart: [], 
   },
   reducers: {
     updateSubtotal: (state, action) => {
@@ -13,9 +13,12 @@ const cartSlice = createSlice({
       );
       state.userCart = updatedCart;
     },
-    // ... otras reducers si las tienes
+    removeProductFromCart: (state, action) => {
+      // return state.filter((product) => product.id !== action.payload);
+      // console.log(state)
+    },
   },
 });
 
-export const { updateSubtotal } = cartSlice.actions;
+export const { updateSubtotal, removeProductFromCart } = cartSlice.actions;
 export default cartSlice.reducer;

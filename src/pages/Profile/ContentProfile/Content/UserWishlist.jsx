@@ -25,15 +25,15 @@ const UserWishlist = () => {
               {userWishlist &&
                 userWishlist.map((product) => (
                   <CardComponent
-                    key={product._id}
-                    id={product._id}
+                    key={product._id || product.productId}
+                    id={product._id || product.productId}
                     name={product.name}
                     descrip={product.description}
                     category={product.category}
                     price={product.price}
                     discount={product.discount}
                     stock={product.stock}
-                    img={product.images.url}
+                    img={product.img || product.images.url}
                   />
                 ))}
             </ContainerCards>
