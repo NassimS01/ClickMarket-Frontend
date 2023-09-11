@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   activeUser,
+  activeUserForAdmin,
   deleteUser,
   getAllUsers,
 } from "../../../redux/actions/user";
@@ -51,7 +52,7 @@ const Users = ({ search }) => {
         "Confirmar",
         "Cancelar",
         () => {
-          dispatch(activeUser(user._id, true));
+          dispatch(activeUserForAdmin(user._id, true));
           window.location.reload();
         }
       );
@@ -63,7 +64,7 @@ const Users = ({ search }) => {
         "Confirmar",
         "Cancelar",
         () => {
-          dispatch(activeUser(user._id, false));
+          dispatch(activeUserForAdmin(user._id, false));
           window.location.reload();
         }
       );

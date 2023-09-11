@@ -29,9 +29,7 @@ const CardComponent = ({ id, name, price, img, description, discount }) => {
 
   useEffect(() => {
     if (isProductInWishlist) {
-      console.log("hi")
     } else {
-      console.log("bai")
     }
   }, [isProductInWishlist]);
 

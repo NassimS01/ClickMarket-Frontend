@@ -192,11 +192,35 @@ export const deleteUser = (id) => async (dispatch) => {
   }
 };
 
-// enable user
+// enable or disable user for admin
+export const activeUserForAdmin = (id, updatedData) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "enableUserRequest",
+    });
 
+    const { data } = await axios.put(
+      `${server}/user/active-user-for-admin/${id}`,
+      { active: updatedData },
+      {
+        withCredentials: true,
+      }
+    );
+    dispatch({
+      type: "enableUserSuccess",
+      payload: data.message,
+    });
+  } catch (error) {
+    dispatch({
+      type: "enableUserFailed",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+
+// enable user
 export const activeUser = (id, updatedData) => async (dispatch) => {
-  console.log(updatedData);
-  console.log(id)
   try {
     dispatch({
       type: "enableUserRequest",
