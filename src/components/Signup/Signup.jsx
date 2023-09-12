@@ -4,6 +4,7 @@ import { ContainerSignup } from './SignupStyled';
 import { server } from '../../server';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { toast } from "react-toastify";
+import { alertTime } from '../../utils/alerts';
 import axios from "axios";
 import Loader from "../Loader/Loader";
 
@@ -23,12 +24,24 @@ const Signup = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      toast.error("Las contraseñas no coinciden.");
+      alertTime(
+        "Las contraseñas ingresadas no coinciden",
+        "error",
+        "var(--colorPrimary)",
+        "white",
+        ""
+      );
       return;
     }
 
     if (!isChecked) {
-      toast.error("Debes aceptar los Términos y Condiciones.");
+      alertTime(
+        "Debes aceptar los términos y condiciones",
+        "error",
+        "var(--colorPrimary)",
+        "white",
+        ""
+      );
       return;
     }
 
@@ -37,7 +50,7 @@ const Signup = () => {
     axios
       .post(`${server}/user/create-user`, { name, email, password, avatar })
       .then((res) => {
-        toast.success(res.data.message);
+        alertTime(res.data.message, "success", "green", "white", "");
         setName("");
         setEmail("");
         setPassword("");
@@ -49,7 +62,13 @@ const Signup = () => {
         }, 2000);
       })
       .catch((error) => {
-        toast.error(error.response.data.message);
+        alertTime(
+          error.response.data.message,
+          "error",
+          "var(--colorPrimary)",
+          "white",
+          ""
+        );
         setIsLoading(false);
       });
   };
