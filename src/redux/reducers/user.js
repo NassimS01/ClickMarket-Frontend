@@ -1,10 +1,12 @@
 import { createReducer } from "@reduxjs/toolkit";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 
 const initialState = {
   isAuthenticated: false,
   userWishlist: [],
   userCart: [],
   userOrder: [],
+  userWishListProductStatus: {},
 };
 
 export const userReducer = createReducer(initialState, {
@@ -65,6 +67,21 @@ export const userReducer = createReducer(initialState, {
     state.success = false;
   },
 
+  addProductFromWhislist: (state, action) => {
+    state.userWishlist = [...state.userWishlist, action.payload];
+  },
+
+  removeProductFromWhislist: (state, action) => {
+    state.userWishlist = state.userWishlist.filter(
+      (product) => product._id !== action.payload
+    );
+  },
+
+  productInWishlistStatus: (state, action) => {
+    const { productId, status } = action.payload;
+    state.productInWishlistStatus[productId] = status;
+  },
+
   // user cart
   getUserCartRequest: (state) => {
     state.isLoading = true;
@@ -73,11 +90,23 @@ export const userReducer = createReducer(initialState, {
     state.isLoading = false;
     state.success = true;
     state.userCart = action.payload;
+
+    return state;
   },
   getUserCartFailed: (state, action) => {
     state.isLoading = false;
     state.error = action.payload;
     state.success = false;
+  },
+
+  addProductFromCart: (state, action) => {
+    state.userCart = [...state.userCart, action.payload];
+  },
+
+  removeProductFromCart: (state, action) => {
+    state.userCart = state.userCart.filter(
+      (product) => product._id !== action.payload
+    );
   },
 
   increaseCartItemQuantity: (state, action) => {

@@ -11,6 +11,8 @@ import { getUserCart, getUserWishlist } from "../../../../redux/actions/user";
 import { CartContainer } from "../../../Cart/CartStyles";
 import { server } from "../../../../server";
 import { addOrder } from "../../../../redux/actions/order";
+import { removeFromCart } from "../../../../redux/actions/cart";
+import { alertConfirmCancel } from "../../../../utils/alerts";
 
 const UserCart = () => {
   const dispatch = useDispatch();
@@ -20,13 +22,24 @@ const UserCart = () => {
     return (acc += item.price * item.quantity);
   }, 0);
 
+  const checkout = () => {
+    dispatch(addOrder(userCart));
+  };
+
+  const removeProductFromCart = (productId) => {
+    alertConfirmCancel(
+      "",
+      "¿Deseas eliminar este producto de tu carrito?",
+      "question",
+      "Confirmar",
+      "Cancelar",
+      () => dispatch(removeFromCart(productId))
+    );
+  };
+
   useEffect(() => {
     dispatch(getUserCart());
   }, [dispatch]);
-
-  const checkout = () => {
-    dispatch(addOrder(userCart))
-  };
 
   return (
     <CartContainer>
@@ -44,8 +57,9 @@ const UserCart = () => {
                   name={product.name}
                   price={product.price}
                   stock={product.stock}
-                  img={product.images.url}
+                  img={product.img || product.images.url }
                   quantity={product.quantity}
+                  removeProductFromCart={removeProductFromCart}
                 />
               ))}
             </div>
@@ -83,28 +97,3 @@ const UserCart = () => {
 };
 
 export default UserCart;
-
-const Container = styled.div`
-  margin-top: 100px;
-  .cartSectionRight {
-    position: sticky;
-    top: 0;
-    right: 0;
-    margin-left: 5rem;
-  }
-
-  .cartSectionRight {
-    position: sticky;
-    top: 0;
-    right: 0;
-    margin-left: 1rem;
-  }
-`;
-
-const ButtonPayment = styled.button`
-  background-color: green;
-  border-radius: 10px;
-  position: sticky;
-  top: 0;
-  right: -100%;
-`;

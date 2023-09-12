@@ -1,8 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-    isLoading: false,
-    productInWishlistStatus: {},
+  isLoading: false,
+  productInWishlistStatus: {},
 };
 
 export const wishlistReducer = createReducer(initialState, {
