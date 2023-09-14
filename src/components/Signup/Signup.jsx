@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { ContainerSignup } from './SignupStyled';
 import { server } from '../../server';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { toast } from "react-toastify";
 import { alertTime } from '../../utils/alerts';
 import axios from "axios";
 import Loader from "../Loader/Loader";

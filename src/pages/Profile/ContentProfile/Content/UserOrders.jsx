@@ -36,8 +36,11 @@ const UserOrders = () => {
   }, [dispatch]);
   return (
     <Order>
+      <h2 className="title">
+        {userOrder.length == 0 ? "Todavía no tenés ningun pedido" : "Mis Pedidos"}
+      </h2>
       {arrayOfObjects.map((customer) => (
-        <OrderProduct>
+        <OrderProduct key={customer.customerId}>
           <div className="customer-info" key={customer.customerId}>
             <h2>Datos del pedido:</h2>
             <p>

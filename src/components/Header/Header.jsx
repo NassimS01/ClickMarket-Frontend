@@ -157,7 +157,7 @@ const Header = () => {
         </NavLink>
         {user?.role === "Admin" ? (
           <NavLink to="/panel-admin" onClick={closeMenu}>
-            Panel Administrativo
+            Panel de Gestión
           </NavLink>
         ) : (
           ""
