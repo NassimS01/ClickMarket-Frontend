@@ -2,7 +2,7 @@ import { server } from "../../../server";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { styled } from "styled-components";
-
+import { formatPrice } from "../../../utils/functions";
 
 const PanelOrders = () => {
   const [data, setData] = useState([]);
@@ -44,8 +44,8 @@ const PanelOrders = () => {
               <div className="col col-1" data-label="Usuario">{order.shipping.email}</div>
               <div className="col col-2" data-label="Estado">{order.payment_status === "paid" ? "Pagado" : "Pendiente de Pago"}</div>
               <div className="col col-3" data-label="Envío">{order.delivery_status}</div>
-              <div className="col col-4" data-label="Subtotal">${order.subtotal}</div>
-              <div className="col col-5" data-label="Total">${order.total}</div>
+              <div className="col col-4" data-label="Subtotal">{formatPrice(order.subtotal)}</div>
+              <div className="col col-5" data-label="Total">{formatPrice(order.total)}</div>
               <div className="col col-6" data-label="Detalles"><button className="modal-btn" onClick={() => openModalWithOrder(order)}>...</button></div>
             </li>
           ))
@@ -55,20 +55,20 @@ const PanelOrders = () => {
     {modalVisible && selectedOrder && (
       <Modal>
         <ModalContent>
-          <button onClick={() => setModalVisible(false)} className="close-modal">X</button>
           <h2>Detalles de la Orden</h2>
           <hr />
           {selectedOrder && (
             <>
               <p><b>Orden N°:</b> {selectedOrder._id}</p>
               <p><b>Nombre:</b> {selectedOrder.shipping.name}</p>
-              <p><b>Día de Compra:</b> {selectedOrder.purchaseDate.slice(0,10)}</p>
+              <p><b>Día de Compra:</b> {selectedOrder.purchaseDate.slice(0, 10)}</p>
               <p><b>Dirección:</b> {selectedOrder.shipping.address.city} - {selectedOrder.shipping.address.line1}</p>
               <p><b>CP:</b> {selectedOrder.shipping.address.postal_code}</p>
               <p><b>Provincia:</b> {selectedOrder.shipping.address.state}</p>
               <p><b>Teléfono:</b> {selectedOrder.shipping.phone === null ? (<i>No ingresado</i>) : selectedOrder.shipping.phone}</p>
             </>
           )}
+          <button onClick={() => setModalVisible(false)} className="close-modal">Cerrar</button>
         </ModalContent>
       </Modal>
     )}
@@ -106,7 +106,8 @@ h2 {
     margin-bottom: 20px;
   }
   .table-header {
-    background-color: #95A5A6;
+    font-weight: bold;
+    color: gray;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.03em;
@@ -116,7 +117,37 @@ h2 {
     box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
 
     .modal-btn{
-      padding: 0 20px;
+      border: none;
+      border-radius: 12px;
+      background-color: var(--colorPrimary);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 400;
+      font-size: 16px;
+      width: 50px;
+    }
+
+    .col-1{
+      font-weight: bold;
+    }
+
+    .col-2{
+      color: green;
+      font-weight: bold;
+    }
+
+    .col-3{
+      color: red;
+      font-weight: bold;
+    }
+
+    .col-4{
+      font-weight: bold;
+      font-style: italic;
+    }
+
+    .col-5{
+      font-weight: bold;
     }
   }
 
@@ -140,6 +171,12 @@ h2 {
   }
   
   @media all and (max-width: 767px) {
+    .table-row{
+      .col-2{
+        color: green;
+        font-weight: bold;
+      }
+    }
     .table-header {
       display: none;
     }
@@ -149,7 +186,6 @@ h2 {
     .col {
       font-size: 12px;
       flex-basis: 100%;
-      
     }
     .col {
       display: flex;
@@ -178,10 +214,13 @@ const Modal = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 9999; 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
 `;
 
 const ModalContent = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   padding: 2rem 4rem;
   border-radius: 5px;
@@ -191,13 +230,20 @@ const ModalContent = styled.div`
     text-align: center;
   }
 
+  hr{
+    margin: 1rem 0;
+  }
+
   .close-modal{
     padding: 10px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    background-color: transparent;
     border: none;
-    font-size: 1.5rem;
+    border-radius: 12px;
+    background-color: var(--colorPrimary);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 16px;
+    width: 50%;
+    margin: 1rem auto;
   }
 `;
