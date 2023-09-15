@@ -51,8 +51,8 @@ Este proyecto utiliza las siguientes dependencias:
 ## Aclaraciones
 * **stripe:** Stripe tiene limitaciones de carácteres en el modo desarrollador por ende a la hora de cargar más de dos productos no permite realizar la compra.
 Documentación: https://stripe.com/docs/api/metadata
-Fake card: 4000000320000021 - Se puede colocar cualquier fecha de vencimiento y cvc
-
+* **Fake card:** 4000000320000021 - Se puede colocar cualquier fecha de vencimiento y cvc
+  
 ## Empezando
 Para comenzar con el proyecto, sigue estos pasos:
 1. Clona este repositorio en tu máquina local usando:
