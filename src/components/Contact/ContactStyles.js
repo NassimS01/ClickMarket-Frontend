@@ -99,21 +99,38 @@ export const ContainerContact = styled.div`
     color: var(--colorPrimary);
   }
 
+  .errors {
+    margin-left: 10px;
+    color: var(--colorPrimary);
+  }
+
   .container-contact-right .input-box {
-    height: 50px;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     margin: 12px 0;
   }
 
-  .container-contact-right .input-box input,
-  .container-contact-right .input-box textarea {
-    height: 100%;
+  .container-contact-right .input-box input {
+    height: 50px;
     width: 100%;
     border: none;
     font-size: 16px;
     background-color: #f0f1f8;
     border-radius: 6px;
     padding: 0 15px;
+    resize: none;
+    outline: none;
+  }
+
+  .container-contact-right .input-box textarea {
+    height: 150px;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    background-color: #f0f1f8;
+    border-radius: 6px;
+    padding: 12px;
     resize: none;
     outline: none;
   }

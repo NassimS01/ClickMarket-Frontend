@@ -11,7 +11,11 @@ import {
 import { addToCart, removeFromCart } from "../../redux/actions/cart";
 import { useLocation, useNavigate } from "react-router-dom";
 import { alertConfirmCancel, alertTime } from "../../utils/alerts";
-import { getUserCart, getUserWishlist } from "../../redux/actions/user";
+import {
+  getUserCart,
+  getUserWishlist,
+  loadUser,
+} from "../../redux/actions/user";
 import { toggleProductWishlistStatus } from "../../redux/actions/wishlist";
 import { toggleProductCartStatus } from "../../redux/actions/cart";
 
@@ -103,11 +107,15 @@ const CardComponent = ({ id, name, price, img, description, discount }) => {
   };
 
   useEffect(() => {
-    dispatch(getUserWishlist());
+    if (isAuthenticated) {
+      dispatch(getUserWishlist());
+    }
   }, [isProductInWishlist]);
 
   useEffect(() => {
-    dispatch(getUserCart());
+    if (isAuthenticated) {
+      dispatch(getUserCart());
+    }
   }, []);
 
   return (
