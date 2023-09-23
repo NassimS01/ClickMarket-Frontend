@@ -107,7 +107,7 @@ const Routes = () => {
               </ProtectedRoute>
             }
           />
-
+          <Route path="/notfound" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />

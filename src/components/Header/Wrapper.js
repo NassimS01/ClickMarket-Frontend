@@ -260,8 +260,8 @@ export const ButtonLink = styled.button`
 
   .user-avatar {
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 42px;
+    height: 42px;
   }
 
   .dropdown-content {
@@ -279,8 +279,10 @@ export const ButtonLink = styled.button`
     background-color: var(--colorPrimary);
     color: white;
     padding: 0.3rem;
+    margin: auto auto;
     border-radius: 10px;
-    font-size: 16px;
+    width: 100px;
+    font-size: 14px;
   }
 
   button {

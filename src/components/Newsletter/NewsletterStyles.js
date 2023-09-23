@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const AsideNews = styled.aside`
   background-color: white;
   max-width: 800px;
-  width: 50%;
+  width: 80%;
   height: 235px;
   border-radius: 47px;
   text-align: center;

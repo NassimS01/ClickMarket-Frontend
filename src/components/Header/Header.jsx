@@ -158,12 +158,9 @@ const Header = () => {
         <NavLink to={urlCategory} onClick={closeMenu}>
           Categorias
         </NavLink>
-        <NavLink to="/contacto" onClick={closeMenu}>
-          Contacto
-        </NavLink>
         {user?.role === "Admin" ? (
           <NavLink to="/panel-admin" onClick={closeMenu}>
-            Panel de Gestión
+            Panel de control
           </NavLink>
         ) : (
           ""
@@ -203,13 +200,13 @@ const Header = () => {
                           className="btn-dropdown"
                           onClick={closeMenu}
                         >
-                          Gestión
+                          Panel
                         </Link>
                         <button
                           onClick={logoutHandler}
                           className="btn-dropdown"
                         >
-                          Cerrar Sesión
+                          Salir
                         </button>
                       </>
                     ) : (
@@ -227,7 +224,7 @@ const Header = () => {
                           onClick={logoutHandler}
                           className="btn-dropdown"
                         >
-                          Cerrar Sesión
+                          Salir
                         </button>
                       </div>
                     )}

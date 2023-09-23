@@ -15,6 +15,7 @@ import qr from "../../assets/ClickMarketQR.png";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { BsPeopleFill, BsFillPersonLinesFill } from "react-icons/bs";
 import { useLocation } from "react-router";
+import { NavLink } from "react-router-dom";
 
 const Footer = ({ isLoading }) => {
   const location = useLocation();
@@ -65,25 +66,25 @@ const Footer = ({ isLoading }) => {
           <p href="#" className="text link">
             <AiFillPhone color="var(--colorPrimary)" /> +54 381-5367724
           </p>
-          <a href="#" className="text link">
+          <p className="text link">
             <AiFillMail color="var(--colorPrimary)" /> clickmarket@support.com
-          </a>
+          </p>
         </div>
 
         <div className="container-3">
           <h3 className="container-title">Soporte</h3>
-          <a href="#" className="link">
+          <NavLink to="/notfound" className="link">
             <LiaShippingFastSolid color="var(--colorPrimary)" size="20px" />
             Envíos y devoluciones
-          </a>
-          <a href="#" className="link">
+          </NavLink>
+          <NavLink to="/contacto" className="link">
             <BsPeopleFill color="var(--colorPrimary)" size="20px" />
-            Acerca de nosotros
-          </a>
-          <a href="#" className="link">
+            Contacto
+          </NavLink>
+          <NavLink to="/notfound" className="link">
             <BsFillPersonLinesFill color="var(--colorPrimary)" size="20px" />
             Patrocinios
-          </a>
+          </NavLink>
         </div>
 
         <div className="container-4">
