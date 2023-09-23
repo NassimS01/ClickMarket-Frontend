@@ -32,8 +32,8 @@ const ProductForm = ({ onClose }) => {
     }
   }, [dispatch, error, success]);
 
-  const regexProd = /^[a-zA-Z0-9 ]{1,30}$/
-  const regexDesc = /^[a-zA-Z0-9 ]{1,40}$/
+  const regexProd = /^[a-zA-Z0-9,. -]{1,30}$/
+  const regexDesc = /^[a-zA-Z0-9,. -]{1,40}$/
   const regexPrice = /^(?!0+$)[0-9]{2,6}$/
   const regexStock = /^(?!0+$)[0-9]{1,6}$/
   const regexDisc = /^(?!0{1,2}$)(10|[1-9][0-9]|90)$/
