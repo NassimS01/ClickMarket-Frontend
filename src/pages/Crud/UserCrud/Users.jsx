@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   activeUser,
   activeUserForAdmin,
@@ -11,23 +11,26 @@ import { server } from "../../../server";
 import { TableStyled } from "../PanelsTwo/ProductsStyled";
 import BtnDelete from "../BtnDelete/BtnDelete";
 import BtnAccept from "../BtnAccept/BtnAccept";
-import { alertConfirmCancel } from "../../../utils/alerts";
+import { alertConfirmCancel, alertTime } from "../../../utils/alerts";
 import "./UserStyles.css";
 import { CircularProgress  } from "@mui/material";
 
 const Users = ({ search }) => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
+  const {users} = useSelector((state)=> state.user)
 
   useEffect(() => {
-    axios
-      .get(`${server}/user/admin-all-users`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setData(res.data.users);
-      });
+    // axios
+    //   .get(`${server}/user/admin-all-users`, {
+    //     withCredentials: true,
+    //   })
+    //   .then((res) => {
+    //     setData(res.data.users);
+    //   });
+    dispatch(getAllUsers())
   }, []);
+
 
   const handleDelete = (id) => {
     alertConfirmCancel(
@@ -38,7 +41,15 @@ const Users = ({ search }) => {
       "Cancelar",
       () => {
         dispatch(deleteUser(id));
-        window.location.reload();
+        alertTime(
+          "Usuario eliminado correctamente",
+          "success",
+          "green",
+          "white"
+        )
+        let interval = setInterval(()=>{
+          window.location.reload()
+        },2000)
       }
     );
   };
@@ -53,7 +64,15 @@ const Users = ({ search }) => {
         "Cancelar",
         () => {
           dispatch(activeUserForAdmin(user._id, true));
-          window.location.reload();
+          alertTime(
+            "Usuario habilitado",
+            "success",
+            "green",
+            "white"
+          )
+          let interval = setInterval(()=>{
+            window.location.reload()
+          },2000)
         }
       );
     } else {
@@ -65,7 +84,15 @@ const Users = ({ search }) => {
         "Cancelar",
         () => {
           dispatch(activeUserForAdmin(user._id, false));
-          window.location.reload();
+          alertTime(
+            "Usuario deshabilitado",
+            "success",
+            "red",
+            "white"
+          )
+          let interval = setInterval(()=>{
+            window.location.reload()
+          },2000)
         }
       );
     }
@@ -73,7 +100,7 @@ const Users = ({ search }) => {
 
   return (
     <>
-      {data.length >= 2 ? (
+      {users && users.length >= 2 ? (
         <div
           id="users"
           style={{
@@ -94,7 +121,7 @@ const Users = ({ search }) => {
               <p className="user-buttons">Acciones</p>
             </div>
 
-            {data
+            {users
               .filter((user) => {
                 return search.toLowerCase() == "todos"
                   ? user
