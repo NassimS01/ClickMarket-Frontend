@@ -1,5 +1,4 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { AiOutlineConsoleSql } from "react-icons/ai";
 
 const initialState = {
   isAuthenticated: false,
@@ -27,7 +26,7 @@ export const userReducer = createReducer(initialState, {
     state.isAuthenticated = false;
   },
 
-  // update user information
+
   updateUserInfoRequest: (state) => {
     state.loading = true;
   },
@@ -41,7 +40,7 @@ export const userReducer = createReducer(initialState, {
     state.error = action.payload;
   },
 
-  // get all users --- admin
+
   getAllUsersRequest: (state) => {
     state.usersLoading = true;
   },
@@ -54,7 +53,6 @@ export const userReducer = createReducer(initialState, {
     state.error = action.payload;
   },
 
-  //user wishlist
   getUserWishlistRequest: (state) => {
     state.isLoading = true;
   },
@@ -84,7 +82,7 @@ export const userReducer = createReducer(initialState, {
     state.productInWishlistStatus[productId] = status;
   },
 
-  // user cart
+
   getUserCartRequest: (state) => {
     state.isLoading = true;
   },
@@ -163,7 +161,6 @@ export const userReducer = createReducer(initialState, {
     state.successMessage = null;
   },
 
-  // get user order
 
   getUserOrderRequest: (state) => {
     state.isLoading = true;

@@ -117,11 +117,9 @@ const Products = ({ search }) => {
           </TableStyled>
         </div>
       ) : data.length === 0 && status === "success" ? (
-        {
-          /* <div>
+        <div>
           <h2 style={{ textAlign: "center" }}>No hay productos para mostrar</h2>
-        </div> */
-        }
+        </div>
       ) : (
         <div
           className="loading"

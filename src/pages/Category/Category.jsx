@@ -6,7 +6,7 @@ import { fetchFilteredProducts } from "../../redux/actions/filterProducts";
 import FilterComponent from "../../components/FilterComponent/FilterComponent";
 import { AiOutlineSearch } from "react-icons/ai";
 import { ButtonGlobal } from "../../components/ButtonGlobal/ButtonGlobal";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 
 const Category = () => {

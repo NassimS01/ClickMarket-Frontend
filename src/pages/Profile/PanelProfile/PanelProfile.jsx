@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import { LeftContainer } from "./PanelProfileStyles";
 import { AiFillHeart, AiFillShopping, AiFillSetting } from "react-icons/ai";
 import { BsCartFill } from "react-icons/bs";
 import { useSelector } from "react-redux";

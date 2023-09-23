@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { styled } from "styled-components";
+import { Link } from "react-router-dom";
 import { formatPrice } from "../../../../utils/functions";
-
 import { ButtonGlobal } from "../../../../components/ButtonGlobal/ButtonGlobal";
-import { ButtonLink } from "../../../../components/Header/Wrapper";
 import ProductCart from "../../../../components/ProductCart/ProductCart";
-import { getUserCart, getUserWishlist } from "../../../../redux/actions/user";
+import { getUserCart } from "../../../../redux/actions/user";
 import { CartContainer } from "../../../Cart/CartStyles";
-import { server } from "../../../../server";
 import { addOrder } from "../../../../redux/actions/order";
 import { removeFromCart } from "../../../../redux/actions/cart";
 import { alertConfirmCancel } from "../../../../utils/alerts";

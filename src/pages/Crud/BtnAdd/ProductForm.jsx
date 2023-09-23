@@ -3,15 +3,12 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { ModalStyled } from "./ModalStyled";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { createProduct } from "../../../redux/actions/product";
-import { toast } from "react-toastify";
 import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
 import { alertTime } from "../../../utils/alerts";
 
 const ProductForm = ({ onClose }) => {
   const { success, error } = useSelector((state) => state.product);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [images, setImages] = useState("");
@@ -22,7 +19,6 @@ const ProductForm = ({ onClose }) => {
   const [discount, setDiscount] = useState();
   const [stock, setStock] = useState();
   const [state, setState] = useState();
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (error) {
@@ -35,9 +31,6 @@ const ProductForm = ({ onClose }) => {
       }, 1500);
     }
   }, [dispatch, error, success]);
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const regexProd = /^[a-zA-Z0-9 ]{1,30}$/
   const regexDesc = /^[a-zA-Z0-9 ]{1,40}$/

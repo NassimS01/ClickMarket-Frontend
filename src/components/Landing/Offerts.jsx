@@ -7,11 +7,9 @@ import MercadoPago from "../../assets/images/Landing/mercadopago.png"
 import PersonalPay from "../../assets/images/Landing/personalpay.png"
 import Galicia from "../../assets/images/Landing/galicia.png"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
 import { useSelector } from "react-redux";
 import CardComponent from "../Card/Card";
 import Loader from "../Loader/Loader";
-import { useEffect, useState } from "react";
 
 const Offerts = () => {
     const { allProducts } = useSelector((state) => state.product);

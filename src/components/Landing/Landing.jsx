@@ -4,12 +4,11 @@ import { ContainerCards, Container } from "./LandingStyle";
 import Categories from "./Categories";
 import Offerts from "./Offerts";
 import ExtraInfo from "../ExtraInfo/ExtraInfo";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
 
 
 const Landing = () => {
-  const dispatch = useDispatch()
   const {allProducts, isLoading} = useSelector((state)=> state.product);
 
 

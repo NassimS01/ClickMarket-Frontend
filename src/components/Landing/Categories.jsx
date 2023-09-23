@@ -10,7 +10,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import { PiBeerBottleDuotone, PiOrangeSliceDuotone } from "react-icons/pi";
 import { BsSnow } from "react-icons/bs";
 import { Container, Category } from "./CategoryStyles";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Categories = () => {
   const navigate = useNavigate();

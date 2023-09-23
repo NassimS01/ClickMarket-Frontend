@@ -23,7 +23,7 @@ export const loadUser = () => async (dispatch) => {
   }
 };
 
-//user update information
+
 export const updateUserInformation =
   (name, email, oldPassword, newPassword, repeatNewPassword) =>
   async (dispatch) => {
@@ -62,7 +62,7 @@ export const updateUserInformation =
     }
   };
 
-// get all users --- admin
+
 export const getAllUsers = () => async (dispatch) => {
   try {
     dispatch({
@@ -85,7 +85,7 @@ export const getAllUsers = () => async (dispatch) => {
   }
 };
 
-//get user wishlist
+
 export const getUserWishlist = () => async (dispatch) => {
   try {
     dispatch({
@@ -112,7 +112,6 @@ export const getUserWishlist = () => async (dispatch) => {
   }
 };
 
-// get user cart
 export const getUserCart = () => async (dispatch) => {
   try {
     dispatch({
@@ -139,7 +138,6 @@ export const getUserCart = () => async (dispatch) => {
   }
 };
 
-// get user order
 
 export const getUserOrder = () => async (dispatch) => {
   try {
@@ -167,7 +165,6 @@ export const getUserOrder = () => async (dispatch) => {
   }
 };
 
-// delete user
 
 export const deleteUser = (id) => async (dispatch) => {
   try {
@@ -191,7 +188,7 @@ export const deleteUser = (id) => async (dispatch) => {
   }
 };
 
-// enable or disable user for admin
+
 export const activeUserForAdmin = (id, updatedData) => async (dispatch) => {
   try {
     dispatch({
@@ -217,7 +214,7 @@ export const activeUserForAdmin = (id, updatedData) => async (dispatch) => {
   }
 };
 
-// enable user
+
 export const activeUser = (id, updatedData) => async (dispatch) => {
   try {
     dispatch({

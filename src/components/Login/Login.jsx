@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { ContainerLogin } from "./LoginStyled";
 import { server } from "../../server.js";
-import { toast } from "react-toastify";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from 'axios';
 import { alertTime } from '../../utils/alerts';

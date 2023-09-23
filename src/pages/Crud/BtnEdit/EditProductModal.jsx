@@ -1,17 +1,13 @@
 import { ModalStyled } from "../BtnAdd/ModalStyled";
-import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { editProduct } from "../../../redux/actions/product";
 import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
 import { alertTime } from "../../../utils/alerts";
-import { server } from "../../../server";
 
 const EditProductModal = ({ productData, onClose }) => {
   const dispatch = useDispatch();
 
-  // Estados locales para los campos editables
   const [name, setName] = useState(productData && productData.name);
   const [price, setPrice] = useState(productData && productData.price);
   const [discount, setDiscount] = useState(productData && productData.discount);
@@ -21,7 +17,6 @@ const EditProductModal = ({ productData, onClose }) => {
   const [state, setState] = useState(productData && productData.state);
 
   useEffect(() => {
-    // Actualiza los campos del formulario cuando se reciben los nuevos datos del producto a editar
     if (productData) {
       setName(productData.name);
       setPrice(productData.price);

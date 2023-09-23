@@ -39,7 +39,6 @@ export const productReducer = createReducer(initialState, {
     },
 
 
-    // edit product
     editProductRequest: (state) => {
         state.isLoading = true;
     },
@@ -50,9 +49,5 @@ export const productReducer = createReducer(initialState, {
     editProductFailed: (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-    },
-
-    clearErrors: (state) => {
-        state.error = null;
-    },
+    }
 });

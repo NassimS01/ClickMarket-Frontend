@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import {
   BrowserRouter,
@@ -15,11 +15,6 @@ import Layout from "../components/layout/Layout";
 import Home from "../pages/Home/Home";
 import Category from "../pages/Category/Category";
 import Signup from "../pages/Signup/SignupPage";
-
-import Cart from "../pages/Cart/Cart";
-import Store from "../redux/store";
-import { loadUser } from "../redux/actions/user";
-import { getAllProducts } from "../redux/actions/product";
 import ProtectedAdminRoute from "./ProtectedAdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../pages/Profile/Profile";
@@ -41,7 +36,6 @@ const Routes = () => {
           <Route path="/contacto" element={<Contact />} />
           <Route path="/verify-user/:id" element={<ActiveUser />} />
 
-          {/* CRUD ADMIN */}
           <Route
             path="/panel-admin/*"
             element={
@@ -55,7 +49,6 @@ const Routes = () => {
             <Route path="orders" element={<PanelOrders />} />
           </Route>
 
-          {/* PANEL USER */}
           <Route
             path="/profile/*"
             element={
@@ -98,7 +91,6 @@ const Routes = () => {
             />
           </Route>
 
-          {/* PAYMENT */}
           <Route
             path="/payment"
             element={

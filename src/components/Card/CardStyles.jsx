@@ -55,8 +55,6 @@ export const Card = styled.div`
   & .product-description {
     height: 50px;
     width: 230px;
-    /* white-space: nowrap; */
-    /* overflow: hidden; */
     text-overflow: ellipsis;
   }
 

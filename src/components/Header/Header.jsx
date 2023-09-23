@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { ButtonLink, Wrapper } from "./Wrapper";
 import logoClickMarket from "../../assets/CLICK.png";
 import {
-  AiOutlineSearch,
   AiOutlineMenuUnfold,
   AiOutlineShoppingCart,
   AiOutlineUser,

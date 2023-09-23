@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { BiCheck, BiX } from "react-icons/bi";
 
 const BtnAccept = ({ user, handleActive }) => {
-
-
-
   return (
     <>
       {user.active == true ? (

@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { BiTrashAlt } from "react-icons/bi";
 
 const BtnDelete = ({ product, handleDelete }) => {

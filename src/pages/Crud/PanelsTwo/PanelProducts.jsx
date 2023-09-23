@@ -13,7 +13,6 @@ const PanelProducts = () => {
 
   return (
     <PanelsTwoStyled>
-      {/* <h2 className="title">Productos</h2> */}
       <div className="container">
         <div className="searchContainer">
           <AiOutlineSearch className="icon-search" />

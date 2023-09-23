@@ -1,4 +1,3 @@
-import Categories from "../components/Landing/Categories";
 import { getProductsFromDatabase } from "./fetchingData";
 
 export async function totalProducts() {
@@ -15,7 +14,7 @@ export async function totalProducts() {
 
 export async function filterProductsByCategory() {
   try {
-    const products = await getProductsFromDatabase(); // Obtener productos de la base de datos
+    const products = await getProductsFromDatabase();
 
     const productsFilter = products.reduce((acc, product) => {
       if (!acc[product.category]) {

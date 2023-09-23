@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { AiOutlineCamera } from "react-icons/ai";
 import { BiSolidImageAdd } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { alertTime } from "../../../../utils/alerts";
@@ -86,12 +85,12 @@ const UserSettings = () => {
             <div className="container-avatar">
               <img src={`${user?.avatar?.url}`} alt="" className="avatar" />
               <div>
-                <label class="custum-file-upload" for="file">
-                  <div class="icon">
+                <label className="custum-file-upload" htmlFor="file">
+                  <div className="icon">
                     <BiSolidImageAdd size="40px"/>
                   </div>
-                  <div class="text">
-                    <span>Haz click para subir una imágen</span>
+                  <div className="text">
+                    <span>Haz click para subir una imagen</span>
                   </div>
                   <input type="file" id="file" onChange={handleImage} />
                 </label>

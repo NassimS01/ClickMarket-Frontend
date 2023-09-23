@@ -108,14 +108,6 @@ export const PanelUno = styled.section`
   }
 
   @media only screen and (max-width: 425px) {
-    /* .cardUser {
-      width: 90vw;
-      height: auto;
-      gap: 10px;
-      padding: 10px;
-      display: flex;
-    } */
-
     .infoLeft,
     .infoCenter,
     .infoRight {

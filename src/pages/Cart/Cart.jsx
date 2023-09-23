@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { CartContainer } from "./CartStyles";
 import { ButtonGlobal } from "../../components/ButtonGlobal/ButtonGlobal";
-import { ButtonLink } from "../../components/Header/Wrapper";
-
-import ProductCart from "../../components/ProductCart/ProductCart";
 
 const Cart = () => {
 
@@ -18,9 +15,6 @@ const Cart = () => {
             ) : (
                 <div className="cart">
                     <div className="cartSectionLeft">
-                        {/* {data.map((product) => (
-                            <ProductCart key={product.id} {...product}></ProductCart>
-                        ))} */}
                         <ButtonGlobal>Limpiar carrito</ButtonGlobal>
                     </div>
                     <div className="cartSectionRigth">

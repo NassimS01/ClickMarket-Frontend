@@ -1,7 +1,7 @@
 import axios from "axios";
 import { server } from "../../server";
 
-// add product to wishlist
+
 export const addToWishlist =
   (productId, name, price, img, description, discount) => async (dispatch) => {
     try {
@@ -26,7 +26,7 @@ export const addToWishlist =
     }
   };
 
-// remove product from wishlist
+
 export const removeFromWishlist = (productId) => async (dispatch) => {
   try {
     const { data } = await axios.delete(

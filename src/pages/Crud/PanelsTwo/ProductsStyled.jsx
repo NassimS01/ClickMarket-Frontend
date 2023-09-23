@@ -109,8 +109,6 @@ export const TableStyled = styled.div`
     justify-content: space-around;
     padding: 0 5px;
 
-    /* estilos crud PRODUCTOS */
-
     & .container-img {
       width: 10%;
       display: flex;
@@ -150,10 +148,6 @@ export const TableStyled = styled.div`
       gap: 15px;
       cursor: pointer;
     }
-
-    /*  */
-
-    /* Estilos crud Usuarios */
 
     .user-activeTrue {
       width: 20%;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { CartProduct } from "./ProductCartStyles";
 import { ButtonLink } from "../Header/Wrapper";
 import { BsPlus, BsDash, BsTrash } from "react-icons/bs";
@@ -6,17 +6,9 @@ import { formatPrice } from "../../utils/functions"
 import {
   decreaseCartItemQuantity,
   increaseCartItemQuantity,
-  removeFromCart,
-  toggleProductCartStatus,
 } from "../../redux/actions/cart";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  alertTime,
-  alertConfirmCancel,
-} from "../../utils/alerts";
-import { getUserCart, getUserWishlist } from "../../redux/actions/user";
-import { useNavigate } from "react-router-dom";
-import { updateSubtotal } from "../../redux/reducers/cartSlice";
+import { getUserCart } from "../../redux/actions/user";
 
 const ProductCart = ({
   id,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { getDiscount, formatPrice } from "../../utils/functions";
 import { ButtonGlobal } from "../ButtonGlobal/ButtonGlobal";
@@ -9,15 +9,12 @@ import {
   removeFromWishlist,
 } from "../../redux/actions/wishlist";
 import { addToCart, removeFromCart } from "../../redux/actions/cart";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { alertConfirmCancel, alertTime } from "../../utils/alerts";
 import {
   getUserCart,
   getUserWishlist,
-  loadUser,
 } from "../../redux/actions/user";
-import { toggleProductWishlistStatus } from "../../redux/actions/wishlist";
-import { toggleProductCartStatus } from "../../redux/actions/cart";
 
 const CardComponent = ({ id, name, price, img, description, discount }) => {
   const navigate = useNavigate();

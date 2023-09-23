@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { AsideNews } from "./NewsletterStyles";
-import { Container } from "../ExtraInfo/ExtraInfoStyles";
 
 const Newsletter = () => {
   const [formData, setFormData] = useState({

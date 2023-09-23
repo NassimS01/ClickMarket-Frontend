@@ -1,7 +1,6 @@
 import Lottie from "lottie-react";
 import loaderAnimation from "../../assets/animation/loaderAnimation.json";
 import { styled } from "styled-components";
-import Routes from "../../routes/Routes";
 
 const Container = styled.div`
     position: fixed;

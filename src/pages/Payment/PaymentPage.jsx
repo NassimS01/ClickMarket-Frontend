@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BiLogoMastercard, BiLogoVisa } from "react-icons/bi";
 import { BsBuildingAdd, BsCreditCard2Front, BsHouseDoor } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
-import { getUserCart, removeAllFromCart } from "../../redux/actions/user";
+import { getUserCart } from "../../redux/actions/user";
 import { alertTime } from "../../utils/alerts";
 import { addOrder } from "../../redux/actions/order";
 import { useNavigate } from "react-router";
-import { removeFromCart } from "../../redux/actions/cart";
 import axios from "axios";
 import { server } from "../../server";
 
@@ -28,7 +27,6 @@ const PaymentPage = () => {
   const [cvv, setCvv] = useState(0);
 
   let totalPrice = 0;
-  const subtotal = userCart.map((product) => (totalPrice += product.price));
 
   if (userCart.length === 0) {
     navigate("/");
@@ -404,7 +402,6 @@ const Container = styled.div`
     color: grey;
   }
 
-  /* Responsive layout */
   @media screen and (min-width: 768px) {
     .row {
       flex-direction: column;
