@@ -52,7 +52,7 @@ const UserCart = () => {
             <div className="cartSectionLeft">
               {userCart.map((product) => (
                 <ProductCart
-                  key={product._id}
+                  key={product.name}
                   id={product._id}
                   name={product.name}
                   price={product.price}

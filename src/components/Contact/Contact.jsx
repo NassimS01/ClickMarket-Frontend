@@ -4,13 +4,14 @@ import { FaEnvelope } from "react-icons/fa";
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { ContainerContact } from "./ContactStyles";
-import { alertTime } from "../../utils/alerts"
+import { alertTime } from "../../utils/alerts";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 
 const Contact = () => {
   const form = useRef();
 
   const sendEmail = (e) => {
-    e.preventDefault();
 
     emailjs
       .sendForm(
@@ -39,6 +40,22 @@ const Contact = () => {
         }
       );
   };
+
+  const ContactSchema = Yup.object().shape({
+    user_name: Yup.string()
+      .min(2, "Se permiten mínimo 2 carácteres")
+      .max(20, "Se permiten máximo 20 carácteres")
+      .required("Este campo es requerido")
+      .matches(/^[a-zA-Z]+$/, "Se permiten solo letras"),
+    user_email: Yup.string()
+      .email("Email no válido")
+      .required("Este campo es requerido"),
+    message: Yup.string()
+      .min(10, "Se permiten mínimo 10 carácteres")
+      .max(300, "Se permiten máximo 300 carácteres")
+      .required("Este campo es requerido")
+      .matches(/^[a-zA-Z0-9]+$/, "Se permiten letras y números"),
+  });
 
   return (
     <ContainerContact>
@@ -74,35 +91,60 @@ const Contact = () => {
             <div className="container-contact-right">
               <div className="topic-text">Envíanos un mensaje</div>
               <p></p>
-
-              <form ref={form} onSubmit={sendEmail}>
-                <div className="input-box">
-                  <input
-                    type="text"
-                    name="user_name"
-                    placeholder="Ingresa tu nombre"
-                    required
-                  />
-                </div>
-                <div className="input-box">
-                  <input
-                    type="email"
-                    name="user_email"
-                    placeholder="Ingresa tu email"
-                    required
-                  />
-                </div>
-                <div className="input-box message-box">
-                  <textarea
-                    name="message"
-                    placeholder="Deje un mensaje"
-                    required
-                  ></textarea>
-                </div>
-                <div className="button">
-                  <input type="submit" className="button-send" value="Enviar" />
-                </div>
-              </form>
+              <Formik
+                initialValues={{
+                  user_name: "",
+                  user_email: "",
+                  message: "",
+                }}
+                validationSchema={ContactSchema}
+                onSubmit={(values) => {
+                  sendEmail();
+                }}
+              >
+                {({ errors, touched }) => (
+                  <Form ref={form}>
+                    <div className="input-box">
+                      <Field
+                        type="text"
+                        name="user_name"
+                        placeholder="Ingresa tu nombre"
+                      />{" "}
+                      {errors.user_name && touched.user_name ? (
+                        <div className="errors">{errors.user_name}</div>
+                      ) : null}
+                    </div>
+                    <div className="input-box">
+                      <Field
+                        type="email"
+                        name="user_email"
+                        placeholder="Ingresa tu email"
+                      />
+                      {errors.user_email && touched.user_email ? (
+                        <div className="errors">{errors.user_email}</div>
+                      ) : null}
+                    </div>
+                    <div className="input-box message-box">
+                      <Field
+                        as="textarea"
+                        name="message"
+                        placeholder="Deje un mensaje"
+                      />
+                        {errors.message && touched.message ? (
+                          <div className="errors">{errors.message}</div>
+                        ) : null}
+                    
+                    </div>
+                    <div className="button">
+                      <button
+                        type="submit"
+                        className="button-send"
+                        value="Enviar"
+                      >Enviar</button>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
             </div>
           </div>
         </div>

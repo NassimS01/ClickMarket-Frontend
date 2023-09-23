@@ -3,7 +3,6 @@ import { server } from "../../server";
 import { toggleProductCartStatus } from "./cart";
 import { toggleProductWishlistStatus } from "./wishlist";
 
-// load user
 export const loadUser = () => async (dispatch) => {
   try {
     dispatch({
@@ -217,7 +216,6 @@ export const activeUserForAdmin = (id, updatedData) => async (dispatch) => {
     });
   }
 };
-
 
 // enable user
 export const activeUser = (id, updatedData) => async (dispatch) => {

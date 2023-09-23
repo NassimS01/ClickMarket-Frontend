@@ -116,7 +116,9 @@ const Header = () => {
   }, [dispatch, userWishlist, userCart]);
 
   useEffect(() => {
-    dispatch(getUserCart());
+    if (isAuthenticated) {
+      dispatch(getUserCart());
+    }
   }, []);
 
   const pathnameSegments = location.pathname.split("/");
@@ -131,7 +133,11 @@ const Header = () => {
       headernone={location.pathname == `/verify-user/${id}` ? "true" : "false"}
     >
       <div className="logo" onClick={() => navigate("/")}>
-        <img src={logoClickMarket} alt="Logo Click Market" className="logo-click"/>
+        <img
+          src={logoClickMarket}
+          alt="Logo Click Market"
+          className="logo-click"
+        />
       </div>
 
       <button
