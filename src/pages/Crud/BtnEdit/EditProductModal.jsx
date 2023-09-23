@@ -33,8 +33,40 @@ const EditProductModal = ({ productData, onClose }) => {
     }
   }, [productData]);
 
+  const regexProd = /^[a-zA-Z0-9 ]{1,30}$/
+  const regexDesc = /^[a-zA-Z0-9 ]{1,40}$/
+  const regexPrice = /^(?!0+$)[0-9]{2,6}$/
+  const regexStock = /^(?!0+$)[0-9]{1,6}$/
+  const regexDisc = /^(?!0{1,2}$)(10|[1-9][0-9]|90)$/
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!regexProd.test(name) || !isNaN(name)) {
+      return alertTime("Ingresa un nombre válido para el producto", "warning", "red", "white");
+    }
+
+    if (!regexDesc.test(description) || !isNaN(description)) {
+      return alertTime("Ingresa una descripción válida para el producto", "warning", "red", "white");
+    }
+
+    if (category === "") {
+      return alertTime("Selecciona una categoria para el producto", "warning", "red", "white");
+    }
+
+    if (!regexPrice.test(price)) {
+      return alertTime("Ingresa un precio válido para el producto", "warning", "red", "white");
+    }
+
+    if (!regexStock.test(stock)) {
+      return alertTime("Ingresa un stock válido para el producto", "warning", "red", "white");
+    }
+
+    if (!regexDisc.test(discount)) {
+      return alertTime("Ingresa un descuento válido para el producto", "warning", "red", "white");
+    }
+
+
     try {
 
       dispatch(editProduct(productData._id, name, price, discount, description, category, stock, state));

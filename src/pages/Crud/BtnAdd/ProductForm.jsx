@@ -60,31 +60,31 @@ const ProductForm = ({ onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(images === ""){
-        return alertTime("Por favor, inserta una imagen", "warning", "red", "white");
+    if (images === "") {
+      return alertTime("Por favor, inserta una imagen", "warning", "red", "white");
     }
 
-    if(!regexProd.test(name) || !isNaN(name)){
+    if (!regexProd.test(name) || !isNaN(name)) {
       return alertTime("Ingresa un nombre válido para el producto", "warning", "red", "white");
     }
 
-    if(!regexDesc.test(description) || !isNaN(description)){
+    if (!regexDesc.test(description) || !isNaN(description)) {
       return alertTime("Ingresa una descripción válida para el producto", "warning", "red", "white");
     }
 
-    if(category === ""){
+    if (category === "") {
       return alertTime("Selecciona una categoria para el producto", "warning", "red", "white");
     }
 
-    if(!regexPrice.test(price)){
+    if (!regexPrice.test(price)) {
       return alertTime("Ingresa un precio válido para el producto", "warning", "red", "white");
     }
 
-    if(!regexStock.test(stock)){
+    if (!regexStock.test(stock)) {
       return alertTime("Ingresa un stock válido para el producto", "warning", "red", "white");
     }
 
-    if(!regexDisc.test(discount)){
+    if (!regexDisc.test(discount)) {
       return alertTime("Ingresa un descuento válido para el producto", "warning", "red", "white");
     }
 
@@ -118,30 +118,30 @@ const ProductForm = ({ onClose }) => {
       <div className="modal">
         <h3 className="title">Agrega un Producto</h3>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="upload">
-              <AiOutlinePlusCircle
-                size={30}
-                className="image-icon"
-                color="#555"
-              />
-            </label>
-            <input
-              type="file"
-              name=""
-              id="upload"
-              className="hidden input"
-              multiple
-              onChange={handleImageChange}
-            />
             <div className="image-container">
               {images ? (
                 <img src={images} alt="" className="product-image" />
               ) : (
-                <i>No hay imagen del producto</i>
+                <div className="icon-text-container">
+                  <label htmlFor="upload">
+                    <AiOutlinePlusCircle
+                      size={30}
+                      className="image-icon"
+                      color="#555"
+                    />
+                  </label>
+                  <input
+                    type="file"
+                    name=""
+                    id="upload"
+                    className="hidden input"
+                    multiple
+                    onChange={handleImageChange}
+                  />
+                  <i className="text-image">No hay imagen del producto</i>
+                </div>
               )}
             </div>
-          </div>
           <div className="name-price-container">
             <div>
               <input

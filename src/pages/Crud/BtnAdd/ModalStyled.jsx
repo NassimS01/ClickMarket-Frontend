@@ -24,7 +24,7 @@ export const ModalStyled = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 20px;
+    /* padding: 30px; */
     background-color: white;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
@@ -33,6 +33,8 @@ export const ModalStyled = styled.div`
     flex-direction: column;
     align-items: center;
     width: 500px;
+    height: 90vh;
+    overflow-x : auto;
   }
 
   .input,
@@ -85,10 +87,21 @@ export const ModalStyled = styled.div`
     height: 100%;
     gap: 10px;
 
+    .icon-text-container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .image-container {
       width: 100%;
       display: flex;
       align-items: center;
+      justify-content: center;
+
+      .text-image{
+        font-size: 12px;
+      }
     }
 
     .product-image {
