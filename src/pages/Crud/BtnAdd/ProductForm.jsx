@@ -39,6 +39,12 @@ const ProductForm = ({ onClose }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const regexProd = /^[a-zA-Z0-9 ]{1,30}$/
+  const regexDesc = /^[a-zA-Z0-9 ]{1,40}$/
+  const regexPrice = /^(?!0+$)[0-9]{2,6}$/
+  const regexStock = /^(?!0+$)[0-9]{1,6}$/
+  const regexDisc = /^(?!0{1,2}$)(10|[1-9][0-9]|90)$/
+
   const handleImageChange = (e) => {
     const reader = new FileReader();
 
@@ -53,6 +59,36 @@ const ProductForm = ({ onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if(images === ""){
+        return alertTime("Por favor, inserta una imagen", "warning", "red", "white");
+    }
+
+    if(!regexProd.test(name) || !isNaN(name)){
+      return alertTime("Ingresa un nombre válido para el producto", "warning", "red", "white");
+    }
+
+    if(!regexDesc.test(description) || !isNaN(description)){
+      return alertTime("Ingresa una descripción válida para el producto", "warning", "red", "white");
+    }
+
+    if(category === ""){
+      return alertTime("Selecciona una categoria para el producto", "warning", "red", "white");
+    }
+
+    if(!regexPrice.test(price)){
+      return alertTime("Ingresa un precio válido para el producto", "warning", "red", "white");
+    }
+
+    if(!regexStock.test(stock)){
+      return alertTime("Ingresa un stock válido para el producto", "warning", "red", "white");
+    }
+
+    if(!regexDisc.test(discount)){
+      return alertTime("Ingresa un descuento válido para el producto", "warning", "red", "white");
+    }
+
+
     const newForm = new FormData();
 
     newForm.set("images", images);
@@ -161,6 +197,7 @@ const ProductForm = ({ onClose }) => {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
+                <option value="undefined">Seleccionar Categoria</option>
                 <option value="bazar">Bazar</option>
                 <option value="bebidas">Bebidas</option>
                 <option value="carnes">Carnes</option>

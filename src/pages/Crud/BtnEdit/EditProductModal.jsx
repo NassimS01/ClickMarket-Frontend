@@ -44,7 +44,9 @@ const EditProductModal = ({ productData, onClose }) => {
         "var(--colorSuccess)",
         "white"
       );
-      window.location.reload()
+      let interval = setInterval(()=>{
+        window.location.reload()
+      },2000)
     } catch (error) {
       console.error("Error al actualizar el producto:", error);
     }

@@ -126,9 +126,9 @@ const CardComponent = ({ id, name, price, img, description, discount }) => {
         <p className="product-description">{description}</p>
         <p className="discount">{discount}%</p>
         <div className="container-price">
-          <span className="product-price">{formatPrice(price)}</span>
+          <span className="product-price">{formatPrice(priceWithDiscount)}</span>
           <span className="product-discount">
-            {formatPrice(priceWithDiscount)}
+            {formatPrice(price)}
           </span>
         </div>
 

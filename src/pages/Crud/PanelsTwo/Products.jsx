@@ -6,8 +6,7 @@ import { TableStyled } from "./ProductsStyled";
 import BtnDelete from "../BtnDelete/BtnDelete";
 import BtnEdit from "../BtnEdit/BtnEdit";
 import { server } from "../../../server";
-import { AiOutlineSearch } from "react-icons/ai";
-import { alertConfirmCancel } from "../../../utils/alerts";
+import { alertConfirmCancel, alertTime } from "../../../utils/alerts";
 import { ButtonGlobal } from "../../../components/ButtonGlobal/ButtonGlobal";
 import { CircularProgress } from "@mui/material";
 
@@ -28,7 +27,15 @@ const Products = ({ search }) => {
   const handleDelete = (id) => {
     alertConfirmCancel("", "¿Deseas eliminar este producto?", "question", "Confirmar", "Cancelar", () => {
       dispatch(deleteProduct(id));
-      window.location.reload();
+      alertTime(
+        "Producto eliminado",
+        "success",
+        "green",
+        "white"
+      )
+      let interval = setInterval(()=>{
+        window.location.reload()
+      },2000)
     })
 
   };
