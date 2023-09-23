@@ -65,7 +65,7 @@ const PanelOrders = () => {
               <p><b>Dirección:</b> {selectedOrder.shipping.address.city} - {selectedOrder.shipping.address.line1}</p>
               <p><b>CP:</b> {selectedOrder.shipping.address.postal_code}</p>
               <p><b>Provincia:</b> {selectedOrder.shipping.address.state}</p>
-              <p><b>Teléfono:</b> {selectedOrder.shipping.phone === null ? (<i>No ingresado</i>) : selectedOrder.shipping.phone}</p>
+              <p><b>Productos:</b>{selectedOrder.products.map((prod) => (<p key={prod._id}>{prod.name} - <i>{prod.quantity} unidad(es)</i></p>))}</p>
             </>
           )}
           <button onClick={() => setModalVisible(false)} className="close-modal">Cerrar</button>

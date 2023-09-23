@@ -197,7 +197,7 @@ const Header = () => {
                           className="btn-dropdown"
                           onClick={closeMenu}
                         >
-                          Panel Administrador
+                          Gestión
                         </Link>
                         <button
                           onClick={logoutHandler}

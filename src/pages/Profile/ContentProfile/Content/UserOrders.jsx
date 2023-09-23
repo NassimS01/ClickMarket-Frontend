@@ -35,10 +35,11 @@ const UserOrders = () => {
     dispatch(getUserOrder());
   }, [dispatch]);
   return (
-    <Order>
+    <>
       <h2 className="title">
         {userOrder.length == 0 ? "Todavía no tenés ningun pedido" : "Mis Pedidos"}
       </h2>
+    <Order>
       {arrayOfObjects.map((customer) => (
         <OrderProduct key={customer.customerId}>
           <div className="customer-info" key={customer.customerId}>
@@ -90,7 +91,7 @@ const UserOrders = () => {
         </OrderProduct>
       ))}
     </Order>
-  );
+  </>);
 };
 
 export default UserOrders;
